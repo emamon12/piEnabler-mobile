@@ -6,7 +6,6 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { signOut } from '../../store/actions/authActions';
 
 const SignedInLinks = (props) => {
-    // As in SignIn.jsx we need to use a function that gets as an argument firebase object
     const handleSignOut = () => {
         const { firebase } = props;
         props.signOut(firebase);

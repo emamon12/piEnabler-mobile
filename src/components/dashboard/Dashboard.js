@@ -40,4 +40,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(firestoreConnect(['classes']), connect(mapStateToProps))(Dashboard)
+export default compose(firestoreConnect([{ collection: 'classes', orderBy: ['classIdentifier', 'desc']}]), connect(mapStateToProps))(Dashboard)

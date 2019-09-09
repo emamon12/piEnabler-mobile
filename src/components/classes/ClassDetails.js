@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import moment from 'moment'
-import firebase from 'firebase'
-import { identifier } from '@babel/types'
 
 const ClassDetails = (props) => {
     const { auth } = props;
@@ -13,8 +10,9 @@ const ClassDetails = (props) => {
         return <Redirect to='/signin/' />
     }
 
-
     const { classs } = props;
+
+    console.log(props);
 
     if (classs) {
         return (

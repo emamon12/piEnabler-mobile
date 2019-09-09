@@ -41,3 +41,14 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
         err,
     }))
 };
+
+export const addResponse = response => (dispatch, getState, {getFirestore}) =>{
+    const fireStore = getFirestore();
+    const {profile} = getState().firebase;
+    const studentId = getState().firebase.auth.uid;
+
+    firestore.collection('responses').add({
+        ...response,
+        studentId: studentId,
+    })
+}

@@ -28,6 +28,7 @@ class App extends Component {
             <Route path='/addClass' component={AddClass}></Route>
             <Route path='/createClass' component={CreateClass}></Route>
             <Route path="/:any" component={Dashboard} />
+            <Route path="/sessions/:id" componen={ClassSession}></Route>
           </Switch>
         </div>
       </BrowserRouter>
