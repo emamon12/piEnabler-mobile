@@ -3,13 +3,13 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyACVDHy4exTnb-vSiIGJmoOyqFMRm3dX5Q",
-    authDomain: "red-name.firebaseapp.com",
-    databaseURL: "https://red-name.firebaseio.com",
-    projectId: "red-name",
-    storageBucket: "",
-    messagingSenderId: "451668312999",
-    appId: "1:451668312999:web:866bede56cbcf043"
+    apiKey: "AIzaSyBT8CS1nu1PqeMDq_VnMu2LsfOZM_7eMQo",
+    authDomain: "piesiue.firebaseapp.com",
+    databaseURL: "https://piesiue.firebaseio.com",
+    projectId: "piesiue",
+    storageBucket: "piesiue.appspot.com",
+    messagingSenderId: "567352311341",
+    appId: "1:567352311341:web:ac5901cd994e7477"  
 };
 
 firebase.initializeApp(firebaseConfig);
