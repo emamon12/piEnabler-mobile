@@ -1,12 +1,13 @@
-
 /* eslint-disable no-underscore-dangle */
+
+//INDEX SHOULD NOT BE CHANGED UNTIL FINAL PRODUCTION BUILD
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
-import { ReactReduxFirebaseProvider, getFirebase, authIsReady, reactReduxFirebase } from 'react-redux-firebase';
+import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import firebase from './config/fbConfig';
 import './index.css';
 import App from './App';
@@ -25,7 +26,7 @@ const rrfConfig = {
     userProfile: 'users',
     attachAuthIsReady: true,
 };
-
+//create store to pass the reducers and pass firebase to redux stre
 const store = createStore(rootReducer,
     composeEnhancers(
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
@@ -36,10 +37,10 @@ const rrfProps = {
     firebase,
     config: rrfConfig,
     dispatch: store.dispatch,
-    createFirestoreInstance, // Create firestore instead of craete it in fbConfig.js
+    createFirestoreInstance, // Create firestore instead of create it in fbConfig.js
 };
 
-
+//
 ReactDOM.render(
     <Provider store={store}>
         <ReactReduxFirebaseProvider {...rrfProps}>
@@ -49,12 +50,10 @@ ReactDOM.render(
     document.getElementById('root'),
 );
 
-
+//this is for debugging purposes... delete when done
 console.log('store', store);
 console.log('state', store.getState());
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-

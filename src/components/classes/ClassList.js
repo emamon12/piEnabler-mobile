@@ -6,19 +6,22 @@ const ClassList = ({ classes, profile }) => {
     return (
         <div className="classs-list section">
             {classes && classes.map(classs => {
-                var y = false;
-
+                
+                var studentRegisteredClass = false;
                 var studentIdArray = classs.studentId;
                 var i;
 
+                // eslint-disable-next-line no-lone-blocks
+                {/* checks  the class studentId array to see if the userID is in there.*/}
                 for (i in studentIdArray) {
                     console.log(studentIdArray[i]);
                     if (profile.uid === studentIdArray[i]) {
-                        y = true;
+                        studentRegisteredClass = true;
                     }
                 }
-
-                if (y) {
+                // eslint-disable-next-line no-lone-blocks
+                {/*if the student is registered in class, the class shows up in dashboard  */}
+                if (studentRegisteredClass) {
                     return (
                         <Link to={'/classes/' + classs.id} key={classs.id}>
                             <ClassSummary classs={classs} ></ClassSummary>

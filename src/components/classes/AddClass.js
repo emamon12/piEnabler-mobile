@@ -21,7 +21,6 @@ class AddClass extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state);
         const { props, state } = this;
         props.addClass(state);
 
