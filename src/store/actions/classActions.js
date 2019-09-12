@@ -1,5 +1,3 @@
-import { firestore } from 'firebase';
-import { firebase } from 'firebase';
 
 export const createClass = classs => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
@@ -25,7 +23,6 @@ export const createClass = classs => (dispatch, getState, { getFirestore }) => {
 
 export const addClass = classs => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
-    const { profile } = getState().firebase;
     const studentId = getState().firebase.auth.uid;
 
     var classId = classs.classKey;
@@ -41,14 +38,3 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
         err,
     }))
 };
-
-export const addResponse = response => (dispatch, getState, {getFirestore}) =>{
-    const fireStore = getFirestore();
-    const {profile} = getState().firebase;
-    const studentId = getState().firebase.auth.uid;
-
-    firestore.collection('responses').add({
-        ...response,
-        studentId: studentId,
-    })
-}

@@ -24,14 +24,14 @@ class CreateClass extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state);
         const { props, state } = this;
         props.createClass(state);
-
+        //the push acts as a redirect... when the form is submitted... redirect to home
         props.history.push('/');
     }
 
     render() {
+        //just check if the user is authenticated
         const { auth } = this.props;
         if (!auth.uid) {
             return <Redirect to="/signin" />;

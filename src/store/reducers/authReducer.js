@@ -5,7 +5,7 @@ const authReducer = (state = initState, action) => {
         case 'LOGIN_ERROR':
             return {
                 ...state,
-                authError: 'Login fail',
+                authError: 'Invalid Username or Password',
             };
         case 'LOGIN_SUCCESS':
             console.log('login success');
@@ -14,16 +14,16 @@ const authReducer = (state = initState, action) => {
                 authError: null,
             };
         case 'SIGNOUT_SUCCESS':
-            console.log('signout success');
+            console.log('Successfully signed out');
             return state;
         case 'SIGNUP_SUCCESS':
-            console.log('signup success');
+            console.log('Successfully signed up');
             return {
                 ...state,
                 authError: null,
             };
         case 'SIGNUP_ERROR':
-            console.log('signup failed');
+            console.log('Cannot Sign up');
             return {
                 ...state,
                 authError: action.err.message,

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -19,11 +20,8 @@ class ClassSession extends Component {
         }));
     }
 
-
-
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state);
         const { props, state } = this;
         props.addClass(state);
 
@@ -31,11 +29,13 @@ class ClassSession extends Component {
     }
 
     render() {
+        //this just redirects if the user is not authenticated
         const { auth } = this.props;
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
-        console.log(this.props);
+
+        //this is whats actually being seen in the ClassList
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
@@ -62,3 +62,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['sessions']))(ClassSession);
+

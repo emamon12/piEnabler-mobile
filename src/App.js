@@ -11,9 +11,8 @@ import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import AddClass from './components/classes/AddClass'
 import CreateClass from './components/classes/CreateClass'
-import ClassSession from './components/classes/ClassSession'
 
-
+//this is where all of the links to all of th components are located. Make sure to import the components with the link route
 class App extends Component {
   render() {
     return (
@@ -28,7 +27,6 @@ class App extends Component {
             <Route path='/addClass' component={AddClass}></Route>
             <Route path='/createClass' component={CreateClass}></Route>
             <Route path="/:any" component={Dashboard} />
-            <Route path="/sessions/:id" componen={ClassSession}></Route>
           </Switch>
         </div>
       </BrowserRouter>
