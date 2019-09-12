@@ -12,8 +12,6 @@ const ClassDetails = (props) => {
 
     const { classs } = props;
 
-    console.log(props);
-
     if (classs) {
         return (
             <div>
@@ -43,6 +41,7 @@ const ClassDetails = (props) => {
     };
 }
 
+//this basically just gets the classes objects from firestore and if there are classes to be shown, it maps it
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;
     const { classes } = state.firestore.data;
