@@ -26,15 +26,16 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
     const studentId = getState().firebase.auth.uid;
 
     var classId = classs.classKey;
-    var ref = fireStore.collection('classes').doc(classId);
 
-    ref.update({
-        studentId: fireStore.FieldValue.arrayUnion(studentId),
-    }).then(() => dispatch({
-        type: 'ADD_CLASS',
-        classs,
-    })).catch((err) => dispatch({
-        type: 'ADD_CLASS_ERROR',
-        err,
-    }))
+    if (classId !== "") {
+        fireStore.collection('classes').doc(classId).update({
+            studentId: fireStore.FieldValue.arrayUnion(studentId),
+        }).then(() => dispatch({
+            type: 'ADD_CLASS',
+            classs,
+        })).catch((err) => dispatch({
+            type: 'ADD_CLASS_ERROR',
+            err,
+        }))
+    }
 };
