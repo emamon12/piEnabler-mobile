@@ -10,6 +10,7 @@ export const createClass = classs => (dispatch, getState, { getFirestore }) => {
         teacherLastName: profile.lastName,
         studentId: [studentId],
         messageOfTheDay: '',
+        currSession: '',
         createdAt: new Date(),
     }).then(() => dispatch({
         type: 'CREATE_CLASS',
@@ -39,3 +40,10 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
         }))
     }
 };
+
+export const addResponse = sessions => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const studentId = getState().firebase.auth.uid;
+
+    var response = sessions.respose;
+}

@@ -28,6 +28,19 @@ class ClassSession extends Component {
         e.target.className = "collection-item black-text red lighten-3"
     }
 
+    handleButtonClick = (e) => {
+        e.preventDefault();
+
+        var y = document.getElementsByClassName("collection-item black-text")
+
+        console.log(e.target.value)
+
+        y[0].className = "collection-item black-text disabled"
+        y[1].className = "collection-item black-text disabled"
+        y[2].className = "collection-item black-text disabled"
+        y[3].className = "collection-item black-text disabled"
+    }
+
     render() {
         //this just redirects if the user is not authenticated
         const { session, auth } = this.props;
@@ -39,33 +52,45 @@ class ClassSession extends Component {
         if (session) {
             return (
                 <div className="container section">
+                    <div className="card">
+                        <div className="card-content">
+                            <label className="card-title black-text center">{session.question}</label>
+                        </div>
+                    </div>
                     <div className="collection card-content" onClick={this.handleListClick}>
                         <a id="answer1" name="answer1" href="#!" className="collection-item black-text" >{session.answer1}</a>
                         <a id="answer2" name="answer2" href="#!" className="collection-item black-text" >{session.answer2}</a>
                         <a id="answer3" name="answer3" href="#!" className="collection-item black-text" >{session.answer3}</a>
-                        <a id="answer4" name="answer4" href="#!" className="collection-item black-text" >{session.answer4}</a>
+                        <a id="answer4" name="answer4" href="#!" className="collection-item black-text" >   {session.answer4}</a>
+                    </div>
+                    <div className="input-field center">
+                        <button onClick={this.handleButtonClick} value={auth.uid} className="btn-large red-bg red darken-3 z-depth-1 waves-effect waves-light ">Submit</button>
                     </div>
                 </div>
-
-            );
-        } else if (!session) {
+            )
+        }
+        else if (!session && isLoaded(session)) {
             return (
                 <div className="container section">
                     <div className="card">
                         <div className="card-content grey-text text-darken-3 center">
-                            <span className="card-title">No Session Active</span>
+                            <span className="card-title">Loading...</span>
                         </div>
                     </div>
                 </div>
-            );
-        } else {
+            )
+        }
+
+        else {
             return (
-                <div className="card z-depth-0 container section center">
-                    <div className="card-content grey-text text-darken-3 center">
-                        <span className="card-title">Loading...</span>
+                <div className="container section">
+                    <div className="card">
+                        <div className="card-content grey-text text-darken-3 center">
+                            <span className="card-title">Session Does Not Exist...</span>
+                        </div>
                     </div>
                 </div>
-            );
+            )
         }
 
     }

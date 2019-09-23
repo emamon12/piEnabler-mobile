@@ -54,7 +54,7 @@ const ClassDetails = (props) => {
                         </div>
                     </div>
                     <div className="center">
-                        <Modal header="No Session Active" trigger={<button data-target="modal1" className="btn modal-trigger red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                        <Modal className="modal1"header="No Session Active" trigger={<button data-target="modal1" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
                         }>
                             The class session is currently not active.
                     </Modal>
