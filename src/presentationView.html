@@ -41,31 +41,34 @@ height: 35%;
 }
 
 #wrapper {
-
+    width: 100%;
+    margin: 0 auto;
 }
 
 #top-container {
-
+    width:10px;
+    display:block;
+    vertical-align: middle;
+    float:right;
+    padding-left: 100px;
 }
 
 #left {
 
+left:0;
 }
 
 #right {
-
-}
-
-#top-right {
-
+right:0;
 }
 
 #top-left {
-
+position: absolute;
+margin-top: -10px;
 }
 
 #bottom-left {
-
+position: absolute;
 }
 
 #bottom-right {
@@ -112,27 +115,31 @@ height: 35%;
         <div id="top-container">
             <div id="left">
                 <div id="top-left">
+                        <button type="submit">Histogram</button>
 
                 </div>
 
                 <div id="bottom-left">
+                        <button type="submit">Histogram</button>
 
                 </div>
             </div>
 
             <div id="right">
                 <div id="histogram">
-                    
+                        <button type="submit">Histogram</button>
+
                 </div>
                 
                 <div id="bottom-right">
+                        <button type="submit">Histogram</button>
 
                 </div>
             </div>
         </div>
 
         <div id="ribbon">
-            <div id="lecture">
+          <!--  <div id="lecture">
                 <button type="submit">Lecture Slice</button>
             </div>
             <div id="similar-slide"> 
@@ -146,7 +153,7 @@ height: 35%;
             </div>
             <div id="histogram-div">
                     <button type="submit">Histogram</button>
-            </div>
+            </div>-->
         </div>
 
     </div>
