@@ -2,6 +2,106 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    background-color: red;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+.wrapper {
+    text-align:center;
+    margin: auto 0;
+}
+
+@media only screen and (max-width:800px) {
+/* For tablets: */
+.wrapper {
+width: 80%;
+padding: 0;
+}
+img {
+width: 45%;
+height: 45%;
+}
+}
+@media only screen and (max-width:500px) {
+/* For mobile phones: */
+.wrapper {
+width: 70%;
+}
+
+img {
+width: 35%;
+height: 35%;
+
+}
+
+#wrapper {
+
+}
+
+#top-container {
+
+}
+
+#left {
+
+}
+
+#right {
+
+}
+
+#top-right {
+
+}
+
+#top-left {
+
+}
+
+#bottom-left {
+
+}
+
+#bottom-right {
+
+}
+
+#histogram {
+
+}
+
+#ribbon {
+
+}
+
+#lecture {
+
+}
+
+#similar-slide {
+
+}
+
+#harder-slide {
+
+}
+
+#new-slide {
+
+}
+
+#histogram-div {
+
+}
+
+}
+</style>
 
 <body>
     <div id="wrapper">
@@ -32,12 +132,23 @@
         </div>
 
         <div id="ribbon">
-            <div id="lecture"> </div>
-            <div id="similar-slide"> </div>
-            <div id="harder-slide"> </div>
-            <div id="new-slide"> </div>
-            <div id="histogram-button"> </div>
+            <div id="lecture">
+                <button type="submit">Lecture Slice</button>
+            </div>
+            <div id="similar-slide"> 
+                    <button type="submit">Similar Slice</button>
+            </div>
+            <div id="harder-slide">
+                    <button type="submit">Harder Slice</button>
+            </div>
+            <div id="new-slide">
+                <button type="submit">New Topic</button>
+            </div>
+            <div id="histogram-div">
+                    <button type="submit">Histogram</button>
+            </div>
         </div>
 
     </div>
 </body>
+
