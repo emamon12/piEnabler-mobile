@@ -16,6 +16,7 @@ const SignedInLinks = (props) => {
         <ul className="right">
             <li><NavLink to="/addClass">Add Class</NavLink></li>
             <li><NavLink to="/createClass">Create Class</NavLink></li>
+            <li><NavLink to="/createSlice">Create Slice</NavLink></li>
             <li><NavLink to="/" onClick={handleSignOut}>Log Out</NavLink></li> {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
             <li><NavLink to="/" className="btn btn-floating red-bg red lighten-1">{props.profile.initials}</NavLink></li>
         </ul>
