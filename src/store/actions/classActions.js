@@ -41,9 +41,23 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
     }
 };
 
-export const addResponse = sessions => (dispatch, getState, { getFirestore }) => {
+export const addResponse = (response, session) => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
     const studentId = getState().firebase.auth.uid;
 
-    var response = sessions.respose;
-}
+    fireStore.collection('responses').doc(`${session.sessionId}${studentId}${session.currentSliceId}${session.numPolls}`).set({
+        response: response.userAnswer,
+        studentId: studentId,
+        currSlice: session.currentSliceId,
+        currSession: session.sessionId,
+        timesPolled: session.numPolls
+
+    }).then(() => dispatch({
+        type: 'ADD_RESPONSE',
+        response
+    })).catch((err) => dispatch({
+        type: 'ADD_RESPONSE_ERR',
+        err
+    }))
+
+};

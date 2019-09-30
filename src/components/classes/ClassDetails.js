@@ -4,18 +4,19 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { Modal, Button } from 'react-materialize'
+import { Modal } from 'react-materialize'
 
 const ClassDetails = (props) => {
-
     const { auth } = props;
     if (!auth.uid) {
         return <Redirect to='/signin/' />
     }
 
-    const { classs } = props;
+    const { classs } = props
 
-    if (classs && classs.currSession !== "") {
+    const { user } = props
+
+    if (user && classs && classs.currSession !== "") {
         return (
             <div>
                 <div className="container section classs-details">
@@ -54,7 +55,7 @@ const ClassDetails = (props) => {
                         </div>
                     </div>
                     <div className="center">
-                        <Modal className="modal1"header="No Session Active" trigger={<button data-target="modal1" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                        <Modal className="modal1" header="No Session Active" trigger={<button data-target="modal1" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
                         }>
                             The class session is currently not active.
                     </Modal>
@@ -64,8 +65,14 @@ const ClassDetails = (props) => {
         )
     } else {
         return (
-            <div className="container center">
-                <p>No Classes Currently Loaded...</p>
+            <div className="container section class-details">
+                <div className="card z-depth-1">
+                    <div className="card-content">
+                        <span className="card-title">
+                        <p>Loading...</p>
+                        </span>
+                    </div>
+                </div>
             </div>
         );
     };
@@ -75,12 +82,14 @@ const ClassDetails = (props) => {
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;
     const { classes } = state.firestore.data;
+    const { users } = state.firestore.data;
     const classs = classes ? classes[id] : null
+    const user = users ? users[state.firebase.auth.uid] : null
     return {
         classs: classs,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        user: user
     };
 };
 
-
-export default compose(connect(mapStateToProps), firestoreConnect(['classes']))(ClassDetails)
+export default compose(connect(mapStateToProps), firestoreConnect(['users']))(ClassDetails)
