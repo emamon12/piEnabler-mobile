@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {createClass} from '../../store/actions/classActions';
+import { createClass } from '../../store/actions/classActions';
 
 class CreateClass extends Component {
     state = {

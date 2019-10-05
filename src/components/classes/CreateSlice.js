@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {createSlice} from '../../store/actions/sliceActions';
+import { createSlice } from '../../store/actions/sliceActions';
 
 class CreateSlice extends Component {
     state = {
@@ -29,9 +29,9 @@ class CreateSlice extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { props, state } = this;
-        props.createClass(state);
+        props.createSlice(state);
         //the push acts as a redirect... when the form is submitted... redirect to home
-        props.history.push('/');
+        props.history.push('/createSlice');
     }
 
     render() {
