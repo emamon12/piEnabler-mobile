@@ -36,10 +36,3 @@ export const addSlice = slices => (dispatch, getState, { getFirestore }) => {
         }))
     }
 };
-
-export const addResponse = sessions => (dispatch, getState, { getFirestore }) => {
-    const fireStore = getFirestore();
-    const teacherId = getState().firebase.auth.uid;
-
-    var response = sessions.respose;
-}
