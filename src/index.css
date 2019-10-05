@@ -49,3 +49,20 @@ code {
 .collection-item{
   min-height: 100px;
 } 
+
+.class-list {
+  animation-name: class_list_anim;
+  animation-iteration-count: 1;
+  animation-duration: .5s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes class_list_anim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

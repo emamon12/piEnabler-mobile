@@ -22,9 +22,10 @@ const ClassList = ({ classes, profile }) => {
                 //if the student is registered in class, the class shows up in dashboard
                 if (studentRegisteredClass) {
                     return (
-                        <Link to={'/classes/' + classs.id} key={classs.id}>
-                            <ClassSummary classs={classs} ></ClassSummary>
-                        </Link>
+                            <Link to={'/classes/' + classs.id} key={classs.id}>
+                                <ClassSummary classs={classs} ></ClassSummary>
+                            </Link>
+
                     )
                     // eslint-disable-next-line array-callback-return
                 } else { return }
