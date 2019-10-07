@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { createSlice } from '../../store/actions/sliceActions';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import Switch from '@material-ui/core/Switch';
 import { Switch } from 'react-materialize'
 import Textarea from 'muicss/lib/react/textarea';
+import Dropdown from 'muicss/lib/react/dropdown';
+import DropdownItem from 'muicss/lib/react/dropdown-item';
 
 class CreateSlice extends Component {
     state = {
@@ -23,7 +23,7 @@ class CreateSlice extends Component {
         }));
     }
 
-    HandleLectureChange = (e) => {
+    handleLectureChange = (e) => {
         const { target } = e
         console.log(target.checked)
         console.log(target.id)
@@ -31,6 +31,14 @@ class CreateSlice extends Component {
         this.setState(state => ({
             ...state,
             [target.id]: target.checked,
+        }));
+    }
+
+    handleDifChange = (e, data) => {
+        console.log(e)
+        this.setState(state => ({
+            ...state,
+            Difficulty: e,
         }));
     }
 
@@ -55,7 +63,7 @@ class CreateSlice extends Component {
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Create a new Slice</h5>
 
-                    <Switch offLabel="Question" onLabel="Lecture" onChange={this.HandleLectureChange} id="Lecture" />
+                    <Switch offLabel="Question" onLabel="Lecture" onChange={this.handleLectureChange} id="Lecture" />
 
                     {this.state.Lecture ?
                         (
@@ -103,8 +111,16 @@ class CreateSlice extends Component {
                                     <input type="text" name="Topic" id="Topic" onChange={this.handleChange} />
                                 </div>
                                 <div className="input-field">
-                                    <label htmlFor="Difficulty">Difficulty</label>
-                                    <input type="text" name="Difficulty" id="Difficulty" onChange={this.handleChange} />
+                                    <Dropdown
+                                        color="danger"
+                                        label={(this.state.Difficulty) ? (this.state.Difficulty) : "Difficulty"}
+                                        id="Difficulty"
+                                        onSelect={this.handleDifChange}
+                                    >
+                                        <DropdownItem value="easy">Easy</DropdownItem>
+                                        <DropdownItem value="medium">Medium</DropdownItem>
+                                        <DropdownItem value="hard">Hard</DropdownItem>
+                                    </Dropdown>
                                 </div>
 
                                 <div className="input-field" style={{ paddingBottom: "2rem" }}>
