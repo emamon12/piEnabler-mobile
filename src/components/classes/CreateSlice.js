@@ -111,12 +111,16 @@ class CreateSlice extends Component {
                                     <input type="text" name="Topic" id="Topic" onChange={this.handleChange} />
                                 </div>
                                 <div className="input-field">
+                                <label style={{marginRight: "2em"}}>Difficulty</label>
+
                                     <Dropdown
                                         color="danger"
-                                        label={(this.state.Difficulty) ? (this.state.Difficulty) : "Difficulty"}
+                                        label={(this.state.Difficulty) ? (this.state.Difficulty) : ""}
                                         id="Difficulty"
                                         onSelect={this.handleDifChange}
+                                        style={{marginLeft: "7em"}}
                                     >
+                                        <DropdownItem value="">None</DropdownItem>
                                         <DropdownItem value="easy">Easy</DropdownItem>
                                         <DropdownItem value="medium">Medium</DropdownItem>
                                         <DropdownItem value="hard">Hard</DropdownItem>
