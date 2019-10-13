@@ -8,9 +8,7 @@ import { Redirect } from 'react-router-dom'
 class Dashboard extends Component {
     render() {
         const { classes, auth } = this.props;
-
-        console.log(auth);
-
+        
         if (!auth.uid && isLoaded(auth)) {
             return <Redirect to='/signin' />
         }
@@ -30,7 +28,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         classes: state.firestore.ordered.classes,
         auth: state.firebase.auth
@@ -39,5 +36,5 @@ const mapStateToProps = (state) => {
 
 //connect mapstatetoprops
 //firestoreconnect connects the component to the firestore... so you can access the collections
-export default compose(firestoreConnect([{ collection: 'classes', orderBy: ['classIdentifier', 'desc']}]), connect(mapStateToProps))(Dashboard)
+export default compose(firestoreConnect([{ collection: 'classes', orderBy: ['classIdentifier', 'desc'] }]), connect(mapStateToProps))(Dashboard)
 
