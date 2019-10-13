@@ -27,7 +27,7 @@ class Presentation extends Component {
   };
 
   handleResetPolling = () => {
-    console.log("Reset Clicked")
+    console.log("Reset Clicked");
     this.setState(state => ({
       ...state,
       Voted: 0
@@ -35,23 +35,23 @@ class Presentation extends Component {
   };
 
   handleLecture = () => {
-    console.log("Lecture Clicked")
+    console.log("Lecture Clicked");
   };
 
   handleQuestion = () => {
-    console.log("Question Clicked")
+    console.log("Question Clicked");
   };
 
   handleDifficulty = () => {
-    console.log("Difficulty Clicked")
+    console.log("Difficulty Clicked");
   };
 
   handleTopic = () => {
-    console.log("Topic Clicked")
+    console.log("Topic Clicked");
   };
 
   handleHistogram = () => {
-    console.log("Histogram Clicked")
+    console.log("Histogram Clicked");
   };
 
   render() {
@@ -123,7 +123,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  answer1
+                  A: This is where Answer1 goes
                 </a>
                 <a
                   id="answer2"
@@ -131,7 +131,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  answer2
+                  B: This is where Answer2 goes
                 </a>
                 <a
                   id="answer3"
@@ -139,7 +139,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  answer3
+                  C: This is where Answer3 goes
                 </a>
                 <a
                   id="answer4"
@@ -147,7 +147,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  answer4
+                  D: This is where Answer4 goes
                 </a>
               </div>
               <Button
