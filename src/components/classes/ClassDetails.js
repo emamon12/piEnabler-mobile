@@ -32,10 +32,17 @@ const ClassDetails = (props) => {
                         </div>
                     </div>
                     <div className="center">
+                        <Link to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession}>
+                            <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light" style={{marginRight: "10em"}}>Presentation</button>
+                        </Link>
                         <Link to={'/session/' + classs.currSession} key={classs.currSession}>
-                            <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                            <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light" style={{marginRight: "10em"}}>Join Session</button>
+                        </Link>
+                        <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession}>
+                            <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light" >Projection</button>
                         </Link>
                     </div>
+
                 </div>
             </div>
         )

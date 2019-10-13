@@ -1,9 +1,9 @@
+import './App.css';
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
-
 import Navbar from './components/layout/Navbar'
 import Dashboard from './components/dashboard/Dashboard'
 import ClassDetails from './components/classes/ClassDetails'
@@ -13,6 +13,8 @@ import AddClass from './components/classes/AddClass'
 import CreateClass from './components/classes/CreateClass'
 import Session from './components/classes/ClassSession'
 import CreateSlice from './components/classes/CreateSlice'
+import Projection from './components/classes/Projection'
+import Presentation from './components/classes/Presentation'
 
 //this is where all of the links to all of th components are located. Make sure to import the components with the link route
 class App extends Component {
@@ -29,7 +31,9 @@ class App extends Component {
             <Route path='/addClass' component={AddClass}></Route>
             <Route path='/createClass' component={CreateClass}></Route>
             <Route path='/createSlice' component={CreateSlice}></Route>
-            <Route path='/session/:id' component={Session}></Route>
+            <Route exact path='/session/:id' component={Session}></Route>
+            <Route path='/session/:id/projection' component={Projection}></Route>
+            <Route path='/session/:id/presentation' component={Presentation}></Route>
             <Route path="/:any" component={Dashboard} />
           </Switch>
         </div>
