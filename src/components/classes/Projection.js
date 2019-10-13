@@ -17,7 +17,11 @@ class Projection extends Component {
   };
 
   nextSlide = () => {
-    console.log("next slide");
+    this.setState({ slideNumber: this.state.slideNumber + 1 });
+  };
+  
+  prevSlide = () => {
+    this.setState({ slideNumber: this.state.slideNumber - 1 });
   };
 
   render() {
@@ -71,7 +75,7 @@ class Projection extends Component {
               color: "black",
               position: "absolute",
               bottom: "2%",
-              left: "2%",
+              left: "1%",
               display: "inline"
             }}
           >
