@@ -41,24 +41,36 @@ class Presentation extends Component {
     const { target } = e;
 
     this.setState(state => ({
-        ...state,
-        [target.id]: !state.PollingStatus
-      }));
-  }
+      ...state,
+      [target.id]: !state.PollingStatus
+    }));
+  };
 
   handleResetPolling = () => {
-      this.setState(state => ({
-        ...state,
-        Voted: 0
-      }));
-  }
+    this.setState(state => ({
+      ...state,
+      Voted: 0
+    }));
+  };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { props, state } = this;
-    props.createSlice(state);
-    //the push acts as a redirect... when the form is submitted... redirect to home
-    props.history.push("/createSlice");
+  handleLecture = () => {
+    console.log("Lecture Clicked")
+  };
+
+  handleQuestion = () => {
+    console.log("Question Clicked")
+  };
+
+  handleDifficulty = () => {
+    console.log("Difficulty Clicked")
+  };
+
+  handleTopic = () => {
+    console.log("Topic Clicked")
+  };
+
+  handleHistogram = () => {
+    console.log("Histogram Clicked")
   };
 
   render() {
@@ -70,7 +82,7 @@ class Presentation extends Component {
       return <Redirect to="/signin" />;
     }
 
-    var votePercent = (state.Voted / state.Here) * 100
+    var votePercent = (state.Voted / state.Here) * 100;
 
     const StyleOpen = {
       fontSize: "1vw",
@@ -255,7 +267,9 @@ class Presentation extends Component {
                       textClassName="black-text"
                       style={{ fontSize: "1.5vw", height: "100%" }}
                     >
-                      <p>{state.Voted}/{state.Here}</p>
+                      <p>
+                        {state.Voted}/{state.Here}
+                      </p>
                       <p>Voted {votePercent.toFixed(2)} %</p>
                     </Card>
                   </Col>
