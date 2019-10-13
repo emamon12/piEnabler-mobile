@@ -17,26 +17,6 @@ class Presentation extends Component {
     Here: 150
   };
 
-  handleChange = e => {
-    const { target } = e;
-
-    this.setState(state => ({
-      ...state,
-      [target.id]: target.value
-    }));
-  };
-
-  HandleLectureChange = e => {
-    const { target } = e;
-    console.log(target.checked);
-    console.log(target.id);
-
-    this.setState(state => ({
-      ...state,
-      [target.id]: target.checked
-    }));
-  };
-
   handlePolling = e => {
     const { target } = e;
 
@@ -47,6 +27,7 @@ class Presentation extends Component {
   };
 
   handleResetPolling = () => {
+    console.log("Reset Clicked")
     this.setState(state => ({
       ...state,
       Voted: 0
