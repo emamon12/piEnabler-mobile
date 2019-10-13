@@ -16,6 +16,10 @@ class Projection extends Component {
     this.setState({ isFull: !this.state.isFull });
   };
 
+  nextSlide = () => {
+    console.log("next slide");
+  };
+
   render() {
     const { auth, authError } = this.props;
     console.log(authError);
@@ -26,16 +30,13 @@ class Projection extends Component {
 
     return (
       <div style={{ margin: "1em", padding: "0" }}>
-        <Fullscreen
-          enabled={this.state.isFull}
-          onChange={isFull => this.setState({ isFull })}
-        >
+        <Fullscreen enabled={this.state.isFull}>
           <Card
             className="white full-screenable-node"
             textClassName="black-text"
             title="Slide 1"
             style={{ height: "100%", position: "relative" }}
-            onClick={this.goFull}
+            onClick={this.nextSlide}
           >
             This a bunch of drunkenly typed text that should show up on a
             fullscreen projetion view fingers crossed. This may cover the entire
