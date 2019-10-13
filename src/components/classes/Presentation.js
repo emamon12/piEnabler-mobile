@@ -67,7 +67,7 @@ class Presentation extends Component {
     console.log(authError);
 
     if (!auth.uid) {
-      //return <Redirect to="/signin" />;
+      return <Redirect to="/signin" />;
     }
 
     var votePercent = (state.Voted / state.Here) * 100
@@ -160,7 +160,7 @@ class Presentation extends Component {
               <Button
                 style={{
                   position: "absolute",
-                  left: "50%",
+                  left: "40%",
                   bottom: "2%",
                   background: "grey"
                 }}
