@@ -71,6 +71,12 @@ div.mui-col-md-4:nth-child(3)
   height: 100%;
 }
 
+.fullscreen{
+  height: 90vh !important;
+  margin: 2em !important;
+  position: relative;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
