@@ -1,6 +1,45 @@
 import React from 'react';
 import {Button} from 'react-native';
 
+function getHistogram() {
+
+}
+
+function showHistogram() {
+
+}
+
+function getQuestions() {
+
+}
+
+function showCurrentSlice() {
+
+}
+
+function nextSlice() {
+
+}
+
+function sendQuestionsToStudents() {
+
+}
+
+function harderSlice() {
+
+}
+
+function similarSlice() {
+
+}
+
+function getNewSlice() {
+
+}
+
+function showLectureMaterial() {
+
+}
 class PresentationView {
     render() {
         return (
@@ -10,7 +49,7 @@ class PresentationView {
                 <div className="student-question-screen">
 
                 </div>
-                <Button onPress = {}
+                <Button onPress = {this.sendQuestionsToStudents}
                             title = "Deploy Questions"
                             color = "red"/>
     
@@ -20,14 +59,14 @@ class PresentationView {
             <div className="top-container">
                 <div className="left">
                     <div className="top-left">
-                        <Button onPress = {}
+                        <Button onPress = {this.showCurrentSlice}
                             title = "Current Slice"
                             color = "red"/>
     
                     </div>
     
                     <div className="bottom-left">
-                    <Button onPress = {}
+                    <Button onPress = {this.nextSlice}
                             title = "Next Slice"
                             color = "red"/>
     
@@ -36,41 +75,40 @@ class PresentationView {
     
                 <div className="right">
                     <div className="histogram">
-                    <Button onPress = {}
+                    <Button onPress = {this.getHistogram}
                             title = "Show Histogram"
                             color = "red"/>    
                     </div>
                     
                     <div className="bottom-right">
 
-    
                     </div>
                 </div>
             </div>
     
             <div className="ribbon">
              <div className="lecture">
-             <Button onPress = {}
+             <Button onPress = {this.showLectureMaterial}
                             title = "Lecture Slice"
                             color = "red"/>
                 </div>
-                <div className="similar-slclassNamee"> 
-                <Button onPress = {}
+                <div className="similar-slice"> 
+                <Button onPress = {this.similarSlice}
                             title = "Similar Slice"
                             color = "red"/>
                 </div>
-                <div className="harder-slclassNamee">
-                <Button onPress = {}
+                <div className="harder-slice">
+                <Button onPress = {this.harderSlice}
                             title = "Harder Slice"
                             color = "red"/>
                 </div>
-                <div className="new-slclassNamee">
-                <Button onPress = {}
+                <div className="new-slice">
+                <Button onPress = {this.getNewSlice}
                             title = "New Topic"
                             color = "red"/>
                 </div>
                 <div className="histogram-div">
-                <Button onPress = {}
+                <Button onPress = {this.showHistogram}
                             title = "Show Histogram"
                             color = "red"/>
                 </div>-->
