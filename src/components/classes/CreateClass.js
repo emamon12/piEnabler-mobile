@@ -32,13 +32,17 @@ class CreateClass extends Component {
 
     render() {
         //just check if the user is authenticated
-        const { auth } = this.props;
+        const { auth, profile } = this.props;
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
 
+        if(profile.userRole === "student"){
+            return <Redirect to="/"></Redirect>;
+        }
+
         return (
-            <div className="container">
+            <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Create new class</h5>
                     <div className="input-field">
@@ -68,6 +72,7 @@ class CreateClass extends Component {
 
 const mapStateToProps = state => ({
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
 });
 
 const mapDispatchToProps = dispatch => ({

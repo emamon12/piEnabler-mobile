@@ -46,18 +46,11 @@ code {
     monospace;
 }
 
-.collection-item{
+.collection-item {
   min-height: 100px;
-} 
-
-.class-list {
-  animation-name: class_list_anim;
-  animation-iteration-count: 1;
-  animation-duration: .5s;
-  animation-timing-function: ease-in;
 }
 
-@keyframes class_list_anim {
+@keyframes nav_wrapper_anim {
   0% {
     opacity: 0;
   }
@@ -65,4 +58,39 @@ code {
   100% {
     opacity: 1;
   }
+}
+
+.classs-list {
+  animation-name: nav_wrapper_anim;
+  animation-iteration-count: 1;
+  animation-duration: .3s;
+  animation-timing-function: ease-in;
+}
+
+.container {
+  animation-name: nav_wrapper_anim;
+  animation-iteration-count: 1;
+  animation-duration: .3s;
+  animation-timing-function: ease-in;
+}
+
+@media screen and (min-width: 626px){
+  .navbar-dropdown{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 625px){
+  .navbar-attrib{
+    display: none;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.flexbox{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }

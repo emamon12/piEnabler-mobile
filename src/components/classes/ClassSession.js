@@ -10,7 +10,7 @@ class ClassSession extends Component {
     state = {
         userAnswer: "",
     }
-    
+
 
     handleListClick = (e) => {
         e.preventDefault();
@@ -34,7 +34,6 @@ class ClassSession extends Component {
     }
 
     handleButtonClick = (e) => {
-        e.preventDefault()
 
         var y = document.getElementsByClassName("collection-item black-text")
 
@@ -45,17 +44,22 @@ class ClassSession extends Component {
 
         const { props, state } = this;
 
-        props.addResponse(state, props.session)
+        const { session } = props;
+        const uAnswer = { ...state };
+
+        const composite = { session, uAnswer };
+
+        props.addResponse(composite)
 
         var buttonDoc = document.getElementById("answer-submit")
         buttonDoc.className = "disabled btn-large red-bg red darken-3 z-depth-1 waves-effect waves-light"
     }
 
     render() {
-        //this just redirects if the user is not authenticated
-        const { session, auth, authError } = this.props;
-        console.log(authError)
 
+        const { session, auth, responseFeedback } = this.props;
+
+        //this just redirects if the user is not authenticated
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
@@ -63,11 +67,14 @@ class ClassSession extends Component {
         //this is whats actually being seen in the ClassList
 
         if (session) {
-            if (session.isCurrentSliceAQuestion) {
+            if (session && session.isCurrentSliceAQuestion) {
                 return (
                     <div className="container section">
                         <div className="card">
                             <div className="card-content">
+                                <div>
+                                    <label>Slice ID: {session.currentSliceId}</label>
+                                </div>
                                 <label className="card-title black-text center">{session.question}</label>
                             </div>
                         </div>
@@ -80,7 +87,21 @@ class ClassSession extends Component {
                         <div className="input-field center">
                             <button id="answer-submit" onClick={this.handleButtonClick} name={session} className="disabled btn-large red-bg red darken-3 z-depth-1 waves-effect waves-light">Submit</button>
                         </div>
-                        {authError ? <div className="red-text center text-darken-1"><p>{authError}</p></div> : null}
+                        {auth.isLoaded}
+                        {responseFeedback ? <div className="red-text center text-darken-1"><p>{responseFeedback}</p></div> : null}
+                    </div>
+                )
+            } else if (!session.isCurrentSliceAQuestion) {
+                return (
+                    <div className="container section">
+                        <div className="card">
+                            <div className="card-content">
+                                <div>
+                                    <label>Slice ID: {session.currentSliceId}</label>
+                                </div>
+                                <span className="card-title black-text center">{session.question}</span>
+                            </div>
+                        </div>
                     </div>
                 )
             }
@@ -119,12 +140,12 @@ const mapStateToProps = (state, ownProps) => {
     return {
         session: session,
         auth: state.firebase.auth,
-        authError: state.auth.authError
+        responseFeedback: state.classs.responseFeedback
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    addResponse: (state, session) => dispatch(addResponse(state, session)),
+    addResponse: (composite) => dispatch(addResponse(composite)),
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['sessions']))(ClassSession);

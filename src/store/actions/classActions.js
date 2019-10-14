@@ -1,4 +1,3 @@
-
 export const createClass = classs => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
     const { profile } = getState().firebase;
@@ -41,23 +40,41 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
     }
 };
 
-export const addResponse = (response, session) => (dispatch, getState, { getFirestore }) => {
+export const addResponse = fbase => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
     const studentId = getState().firebase.auth.uid;
+    const session = fbase.session;
+    const resp = fbase.uAnswer;
 
     fireStore.collection('responses').doc(`${session.sessionId}${studentId}${session.currentSliceId}${session.numPolls}`).set({
-        response: response.userAnswer,
+        response: resp.userAnswer,
         studentId: studentId,
         currSlice: session.currentSliceId,
         currSession: session.sessionId,
         timesPolled: session.numPolls
 
     }).then(() => dispatch({
-        type: 'ADD_RESPONSE',
-        response
+        type: 'ADD_RESPONSE'
     })).catch((err) => dispatch({
         type: 'ADD_RESPONSE_ERR',
         err
     }))
 
+};
+
+export const ChangeMessage = classs => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const message = classs.value;
+    const collection = classs.classId;
+
+    console.log(classs)
+
+    fireStore.collection('classes').doc(collection).update({
+        messageOfTheDay: message,
+    }).then(() => ({
+        type: 'CHANGE_MESSAGE'
+    })).catch((err) => dispatch({
+        type: 'CHANGE_MESSAGE_ERROR',
+        err
+    }))
 };

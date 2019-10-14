@@ -24,17 +24,16 @@ class AddClass extends Component {
         const { props, state } = this;
         props.addClass(state);
 
-        props.history.push('/');
     }
 
     render() {
-        const { auth } = this.props;
+        const { auth, addClassError } = this.props;
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
 
         return (
-            <div className="container">
+            <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Add new class</h5>
                     <div className="input-field">
@@ -44,6 +43,7 @@ class AddClass extends Component {
                     <div className="input-field">
                         <button type="submit" className="btn red-bg red darken-3 z-depth-1">Add</button>
                     </div>
+                    {addClassError ? <div className="red-text center text-darken-1"><p>{addClassError}</p></div> : null}
                 </form>
             </div>
         );
@@ -52,6 +52,7 @@ class AddClass extends Component {
 
 const mapStateToProps = state => ({
     auth: state.firebase.auth,
+    addClassError: state.classs.addClassError
 });
 
 const mapDispatchToProps = dispatch => ({
