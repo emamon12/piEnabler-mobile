@@ -70,10 +70,15 @@ div.mui-col-md-4:nth-child(3)
   height: 100%;
 }
 
-.fullscreen{
-  height: 90vh !important;
+.fullscreen {
+  height: 87vh !important;
   margin: 2em !important;
   position: relative;
+}
+
+.react-calendar {
+  margin: 0 auto;
+  margin-top: 20vh;
 }
 
 @keyframes App-logo-spin {

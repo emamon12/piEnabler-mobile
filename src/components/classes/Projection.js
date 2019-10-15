@@ -5,6 +5,7 @@ import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
 import { Card, Button } from "react-materialize";
 import Fullscreen from "react-full-screen";
+import Calendar from "react-calendar";
 
 class Projection extends Component {
   state = {
@@ -44,11 +45,12 @@ class Projection extends Component {
             This a bunch of drunkenly typed text that should show up on a
             fullscreen projetion view fingers crossed. This may cover the entire
             monitor.
+            <Calendar />
           </Card>
           {this.state.isFull ? (
             <CancelPresentationIcon
               style={{
-                fontSize: "xxx-large",
+                fontSize: "4em",
                 color: "red",
                 position: "absolute",
                 top: "1%",
@@ -59,7 +61,7 @@ class Projection extends Component {
           ) : (
             <AspectRatioIcon
               style={{
-                fontSize: "xxx-large",
+                fontSize: "4em",
                 color: "red",
                 position: "absolute",
                 top: "1%",
@@ -81,13 +83,13 @@ class Projection extends Component {
             <img
               src="https://i.imgur.com/cwulpWU.png"
               alt=""
-              style={{ height: "1em" }}
+              style={{ height: "5em" }}
             />
             <h3
               style={{
                 cursor: "default",
                 float: "right",
-                bottom: "-6%",
+                bottom: "-30%",
                 position: "absolute",
                 left: "118%"
               }}
