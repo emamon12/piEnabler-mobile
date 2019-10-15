@@ -83,7 +83,7 @@ class Projection extends Component {
             <img
               src="https://i.imgur.com/cwulpWU.png"
               alt=""
-              style={{ height: "5em" }}
+              style={{ height: "4em" }}
             />
             <h3
               style={{
