@@ -5,7 +5,6 @@ export const signIn = ({ credentials, firebase }) => (dispatch, getState) => {
     ).then(() => {
         dispatch({ type: 'LOGIN_SUCCESS' });
     }).catch((err) => {
-        console.log(err)
         dispatch({ type: 'LOGIN_ERROR', err });
     });
 };

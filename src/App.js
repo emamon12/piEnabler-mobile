@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
+import './App.css';
 import Navbar from './components/layout/Navbar'
 import Dashboard from './components/dashboard/Dashboard'
 import ClassDetails from './components/classes/ClassDetails'
@@ -29,8 +30,8 @@ class App extends Component {
             <Route path='/signin' component={SignIn}></Route>
             <Route path='/signup' component={SignUp}></Route>
             <Route path='/addClass' component={AddClass}></Route>
-            <Route path='/createClass' component={CreateClass}></Route>
             <Route path='/createSlice' component={CreateSlice}></Route>
+            <Route path='/createClass' component={CreateClass}></Route>
             <Route exact path='/session/:id' component={Session}></Route>
             <Route path='/session/:id/projection' component={Projection}></Route>
             <Route path='/session/:id/presentation' component={Presentation}></Route>

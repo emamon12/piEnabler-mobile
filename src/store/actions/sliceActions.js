@@ -1,7 +1,5 @@
-
 export const createSlice = slices => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
-    const { profile } = getState().firebase;
     const teacherId = getState().firebase.auth.uid;
 
     fireStore.collection('slices').add({

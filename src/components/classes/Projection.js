@@ -19,7 +19,6 @@ class Projection extends Component {
   nextSlide = () => {
     this.setState({ slideNumber: this.state.slideNumber + 1 });
   };
-  
   prevSlide = () => {
     this.setState({ slideNumber: this.state.slideNumber - 1 });
   };

@@ -272,15 +272,15 @@ class Presentation extends Component {
                         Polling Status : OPEN
                       </Button>
                     ) : (
-                      <Button
-                        waves="dark"
-                        style={StyleClosed}
-                        onClick={this.handlePolling}
-                        id="PollingStatus"
-                      >
-                        Polling Status : CLOSED
+                        <Button
+                          waves="dark"
+                          style={StyleClosed}
+                          onClick={this.handlePolling}
+                          id="PollingStatus"
+                        >
+                          Polling Status : CLOSED
                       </Button>
-                    )}
+                      )}
                   </Col>
                 </Row>
                 <Row style={{ height: "35%", paddingTop: "2em" }}>

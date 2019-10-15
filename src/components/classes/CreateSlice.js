@@ -69,7 +69,7 @@ class CreateSlice extends Component {
                         (
                             <form onSubmit={this.handleSubmit} style={{ marginTop: 0 }} className="white">
                                 <div className="input-field">
-                                    <Textarea type="text" name="Question" id="Question" onChange={this.handleChange} floatingLabel={true}  label="Lecture Material"  />
+                                    <Textarea type="text" name="Question" id="Question" onChange={this.handleChange} floatingLabel={true} label="Lecture Material" />
                                 </div>
                                 <div className="input-field">
                                     <label htmlFor="Topic">Topic</label>
