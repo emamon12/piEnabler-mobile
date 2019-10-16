@@ -136,6 +136,10 @@ code {
 
 .navcontainer {
   width: 98vw;
+  animation-name: nav_wrapper_anim;
+  animation-iteration-count: 1;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
 }
 
 @keyframes class_list_anim {
@@ -151,34 +155,43 @@ code {
 .classs-list {
   animation-name: nav_wrapper_anim;
   animation-iteration-count: 1;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in;
 }
 
 .container {
   animation-name: nav_wrapper_anim;
   animation-iteration-count: 1;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in;
 }
 
-@media screen and (min-width: 626px){
-  .navbar-dropdown{
+@media screen and (min-width: 626px) {
+  .navbar-dropdown {
     display: none;
   }
 }
 
-@media screen and (max-width: 625px){
-  .navbar-attrib{
+@media screen and (max-width: 625px) {
+  .navbar-attrib {
     display: none;
     pointer-events: none;
     cursor: default;
   }
 }
 
-.flexbox{
+.flexbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.centerloader {
+  text-align: center;
+  height: 100%;
+}
+
+.fit {
+  padding-top: 25% !important;
 }

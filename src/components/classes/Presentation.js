@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
-import { Card, Button } from "react-materialize";
+import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 
 class Presentation extends Component {
@@ -183,7 +183,7 @@ class Presentation extends Component {
                   textClassName="black-text fit"
                   style={{ height: "100%", padding: "0px" }}
                 >
-                  Sample Text
+                  <Preloader flashing size="big" />
                 </Card>
               </Card>
             </Row>
@@ -203,7 +203,7 @@ class Presentation extends Component {
                   textClassName="black-text fit"
                   style={{ height: "100%", padding: "0px" }}
                 >
-                  Sample Text
+                  <Preloader flashing size="big" />
                 </Card>
               </Card>
             </Row>
@@ -228,7 +228,7 @@ class Presentation extends Component {
                   textClassName="black-text fit"
                   style={{ height: "90%", padding: "0px" }}
                 >
-                  Sample Graph
+                  <Preloader flashing size="big" />
                 </Card>
               </Card>
             </Row>
@@ -246,12 +246,14 @@ class Presentation extends Component {
                     <Card
                       className="white darken-3"
                       textClassName="black-text"
-                      style={{ fontSize: "1.5vw", height: "100%" }}
+                      style={{ fontSize: "1.5vw", height: "100%", margin: "0" }}
                     >
-                      <p>
+                      <p style={{ textAlign: "center" }}>
                         {state.Voted}/{state.Here}
                       </p>
-                      <p>Voted {votePercent.toFixed(2)} %</p>
+                      <p style={{ textAlign: "center" }}>
+                        Voted {votePercent.toFixed(2)} %
+                      </p>
                     </Card>
                   </Col>
                   <Col
@@ -272,15 +274,15 @@ class Presentation extends Component {
                         Polling Status : OPEN
                       </Button>
                     ) : (
-                        <Button
-                          waves="dark"
-                          style={StyleClosed}
-                          onClick={this.handlePolling}
-                          id="PollingStatus"
-                        >
-                          Polling Status : CLOSED
+                      <Button
+                        waves="dark"
+                        style={StyleClosed}
+                        onClick={this.handlePolling}
+                        id="PollingStatus"
+                      >
+                        Polling Status : CLOSED
                       </Button>
-                      )}
+                    )}
                   </Col>
                 </Row>
                 <Row style={{ height: "35%", paddingTop: "2em" }}>
