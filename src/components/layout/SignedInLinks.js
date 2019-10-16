@@ -20,7 +20,7 @@ const SignedInLinks = (props) => {
 
     if (profile.userRole === "instructor" || profile.userRole === "admin") {
         return (
-            <div>
+            <div className="nav-container">
                 <ul className="right">
                     <Dropdown trigger={<li className="navbar-dropdown" >Class Options</li>}>
                         <NavLink className="purple darken-3 white-text" to="/addClass">Add Class</NavLink>
@@ -57,39 +57,32 @@ const SignedInLinks = (props) => {
         )
     } else if (profile.userRole === "student") {
         return (
-            <ul className="right">
-                <Dropdown trigger={<li className="navbar-dropdown" >Class Options</li>}>
-                    <NavLink className="purple darken-3 white-text" to="/">Home</NavLink>
-                    <Divider></Divider>
-                    <NavLink className="purple darken-3 white-text" to="/addClass">Add Class</NavLink>
-                </Dropdown>
-                <li><NavLink to="/" className="navbar-attrib" >Home</NavLink></li>
-                <li><NavLink to="/addClass" className="navbar-attrib">Add Class</NavLink></li>
-                {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
-                <SideNav className="purple darken-3 white-text" trigger={<li><button className="btn btn-floating grey-bg grey darken-3">{props.profile.initials}</button></li>} options={{ closeOnClick: true, edge: 'right' }}>
-                    <SideNavItem userView user={{
-                        background: "../img/background_img.png",
-                        image: "../img/hat_kid.svg",
-                        name: `${profile.firstName} ${profile.lastName}`,
-                    }} />
-                    <SideNavItem waves={true} className="white" to="/" icon="account_circle">
-                        <span className="white-text">Profile</span>
-                    </SideNavItem>
-                    <Divider />
-                    <SideNavItem waves={true} className="white" to="/" icon="settings_applications">
-                        <span className="white-text">Settings</span>
-                    </SideNavItem>
-                    <Divider />
-                    <SideNavItem waves={true} className="white" to="/" onClick={handleSignOut} icon="power_settings_new">
-                    <span className="white-text">Log Out</span>
-                    </SideNavItem>
-                </SideNav>
-            </ul>
+            <div>
+                <ul className="right">
+                    <Dropdown trigger={<li className="navbar-dropdown" >Class Options</li>}>
+                        <NavLink className="purple darken-3 white-text" to="/">Home</NavLink>
+                        <Divider></Divider>
+                        <NavLink className="purple darken-3 white-text" to="/addClass">Add Class</NavLink>
+                    </Dropdown>
+                    <li><NavLink to="/addClass" className="navbar-attrib">Add Class</NavLink></li>
+                    {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
+                    <SideNav className="grey darken-3 white-text" trigger={<li><button className="btn btn-floating grey-bg grey darken-3">{props.profile.initials}</button></li>} options={{ closeOnClick: true, edge: 'right' }}>
+                        <SideNavItem userView user={{
+                            background: "../img/sidebar_background.jpg",
+                            image: "../img/hat_kid.svg",
+                            name: `${profile.firstName} ${profile.lastName}`,
+                        }} />
+                        <SideNavItem waves={true} className="white-text" to="/" icon="account_circle">Profile</SideNavItem>
+                        <SideNavItem waves={true} className="white-text" to="/" icon="settings_applications">Settings</SideNavItem>
+                        <SideNavItem waves={true} className="white-text" to="/" onClick={handleSignOut} icon="power_settings_new">Log Out</SideNavItem>
+                    </SideNav>
+                </ul>
+            </div>
+
         )
     } else {
         return (
-            <ul className="right">
-
+            <ul className="left">
             </ul>
         )
     }

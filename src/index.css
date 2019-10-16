@@ -37,7 +37,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #700f70;
+  border-color: #c722b1;
   box-shadow: none;
 }
 
@@ -50,7 +50,15 @@ code {
   min-height: 100px;
 }
 
-@keyframes nav_wrapper_anim {
+.nav-container {
+  width: 98vw;
+  animation-name: ease_in_anim;
+  animation-iteration-count: 1;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes ease_in_anim {
   0% {
     opacity: 0;
   }
@@ -61,14 +69,14 @@ code {
 }
 
 .classs-list {
-  animation-name: nav_wrapper_anim;
+  animation-name: ease_in_anim;
   animation-iteration-count: 1;
   animation-duration: .3s;
   animation-timing-function: ease-in;
 }
 
 .container {
-  animation-name: nav_wrapper_anim;
+  animation-name: ease_in_anim;
   animation-iteration-count: 1;
   animation-duration: .3s;
   animation-timing-function: ease-in;
@@ -88,14 +96,13 @@ code {
   }
 }
 
-@media screen and (max-width:320px){
-  .project-title{
+@media screen and (max-width: 350px){
+  .app-title{
     display: none;
-    cursor: default;
   }
 }
 
-.flexbox{
+.flexbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

@@ -38,7 +38,7 @@ const ClassList = ({ classes, profile }) => {
         )
     } else {
         return (
-            <div>
+            <div className="section">
                 <Row>
                     <Col s={12}>
                         <Preloader flashing size="big"/>

@@ -70,7 +70,7 @@ class SignIn extends Component {
                     </div>
                     <div className="input-field">
                         <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">Login</button>
-                        {authError ? <div className="purple-text center text-darken-1"><p>{authError}</p></div> : null}
+                        {authError ? <div className="red-text center text-darken-1"><p>{authError}</p></div> : null}
                     </div>
                 </form>
             </div>

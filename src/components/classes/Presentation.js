@@ -55,7 +55,7 @@ class Presentation extends Component {
   };
 
   render() {
-    const { auth, authError } = this.props;
+    const {auth, authError } = this.props;
     let state = this.state;
     console.log(authError);
 

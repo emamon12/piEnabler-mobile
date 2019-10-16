@@ -14,7 +14,7 @@ class Dashboard extends Component {
         }
 
         return (
-            <div className="dashboard continaer">
+            <div className="dashboard">
                 <div className="row">
                     <div className="col s12 m6">
                         <ClassList classes={classes} profile={auth} />

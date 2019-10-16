@@ -35,7 +35,7 @@ class AddClass extends Component {
         return (
             <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Add new class</h5>
+                    <h5 className="grey-text text-darken-3">Add New Class</h5>
                     <div className="input-field">
                         <label htmlFor="classKey">Class Key</label>
                         <input type="text" name="classKey" id="classKey" onChange={this.handleChange} />

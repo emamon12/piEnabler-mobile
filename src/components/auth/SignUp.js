@@ -51,16 +51,16 @@ export class SignUp extends Component {
                         <input type="password" id="password" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
+                        <label htmlFor="firstName">First Name</label>
+                        <input type="text" id="firstName" onChange={this.handleChange} />
+                    </div>
+                    <div className="input-field">
                         <label htmlFor="lastName">Last Name</label>
                         <input type="text" id="lastName" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="firstName">Fist Name</label>
-                        <input type="text" id="firstName" onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <button className="btn purple-bg purple darken-3 z-depth-1">Sign Up</button>
-                        {authError ? <div className="purple-text center text-darken-1"><p>{authError}</p></div> : null}
+                        <button className="btn red-bg red darken-3 z-depth-1">Sign Up</button>
+                        {authError ? <div className="red-text center text-darken-1"><p>{authError}</p></div> : null}
                     </div>
                 </form>
             </div>
