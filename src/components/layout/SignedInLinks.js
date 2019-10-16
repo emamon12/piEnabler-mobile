@@ -40,11 +40,10 @@ const SignedInLinks = (props) => {
                     <li><NavLink to="/addClass" className="navbar-attrib" >Add Class</NavLink></li>
                     <li><NavLink to="/createClass" className="navbar-attrib" >Create Class</NavLink></li>
                     <li><NavLink to="/createSlice" className="navbar-attrib" >Create Slice</NavLink></li>
-                    <li><NavLink to="/" onClick={handleSignOut} className="navbar-attrib" >Log Out</NavLink></li> {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
-
-                    <SideNav className="red darken-3 white-text" trigger={<li><button className="btn btn-floating red-bg red lighten-1">{props.profile.initials}</button></li>} options={{ closeOnClick: true, edge: 'right' }}>
+                    {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
+                    <SideNav className="grey darken-3 white-text" trigger={<li><button className="btn btn-floating grey-bg grey darken-3">{props.profile.initials}</button></li>} options={{ closeOnClick: true, edge: 'right' }}>
                         <SideNavItem userView user={{
-                            background: "../img/background_img.png",
+                            background: "../img/sidebar_background.jpg",
                             image: "../img/hat_kid.svg",
                             name: `${profile.firstName} ${profile.lastName}`,
                         }} />

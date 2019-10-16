@@ -344,13 +344,13 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%",
               marginLeft: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleLecture}
           >
             Lecture Material
@@ -359,12 +359,13 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
+
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleQuestion}
           >
             Next Question
@@ -373,12 +374,12 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleDifficulty}
           >
             Change Difficulty
@@ -387,12 +388,12 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleTopic}
           >
             New Topic
@@ -401,11 +402,11 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
               width: "19%",
               height: "90%",
               padding: "2em"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleHistogram}
           >
             Histogram
