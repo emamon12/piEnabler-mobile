@@ -77,7 +77,7 @@ class CreateSlice extends Component {
                                     <input type="text" name="Topic" id="Topic" className="input-style" onChange={this.handleChange} />
                                 </div>
                                 <div className="input-field" style={{ paddingBottom: "2rem" }}>
-                                    <button type="submit" className="btn red-bg red darken-3 right z-depth-1" >Create</button>
+                                    <button type="submit" className="btn purple-bg purple darken-3 right z-depth-1" >Create</button>
                                 </div>
                             </form>
                         ) : (
@@ -129,7 +129,7 @@ class CreateSlice extends Component {
                                 </div>
 
                                 <div className="input-field" style={{ paddingBottom: "2rem" }}>
-                                    <button type="submit" className="btn red-bg red darken-3 right z-depth-1" >Create</button>
+                                    <button type="submit" className="btn purple-bg purple darken-3 right z-depth-1" >Create</button>
                                 </div>
                             </form>
                         )}

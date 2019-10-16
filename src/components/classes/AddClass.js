@@ -41,7 +41,7 @@ class AddClass extends Component {
                         <input type="text" name="classKey" id="classKey" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button type="submit" className="btn red-bg red darken-3 z-depth-1">Add</button>
+                        <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">Add</button>
                     </div>
                     {addClassError ? <div className="red-text center text-darken-1"><p>{addClassError}</p></div> : null}
                 </form>

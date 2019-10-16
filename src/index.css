@@ -196,10 +196,13 @@ code {
   padding-top: 25% !important;
 }
 
-.input-style {
+.input-style:focus , .input-style >textarea:focus, textarea:focus ~ label {
   border-color: #6a1b9a !important;
 }
 
+.mui-textfield > label:nth-child(2):focus ~ label {
+  color: grey;
+}
 .fullscreen {
   height: 90vh !important;
   margin: 2em !important;
