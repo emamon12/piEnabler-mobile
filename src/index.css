@@ -195,3 +195,7 @@ code {
 .fit {
   padding-top: 25% !important;
 }
+
+.input-style {
+  border-color: #6a1b9a !important;
+}

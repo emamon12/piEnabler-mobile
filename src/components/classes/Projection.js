@@ -42,10 +42,12 @@ class Projection extends Component {
             style={{ height: "100%", position: "relative" }}
             onClick={this.nextSlide}
           >
-            This a bunch of drunkenly typed text that should show up on a
-            fullscreen projetion view fingers crossed. This may cover the entire
-            monitor.
-            <Calendar />
+            <div style={{ height: "90vh" }}>
+              This a bunch of drunkenly typed text that should show up on a
+              fullscreen projetion view fingers crossed. This may cover the
+              entire monitor.
+              <Calendar />
+            </div>
           </Card>
           {this.state.isFull ? (
             <CancelPresentationIcon
@@ -64,7 +66,7 @@ class Projection extends Component {
                 fontSize: "4em",
                 color: "red",
                 position: "absolute",
-                top: "1%",
+                top: "6%",
                 right: "1%"
               }}
               onClick={this.goFull}
@@ -83,13 +85,13 @@ class Projection extends Component {
             <img
               src="https://i.imgur.com/cwulpWU.png"
               alt=""
-              style={{ height: "4em" }}
+              style={{ height: "1em" }}
             />
             <h3
               style={{
                 cursor: "default",
                 float: "right",
-                bottom: "-30%",
+                bottom: "-7%",
                 position: "absolute",
                 left: "118%"
               }}
