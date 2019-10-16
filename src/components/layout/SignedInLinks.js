@@ -20,7 +20,7 @@ const SignedInLinks = (props) => {
 
     if (profile.userRole === "instructor" || profile.userRole === "admin") {
         return (
-            <div>
+            <div className="navcontainer">
                 <ul className="left">
                     <li><NavLink to="/" className="">
                         <img src="logo.png" alt="Home" style={{ height: "2em" }} />

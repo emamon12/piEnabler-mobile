@@ -12,7 +12,7 @@ const Navbar = (props) => {
 
   return (
     <nav className="nav-wrapper red-bg red darken-3">
-      <div className="container">
+      <div>
         <Link to="/" className="brand-logo"></Link>
         {auth.isLoaded && links}
       </div>
