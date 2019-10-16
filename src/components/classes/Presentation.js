@@ -342,7 +342,7 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
+              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
@@ -357,7 +357,7 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
+              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
@@ -371,7 +371,7 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
+              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
@@ -385,7 +385,7 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
+              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
@@ -399,7 +399,7 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "red",
+              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em"

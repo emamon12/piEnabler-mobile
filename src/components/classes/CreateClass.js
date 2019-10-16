@@ -44,7 +44,7 @@ class CreateClass extends Component {
         return (
             <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Create new class</h5>
+                    <h5 className="grey-text text-darken-3">Create New Class</h5>
                     <div className="input-field">
                         <label htmlFor="classsName">Class Name</label>
                         <input type="text" name="classsName" id="classsName" onChange={this.handleChange} />
@@ -62,7 +62,7 @@ class CreateClass extends Component {
                         <input type="text" name="classLecture" id="classLecture" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button type="submit" className="btn red-bg red darken-3 z-depth-1">Add</button>
+                        <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">Add</button>
                     </div>
                 </form>
             </div>

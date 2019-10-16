@@ -59,8 +59,8 @@ export class SignUp extends Component {
                         <input type="text" id="firstName" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button className="btn red-bg red darken-3 z-depth-1">Sign Up</button>
-                        {authError ? <div className="red-text center text-darken-1"><p>{authError}</p></div> : null}
+                        <button className="btn purple-bg purple darken-3 z-depth-1">Sign Up</button>
+                        {authError ? <div className="purple-text center text-darken-1"><p>{authError}</p></div> : null}
                     </div>
                 </form>
             </div>

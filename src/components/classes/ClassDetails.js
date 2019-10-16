@@ -99,32 +99,32 @@ class ClassDetails extends Component {
                             <div className="flexbox">
                                 <Link to={'/session/' + classs.currSession} key={classs.currSession}>
                                     <div className="col">
-                                        <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
                                     </div>
                                 </Link>
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col">
-                                        <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
+                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession} >
-                                        <div className="col"><button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Projection</button></div>
+                                        <div className="col"><button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Projection</button></div>
                                     </Link>
                                     : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <Link to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession} >
-                                        <div className="col"><button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Presentation</button></div>
+                                        <div className="col"><button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Presentation</button></div>
                                     </Link>
                                     : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col">
                                         {(!formMode) ?
-                                            <button onClick={this.handleButtonClick} type="button" value={message} className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Change Message</button>
+                                            <button onClick={this.handleButtonClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Change Message</button>
                                             :
-                                            <button onClick={this.handleSubmitClick} type="button" value={message} className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Save</button>}
+                                            <button onClick={this.handleSubmitClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Save</button>}
                                     </div> :
                                     null}
                             </div>
@@ -157,22 +157,22 @@ class ClassDetails extends Component {
                         <div className="row">
                             <div className="flexbox">
                                 <div className="col">
-                                    <Modal className="modal1" options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }} actions={<Button waves="red" modal="close" flat>Okay</Button>} header="No Session Active" trigger={<button data-target="modal1" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                                    <Modal className="modal1" options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }} actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active" trigger={<button data-target="modal1" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
                                     }>
                                         The class session is currently not active.
                             </Modal>
                                 </div>
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col">
-                                        <button type="button" className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Start Session</button>
+                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Start Session</button>
                                     </div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col">
                                         {(!formMode) ?
-                                            <button onClick={this.handleButtonClick} type="button" value={message} className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Change Message</button>
+                                            <button onClick={this.handleButtonClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Change Message</button>
                                             :
-                                            <button onClick={this.handleSubmitClick} type="button" value={message} className="btn red-bg red darken-3 z-depth-1 waves-effect waves-light">Save</button>}
+                                            <button onClick={this.handleSubmitClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Save</button>}
                                     </div> :
                                     null}
                             </div>

@@ -37,7 +37,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #ec407a;
+  border-color: #700f70;
   box-shadow: none;
 }
 
@@ -74,16 +74,23 @@ code {
   animation-timing-function: ease-in;
 }
 
-@media screen and (min-width: 626px){
+@media screen and (min-width: 661px){
   .navbar-dropdown{
     display: none;
   }
 }
 
-@media screen and (max-width: 625px){
+@media screen and (max-width: 660px){
   .navbar-attrib{
     display: none;
     pointer-events: none;
+    cursor: default;
+  }
+}
+
+@media screen and (max-width:320px){
+  .project-title{
+    display: none;
     cursor: default;
   }
 }
