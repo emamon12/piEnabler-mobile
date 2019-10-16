@@ -66,7 +66,7 @@ class Projection extends Component {
                 fontSize: "4em",
                 color: "red",
                 position: "absolute",
-                top: "6%",
+                top: "1%",
                 right: "1%"
               }}
               onClick={this.goFull}

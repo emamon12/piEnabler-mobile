@@ -84,11 +84,7 @@ li.white-text:nth-child(4) > a:nth-child(1) , li.white-text:nth-child(4) > a:nth
 
 li.white-text:nth-child(2) > a:nth-child(1) > i:nth-child(1)
 
-.fullscreen {
-  height: 87vh !important;
-  margin: 2em !important;
-  position: relative;
-}
+
 
 .react-calendar {
   margin: 0 auto;

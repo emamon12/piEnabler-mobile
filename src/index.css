@@ -199,3 +199,9 @@ code {
 .input-style {
   border-color: #6a1b9a !important;
 }
+
+.fullscreen {
+  height: 90vh !important;
+  margin: 2em !important;
+  position: relative;
+}
