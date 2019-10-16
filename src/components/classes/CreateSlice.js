@@ -42,7 +42,7 @@ class CreateSlice extends Component {
         }));
     }
 
-    handleSubmit = (e) => {
+ handleSubmit = (e) => {
         e.preventDefault();
         const { props, state } = this;
         props.createSlice(state);
@@ -50,7 +50,6 @@ class CreateSlice extends Component {
 
         props.history.push('/createSlice');
     }
-
 
     render() {
         //just check if the user is authenticated

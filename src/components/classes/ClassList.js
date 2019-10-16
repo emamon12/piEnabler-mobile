@@ -46,7 +46,6 @@ const ClassList = ({ classes, profile }) => {
                 </Row>
             </div>
         )
-
     }
 }
 
