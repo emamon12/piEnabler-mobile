@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {addClass} from '../../store/actions/classActions';
+import { addClass } from '../../store/actions/classActions';
 
 class AddClass extends Component {
     state = {
@@ -23,7 +23,7 @@ class AddClass extends Component {
         e.preventDefault();
         const { props, state } = this;
         props.addClass(state);
-        props.history.push('/');
+
     }
 
     render() {
@@ -35,7 +35,7 @@ class AddClass extends Component {
         return (
             <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Add New Class</h5>
+                    <h5 className="grey-text text-darken-3">Add new class</h5>
                     <div className="input-field">
                         <label htmlFor="classKey">Class Key</label>
                         <input type="text" name="classKey" id="classKey" onChange={this.handleChange} />
@@ -43,7 +43,7 @@ class AddClass extends Component {
                     <div className="input-field">
                         <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">Add</button>
                     </div>
-                    {addClassError ? <div className="purple-text center text-darken-1"><p>{addClassError}</p></div> : null}
+                    {addClassError ? <div className="red-text center text-darken-1"><p>{addClassError}</p></div> : null}
                 </form>
             </div>
         );

@@ -40,7 +40,7 @@ const ClassList = ({ classes, profile }) => {
         return (
             <div className="section">
                 <Row>
-                    <Col s={12}>
+                    <Col s={12} className="centerloader">
                         <Preloader flashing size="big"/>
                     </Col>
                 </Row>

@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
-import { Card, Button } from "react-materialize";
+import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 
 class Presentation extends Component {
@@ -55,7 +55,7 @@ class Presentation extends Component {
   };
 
   render() {
-    const {auth, authError } = this.props;
+    const { auth, authError } = this.props;
     let state = this.state;
     console.log(authError);
 
@@ -183,7 +183,7 @@ class Presentation extends Component {
                   textClassName="black-text fit"
                   style={{ height: "100%", padding: "0px" }}
                 >
-                  Sample Text
+                  <Preloader flashing size="big" />
                 </Card>
               </Card>
             </Row>
@@ -203,7 +203,7 @@ class Presentation extends Component {
                   textClassName="black-text fit"
                   style={{ height: "100%", padding: "0px" }}
                 >
-                  Sample Text
+                  <Preloader flashing size="big" />
                 </Card>
               </Card>
             </Row>
@@ -228,7 +228,7 @@ class Presentation extends Component {
                   textClassName="black-text fit"
                   style={{ height: "90%", padding: "0px" }}
                 >
-                  Sample Graph
+                  <Preloader flashing size="big" />
                 </Card>
               </Card>
             </Row>
@@ -246,12 +246,14 @@ class Presentation extends Component {
                     <Card
                       className="white darken-3"
                       textClassName="black-text"
-                      style={{ fontSize: "1.5vw", height: "100%" }}
+                      style={{ fontSize: "1.5vw", height: "100%", margin: "0" }}
                     >
-                      <p>
+                      <p style={{ textAlign: "center" }}>
                         {state.Voted}/{state.Here}
                       </p>
-                      <p>Voted {votePercent.toFixed(2)} %</p>
+                      <p style={{ textAlign: "center" }}>
+                        Voted {votePercent.toFixed(2)} %
+                      </p>
                     </Card>
                   </Col>
                   <Col
@@ -342,13 +344,13 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%",
               marginLeft: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleLecture}
           >
             Lecture Material
@@ -357,12 +359,13 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "purple",
+
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleQuestion}
           >
             Next Question
@@ -371,12 +374,12 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleDifficulty}
           >
             Change Difficulty
@@ -385,12 +388,12 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em",
               marginRight: "1%"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleTopic}
           >
             New Topic
@@ -399,11 +402,11 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-              background: "purple",
               width: "19%",
               height: "90%",
               padding: "2em"
             }}
+            className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleHistogram}
           >
             Histogram

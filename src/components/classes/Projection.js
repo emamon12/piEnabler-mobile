@@ -19,7 +19,6 @@ class Projection extends Component {
   nextSlide = () => {
     this.setState({ slideNumber: this.state.slideNumber + 1 });
   };
-
   prevSlide = () => {
     this.setState({ slideNumber: this.state.slideNumber - 1 });
   };
@@ -42,14 +41,17 @@ class Projection extends Component {
             style={{ height: "100%", position: "relative" }}
             onClick={this.nextSlide}
           >
-            This a bunch of drunkenly typed text that should show up on a
-            fullscreen projetion view fingers crossed. This may cover the entire
-            monitor.
+            <div >
+              This a bunch of drunkenly typed text that should show up on a
+              fullscreen projetion view fingers crossed. This may cover the
+              entire monitor.
+
+            </div>
           </Card>
           {this.state.isFull ? (
             <CancelPresentationIcon
               style={{
-                fontSize: "xxx-large",
+                fontSize: "4em",
                 color: "red",
                 position: "absolute",
                 top: "1%",
@@ -60,7 +62,7 @@ class Projection extends Component {
           ) : (
               <AspectRatioIcon
                 style={{
-                  fontSize: "xxx-large",
+                  fontSize: "4em",
                   color: "red",
                   position: "absolute",
                   top: "1%",
@@ -88,7 +90,7 @@ class Projection extends Component {
               style={{
                 cursor: "default",
                 float: "right",
-                bottom: "-6%",
+                bottom: "-7%",
                 position: "absolute",
                 left: "118%"
               }}
