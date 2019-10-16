@@ -1,5 +1,6 @@
 import authReducer from './authReducer'
 import classReducer from './classReducer'
+import sliceReducer from './sliceReducer'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
 import { firebaseReducer } from 'react-redux-firebase'
@@ -7,6 +8,7 @@ import { firebaseReducer } from 'react-redux-firebase'
 const rootReducer = combineReducers({
     auth: authReducer,
     classs: classReducer,
+    slices: sliceReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer,
 })

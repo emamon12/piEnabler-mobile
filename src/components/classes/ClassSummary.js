@@ -6,6 +6,9 @@ const ClassSummary = ({ classs }) => {
             <div className="card-content grey-text text-darken-3">
                 <span className="card-title">{classs.classIdentifier} - {classs.classsName}
                 </span>
+                <span className="card-content">
+                    Instructor: {classs.teacherFirstName} {classs.teacherLastName}
+                </span>
             </div>
         </div>
     )
