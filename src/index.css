@@ -114,7 +114,7 @@ input[type="text"]:not(.browser-default):focus:not([readonly]),
 input[type="email"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #ec407a;
+  border-color: #851363;
   box-shadow: none;
 }
 
@@ -127,22 +127,15 @@ code {
   min-height: 100px;
 }
 
-.class-list {
-  animation-name: class_list_anim;
-  animation-iteration-count: 1;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-in;
-}
-
-.navcontainer {
+.nav-container {
   width: 98vw;
-  animation-name: nav_wrapper_anim;
+  animation-name: ease-in-anim;
   animation-iteration-count: 1;
   animation-duration: 0.3s;
   animation-timing-function: ease-in;
 }
 
-@keyframes class_list_anim {
+@keyframes ease-in-anim {
   0% {
     opacity: 0;
   }
@@ -153,14 +146,14 @@ code {
 }
 
 .classs-list {
-  animation-name: nav_wrapper_anim;
+  animation-name: ease-in-anim;
   animation-iteration-count: 1;
   animation-duration: 0.3s;
   animation-timing-function: ease-in;
 }
 
 .container {
-  animation-name: nav_wrapper_anim;
+  animation-name: ease-in-anim;
   animation-iteration-count: 1;
   animation-duration: 0.3s;
   animation-timing-function: ease-in;
@@ -180,6 +173,14 @@ code {
   }
 }
 
+@media screen and (max-width: 350px) {
+  .project-title {
+    display: none;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
 .flexbox {
   display: flex;
   flex-wrap: wrap;
@@ -193,18 +194,31 @@ code {
 }
 
 .fit {
-  padding-top: 25% !important;
+  padding-top: 18% !important;
 }
 
-.input-style:focus , .input-style >textarea:focus, textarea:focus ~ label {
+.input-style:focus,
+.input-style > textarea:focus,
+textarea:focus ~ label {
   border-color: #6a1b9a !important;
 }
 
 .mui-textfield > label:nth-child(2):focus ~ label {
   color: grey;
 }
+
 .fullscreen {
   height: 90vh !important;
-  margin: 2em !important;
+  margin: 1em !important;
   position: relative;
+}
+
+.projection_body {
+  font-size: xx-large;
+}
+
+.projection_title {
+	text-align: center;
+	font-size: 4vh;
+	margin-bottom: 3em;
 }

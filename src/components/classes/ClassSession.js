@@ -17,14 +17,14 @@ class ClassSession extends Component {
 
         var x = document.getElementsByClassName("collection-item black-text")
         var theButton = document.getElementById("answer-submit")
-        theButton.className = "btn-large red-bg red darken-3 z-depth-1 waves-effect waves-light "
+        theButton.className = "btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light "
 
         x[0].className = "collection-item black-text"
         x[1].className = "collection-item black-text"
         x[2].className = "collection-item black-text"
         x[3].className = "collection-item black-text"
 
-        e.target.className = "collection-item black-text red lighten-3"
+        e.target.className = "collection-item black-text purple lighten-3"
 
         const response = e.target.name
 
@@ -52,7 +52,7 @@ class ClassSession extends Component {
         props.addResponse(composite)
 
         var buttonDoc = document.getElementById("answer-submit")
-        buttonDoc.className = "disabled btn-large red-bg red darken-3 z-depth-1 waves-effect waves-light"
+        buttonDoc.className = "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
     }
 
     render() {
@@ -85,7 +85,7 @@ class ClassSession extends Component {
                             <a id="answer4" name="answer4" href="#!" className="collection-item black-text" >{session.answer4}</a>
                         </div>
                         <div className="input-field center">
-                            <button id="answer-submit" onClick={this.handleButtonClick} name={session} className="disabled btn-large red-bg red darken-3 z-depth-1 waves-effect waves-light">Submit</button>
+                            <button id="answer-submit" onClick={this.handleButtonClick} name={session} className="disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Submit</button>
                         </div>
                         {auth.isLoaded}
                         {responseFeedback ? <div className="red-text center text-darken-1"><p>{responseFeedback}</p></div> : null}

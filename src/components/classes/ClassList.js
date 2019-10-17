@@ -38,7 +38,7 @@ const ClassList = ({ classes, profile }) => {
         )
     } else {
         return (
-            <div className="container section classs-details">
+            <div className="section">
                 <Row>
                     <Col s={12} className="centerloader">
                         <Preloader flashing size="big"/>

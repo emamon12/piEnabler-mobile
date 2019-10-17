@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
@@ -24,7 +26,7 @@ class Projection extends Component {
   };
 
   render() {
-    const { auth, authError } = this.props;
+    const { session, auth, authError } = this.props;
     console.log(authError);
 
     if (!auth.uid) {
@@ -37,15 +39,14 @@ class Projection extends Component {
           <Card
             className="white full-screenable-node"
             textClassName="black-text"
-            title="Slide 1"
             style={{ height: "100%", position: "relative" }}
             onClick={this.nextSlide}
           >
-            <div > 
-              This a bunch of drunkenly typed text that should show up on a
-              fullscreen projetion view fingers crossed. This may cover the
-              entire monitor.
-
+          <h3 className="projection_title">Welcome to CS 140</h3>
+            <div id="body" className="projection_body" >
+              {session && session.question
+                ? session.question
+                : "No Session Active"}
             </div>
           </Card>
           {this.state.isFull ? (
@@ -73,7 +74,7 @@ class Projection extends Component {
           )}
           <div
             style={{
-              fontSize: "xxx-large",
+              fontSize: "4em",
               color: "black",
               position: "absolute",
               bottom: "2%",
@@ -101,7 +102,7 @@ class Projection extends Component {
 
           <div
             style={{
-              fontSize: "xxx-large",
+              fontSize: "1em",
               color: "black",
               position: "absolute",
               bottom: "2%",
@@ -116,13 +117,18 @@ class Projection extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(["sessions"])
 )(Projection);
