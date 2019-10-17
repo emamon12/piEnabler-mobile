@@ -33,8 +33,8 @@ class App extends Component {
             <Route path='/createSlice' component={CreateSlice}></Route>
             <Route path='/createClass' component={CreateClass}></Route>
             <Route exact path='/session/:id' component={Session}></Route>
-            <Route path='/session/:id/projection' component={Projection}></Route>
-            <Route path='/session/:id/presentation' component={Presentation}></Route>
+            <Route exact path='/session/:id/projection' component={Projection}></Route>
+            <Route exact path='/session/:id/presentation' component={Presentation}></Route>
             <Route path="/:any" component={Dashboard} />
           </Switch>
         </div>
