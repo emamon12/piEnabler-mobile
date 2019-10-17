@@ -147,7 +147,7 @@ class frickenlazorbeams extends Component {
     console.log(authError);
 
     if (!auth.uid) {
-      return <Redirect to="/signin" />;
+      //return <Redirect to="/signin" />;
     }
     let style = this.state.enabled ? "lazor" : "";
 
@@ -169,109 +169,67 @@ class frickenlazorbeams extends Component {
               </div>
             </Card>
             {this.state.isFull ? (
-              <div>
-                <CancelPresentationIcon
-                  style={{
-                    fontSize: "4em",
-                    color: "red",
-                    position: "fixed",
-                    top: "1%",
-                    right: "1%"
-                  }}
-                  onClick={this.goFull}
-                />
-
-                <div
-                  style={{
-                    fontSize: "4em",
-                    color: "black",
-                    position: "fixed",
-                    bottom: "2%",
-                    left: "1%",
-                    display: "inline"
-                  }}
-                >
-                  <img
-                    src="https://i.imgur.com/cwulpWU.png"
-                    alt=""
-                    style={{ height: "1em" }}
-                  />
-                  <h3
-                    style={{
-                      cursor: "default",
-                      float: "right",
-                      bottom: "2%",
-                      position: "fixed",
-                      left: "3.5%"
-                    }}
-                  >
-                    piEnabler
-                  </h3>
-                </div>
-                <div
-                  style={{
-                    fontSize: "1em",
-                    color: "black",
-                    position: "absolute",
-                    bottom: "2%",
-                    right: "2%"
-                  }}
-                >
-                  <h1>{this.state.slideNumber}</h1>
-                </div>
-              </div>
+              <CancelPresentationIcon
+                style={{
+                  fontSize: "4em",
+                  color: "red",
+                  position: "absolute",
+                  top: "1%",
+                  right: "1%"
+                }}
+                onClick={this.goFull}
+              />
             ) : (
-              <div>
-                <AspectRatioIcon
-                  style={{
-                    fontSize: "4em",
-                    color: "red",
-                    position: "fixed",
-                    top: "6%",
-                    right: "2%"
-                  }}
-                  onClick={this.goFull}
-                />
-                <div
-                  style={{
-                    fontSize: "4em",
-                    color: "black",
-                    position: "fixed",
-                    bottom: "5%",
-                    left: "2%",
-                    display: "inline"
-                  }}
-                >
-                  <img
-                    src="https://i.imgur.com/cwulpWU.png"
-                    alt=""
-                    style={{ height: "1em" }}
-                  />
-                  <h3
-                    style={{
-                      cursor: "default",
-                      float: "right",
-                      bottom: "5%",
-                      position: "fixed",
-                      left: "4.5%"
-                    }}
-                  >
-                    piEnabler
-                  </h3>
-                </div>
-                <div
-                  style={{
-                    fontSize: "1em",
-                    color: "black",
-                    position: "absolute",
-                    bottom: "5%",
-                    right: "3%"
-                  }}
-                >
-                  <h1>{this.state.slideNumber}</h1>
-                </div>
-              </div>
+              <AspectRatioIcon
+                style={{
+                  fontSize: "4em",
+                  color: "red",
+                  position: "absolute",
+                  top: "1%",
+                  right: "1.5%"
+                }}
+                onClick={this.goFull}
+              />
             )}
+
+            <div
+              style={{
+                fontSize: "4em",
+                color: "black",
+                position: "absolute",
+                bottom: "2%",
+                left: "1%",
+                display: "inline"
+              }}
+            >
+              <img
+                src="https://i.imgur.com/cwulpWU.png"
+                alt=""
+                style={{ height: "1em" }}
+              />
+              <h3
+                style={{
+                  cursor: "default",
+                  float: "right",
+                  position: "absolute",
+                  bottom: "2%",
+                  left: "114.5%"
+                }}
+              >
+                piEnabler
+              </h3>
+            </div>
+            <div
+              style={{
+                fontSize: "1em",
+                color: "black",
+                position: "absolute",
+                bottom: "2%",
+                right: "2%"
+              }}
+            >
+              <h1>{this.state.slideNumber}</h1>
+            </div>
 
             {this.state.enabled ? this.renderShip() : null}
             {this.state.enabled ? this.renderBullets() : null}
