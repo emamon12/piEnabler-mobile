@@ -6,7 +6,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
-import { Card, Button } from "react-materialize";
+import { Card } from "react-materialize";
 import Fullscreen from "react-full-screen";
 
 class frickenlazorbeams extends Component {
