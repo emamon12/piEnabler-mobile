@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import "./frickenlazorbeams.scss";
 import Projection from "../classes/Projection";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
+import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import { Card, Button } from "react-materialize";
+import Fullscreen from "react-full-screen";
 
 class frickenlazorbeams extends Component {
   constructor(props) {
@@ -12,7 +17,9 @@ class frickenlazorbeams extends Component {
       ship: [0, 0],
       bullets: [],
       enabled: true,
-      firing: true
+      firing: true,
+      isFull: false,
+      slideNumber: 1
     };
   }
   componentDidMount() {
@@ -124,31 +131,174 @@ class frickenlazorbeams extends Component {
       ship: [_x, _y]
     });
   };
+
+  goFull = () => {
+    this.setState({ isFull: !this.state.isFull });
+  };
+
+  nextSlide = () => {
+    this.setState({ slideNumber: this.state.slideNumber + 1 });
+  };
+  prevSlide = () => {
+    this.setState({ slideNumber: this.state.slideNumber - 1 });
+  };
+
   render() {
+    const { session, auth, authError } = this.props;
+    console.log(authError);
+
+    if (!auth.uid) {
+      //return <Redirect to="/signin" />;
+    }
     let style = this.state.enabled ? "lazor" : "";
 
     return (
       <div className={style}>
-        <Projection session={this.props.session ? this.props.session : null} />
-        {this.state.enabled ? this.renderShip() : null}
-        {this.state.enabled ? this.renderBullets() : null}
+        <div style={{ margin: "1em", padding: "0" }}>
+          <Fullscreen enabled={this.state.isFull}>
+            <Card
+              className="white full-screenable-node"
+              textClassName="black-text"
+              style={{ height: "100%", position: "relative" }}
+              onClick={this.nextSlide}
+            >
+              <h3 className="projection_title">Welcome to CS 140</h3>
+              <div id="body" className="projection_body">
+                {session && session.question
+                  ? session.question
+                  : "No Session Active"}
+              </div>
+            </Card>
+            {this.state.isFull ? (
+              <div>
+                <CancelPresentationIcon
+                  style={{
+                    fontSize: "4em",
+                    color: "red",
+                    position: "fixed",
+                    top: "1%",
+                    right: "1%"
+                  }}
+                  onClick={this.goFull}
+                />
+
+                <div
+                  style={{
+                    fontSize: "4em",
+                    color: "black",
+                    position: "fixed",
+                    bottom: "2%",
+                    left: "1%",
+                    display: "inline"
+                  }}
+                >
+                  <img
+                    src="https://i.imgur.com/cwulpWU.png"
+                    alt=""
+                    style={{ height: "1em" }}
+                  />
+                  <h3
+                    style={{
+                      cursor: "default",
+                      float: "right",
+                      bottom: "2%",
+                      position: "fixed",
+                      left: "3.5%"
+                    }}
+                  >
+                    piEnabler
+                  </h3>
+                </div>
+                <div
+                  style={{
+                    fontSize: "1em",
+                    color: "black",
+                    position: "absolute",
+                    bottom: "2%",
+                    right: "2%"
+                  }}
+                >
+                  <h1>{this.state.slideNumber}</h1>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <AspectRatioIcon
+                  style={{
+                    fontSize: "4em",
+                    color: "red",
+                    position: "fixed",
+                    top: "6%",
+                    right: "2%"
+                  }}
+                  onClick={this.goFull}
+                />
+                <div
+                  style={{
+                    fontSize: "4em",
+                    color: "black",
+                    position: "fixed",
+                    bottom: "5%",
+                    left: "2%",
+                    display: "inline"
+                  }}
+                >
+                  <img
+                    src="https://i.imgur.com/cwulpWU.png"
+                    alt=""
+                    style={{ height: "1em" }}
+                  />
+                  <h3
+                    style={{
+                      cursor: "default",
+                      float: "right",
+                      bottom: "5%",
+                      position: "fixed",
+                      left: "4.5%"
+                    }}
+                  >
+                    piEnabler
+                  </h3>
+                </div>
+                <div
+                  style={{
+                    fontSize: "1em",
+                    color: "black",
+                    position: "absolute",
+                    bottom: "5%",
+                    right: "3%"
+                  }}
+                >
+                  <h1>{this.state.slideNumber}</h1>
+                </div>
+              </div>
+            )}
+
+            {this.state.enabled ? this.renderShip() : null}
+            {this.state.enabled ? this.renderBullets() : null}
+          </Fullscreen>
+        </div>
       </div>
     );
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.match.params;
-    const { sessions } = state.firestore.data;
-    const session = sessions ? sessions[id] : null
-    return {
-        session: session,
-        auth: state.firebase.auth,
-    };
+  const { id } = ownProps.match.params;
+  const { sessions } = state.firestore.data;
+  const session = sessions ? sessions[id] : null;
+  return {
+    session: session,
+    auth: state.firebase.auth
+  };
 };
 
 const mapDispatchToProps = dispatch => ({});
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['sessions']))(frickenlazorbeams);
-
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(["sessions"])
+)(frickenlazorbeams);
