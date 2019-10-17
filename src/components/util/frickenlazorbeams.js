@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import "./frickenlazorbeams.scss";
-import Projection from "../classes/Projection";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -148,7 +147,7 @@ class frickenlazorbeams extends Component {
     console.log(authError);
 
     if (!auth.uid) {
-      //return <Redirect to="/signin" />;
+      return <Redirect to="/signin" />;
     }
     let style = this.state.enabled ? "lazor" : "";
 
