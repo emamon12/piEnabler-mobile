@@ -212,3 +212,13 @@ textarea:focus ~ label {
   margin: 1em !important;
   position: relative;
 }
+
+.projection_body {
+  font-size: xx-large;
+}
+
+.projection_title {
+	text-align: center;
+	font-size: 4vh;
+	margin-bottom: 3em;
+}

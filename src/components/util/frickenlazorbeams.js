@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./frickenlazorbeams.scss";
 import Projection from "../classes/Projection";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 class frickenlazorbeams extends Component {
   constructor(props) {
@@ -126,7 +129,7 @@ class frickenlazorbeams extends Component {
 
     return (
       <div className={style}>
-        <Projection />
+        <Projection session={this.props.session ? this.props.session : null} />
         {this.state.enabled ? this.renderShip() : null}
         {this.state.enabled ? this.renderBullets() : null}
       </div>
@@ -134,4 +137,18 @@ class frickenlazorbeams extends Component {
   }
 }
 
-export default frickenlazorbeams;
+
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps.match.params;
+    const { sessions } = state.firestore.data;
+    const session = sessions ? sessions[id] : null
+    return {
+        session: session,
+        auth: state.firebase.auth,
+    };
+};
+
+const mapDispatchToProps = dispatch => ({});
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['sessions']))(frickenlazorbeams);
+
