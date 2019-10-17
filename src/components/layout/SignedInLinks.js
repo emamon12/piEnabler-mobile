@@ -20,22 +20,14 @@ const SignedInLinks = (props) => {
 
     if (profile.userRole === "instructor" || profile.userRole === "admin") {
         return (
-            <div className="navcontainer">
-                <ul className="left">
-                    <li><NavLink to="/" className="">
-                        <img src="logo.png" alt="Home" style={{ height: "2em" }} />
-
-                    </NavLink>
-                    </li>
-                    <li><h3 style={{ cursor: "default" }}>piEnabler</h3></li>
-                </ul>
+            <div className="nav-container">
                 <ul className="right">
                     <Dropdown trigger={<li className="navbar-dropdown" >Class Options</li>}>
-                         <NavLink className="red darken-3 white-text" to="/addClass">Add Class</NavLink>
+                        <NavLink className="purple darken-3 white-text" to="/addClass">Add Class</NavLink>
                         <Divider></Divider>
-                        <NavLink className="red darken-3 white-text" to="/createClass">Create Class</NavLink>
+                        <NavLink className="purple darken-3 white-text" to="/createClass">Create Class</NavLink>
                         <Divider></Divider>
-                        <NavLink className="red darken-3 white-text" to="/createSlice">Create Slice</NavLink>
+                        <NavLink className="purple darken-3 white-text" to="/createSlice">Create Slice</NavLink>
                     </Dropdown>
                     <li><NavLink to="/addClass" className="navbar-attrib" >Add Class</NavLink></li>
                     <li><NavLink to="/createClass" className="navbar-attrib" >Create Class</NavLink></li>
@@ -56,26 +48,18 @@ const SignedInLinks = (props) => {
         )
     } else if (profile.userRole === "student") {
         return (
-            <div>
-                <ul className="left">
-                    <li><NavLink to="/" className="">
-                        <img src="logo.png" alt="Home" style={{ height: "2em" }} />
-
-                    </NavLink>
-                    </li>
-                    <li><h3 style={{ cursor: "default" }}>piEnabler</h3></li>
-                </ul>
+            <div className="nav-container">
                 <ul className="right">
                     <Dropdown trigger={<li className="navbar-dropdown" >Class Options</li>}>
-                        <NavLink className="red darken-3 white-text" to="/">Home</NavLink>
+                        <NavLink className="purple darken-3 white-text" to="/">Home</NavLink>
                         <Divider></Divider>
-                        <NavLink className="red darken-3 white-text" to="/addClass">Add Class</NavLink>
+                        <NavLink className="purple darken-3 white-text" to="/addClass">Add Class</NavLink>
                     </Dropdown>
                     <li><NavLink to="/addClass" className="navbar-attrib">Add Class</NavLink></li>
                     {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
-                    <SideNav className="red darken-3 white-text" trigger={<li><button className="btn btn-floating red-bg red lighten-1">{props.profile.initials}</button></li>} options={{ closeOnClick: true, edge: 'right' }}>
+                    <SideNav className="grey darken-3 white-text" trigger={<li><button className="btn btn-floating grey-bg grey darken-3">{props.profile.initials}</button></li>} options={{ closeOnClick: true, edge: 'right' }}>
                         <SideNavItem userView user={{
-                            background: "../img/background_img.png",
+                            background: "../img/sidebar_background.jpg",
                             image: "../img/hat_kid.svg",
                             name: `${profile.firstName} ${profile.lastName}`,
                         }} />
@@ -89,13 +73,7 @@ const SignedInLinks = (props) => {
         )
     } else {
         return (
-            <ul className="left">   
-                <li><NavLink to="/" className="">
-                    <img src="logo.png" alt="Home" style={{ height: "2em" }} />
-
-                </NavLink>
-                </li>
-                <li><h3 style={{ cursor: "default" }}>piEnabler</h3></li>
+            <ul className="left">
             </ul>
         )
     }

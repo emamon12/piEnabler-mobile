@@ -47,7 +47,6 @@ class CreateSlice extends Component {
         const { props, state } = this;
         props.createSlice(state);
         //the push acts as a redirect... when the form is submitted... redirect to home
-        state.
         props.history.push('/createSlice');
     }
 
@@ -112,14 +111,14 @@ class CreateSlice extends Component {
                                     <input type="text" name="Topic" id="Topic" className="input-style" onChange={this.handleChange} />
                                 </div>
                                 <div className="input-field">
-                                <label style={{marginRight: "2em"}}>Difficulty</label>
+                                    <label style={{ marginRight: "2em" }}>Difficulty</label>
 
                                     <Dropdown
                                         color="grey"
                                         label={(this.state.Difficulty) ? (this.state.Difficulty) : ""}
                                         id="Difficulty"
                                         onSelect={this.handleDifChange}
-                                        style={{marginLeft: "7em"}}
+                                        style={{ marginLeft: "7em" }}
                                     >
                                         <DropdownItem value="">None</DropdownItem>
                                         <DropdownItem value="easy">Easy</DropdownItem>

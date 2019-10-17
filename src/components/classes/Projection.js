@@ -41,7 +41,7 @@ class Projection extends Component {
             style={{ height: "100%", position: "relative" }}
             onClick={this.nextSlide}
           >
-            <div > 
+            <div >
               This a bunch of drunkenly typed text that should show up on a
               fullscreen projetion view fingers crossed. This may cover the
               entire monitor.
@@ -60,17 +60,17 @@ class Projection extends Component {
               onClick={this.goFull}
             />
           ) : (
-            <AspectRatioIcon
-              style={{
-                fontSize: "4em",
-                color: "red",
-                position: "absolute",
-                top: "1%",
-                right: "1%"
-              }}
-              onClick={this.goFull}
-            />
-          )}
+              <AspectRatioIcon
+                style={{
+                  fontSize: "4em",
+                  color: "red",
+                  position: "absolute",
+                  top: "1%",
+                  right: "1%"
+                }}
+                onClick={this.goFull}
+              />
+            )}
           <div
             style={{
               fontSize: "xxx-large",
