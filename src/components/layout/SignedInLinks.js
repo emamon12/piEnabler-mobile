@@ -16,8 +16,6 @@ const SignedInLinks = props => {
     props.signOut(firebase);
   };
 
-  console.log(profile);
-
   if (profile.userRole === "instructor" || profile.userRole === "admin") {
     return (
       <div className="nav-container">
@@ -28,11 +26,11 @@ const SignedInLinks = props => {
             <NavLink className="purple darken-3 white-text" to="/addClass">
               Add Class
             </NavLink>
-            <Divider></Divider>
+            <Divider />
             <NavLink className="purple darken-3 white-text" to="/createClass">
               Create Class
             </NavLink>
-            <Divider></Divider>
+            <Divider />
             <NavLink className="purple darken-3 white-text" to="/createSlice">
               Create Slice
             </NavLink>
@@ -52,7 +50,7 @@ const SignedInLinks = props => {
               Create Slice
             </NavLink>
           </li>
-          {/* I left NavLink instead of anchor tag because I'm using airbnb eslint rules */}
+
           <SideNav
             className="grey darken-3 white-text"
             trigger={

@@ -3,7 +3,7 @@ import React from 'react';
 const Notifications = () => {
     return (
         <div>
-            <p>Notificactions LUL</p>
+            <p>This Component has not been created yet...</p>
         </div>
     )
 }
