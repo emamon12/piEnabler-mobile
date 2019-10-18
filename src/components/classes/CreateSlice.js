@@ -49,7 +49,7 @@ class CreateSlice extends Component {
         console.log("submit clicked")
         //the push acts as a redirect... when the form is submitted... redirect to home
         document.getElementById("form").reset();
-        props.history.push("/");
+        
         //props.history.push('/createSlice');
     }
 
@@ -69,7 +69,7 @@ class CreateSlice extends Component {
 
                     {this.state.Lecture ?
                         (
-                            <form onSubmit={this.handleSubmit} style={{ marginTop: 0 }} className="white" id="form">
+                            <form  style={{ marginTop: 0 }} className="white" id="form">
                                 <div className="input-field">
                                     <Textarea type="text" name="Question" id="Question" className="input-style" onChange={this.handleChange} floatingLabel={true} label="Lecture Material" />
                                 </div>
@@ -82,7 +82,7 @@ class CreateSlice extends Component {
                                 </div>
                             </form>
                         ) : (
-                            <form onSubmit={this.handleSubmit} style={{ marginTop: 0 }} className="white" id="form">
+                            <form style={{ marginTop: 0 }} className="white" id="form">
                                 <div className="input-field">
                                     <label htmlFor="Question">Question</label>
                                     <input type="text" name="Question" id="Question" className="input-style" onChange={this.handleChange} />
