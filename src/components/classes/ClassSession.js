@@ -57,7 +57,7 @@ class ClassSession extends Component {
 
     render() {
 
-        const { session, auth, responseFeedback } = this.props;
+        const { session, slice, auth, responseFeedback } = this.props;
 
         //this just redirects if the user is not authenticated
         if (!auth.uid) {

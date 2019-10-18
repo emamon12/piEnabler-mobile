@@ -295,8 +295,8 @@ class Presentation extends Component {
                     }}
                   >
                     <Card
-                      className="white darken-3"
-                      textClassName="black-text"
+                      className="grey darken-4 "
+                      textClassName="green-text"
                       style={{ height: "100%", margin: "0" }}
                     >
                       <Clock
