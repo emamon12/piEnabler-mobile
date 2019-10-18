@@ -16,21 +16,13 @@ const Navbar = props => {
 
   return (
     <nav className="nav-wrapper purple-bg purple darken-3">
-      <div>
-        <ul className="left">
-          <li>
-            <NavLink to="/" className="">
-              <img src="logo.png" alt="Home" style={{ height: "2em" }} />
-            </NavLink>
-          </li>
-          <li>
-            <h3 className="app-title" style={{ cursor: "default" }}>
-              piEnabler
-            </h3>
-          </li>
-        </ul>
-      </div>
-
+      <ul className="left">
+        <li><NavLink to="/" className="">
+          <img src="logo.png" alt="Home" style={{ height: "2em" }} />
+        </NavLink>
+        </li>
+        <li><h3 className="app-title" style={{ cursor: "default" }}>piEnabler</h3></li>
+      </ul>
       <div>{auth.isLoaded && links}</div>
     </nav>
   );
