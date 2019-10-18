@@ -34,9 +34,10 @@ class frickenlazorbeams extends Component {
   animate = now => {
     let drawVisual = requestAnimationFrame(this.animate);
     if (!this.state.last || now - this.state.last >= 1) {
-      this.setState({
+      this.setState(state => ({
+        ...state,
         last: now
-      });
+      }))
       this.renderCanvas();
     }
   };
@@ -45,31 +46,27 @@ class frickenlazorbeams extends Component {
     let _x = event.clientX || (event.touches ? event.touches[0].clientX : 0),
       _y = event.clientY || (event.touches ? event.touches[0].clientY : 0);
 
-    this.setState({
+      this.setState(state => ({
+        ...state,
       ship: [_x, _y]
-    });
+    }))
   };
 
   handleKeyUp = event => {
     let _arr = ["Space"];
+    
+
 
     if (_arr.includes(event.code)) {
-      this.setState({
+      this.setState(state => ({
+        ...state,
         enabled: !this.state.enabled
-      });
+      }))
     }
   };
 
   handleKeyDown = event => {
-    let _speed = this.state.speed,
-      _dir = event.code;
-
     console.log(event.code);
-
-    this.setState({
-      dir: _dir,
-      speed: _speed
-    });
   };
 
   handleBullet = (x, y) => {
@@ -83,9 +80,10 @@ class frickenlazorbeams extends Component {
     } else {
       //_bullets.push({x : x, y : y});
     }
-    this.setState({
+    this.setState(state => ({
+      ...state,
       bullets: _bullets
-    });
+    }))
   };
 
   renderBullets = () => {
@@ -144,10 +142,12 @@ class frickenlazorbeams extends Component {
 
   render() {
     const { session, auth, authError } = this.props;
-    console.log(authError);
+    if (authError){
+      console.log(authError);
+    }
 
     if (!auth.uid) {
-      //return <Redirect to="/signin" />;
+      return <Redirect to="/signin" />;
     }
     let style = this.state.enabled ? "lazor" : "";
 

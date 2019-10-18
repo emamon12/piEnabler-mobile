@@ -92,7 +92,7 @@ class Presentation extends Component {
         style={{
           width: "95vw",
           height: "90vh",
-          background: "white",
+          background: "#4911623d none repeat scroll 0% 0%",
           marginTop: "1em"
         }}
       >
@@ -359,7 +359,6 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-
               width: "19%",
               height: "90%",
               padding: "2em",
