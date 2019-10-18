@@ -42,14 +42,13 @@ class CreateSlice extends Component {
         }));
     }
 
-    handleSubmit = (e) => {
+ handleSubmit = (e) => {
         e.preventDefault();
         const { props, state } = this;
         props.createSlice(state);
         //the push acts as a redirect... when the form is submitted... redirect to home
         props.history.push('/createSlice');
     }
-
 
     render() {
         //just check if the user is authenticated
