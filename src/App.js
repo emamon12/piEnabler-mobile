@@ -14,8 +14,9 @@ import AddClass from './components/classes/AddClass'
 import CreateClass from './components/classes/CreateClass'
 import Session from './components/classes/ClassSession'
 import CreateSlice from './components/classes/CreateSlice'
-import Projection from './components/classes/Projection'
 import Presentation from './components/classes/Presentation'
+import Projection from './components/util/frickenlazorbeams';
+
 
 //this is where all of the links to all of th components are located. Make sure to import the components with the link route
 class App extends Component {

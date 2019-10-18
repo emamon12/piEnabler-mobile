@@ -23,7 +23,7 @@ class AddClass extends Component {
         e.preventDefault();
         const { props, state } = this;
         props.addClass(state);
-
+        props.history.push('/');
     }
 
     render() {

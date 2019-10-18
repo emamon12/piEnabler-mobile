@@ -47,7 +47,6 @@ class CreateSlice extends Component {
         const { props, state } = this;
         props.createSlice(state);
         //the push acts as a redirect... when the form is submitted... redirect to home
-
         props.history.push('/createSlice');
     }
 
