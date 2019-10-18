@@ -62,13 +62,13 @@ class ClassDetails extends Component {
 
     render() {
         const { props } = this;
-
         const { auth } = props;
+        const { classs } = props
+
         if (!auth.uid) {
             return <Redirect to='/signin/' />
         }
 
-        const { classs } = props
         const { user } = props
 
         const formMode = this.state.formMode
@@ -82,7 +82,7 @@ class ClassDetails extends Component {
                             <div className="card-content">
                                 <span className="card-title">{classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day</span>
                                 {formMode ? <Row>
-                                    <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={message}
+                                    <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
                                         s={12}
                                         m={12}
                                         l={12}
@@ -144,7 +144,7 @@ class ClassDetails extends Component {
                             <div className="card-content">
                                 <span className="card-title">{classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day</span>
                                 {formMode ? <Row>
-                                    <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={message}
+                                    <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
                                         s={12}
                                         m={12}
                                         l={12}
