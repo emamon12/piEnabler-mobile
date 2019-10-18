@@ -88,7 +88,7 @@ class ClassDetails extends Component {
                                         l={12}
                                         xl={12}
                                     />
-                                </Row> : <p>{classs.messageOfTheDay}</p>}
+                                </Row> : <p>{message}</p>}
                             </div>
                             <div className="card-action grey lighten-4 grey-text">
                                 <div>Teacher: {classs.teacherFirstName} {classs.teacherLastName}</div>
@@ -109,11 +109,7 @@ class ClassDetails extends Component {
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession} >
-                                        <div className="col mar1">
-                                            <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
-                                                Projection
-                                                </button>
-                                        </div>
+                                        <div className="col mar1"><button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Projection</button></div>
                                     </Link>
                                     : null}
 
@@ -150,7 +146,7 @@ class ClassDetails extends Component {
                                         l={12}
                                         xl={12}
                                     />
-                                </Row> : <p>{classs.messageOfTheDay}</p>}
+                                </Row> : <p>{message}</p>}
 
                             </div>
                             <div className="card-action grey lighten-4 grey-text">
@@ -161,13 +157,8 @@ class ClassDetails extends Component {
                         <div className="row">
                             <div className="flexbox">
                                 <div className="col ">
-                                    <Modal className="modal1"
-                                        options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }}
-                                        actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active"
-                                        trigger={<button data-target="modal1" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
-                                            Join Session
-                                    </button>
-                                        }>
+                                    <Modal className="modal1" options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }} actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active" trigger={<button data-target="modal1" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                                    }>
                                         The class session is currently not active.
                             </Modal>
                                 </div>
@@ -179,14 +170,9 @@ class ClassDetails extends Component {
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
                                         {(!formMode) ?
-                                            <button onClick={this.handleButtonClick} type="button" value={message}
-                                                className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
-                                                Change Message
-                                            </button>
+                                            <button onClick={this.handleButtonClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Change Message</button>
                                             :
-                                            <button onClick={this.handleSubmitClick} type="button" value={message}
-                                                className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
-                                                Save</button>}
+                                            <button onClick={this.handleSubmitClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Save</button>}
                                     </div> :
                                     null}
                             </div>
@@ -234,4 +220,4 @@ const mapDispatchToProps = dispatch => ({
     ChangeMessage: classs => dispatch(ChangeMessage(classs)),
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'classes']))(ClassDetails)
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users']))(ClassDetails)

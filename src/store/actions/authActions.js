@@ -26,7 +26,6 @@ export const signUp = (newUser, firebase) => (dispatch, getState, { getFirestore
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             initials: `${newUser.firstName[0]}${newUser.lastName[0]}`,
-            userRole: "student",
         }))
         .then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' });

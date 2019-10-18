@@ -1,7 +1,6 @@
 import authReducer from './authReducer'
 import classReducer from './classReducer'
 import sliceReducer from './sliceReducer'
-import sessionReducer from './sessionReducer'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
 import { firebaseReducer } from 'react-redux-firebase'
@@ -12,7 +11,6 @@ const rootReducer = combineReducers({
     slices: sliceReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer,
-    session: sessionReducer,
 })
 
 export default rootReducer
