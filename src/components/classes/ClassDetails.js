@@ -10,7 +10,8 @@ import { ChangeMessage } from '../../store/actions/classActions';
 class ClassDetails extends Component {
     state = {
         classMessage: "",
-        formMode: false
+        formMode: false,
+        startASession: false,
     }
 
     componentDidMount = (e) => {

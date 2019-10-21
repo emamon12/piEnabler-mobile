@@ -8,6 +8,21 @@ const sessionReducer = (state = initstate, action) => {
         case 'SUBMIT_PLAN_ERROR':
             console.log('failure to add plan', action);
             return state;
+        case 'UNION_SLICE':
+            return{
+                ...state,
+                sliceError: null,
+            }
+        case 'UNION_SLICE_ERROR':
+            return{
+                ...state,
+                sliceError: "Unable To Add Slice",
+            }
+        case 'UNION_SLICE_NOT_EXIT':
+            return{
+                ...state,
+                sliceError: "Slice Provided Does Not Exist",
+            }
         default:
             return state;
     }

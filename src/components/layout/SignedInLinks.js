@@ -34,6 +34,10 @@ const SignedInLinks = props => {
             <NavLink className="purple darken-3 white-text" to="/createSlice">
               Create Slice
             </NavLink>
+            <Divider />
+            <NavLink className="purple darken-3 white-text" to="/sessionplans">
+              Session Plan
+            </NavLink>
           </Dropdown>
           <li>
             <NavLink to="/addClass" className="navbar-attrib">
@@ -48,6 +52,11 @@ const SignedInLinks = props => {
           <li>
             <NavLink to="/createSlice" className="navbar-attrib">
               Create Slice
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/sessionplans" className="navbar-attrib">
+              Session Plan
             </NavLink>
           </li>
 
