@@ -1,13 +1,14 @@
 import React from 'react'
 
-const ClassSummary = ({ classs }) => {
+const SessionPlanSummary = ({ sessionplans }) => {
+    console.log(sessionplans)
     return (
         <div className="card z-depth-0 classs-summary">
             <div className="card-content grey-text text-darken-3">
-                <span className="card-title">{classs.classIdentifier} - {classs.classsName}
+                <span className="card-title">{sessionplans.sessionPlanSummary}
                 </span>
                 <span className="card-content">
-                    Instructor: {classs.teacherFirstName} {classs.teacherLastName}
+                    {sessionplans.id}
                 </span>
             </div>
         </div>
@@ -15,4 +16,4 @@ const ClassSummary = ({ classs }) => {
 
 }
 
-export default ClassSummary
+export default SessionPlanSummary

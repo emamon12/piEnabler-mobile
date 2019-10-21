@@ -12,7 +12,6 @@ import firebase from './config/fbConfig';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 import rootReducer from './store/reducers/rootReducer';
 
 // We enhance compose in order to use Redux DevTools extension

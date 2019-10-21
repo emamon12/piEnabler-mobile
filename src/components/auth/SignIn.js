@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-
+import {Row, Col, Preloader} from 'react-materialize';
 import { signIn } from '../../store/actions/authActions';
 
 class SignIn extends Component {
@@ -42,7 +42,13 @@ class SignIn extends Component {
 
         if (!isLoaded(auth)) {
             return (
-                <p>loading</p>
+                <div>
+                    <Row>
+                        <Col s={12}>
+                            <Preloader flashing size="big" />
+                        </Col>
+                    </Row>
+                </div>
             )
         }
 
@@ -63,8 +69,7 @@ class SignIn extends Component {
                         <input type="password" name="password" id="password" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button type="submit" className="btn red-bg red darken-3 z-depth-1">Login</button>
-                        {auth.isLoaded}
+                        <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">Login</button>
                         {authError ? <div className="red-text center text-darken-1"><p>{authError}</p></div> : null}
                     </div>
                 </form>
