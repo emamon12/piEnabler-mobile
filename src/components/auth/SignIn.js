@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-
+import {Row, Col, Preloader} from 'react-materialize';
 import { signIn } from '../../store/actions/authActions';
 
 class SignIn extends Component {
@@ -24,6 +24,8 @@ class SignIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
+        // As we use react-redux-firebas-v3 we need to pass firebase object to
+        // authActions to be authorized by using firebse.auth method
         const { props, state } = this;
         const { firebase } = props;
         const credentials = { ...state };
@@ -40,7 +42,13 @@ class SignIn extends Component {
 
         if (!isLoaded(auth)) {
             return (
-                <p>loading</p>
+                <div>
+                    <Row>
+                        <Col s={12}>
+                            <Preloader flashing size="big" />
+                        </Col>
+                    </Row>
+                </div>
             )
         }
 
@@ -61,8 +69,7 @@ class SignIn extends Component {
                         <input type="password" name="password" id="password" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button type="submit" className="btn red-bg red darken-3 z-depth-1">Login</button>
-                        {auth.isLoaded}
+                        <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">Login</button>
                         {authError ? <div className="red-text center text-darken-1"><p>{authError}</p></div> : null}
                     </div>
                 </form>
@@ -80,6 +87,10 @@ const mapDispatchToProps = dispatch => ({
     signIn: authData => dispatch(signIn(authData)),
 });
 
+// We need firebaseConnect function to provide to this component
+// firebase object with auth method.
+// You can find more information on the link below
+// http://docs.react-redux-firebase.com/history/v3.0.0/docs/auth.html
 export default compose(
     firebaseConnect(),
     connect(mapStateToProps, mapDispatchToProps),
