@@ -49,8 +49,7 @@ class CreateSlice extends Component {
         console.log("submit clicked")
         //the push acts as a redirect... when the form is submitted... redirect to home
         document.getElementById("form").reset();
-        
-        //props.history.push('/createSlice');
+        props.history.push('/createSlice');
     }
 
     render() {
