@@ -203,7 +203,7 @@ class frickenlazorbeams extends Component {
               }}
             >
               <img
-                src="https://i.imgur.com/cwulpWU.png"
+                src="./../../darklogo.png"
                 alt=""
                 style={{ height: "1em" }}
               />

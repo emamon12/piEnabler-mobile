@@ -5,8 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "canvasjs": "^1.8.1",
     "firebase": "^6.5.0",
-    "firebase-tools": "^7.6.0",
+    "firebase-tools": "^7.6.1",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.24.0",
     "muicss": "^0.9.43",
