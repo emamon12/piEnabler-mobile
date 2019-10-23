@@ -19,7 +19,7 @@ class ProjectionTemplate extends Component {
           position: "relative"
         }}
       >
-
+      <hr style={{marginBottom: 0}} />
           <p className="projection_title">
             {this.props.title ? this.props.title : "Loading..."}
           </p>

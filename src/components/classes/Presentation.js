@@ -9,6 +9,7 @@ import Col from "muicss/lib/react/col";
 import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
+import Histogram from "../util/Histogram";
 
 class Presentation extends Component {
   state = {
@@ -182,24 +183,7 @@ class Presentation extends Component {
             style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}
           >
             <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Histogram"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "90%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+              <Histogram />
             </Row>
             <Row style={{ height: "50%" }}>
               <Container style={{ height: "100%" }}>
