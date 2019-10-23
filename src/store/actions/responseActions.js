@@ -1,4 +1,4 @@
-const db = firebase.database();
+const db = firestore.database();
 var classesReference = firebase.database().ref("Classes/");
 var studentRef = firebase.database().ref("users/");
 var answerRef = firebase.database().ref("responses/");
@@ -33,21 +33,23 @@ function sendResponseToDB(studentId, response, timesPolled, session, slice) {
   //});
 }
 
-function pollSliceInfo(response, sliceId, sessionId) {
-  var sessionRef = db.ref("piesiue/slices/" + sessionId);
+
+
+function pollSliceInfo(response, sliceId, sessionId, studentId) {
+  var sliceRef = db.ref("piesiue/slices/" + sliceId);
   var responseRef = db.ref("piesiue/sliceResponses/");
   var a1, a2, a3, a4, numA, numB, numC, numD, totalResponses;
   var docId = sliceId + sessionId;
 
-  a1 = sessionRef.answer1;
-  a2 = sessionRef.answer2;
-  a3 = sessionRef.answer3;
-  a4 = sessionRef.answer4;
-  numA = responseRef.numberOfA;
-  numB = responseRef.numberOfB;
-  numC = responseRef.numberOfC;
-  numD = responseRef.numberOfD;
-  totalResponses = responseRef.totalResponses;
+  a1 = sliceRef.answer1;
+  a2 = sliceRef.answer2;
+  a3 = sliceRef.answer3;
+  a4 = sliceRef.answer4;
+  numA = sliceRef.numA;
+  numB = sliceRef.numB;
+  numC = sliceRef.numC;
+  numD = sliceRef.numD;
+  totalResponses = sliceRef.totalResponces;
 
   if (response == a1) {
     numA++;
@@ -66,22 +68,22 @@ function pollSliceInfo(response, sliceId, sessionId) {
     numberOfB: numB,
     numberOfC: numC,
     numberOfD: numD,
-    totalResponses: totalResponses
+    totalResponces: totalResponses
   };
 
-  responseRef.update(data);
+  sliceRef.update(data);
   //db.collection('piesiue/sliceResponses/9MqKqnynbnOqzkYp38sn').set(data);
 }
 
 function getInfoForHistogram() {
   // var sessionRef = db.ref('piesiue/session');
-  var responseRef = db.ref("piesiue/sliceResponses");
+  var sliceRef = db.ref("piesiue/slices");
   var aCount, bCount, cCount, dCount;
 
-  aCount = responseRef.numberOfA;
-  bCount = responseRef.numberOfB;
-  cCount = responseRef.numberOfC;
-  dCount = responseRef.numberOfD;
+  aCount = sliceRef.numberOfA;
+  bCount = sliceRef.numberOfB;
+  cCount = sliceRef.numberOfC;
+  dCount = sliceRef.numberOfD;
 
   Console.log("A: " + aCount);
   Console.log("B: " + bCount);
