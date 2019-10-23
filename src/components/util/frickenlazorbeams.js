@@ -13,8 +13,8 @@ class frickenlazorbeams extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ship: [0, 0],
-      bullets: [],
+      point: [0, 0],
+      trail: [],
       enabled: true,
       firing: true,
       isFull: false,
@@ -22,13 +22,10 @@ class frickenlazorbeams extends Component {
     };
   }
   componentDidMount() {
-    // listen for shit
     window.addEventListener("mousemove", this.handleMouseMove);
     window.addEventListener("touchmove", this.handleMouseMove);
     window.addEventListener("keydown", this.handleKeyDown);
     window.addEventListener("keyup", this.handleKeyUp);
-
-    // run
     this.animate();
   }
   animate = now => {
@@ -37,31 +34,29 @@ class frickenlazorbeams extends Component {
       this.setState(state => ({
         ...state,
         last: now
-      }))
+      }));
       this.renderCanvas();
     }
   };
 
   handleMouseMove = event => {
-    let _x = event.clientX || (event.touches ? event.touches[0].clientX : 0),
-      _y = event.clientY || (event.touches ? event.touches[0].clientY : 0);
+    let x = event.clientX || (event.touches ? event.touches[0].clientX : 0),
+      y = event.clientY || (event.touches ? event.touches[0].clientY : 0);
 
-      this.setState(state => ({
-        ...state,
-      ship: [_x, _y]
-    }))
+    this.setState(state => ({
+      ...state,
+      point: [x, y]
+    }));
   };
 
   handleKeyUp = event => {
     let _arr = ["Space"];
-    
-
 
     if (_arr.includes(event.code)) {
       this.setState(state => ({
         ...state,
         enabled: !this.state.enabled
-      }))
+      }));
     }
   };
 
@@ -69,63 +64,60 @@ class frickenlazorbeams extends Component {
     console.log(event.code);
   };
 
-  handleBullet = (x, y) => {
-    // drop the bass
-    let _bullets = this.state.bullets;
+  handleTrail = (x, y) => {
+    let trail = this.state.trail;
 
-    _bullets.push({ x: x, y: y });
+    trail.push({ x: x, y: y });
 
-    if (_bullets.length > 15) {
-      _bullets.splice(0, _bullets.length - 15);
-    } else {
-      //_bullets.push({x : x, y : y});
+    if (trail.length > 15) {
+      trail.splice(0, trail.length - 15);
     }
     this.setState(state => ({
       ...state,
-      bullets: _bullets
-    }))
+      trail: trail
+    }));
   };
 
-  renderBullets = () => {
-    return this.state.bullets.map((bullet, index) => (
+  renderTrail = () => {
+    return this.state.trail.map((trail, index) => (
       <div
-        className={"bullet"}
+        className={"trail"}
         style={{
-          top: bullet.y + "px",
-          left: bullet.x + "px"
+          top: trail.y + "px",
+          left: trail.x + "px"
         }}
       ></div>
     ));
   };
 
-  renderShip = () => (
+  renderPoint = () => (
     <div
-      id="ship"
-      className={this.state.bullets ? "ship on" : "ship"}
+      id="point"
+      className={this.state.trail ? "point on" : "point"}
       style={{
-        top: this.state.ship[1] + "px",
-        left: this.state.ship[0] + "px"
+        top: this.state.point[1] + "px",
+        left: this.state.point[0] + "px"
       }}
     ></div>
   );
 
   renderCanvas = () => {
     // MOVE SHIP
-    let _dir = this.state.dir,
-      _y = this.state.ship[1],
-      _x = this.state.ship[0],
-      _speed = this.state.speed;
+    let dir = this.state.dir,
+      y = this.state.point[1],
+      x = this.state.point[0],
+      speed = this.state.speed;
 
-    if (_y > window.innerHeight + 20) _y = -20;
-    if (_y < -20) _y = window.innerHeight + 20;
+    if (y > window.innerHeight + 20) y = -20;
+    if (y < -20) y = window.innerHeight + 20;
 
-    if (_x > window.innerWidth + 20) _x = -20;
-    if (_x < -20) _x = window.innerWidth + 20;
+    if (x > window.innerWidth + 20) x = -20;
+    if (x < -20) x = window.innerWidth + 20;
 
-    if (this.state.firing) this.handleBullet(_x, _y);
+    if (this.state.firing) this.handleTrail(x, y);
 
     this.setState({
-      ship: [_x, _y]
+        t: [x, y]
     });
   };
 
@@ -142,13 +134,10 @@ class frickenlazorbeams extends Component {
 
   render() {
     const { session, auth, authError } = this.props;
-    if (authError){
+    if (authError) {
       console.log(authError);
     }
 
-    if (!auth.uid) {
-      return <Redirect to="/signin" />;
-    }
     let style = this.state.enabled ? "lazor" : "";
 
     return (
@@ -203,9 +192,9 @@ class frickenlazorbeams extends Component {
               }}
             >
               <img
-                src="./../../darklogo.png"
+                src="https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f"
                 alt=""
-                style={{ height: "1em" }}
+                style={{ height: "1em" }} 
               />
               <h3
                 style={{
@@ -231,8 +220,8 @@ class frickenlazorbeams extends Component {
               <h1>{this.state.slideNumber}</h1>
             </div>
 
-            {this.state.enabled ? this.renderShip() : null}
-            {this.state.enabled ? this.renderBullets() : null}
+            {this.state.enabled ? this.renderPoint() : null}
+            {this.state.enabled ? this.renderTrail() : null}
           </Fullscreen>
         </div>
       </div>

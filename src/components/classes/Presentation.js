@@ -15,7 +15,9 @@ class Presentation extends Component {
     view: null,
     PollingStatus: false,
     Voted: 83,
-    Here: 150
+    Here: 150,
+    Question: "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
+    Title: "Welcome to CS 140"
   };
 
   handlePolling = e => {
@@ -58,7 +60,7 @@ class Presentation extends Component {
   render() {
     const { session, auth, authError } = this.props;
     let state = this.state;
-    console.log(authError);
+    //console.log(authError);
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
@@ -168,28 +170,11 @@ class Presentation extends Component {
             md="4"
             style={{ paddingRight: "3em", height: "90%", marginTop: "2%" }}
           >
-            <Row style={{ height: "50%" }}>
-                <ProjectionTemplate  />
+            <Row style={{ height: "50%", marginBottom: "1em" }}>
+                <ProjectionTemplate slide="Current Slide" question={state.Question} title={state.Title} />
             </Row>
-            <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Next Slide"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "100%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+            <Row style={{ height: "50%", marginBottom: "-1em" }}>
+              <ProjectionTemplate slide="Next Slide"  question={state.Question} title={state.Title} />
             </Row>
           </Col>
           <Col
@@ -400,9 +385,16 @@ class Presentation extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
+
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.match.params;
+  const { sessions } = state.firestore.data;
+  const session = sessions ? sessions[id] : null;
+  return {
+    session: session,
+    auth: state.firebase.auth
+  };
+};
 
 const mapDispatchToProps = dispatch => ({});
 
