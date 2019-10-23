@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "./frickenlazorbeams.scss";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -169,17 +168,17 @@ class frickenlazorbeams extends Component {
                 onClick={this.goFull}
               />
             ) : (
-              <AspectRatioIcon
-                style={{
-                  fontSize: "4em",
-                  color: "red",
-                  position: "absolute",
-                  top: "1%",
-                  right: "1.5%"
-                }}
-                onClick={this.goFull}
-              />
-            )}
+                <AspectRatioIcon
+                  style={{
+                    fontSize: "4em",
+                    color: "red",
+                    position: "absolute",
+                    top: "1%",
+                    right: "1.5%"
+                  }}
+                  onClick={this.goFull}
+                />
+              )}
 
             <div
               style={{

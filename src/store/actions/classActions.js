@@ -67,14 +67,28 @@ export const ChangeMessage = classs => (dispatch, getState, { getFirestore }) =>
     const message = classs.value;
     const collection = classs.classId;
 
-    console.log(classs)
-
     fireStore.collection('classes').doc(collection).update({
         messageOfTheDay: message,
     }).then(() => ({
         type: 'CHANGE_MESSAGE'
     })).catch((err) => dispatch({
         type: 'CHANGE_MESSAGE_ERROR',
+        err
+    }))
+};
+
+export const RemoveSession = classs => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const collection = classs;
+
+    console.log(collection);
+
+    fireStore.collection('classes').doc(collection).update({
+        currSession: "",
+    }).then(() => ({
+        type: 'SUCCESSFULLY_ENDED',
+    })).catch((err) => dispatch({
+        type: 'UNSUCCESSFULLY_ENDED',
         err
     }))
 };

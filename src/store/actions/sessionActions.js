@@ -1,7 +1,7 @@
 export const createSession = session => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
-    const { profile } = getState().firebase;
     const profileId = getState().firebase.auth.uid;
+
 
     fireStore.collection("sessionplans").add({
         ...session,
@@ -34,11 +34,48 @@ export const addSliceToSession = session => (dispatch, getState, { getFirestore 
                     type: "UNION_SLICE_ERROR",
                     err
                 }))
-            } else{
+            } else {
                 dispatch({
                     type: "UNION_SLICE_NOT_EXIST"
                 })
             }
         })
-
 };
+
+
+export const removeSliceFromSession = session => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const sliceToRemove = session.value;
+    const sessionPlanId = session.sessionplanid;
+
+    console.log(sessionPlanId);
+
+
+    let sessionplan = fireStore.collection('sessionplans').doc(sessionPlanId);
+
+    let getdoc = sessionplan.get()
+        .then(docSnapshot => {
+            var sessionPlan = docSnapshot.data().sliceIds;
+
+            var sliceIds = sessionPlan.filter(function (value, index, array) {
+                return value !== sliceToRemove;
+            });
+
+            fireStore.collection('sessionplans').doc(sessionPlanId).update({
+                sliceIds: sliceIds
+            }).then(() => dispatch({
+                type: "SUCCESSFULLY_DELETED",
+                session,
+            })).catch((err)=>dispatch({
+                type: "UNSUCCESSFULLY_DELETED",
+                err,
+            }))
+
+        }).catch((err) => dispatch({
+            type: "UNABLE_TO_GET"
+        }));
+
+    console.log();
+
+
+}
