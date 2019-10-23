@@ -6,7 +6,7 @@ import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { addSliceToSession } from '../../store/actions/sessionActions'
+import { addSliceToSession, removeSliceFromSession } from '../../store/actions/sessionActions'
 
 class PlanSession extends Component {
     state = {
@@ -35,10 +35,23 @@ class PlanSession extends Component {
         props.addSliceToSession(composite);
     };
 
+    handleDelete = (e) =>{
+        e.preventDefault();
+        const {props} = this;
+        const {target} = e;
+        const value = target.innerHTML;
+
+        const sessionplanid = props.sessionplansid;
+
+        const composite = {sessionplanid, value}
+
+        props.removeSliceFromSession(composite);
+    }
+
     render() {
         //just check if the user is authenticated
         const { props } = this;
-        const { auth, user, sessionplansid, sessionplans } = props;
+        const { auth, user, sessionplansid, sessionplans, sliceError } = props;
 
         if (!auth.uid) {
             return <Redirect to="/signin" />;
@@ -51,14 +64,16 @@ class PlanSession extends Component {
         return (
             <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h2 className="grey-text text-darken-3">Session Planner</h2>
+                    <h4 className="grey-text text-darken-3">Session Planner</h4>
+                    <h2 className="grey-text text-darken-3">Summary: {sessionplans.sessionPlanSummary}</h2>
                     <h5 className="grey-text text-darken-3">Planner Id: {sessionplansid}</h5>
-                    {sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
+                    {sessionplans && sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
                         return (
-                            <h5 key={slices}>{slices}</h5>
+                            <h5 className="slice-list" onClick={this.handleDelete} key={slices}>{slices}</h5>
                         )
                     })
                     }
+
                     <div className="input-field">
                         <label htmlFor="sliceId">Input Slice Id to Add</label>
                         <input
@@ -75,6 +90,7 @@ class PlanSession extends Component {
                             Add
                         </button>
                     </div>
+                    {sliceError? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
                 </form>
             </div>
         );
@@ -91,11 +107,13 @@ const mapStateToProps = (state, ownProps) => {
         sessionplans: sessionplan,
         auth: state.firebase.auth,
         user: user,
-        sessionplansid: id
+        sessionplansid: id,
+        sliceError: state.session.sliceError,
     };
 };
 const mapDispatchToProps = dispatch => ({
-    addSliceToSession: session => dispatch(addSliceToSession(session))
+    addSliceToSession: session => dispatch(addSliceToSession(session)),
+    removeSliceFromSession: session => dispatch(removeSliceFromSession(session)),
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'sessionplans']))(PlanSession);

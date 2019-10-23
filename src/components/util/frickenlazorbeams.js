@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "./frickenlazorbeams.scss";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -63,8 +62,6 @@ class frickenlazorbeams extends Component {
   handleKeyDown = event => {
     let _speed = this.state.speed,
       _dir = event.code;
-
-    console.log(event.code);
 
     this.setState({
       dir: _dir,
@@ -144,7 +141,6 @@ class frickenlazorbeams extends Component {
 
   render() {
     const { session, auth, authError } = this.props;
-    console.log(authError);
 
     if (!auth.uid) {
       //return <Redirect to="/signin" />;
@@ -180,17 +176,17 @@ class frickenlazorbeams extends Component {
                 onClick={this.goFull}
               />
             ) : (
-              <AspectRatioIcon
-                style={{
-                  fontSize: "4em",
-                  color: "red",
-                  position: "absolute",
-                  top: "1%",
-                  right: "1.5%"
-                }}
-                onClick={this.goFull}
-              />
-            )}
+                <AspectRatioIcon
+                  style={{
+                    fontSize: "4em",
+                    color: "red",
+                    position: "absolute",
+                    top: "1%",
+                    right: "1.5%"
+                  }}
+                  onClick={this.goFull}
+                />
+              )}
 
             <div
               style={{

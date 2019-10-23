@@ -5,7 +5,8 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Modal, Button, Row, Col, Preloader, Textarea } from 'react-materialize'
-import { ChangeMessage } from '../../store/actions/classActions';
+import { ChangeMessage } from '../../store/actions/classActions'
+import { RemoveSession } from '../../store/actions/classActions'
 
 class ClassDetails extends Component {
     state = {
@@ -61,6 +62,14 @@ class ClassDetails extends Component {
 
     }
 
+    handleEndSession = (e) => {
+        const { props } = this;
+
+        const classId = props.classsId;
+        
+        props.RemoveSession(classId);
+    }
+
     render() {
         const { props } = this;
         const { auth } = props;
@@ -106,7 +115,7 @@ class ClassDetails extends Component {
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
-                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
+                                        <button type="button" onClick={this.handleEndSession} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession} >
@@ -233,6 +242,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
     ChangeMessage: classs => dispatch(ChangeMessage(classs)),
+    RemoveSession: classs => dispatch(RemoveSession(classs)),
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'classes']))(ClassDetails)
