@@ -69,6 +69,10 @@ class CreateSlice extends Component {
                     {this.state.Lecture ?
                         (
                             <form  style={{ marginTop: 0 }} className="white" id="form">
+                            <div className="input-field">
+                                    <label htmlFor="Title">Slide Title</label>
+                                    <input type="text" name="Title" id="Title" className="input-style" onChange={this.handleChange} />
+                                </div>
                                 <div className="input-field">
                                     <Textarea type="text" name="Question" id="Question" className="input-style" onChange={this.handleChange} floatingLabel={true} label="Lecture Material" />
                                 </div>
@@ -82,6 +86,10 @@ class CreateSlice extends Component {
                             </form>
                         ) : (
                             <form style={{ marginTop: 0 }} className="white" id="form">
+                                <div className="input-field">
+                                    <label htmlFor="Title">Slide Title</label>
+                                    <input type="text" name="Title" id="Title" className="input-style" onChange={this.handleChange} />
+                                </div>
                                 <div className="input-field">
                                     <label htmlFor="Question">Question</label>
                                     <input type="text" name="Question" id="Question" className="input-style" onChange={this.handleChange} />
