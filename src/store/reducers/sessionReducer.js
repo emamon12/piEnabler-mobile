@@ -16,12 +16,27 @@ const sessionReducer = (state = initstate, action) => {
         case 'UNION_SLICE_ERROR':
             return{
                 ...state,
-                sliceError: "Unable To Add Slice",
+                sliceError: "Unable To Add Slice!",
             }
-        case 'UNION_SLICE_NOT_EXIT':
+        case 'UNION_SLICE_NOT_EXIST':
             return{
                 ...state,
-                sliceError: "Slice Provided Does Not Exist",
+                sliceError: "Slice Provided Does Not Exist!",
+            }
+        case 'SUCCESSFULLY_DELETED':
+            return{
+                ...state,
+                sliceError: null,
+            }
+        case 'UNSECESSFULLY_DELETED':
+            return{
+                ...state,
+                sliceError: "Slice Could Not Successfully Deleted"
+            }
+        case 'UNABLE_TO_GET':
+            return{
+                ...state,
+                sliceError: "Session Plan Could Not Successfully Get"
             }
         default:
             return state;

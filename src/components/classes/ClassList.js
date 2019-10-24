@@ -1,37 +1,34 @@
 import React from 'react';
 import ClassSummary from './ClassSummary'
 import { Link } from 'react-router-dom'
-import {Row, Col, Preloader} from 'react-materialize'
+import { Row, Col, Preloader } from 'react-materialize'
 
-const ClassList = ({ classes, profile }) => {
+const ClassList = ({ user, classes }) => {
 
-    if (classes) {
+    if (classes && user) {
         return (
             <div className="classs-list section">
-                {classes && classes.map(classs => {
-
-                    var studentRegisteredClass = false;
-                    var studentIdArray = classs.studentId;
-                    var student;
+                {user && classes && classes.map(classs => {
+                    var registeredClasses = user.registeredClasses
+                    var regClass;
 
                     // eslint-disable-next-line no-lone-blocks
                     //checks  the class studentId array to see if the userID is in there.
-                    for (student in studentIdArray) {
-                        if (profile.uid === studentIdArray[student]) {
-                            studentRegisteredClass = true;
-                        }
+                    for (regClass in registeredClasses) {
+                        if (registeredClasses[regClass] === classs.id) {
+                            
+                            return (
+                                <Link to={'/classes/' + classs.id} key={classs.id}>
+                                    <ClassSummary classs={classs} ></ClassSummary>
+                                </Link>
+
+                            )
+                        } 
                     }
+                    return(null)
                     // eslint-disable-next-line no-lone-blocks
                     //if the student is registered in class, the class shows up in dashboard
-                    if (studentRegisteredClass) {
-                        return (
-                            <Link to={'/classes/' + classs.id} key={classs.id}>
-                                <ClassSummary classs={classs} ></ClassSummary>
-                            </Link>
-
-                        )
-                        // eslint-disable-next-line array-callback-return
-                    } else { return }
+                    // eslint-disable-next-line array-callback-return
 
                 })}
             </div>
@@ -41,7 +38,7 @@ const ClassList = ({ classes, profile }) => {
             <div className="section">
                 <Row>
                     <Col s={12} className="centerloader">
-                        <Preloader flashing size="big"/>
+                        <Preloader flashing size="big" />
                     </Col>
                 </Row>
             </div>

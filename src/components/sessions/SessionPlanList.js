@@ -6,7 +6,7 @@ import { Row, Col, Preloader } from 'react-materialize'
 const SessionPlanList = ({ sessionplans }) => {
     if (sessionplans) {
         return (
-            <div className="session-plans-list section">
+            <div className="session-plans-list ease-in-anim  section">
                 {sessionplans && sessionplans.map(sessionplans => {
                     return (
                         <Link to={'/sessionplans/' + sessionplans.id} key={sessionplans.id}>
@@ -21,7 +21,7 @@ const SessionPlanList = ({ sessionplans }) => {
             <div className="section">
                 <Row>
                     <Col s={12} className="centerloader">
-                        <p>No Session Plans</p>
+                        <Preloader flashing size="big"/>
                     </Col>
                 </Row>
             </div>

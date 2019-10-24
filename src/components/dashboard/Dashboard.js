@@ -4,37 +4,56 @@ import { connect } from 'react-redux'
 import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
+import { Row, Col, Preloader } from 'react-materialize'
+
 
 class Dashboard extends Component {
     render() {
-        const { classes, auth } = this.props;
+        const { classes, auth, user } = this.props;
 
         if (!auth.uid && isLoaded(auth)) {
             return <Redirect to='/signin' />
         }
 
-        return (
-            <div className="dashboard">
-                <div className="row">
-                    <div className="col s12 m6">
-                        <ClassList classes={classes} profile={auth} />
-                    </div>
-                    <div className="col s12 m5 offset-m1">
+        if (classes && user) {
+            return (
+                <div className="dashboard">
+                    <div className="row">
+                        <div className="col s12 m6">
+                            <ClassList user={user} classes={classes} />
+                        </div>
+                        <div className="col s12 m5 offset-m1">
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className="section">
+                    <Row>
+                        <Col s={12} className="centerloader">
+                            <Preloader flashing size="big" />
+                        </Col>
+                    </Row>
+                </div>
+            )
+        }
     }
+
 }
 
 const mapStateToProps = (state) => {
+    const { users } = state.firestore.data;
+    const user = users ? users[state.firebase.auth.uid] : null
+
     return {
         classes: state.firestore.ordered.classes,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        user: user,
     }
 }
 
 //connect mapstatetoprops
 //firestoreconnect connects the component to the firestore... so you can access the collections
-export default compose(firestoreConnect([{ collection: 'classes', orderBy: ['classIdentifier', 'desc'] }]), connect(mapStateToProps))(Dashboard)
+export default compose(firestoreConnect([{ collection: 'classes', orderBy: ['classIdentifier', 'desc'] }, 'users']), connect(mapStateToProps))(Dashboard)
 

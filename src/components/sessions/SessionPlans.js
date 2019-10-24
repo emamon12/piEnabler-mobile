@@ -54,8 +54,9 @@ class SessionPlans extends Component {
 
 
                         {this.state.planningSession ?
-                            <div className="card z-depth-1">
-                                <div className="input-field center card-content">
+                            <form className="white z-depth-1">
+                                <div className="input-field center ease-in-anim card-content">
+                                <label htmlFor="sessionPlanSummary">Provide A Quick Summary</label>
                                     <input
                                         type="text"
                                         name="sessionPlanSummary"
@@ -63,7 +64,7 @@ class SessionPlans extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </div>
-                            </div>
+                            </form>
                             :
                             null}
 
@@ -71,14 +72,14 @@ class SessionPlans extends Component {
                             {this.state.planningSession ?
                                 <button
                                     type="submit"
-                                    className="btn purple-bg purple darken-3 z-depth-1"
+                                    className="btn purple-bg purple ease-in-anim darken-3 z-depth-1"
                                     onClick={this.handleSubmit}>
                                     Submit New Session
                                 </button>
                                 :
                                 <button
                                     type="submit"
-                                    className="btn purple-bg purple darken-3 z-depth-1"
+                                    className="btn purple-bg purple ease-in-anim darken-3 z-depth-1"
                                     onClick={this.handleButtonClick}>
                                     Plan New Session
                                 </button>}
@@ -95,7 +96,8 @@ class SessionPlans extends Component {
 const mapStateToProps = (state) => {
     return {
         sessionplans: state.firestore.ordered.sessionplans,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        sessionErr: state.session.sliceError,
     }
 }
 

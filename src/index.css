@@ -152,6 +152,13 @@ code {
   animation-timing-function: ease-in;
 }
 
+.ease-in-anim{
+  animation-name: ease-in-anim;
+  animation-iteration-count: 1;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+}
+
 .container {
   animation-name: ease-in-anim;
   animation-iteration-count: 1;
@@ -221,4 +228,14 @@ textarea:focus ~ label {
 	text-align: center;
 	font-size: 4vh;
 	margin-bottom: 3em;
+}
+
+
+.slice-list {
+  cursor: default;
+}
+
+.slice-list:hover{
+  color: red;
+  text-decoration: line-through;
 }
