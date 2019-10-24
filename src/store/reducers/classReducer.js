@@ -31,6 +31,11 @@ const classReducer = (state = initState, action) => {
                 ...state,
                 responseFeedback: "Could Not Submit Answer, Please Submit Again.",
             };
+        case 'ADD_CLASS_BLANK':
+            return{
+                ...state,
+                responseFeedback: "Field Cannot Be Empty..."
+            }
         case 'CHANGE_MESSAGE':
             console.log('successfully changed message', action.classs);
             return {
@@ -42,6 +47,31 @@ const classReducer = (state = initState, action) => {
             return {
                 ...state,
                 messageErrorFeedback: "Error in changing message",
+            };
+        case 'SUCCESSFULLY_LOADED':
+            return{
+                ...state,
+                loadingError: null,
+            };
+        case 'UNSUCCESSFULLY_LOADED':
+            return{
+                ...state,
+                loadingError: 'Session Plan Unsuccessfully Loaded...'
+            };
+        case 'SLICE_REF_NOT_EXIST':
+            return{
+                ...state,
+                loadingError: "Slice Does Not Exist..."
+            };
+        case 'SESSION_PLANS_NOT_EXIST':
+            return{
+                ...state,
+                loadingError: "Session Plan Do Not Exist..."
+            };
+        case 'PLAN_EMPTY':
+            return{
+                ...state,
+                loadingError: "Session Plan Is Empty...."
             };
         default:
             return state;

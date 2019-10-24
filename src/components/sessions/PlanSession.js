@@ -65,8 +65,8 @@ class PlanSession extends Component {
             <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
                     <h4 className="grey-text text-darken-3">Session Planner</h4>
-                    <h2 className="grey-text text-darken-3">Summary: {sessionplans.sessionPlanSummary}</h2>
-                    <h5 className="grey-text text-darken-3">Planner Id: {sessionplansid}</h5>
+                    <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
+                    <h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
                     {sessionplans && sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
                         return (
                             <h5 className="slice-list" onClick={this.handleDelete} key={slices}>{slices}</h5>

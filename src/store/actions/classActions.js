@@ -1,20 +1,26 @@
 export const createClass = classs => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
     const { profile } = getState().firebase;
-    const studentId = getState().firebase.auth.uid;
+    const id = getState().firebase.auth.uid;
 
     fireStore.collection('classes').add({
         ...classs,
         teacherFirstName: profile.firstName,
         teacherLastName: profile.lastName,
-        studentId: [studentId],
         messageOfTheDay: '',
         currSession: '',
         createdAt: new Date(),
-    }).then(() => dispatch({
-        type: 'CREATE_CLASS',
-        classs,
-    })).catch(err => dispatch({
+    }).then((docRef) => {
+        fireStore.collection('users').doc(id).update({
+            registeredClasses: fireStore.FieldValue.arrayUnion(docRef.id),
+        }).then(() => dispatch({
+            type: 'CREATE_CLASS',
+            classs
+        })).catch(err => dispatch({
+            type: 'CREATE_ERROR',
+            err
+        }))
+    }).catch(err => dispatch({
         type: 'CREATE_ERROR',
         err,
     }));
@@ -27,30 +33,45 @@ export const addClass = classs => (dispatch, getState, { getFirestore }) => {
 
     var classId = classs.classKey;
 
-    if (classId !== "") {
-        fireStore.collection('classes').doc(classId).update({
-            studentId: fireStore.FieldValue.arrayUnion(studentId),
-        }).then(() => dispatch({
-            type: 'ADD_CLASS',
-            classs,
-        })).catch((err) => dispatch({
-            type: 'ADD_CLASS_ERROR',
-            err,
-        }))
+    if (classId) {
+        fireStore.collection('classes').doc(classId).get()
+            .then(docRef => {
+                if (docRef.exists) {
+                    fireStore.collection('users').doc(studentId).update({
+                        registeredClasses: fireStore.FieldValue.arrayUnion(classId)
+                    }).then(() => dispatch({
+                        type: 'ADD_CLASS',
+                        classs,
+                    })).catch((err) => dispatch({
+                        type: 'ADD_CLASS_ERROR',
+                        err,
+                    }))
+                } else {
+                    dispatch({
+                        type: 'ADD_CLASS_ERROR'
+                    })
+                }
+            })
+    } else {
+        dispatch({
+            type: 'ADD_CLASS_BLANK'
+        })
     }
+
 };
 
 export const addResponse = fbase => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
     const studentId = getState().firebase.auth.uid;
     const session = fbase.session;
+    const sessionid = fbase.sessionid;
     const resp = fbase.uAnswer;
 
-    fireStore.collection('responses').doc(`${session.sessionId}${studentId}${session.currentSliceId}${session.numPolls}`).set({
+    fireStore.collection('responses').doc(`${sessionid}${studentId}${session.currentSliceId}${session.numPolls}`).set({
         response: resp.userAnswer,
         studentId: studentId,
-        currSlice: session.currentSliceId,
-        currSession: session.sessionId,
+        forSlice: session.currentSliceId,
+        forSession: sessionid,
         timesPolled: session.numPolls
 
     }).then(() => dispatch({
@@ -81,8 +102,6 @@ export const RemoveSession = classs => (dispatch, getState, { getFirestore }) =>
     const fireStore = getFirestore();
     const collection = classs;
 
-    console.log(collection);
-
     fireStore.collection('classes').doc(collection).update({
         currSession: "",
     }).then(() => ({
@@ -92,3 +111,65 @@ export const RemoveSession = classs => (dispatch, getState, { getFirestore }) =>
         err
     }))
 };
+
+export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const collection = classs.classId;
+    const sessionToLoad = classs.sessionToLoad;
+
+    fireStore.collection('sessionplans').doc(sessionToLoad).get()
+        .then(docRef => {
+            if (docRef.exists) {
+                var sliceIds = docRef.data().sliceIds;
+                if (sliceIds[0]) {
+                    fireStore.collection('slices').doc(sliceIds[0]).get()
+                        .then(docRef2 => {
+                            if (docRef2.exists) {
+                                fireStore.collection('sessions').add({
+                                    answer1: docRef2.data().Answer1,
+                                    answer2: docRef2.data().Answer2,
+                                    answer3: docRef2.data().Answer3,
+                                    answer4: docRef2.data().Answer4,
+                                    currentSliceId: sliceIds[0],
+                                    inClass: collection,
+                                    isCurrentSliceAQuestion: !docRef2.data().Lecture,
+                                    numPolls: 1,
+                                    question: docRef2.data().Question,
+                                    topic: docRef2.data().Topic,
+                                    difficulty: docRef2.data().Difficulty,
+                                    sessionPlan: sliceIds,
+                                    sessionStart: new Date(),
+                                    sessionEnd: "",
+                                    sliceHistory: "",
+                                    trueAnswer: docRef2.data().CorrectAnswer,
+                                }).then(docRefSession => {
+                                    fireStore.collection('classes').doc(collection).update({
+                                        currSession: docRefSession.id,
+                                    }).then(() => dispatch({
+                                        type: 'SUCCESSFULLY_LOADED',
+                                        classs,
+                                    })).catch((err) => dispatch({
+                                        type: 'UNSUCCESSFULLY_LOADED',
+                                        err,
+                                    }))
+                                })
+                            } else {
+                                dispatch({
+                                    type: 'SLICE_REF_NOT_EXIST'
+                                })
+                            }
+                        })
+                } else {
+                    dispatch({
+                        type: 'PLAN_EMPTY'
+                    })
+                }
+
+            } else {
+                dispatch({
+                    type: 'SESSION_PLANS_NOT_EXIST'
+                })
+            }
+        })
+
+}
