@@ -48,9 +48,6 @@ export const removeSliceFromSession = session => (dispatch, getState, { getFires
     const sliceToRemove = session.value;
     const sessionPlanId = session.sessionplanid;
 
-    console.log(sessionPlanId);
-
-
     let sessionplan = fireStore.collection('sessionplans').doc(sessionPlanId);
 
     let getdoc = sessionplan.get()
