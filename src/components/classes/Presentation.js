@@ -9,7 +9,7 @@ import Col from "muicss/lib/react/col";
 import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
-import Histogram from "../util/Histogram";
+import Histogram from "../util/histogram";
 
 class Presentation extends Component {
   state = {
@@ -17,7 +17,8 @@ class Presentation extends Component {
     PollingStatus: false,
     Voted: 83,
     Here: 150,
-    Question: "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
+    Question:
+      "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
     Title: "Welcome to CS 140"
   };
 
@@ -172,10 +173,18 @@ class Presentation extends Component {
             style={{ paddingRight: "3em", height: "90%", marginTop: "2%" }}
           >
             <Row style={{ height: "50%", marginBottom: "1em" }}>
-                <ProjectionTemplate slide="Current Slide" question={state.Question} title={state.Title} />
+              <ProjectionTemplate
+                slide="Current Slide"
+                question={state.Question}
+                title={state.Title}
+              />
             </Row>
             <Row style={{ height: "50%", marginBottom: "-1em" }}>
-              <ProjectionTemplate slide="Next Slide"  question={state.Question} title={state.Title} />
+              <ProjectionTemplate
+                slide="Next Slide"
+                question={state.Question}
+                title={state.Title}
+              />
             </Row>
           </Col>
           <Col
@@ -185,7 +194,7 @@ class Presentation extends Component {
             <Row style={{ height: "50%" }}>
               <Histogram />
             </Row>
-            <Row style={{ height: "50%" }}>
+            <Row style={{ height: "50%", marginTop: "3em" }}>
               <Container style={{ height: "100%" }}>
                 <Row style={{ height: "35%" }}>
                   <Col
@@ -368,7 +377,6 @@ class Presentation extends Component {
     );
   }
 }
-
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;

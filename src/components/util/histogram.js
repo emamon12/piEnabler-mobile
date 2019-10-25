@@ -2,14 +2,15 @@ import React from "react";
 import { Chart } from "react-google-charts";
 import { Card } from "react-materialize";
 
-
 const data = [
-  ["Answer", "Repsonses", { role: "style" }],
+  ["Answer", "", { role: "style" }],
   ["A", 10, "color: red"],
   ["B", 14, "color: blue"],
   ["C", 16, "color: green"],
   ["D", 22, "color: orange"]
 ];
+
+
 
 class Histogram extends React.Component {
   render() {
@@ -21,12 +22,13 @@ class Histogram extends React.Component {
         style={{
           padding: "0em",
           textAlign: "center",
-          height: "100%",
+          height: "85%",
+          marginTop: "2em",
           position: "relative"
         }}
       >
-        <hr style={{marginBottom: "0"}} />
-        <Chart chartType="BarChart" width="100%" height="400px" data={data} />
+        <hr style={{ marginBottom: "0" }} />
+        <Chart chartType="BarChart" width="100%" height="auto" data={data} />
       </Card>
     );
   }
