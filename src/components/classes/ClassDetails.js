@@ -5,13 +5,16 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Modal, Button, Row, Col, Preloader, Textarea } from 'react-materialize'
-import { ChangeMessage } from '../../store/actions/classActions';
+import { ChangeMessage } from '../../store/actions/classActions'
+import { RemoveSession } from '../../store/actions/classActions'
+import { LoadSession } from '../../store/actions/classActions'
 
 class ClassDetails extends Component {
     state = {
         classMessage: "",
         formMode: false,
         startASession: false,
+        sessionToLoad: "",
     }
 
     componentDidMount = (e) => {
@@ -29,6 +32,13 @@ class ClassDetails extends Component {
             formMode: true
         }));
 
+    }
+
+    handleSessionClick = (e) => {
+
+        this.setState(state => ({
+            startASession: true,
+        }))
     }
 
     handleChange = (e) => {
@@ -61,10 +71,31 @@ class ClassDetails extends Component {
 
     }
 
+    handleEndSession = (e) => {
+        const { props } = this;
+        const classId = props.classsId;
+
+        props.RemoveSession(classId);
+    }
+
+    handleSessionLoad = (e) => {
+        e.preventDefault();
+        const { props, state } = this;
+        const classId = props.classsId;
+        const sessionToLoad = state.sessionToLoad;
+        const composite = { classId, sessionToLoad };
+
+        props.LoadSession(composite)
+
+        this.setState(state => ({
+            startASession: false,
+        }))
+    }
+
     render() {
         const { props } = this;
         const { auth } = props;
-        const { classs } = props
+        const { classs, loadingError } = props
 
         if (!auth.uid) {
             return <Redirect to='/signin/' />
@@ -98,15 +129,20 @@ class ClassDetails extends Component {
                         </div>
                         <div className="row">
                             <div className="flexbox">
-                                <Link to={'/session/' + classs.currSession} key={classs.currSession}>
-                                    <div className="col mar1">
-                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
-                                    </div>
-                                </Link>
+                                {(classs.currSession !== "") ?
+                                    <Link to={'/session/' + classs.currSession} key={classs.currSession}>
+                                        <div className="col mar1">
+                                            <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                                        </div>
+                                    </Link>
+                                    :
+                                    null
+                                }
+
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
-                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
+                                        <button type="button" onClick={this.handleEndSession} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession} >
@@ -120,7 +156,12 @@ class ClassDetails extends Component {
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <Link to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession} >
-                                        <div className="col mar1"><button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Presentation</button></div>
+                                        <div className="col mar1">
+                                            <button type="button"
+                                                className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
+                                                Presentation
+                                            </button>
+                                        </div>
                                     </Link>
                                     : null}
 
@@ -161,7 +202,7 @@ class ClassDetails extends Component {
                         </div>
                         <div className="row">
                             <div className="flexbox">
-                                <div className="col ">
+                                <div className="col">
                                     <Modal className="modal1"
                                         options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }}
                                         actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active"
@@ -172,9 +213,9 @@ class ClassDetails extends Component {
                                         The class session is currently not active.
                             </Modal>
                                 </div>
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                {((this.state.startASession === false) && (user.userRole === "admin" || user.userRole === "instructor")) ?
                                     <div className="col mar1">
-                                        <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Start Session</button>
+                                        <button type="button" onClick={this.handleSessionClick} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Start Session</button>
                                     </div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
@@ -191,6 +232,37 @@ class ClassDetails extends Component {
                                     </div> :
                                     null}
                             </div>
+
+                            {((this.state.startASession === true) && (user.userRole === "admin" || user.userRole === "instructor")) ?
+                                <div className="row">
+                                    <form onSubmit={this.handleSessionLoad} className="white z-depth-1">
+                                        <div className="input-field">
+                                            <label htmlFor="sessionToLoad">Input Session Plan To Load</label>
+                                            <input
+                                                type="text"
+                                                name="sessionToLoad"
+                                                id="sessionToLoad"
+                                                onChange={this.handleChange}
+                                            />
+                                        </div>
+                                    </form>
+                                </div>
+                                :
+                                null
+                            }
+
+
+
+                            {((this.state.startASession === true) && (user.userRole === "admin" || user.userRole === "instructor")) ?
+                                <div className="row">
+                                    <div className="center">
+                                        <button onClick={this.handleSessionLoad} type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Load Session</button>
+                                    </div>
+                                </div>
+                                :
+                                null}
+
+                                {loadingError ? <div className="center red-text error-msg center text-darken-1"><p>{loadingError}</p></div> : null}
                         </div>
                     </div>
                 </div>
@@ -227,12 +299,15 @@ const mapStateToProps = (state, ownProps) => {
         classs: classs,
         auth: state.firebase.auth,
         user: user,
-        classsId: id
+        classsId: id,
+        loadingError: state.classs.loadingError
     };
 };
 
 const mapDispatchToProps = dispatch => ({
     ChangeMessage: classs => dispatch(ChangeMessage(classs)),
+    RemoveSession: classs => dispatch(RemoveSession(classs)),
+    LoadSession: classs => dispatch(LoadSession(classs)),
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'classes']))(ClassDetails)
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'classes', 'sessions']))(ClassDetails)

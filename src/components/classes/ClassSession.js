@@ -46,8 +46,9 @@ class ClassSession extends Component {
 
         const { session } = props;
         const uAnswer = { ...state };
+        const sessionid = props.sessionid;
 
-        const composite = { session, uAnswer };
+        const composite = { session, uAnswer, sessionid };
 
         props.addResponse(composite)
 
@@ -140,6 +141,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         session: session,
         auth: state.firebase.auth,
+        sessionid: id,
         responseFeedback: state.classs.responseFeedback
     };
 };
