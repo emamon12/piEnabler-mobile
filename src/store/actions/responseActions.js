@@ -110,26 +110,26 @@ export const LoadQuestions = classs => (dispatch, getState, {getFirestore}) => {
   }
   
   if(correctAnswer == answer1) {
-    show1.innerHTML = <b>answer1</b>;
+    show1.innerHTML = answer1.bold();
     show2.innerHTML = answer2;
     show3.innerHTML = answer3;
     show4.innerHTML = answer4;
   } 
   else if(correctAnswer == answer2) {
     show1.innerHTML = answer1;
-    show2.innerHTML = <b>answer2</b>;
+    show2.innerHTML = answer2.bold();
     show3.innerHTML = answer3;
     show4.innerHTML = answer4;
   }
   else if(correctAnswer == answer3) {
     show1.innerHTML = answer1;
     show2.innerHTML = answer2;
-    show3.innerHTML = <b>answer3</b>;
+    show3.innerHTML = answer3.bold();
     show4.innerHTML = answer4;
   } else {
     show1.innerHTML = answer1;
     show2.innerHTML = answer2;
     show3.innerHTML = answer3;
-    show4.innerHTML = <b>answer4</b>;
+    show4.innerHTML = answer4.bold();
   }
 }
