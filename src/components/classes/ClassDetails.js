@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { Modal, Button, Row, Col, Preloader, Textarea } from 'react-materialize'
 import { ChangeMessage } from '../../store/actions/classActions'
 import { RemoveSession } from '../../store/actions/classActions'
@@ -74,8 +74,13 @@ class ClassDetails extends Component {
     handleEndSession = (e) => {
         const { props } = this;
         const classId = props.classsId;
+        const { classs } = props;
 
-        props.RemoveSession(classId);
+        const sessionId = classs.currSession;
+
+        const composite = {classId, sessionId};
+
+        props.RemoveSession(composite);
     }
 
     handleSessionLoad = (e) => {
@@ -145,24 +150,24 @@ class ClassDetails extends Component {
                                         <button type="button" onClick={this.handleEndSession} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + 'proj'} >
+                                    <NavLink to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + "proj"} >
                                         <div className="col mar1">
                                             <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
                                                 Projection
                                                 </button>
                                         </div>
-                                    </Link>
+                                    </NavLink>
                                     : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <Link to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + 'pres'} >
+                                    <NavLink to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
                                         <div className="col mar1">
                                             <button type="button"
                                                 className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
                                                 Presentation
                                             </button>
                                         </div>
-                                    </Link>
+                                    </NavLink>
                                     : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
@@ -262,7 +267,7 @@ class ClassDetails extends Component {
                                 :
                                 null}
 
-                                {loadingError ? <div className="center red-text error-msg center text-darken-1"><p>{loadingError}</p></div> : null}
+                            {loadingError ? <div className="center red-text error-msg center text-darken-1"><p>{loadingError}</p></div> : null}
                         </div>
                     </div>
                 </div>

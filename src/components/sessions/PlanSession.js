@@ -2,10 +2,9 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect, isLoaded } from 'react-redux-firebase'
+import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { addSliceToSession, removeSliceFromSession } from '../../store/actions/sessionActions'
 
 class PlanSession extends Component {
@@ -13,15 +12,15 @@ class PlanSession extends Component {
         sliceId: '',
     };
 
-    handleChange = e => {
+    handleChange = (e) => {
         const { target } = e;
         console.log(document.getElementById("sliceId"))
     
         this.setState(state => ({
-          ...state,
-          [target.id]: target.value
+            ...state,
+            [target.id]: target.value
         }));
-      };
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -40,15 +39,15 @@ class PlanSession extends Component {
         
     };
 
-    handleDelete = (e) =>{
+    handleDelete = (e) => {
         e.preventDefault();
-        const {props} = this;
-        const {target} = e;
+        const { props } = this;
+        const { target } = e;
         const value = target.innerHTML;
 
         const sessionplanid = props.sessionplansid;
 
-        const composite = {sessionplanid, value}
+        const composite = { sessionplanid, value }
 
         props.removeSliceFromSession(composite);
     }
@@ -95,7 +94,7 @@ class PlanSession extends Component {
                             Add
                         </button>
                     </div>
-                    {sliceError? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
+                    {sliceError ? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
                 </form>
             </div>
         );
