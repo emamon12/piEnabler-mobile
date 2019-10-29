@@ -28,19 +28,19 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
-            <Route exact path='/' component={Dashboard}></Route>
-            <Route path='/classes/:id' component={ClassDetails}></Route>
-            <Route path='/signin' component={SignIn}></Route>
-            <Route path='/signup' component={SignUp}></Route>
-            <Route path='/addClass' component={AddClass}></Route>
-            <Route path='/createSlice' component={CreateSlice}></Route>
-            <Route path='/createClass' component={CreateClass}></Route>
-            <Route exact path='/sessionplans' component={SessionPlans}></Route>
-            <Route path='/sessionplans/:id' component={PlanSession}></Route>
-            <Route exact path='/session/:id' component={Session}></Route>
-            <Route exact path='/session/:id/projection' component={Projection}></Route>
-            <Route exact path='/session/:id/presentation' component={Presentation}></Route>
-            <Route path="/:any" component={Dashboard} />
+            <Route push exact path='/' component={Dashboard}/>
+            <Route push path='/classes/:id' component={ClassDetails}/>
+            <Route push path='/signin' component={SignIn}/>
+            <Route push path='/signup' component={SignUp}/>
+            <Route push path='/addClass' component={AddClass}/>
+            <Route push path='/createSlice' component={CreateSlice}/>
+            <Route push path='/createClass' component={CreateClass}/>
+            <Route push exact path='/sessionplans' component={SessionPlans}/>
+            <Route push path='/sessionplans/:id' component={PlanSession}/>
+            <Route push exact path='/session/:id' component={Session}/>
+            <Route push exact path='/session/:id/projection' component={Projection}/>
+            <Route push exact path='/session/:id/presentation' component={Presentation}/>
+            <Route push path="/:any" component={Dashboard} />
           </Switch>
         </div>
       </BrowserRouter>
