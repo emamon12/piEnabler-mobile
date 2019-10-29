@@ -206,7 +206,7 @@ class frickenlazorbeams extends Component {
                 right: "2%"
               }}
             >
-              <h1>{this.state.slideNumber}</h1>
+              <h1>{session && session.sliceNumber ? session.sliceNumber : ''}</h1>
             </div>
 
             {this.state.enabled ? this.renderPoint() : null}

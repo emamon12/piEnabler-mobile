@@ -128,7 +128,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  A: This is where Answer1 goes
+                  {(session && session.isCurrentSliceAQuestion) ? session.answer1 : '' }
                 </a>
                 <a
                   id="answer2"
@@ -136,7 +136,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  B: This is where Answer2 goes
+                   {(session && session.isCurrentSliceAQuestion) ? session.answer2 : '' }
                 </a>
                 <a
                   id="answer3"
@@ -144,7 +144,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  C: This is where Answer3 goes
+                   {(session && session.isCurrentSliceAQuestion) ? session.answer3 : '' }
                 </a>
                 <a
                   id="answer4"
@@ -152,7 +152,7 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  D: This is where Answer4 goes
+                   {(session && session.isCurrentSliceAQuestion) ? session.answer4 : '' }
                 </a>
               </div>
               <Button

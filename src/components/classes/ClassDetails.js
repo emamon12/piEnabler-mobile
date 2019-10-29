@@ -145,7 +145,7 @@ class ClassDetails extends Component {
                                         <button type="button" onClick={this.handleEndSession} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession} >
+                                    <Link to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + 'proj'} >
                                         <div className="col mar1">
                                             <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
                                                 Projection
@@ -155,7 +155,7 @@ class ClassDetails extends Component {
                                     : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <Link to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession} >
+                                    <Link to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + 'pres'} >
                                         <div className="col mar1">
                                             <button type="button"
                                                 className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
