@@ -239,3 +239,7 @@ textarea:focus ~ label {
   color: red;
   text-decoration: line-through;
 }
+
+.profile-content{
+  font-size-adjust: inherit;
+}

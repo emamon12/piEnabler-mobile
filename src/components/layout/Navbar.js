@@ -9,7 +9,7 @@ import SignedOutLinks from "./SignedOutLinks";
 const Navbar = props => {
   const { auth, profile } = props;
   const links = auth.uid ? (
-    <SignedInLinks profile={profile} />
+    <SignedInLinks profile={profile} auth={auth} />
   ) : (
     <SignedOutLinks />
   );
@@ -20,7 +20,7 @@ const Navbar = props => {
         <ul className="left">
           <li>
             <NavLink to="/" className="">
-              <img src="logo.png" alt="Home" style={{ height: "2em" }} />
+              <img src="../logo.png" alt="Home" style={{ height: "2em" }} />
             </NavLink>
           </li>
           <li>
