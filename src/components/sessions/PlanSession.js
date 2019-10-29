@@ -15,6 +15,7 @@ class PlanSession extends Component {
 
     handleChange = e => {
         const { target } = e;
+        console.log(document.getElementById("sliceId"))
     
         this.setState(state => ({
           ...state,
@@ -32,7 +33,11 @@ class PlanSession extends Component {
 
         const composite = { sessionplanid, sliceId }
 
+        document.getElementById("sliceId").value = "";
+
         props.addSliceToSession(composite);
+
+        
     };
 
     handleDelete = (e) =>{

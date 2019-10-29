@@ -29,13 +29,10 @@ class frickenlazorbeams extends Component {
   }
   animate = now => {
     let drawVisual = requestAnimationFrame(this.animate);
-    if (!this.state.last || now - this.state.last >= 1) {
-      this.setState(state => ({
-        ...state,
-        last: now
-      }));
+
+
       this.renderCanvas();
-    }
+    
   };
 
   handleMouseMove = event => {
@@ -71,10 +68,6 @@ class frickenlazorbeams extends Component {
     if (trail.length > 15) {
       trail.splice(0, trail.length - 15);
     }
-    this.setState(state => ({
-      ...state,
-      trail: trail
-    }));
   };
 
   renderTrail = () => {
@@ -115,9 +108,6 @@ class frickenlazorbeams extends Component {
 
     if (this.state.firing) this.handleTrail(x, y);
 
-    this.setState({
-        t: [x, y]
-    });
   };
 
   goFull = () => {
