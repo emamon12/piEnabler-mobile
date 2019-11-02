@@ -9,7 +9,7 @@ import { Dropdown, Divider, SideNavItem, SideNav } from "react-materialize";
 const SignedInLinks = props => {
   // As in SignIn.jsx we need to use a function that gets as an argument firebase object
 
-  const { profile } = props;
+  const { profile, auth } = props;
 
   const handleSignOut = () => {
     const { firebase } = props;
@@ -82,11 +82,13 @@ const SignedInLinks = props => {
             <SideNavItem
               waves={true}
               className="white-text"
-              to="/"
               icon="account_circle"
+              href={"../users/" + auth.uid}
+
             >
               Profile
             </SideNavItem>
+
             <SideNavItem
               waves={true}
               className="white-text"
@@ -151,7 +153,8 @@ const SignedInLinks = props => {
             <SideNavItem
               waves={true}
               className="white-text"
-              to="/"
+              to={"/users/" + profile.id}
+              key={profile.id}
               icon="account_circle"
             >
               Profile

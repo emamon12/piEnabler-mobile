@@ -17,7 +17,8 @@ import CreateSlice from './components/classes/CreateSlice'
 import Presentation from './components/classes/Presentation'
 import Projection from './components/util/frickenlazorbeams'
 import SessionPlans from './components/sessions/SessionPlans'
-import PlanSession from './components/sessions/PlanSession';
+import PlanSession from './components/sessions/PlanSession'
+import ProfilePage from './components/profile/ProfilePage'
 
 
 //this is where all of the links to all of th components are located. Make sure to import the components with the link route
@@ -28,6 +29,7 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Switch>
+      
             <Route push exact path='/' component={Dashboard}/>
             <Route push path='/classes/:id' component={ClassDetails}/>
             <Route push path='/signin' component={SignIn}/>
@@ -41,6 +43,7 @@ class App extends Component {
             <Route push exact path='/session/:id/projection' component={Projection}/>
             <Route push exact path='/session/:id/presentation' component={Presentation}/>
             <Route push path="/:any" component={Dashboard} />
+
           </Switch>
         </div>
       </BrowserRouter>

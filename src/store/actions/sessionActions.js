@@ -72,7 +72,7 @@ export const removeSliceFromSession = session => (dispatch, getState, { getFires
             type: "UNABLE_TO_GET"
         }));
 
-    console.log();
-
-
+        if(getdoc){
+            console.log("removal complete")
+        }
 }

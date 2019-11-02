@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-import {Row, Col, Preloader} from 'react-materialize';
+import { Row, Col, Preloader } from 'react-materialize';
 import { signIn } from '../../store/actions/authActions';
 
 class SignIn extends Component {
@@ -19,6 +19,7 @@ class SignIn extends Component {
             ...state,
             [target.id]: target.value,
         }));
+
     }
 
     handleSubmit = (e) => {

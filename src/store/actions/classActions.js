@@ -100,13 +100,23 @@ export const ChangeMessage = classs => (dispatch, getState, { getFirestore }) =>
 
 export const RemoveSession = classs => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
-    const collection = classs;
+    const classCollection = classs.classId;
+    const sessionId = classs.sessionId;
 
-    fireStore.collection('classes').doc(collection).update({
-        currSession: "",
-    }).then(() => ({
-        type: 'SUCCESSFULLY_ENDED',
-    })).catch((err) => dispatch({
+    fireStore.collection('session').doc(sessionId).update({
+        sessionEnd: new Date(),
+        inClass: '',
+        currentSliceId: '',
+    }).then(
+        fireStore.collection('classes').doc(classCollection).update({
+            currSession: "",
+        }).then(() => ({
+            type: 'SUCCESSFULLY_ENDED',
+        })).catch((err) => dispatch({
+            type: 'UNSUCCESSFULLY_ENDED',
+            err
+        }))
+    ).catch((err) => ({
         type: 'UNSUCCESSFULLY_ENDED',
         err
     }))
@@ -142,6 +152,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                                     sessionEnd: "",
                                     sliceHistory: "",
                                     trueAnswer: docRef2.data().CorrectAnswer,
+                                    sliceNumber: 1,
                                 }).then(docRefSession => {
                                     fireStore.collection('classes').doc(collection).update({
                                         currSession: docRefSession.id,
