@@ -7,7 +7,7 @@ const ClassList = ({ user, classes }) => {
 
     if (classes && user) {
         return (
-            <div className="classs-list section">
+            <div className="classs-list section">   
                 {user && classes && classes.map(classs => {
                     var registeredClasses = user.registeredClasses
                     var regClass;

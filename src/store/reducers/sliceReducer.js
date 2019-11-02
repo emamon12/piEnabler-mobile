@@ -9,7 +9,7 @@ const sliceReducer = (state = initState, action) => {
             console.log('add slice error', action.err);
             return state;
         case 'CREATE_SLICE':
-            console.log('create slice error', action.slices);
+            console.log('created slice', action.slices);
             return state;
         case 'CREATE_SLICE_ERROR':
             console.log('create slice error', action.err);

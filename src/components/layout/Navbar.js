@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { compose } from "redux";
 import { firebaseConnect } from "react-redux-firebase";
+import storage from "../../config/fbConfig";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 
@@ -20,7 +21,7 @@ const Navbar = props => {
         <ul className="left">
           <li>
             <NavLink to="/" className="">
-              <img src="../logo.png" alt="Home" style={{ height: "2em" }} />
+              <img src="https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/logo.png?alt=media&token=d9b38104-916b-492f-b128-dd00209cded9" alt="Home" style={{ height: "2em" }} />
             </NavLink>
           </li>
           <li>

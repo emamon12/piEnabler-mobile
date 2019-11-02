@@ -8,13 +8,18 @@ import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
+import ProjectionTemplate from "../util/ProjectionTemplate";
+import Histogram from "../util/histogram";
 
 class Presentation extends Component {
   state = {
     view: null,
     PollingStatus: false,
     Voted: 83,
-    Here: 150
+    Here: 150,
+    Question:
+      "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
+    Title: "Welcome to CS 140"
   };
 
   handlePolling = e => {
@@ -57,7 +62,7 @@ class Presentation extends Component {
   render() {
     const { session, auth, authError } = this.props;
     let state = this.state;
-    console.log(authError);
+    //console.log(authError);
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
@@ -92,7 +97,7 @@ class Presentation extends Component {
         style={{
           width: "95vw",
           height: "90vh",
-          background: "white",
+          background: "#4911623d none repeat scroll 0% 0%",
           marginTop: "1em"
         }}
       >
@@ -167,45 +172,19 @@ class Presentation extends Component {
             md="4"
             style={{ paddingRight: "3em", height: "90%", marginTop: "2%" }}
           >
-            <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Current Slide"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "100%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+            <Row style={{ height: "50%", marginBottom: "1em" }}>
+              <ProjectionTemplate
+                slide="Current Slide"
+                question={state.Question}
+                title={state.Title}
+              />
             </Row>
-            <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Next Slide"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "100%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+            <Row style={{ height: "50%", marginBottom: "-1em" }}>
+              <ProjectionTemplate
+                slide="Next Slide"
+                question={state.Question}
+                title={state.Title}
+              />
             </Row>
           </Col>
           <Col
@@ -213,26 +192,9 @@ class Presentation extends Component {
             style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}
           >
             <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Histogram"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "90%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+              <Histogram />
             </Row>
-            <Row style={{ height: "50%" }}>
+            <Row style={{ height: "50%", marginTop: "3em" }}>
               <Container style={{ height: "100%" }}>
                 <Row style={{ height: "35%" }}>
                   <Col
@@ -295,8 +257,8 @@ class Presentation extends Component {
                     }}
                   >
                     <Card
-                      className="white darken-3"
-                      textClassName="black-text"
+                      className="grey darken-4 "
+                      textClassName="green-text"
                       style={{ height: "100%", margin: "0" }}
                     >
                       <Clock
@@ -359,7 +321,6 @@ class Presentation extends Component {
           <Button
             waves="light"
             style={{
-
               width: "19%",
               height: "90%",
               padding: "2em",
@@ -417,9 +378,15 @@ class Presentation extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
-});
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.match.params;
+  const { sessions } = state.firestore.data;
+  const session = sessions ? sessions[id] : null;
+  return {
+    session: session,
+    auth: state.firebase.auth
+  };
+};
 
 const mapDispatchToProps = dispatch => ({});
 
