@@ -14,9 +14,8 @@ class PlanSession extends Component {
 
     handleChange = (e) => {
         const { target } = e;
-
         console.log(document.getElementById("sliceId"))
- 
+    
         this.setState(state => ({
             ...state,
             [target.id]: target.value

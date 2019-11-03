@@ -14,7 +14,7 @@ class frickenlazorbeams extends Component {
     this.state = {
       point: [0, 0],
       trail: [],
-      enabled: true,
+      enabled: false,
       firing: true,
       isFull: false,
       slideNumber: 1
@@ -123,7 +123,7 @@ class frickenlazorbeams extends Component {
     if (authError) {
       console.log(authError);
     }
-
+    
     let style = this.state.enabled ? "lazor" : "";
 
     return (
@@ -203,7 +203,7 @@ class frickenlazorbeams extends Component {
                 right: "2%"
               }}
             >
-              <h1>{this.state.slideNumber}</h1>
+              <h1>{session && session.sliceNumber ? session.sliceNumber : ''}</h1>
             </div>
 
             {this.state.enabled ? this.renderPoint() : null}
@@ -217,10 +217,11 @@ class frickenlazorbeams extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  const { sessions } = state.firestore.data;
+  const { sessions, slices } = state.firestore.data;
   const session = sessions ? sessions[id] : null;
   return {
     session: session,
+    slices: slices,
     auth: state.firebase.auth
   };
 };
@@ -232,5 +233,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  firestoreConnect(["sessions"])
+  firestoreConnect(["sessions", "slices"])
 )(frickenlazorbeams);

@@ -3,6 +3,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { firestoreConnect, getFirestore } from "react-redux-firebase";
+import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
@@ -10,6 +12,7 @@ import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
+import { connectableObservableDescriptor } from "C:/Users/Serenity/AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/ConnectableObservable";
 
 class Presentation extends Component {
   state = {
@@ -60,13 +63,16 @@ class Presentation extends Component {
   };
 
   render() {
-    const { session, auth, authError } = this.props;
+    const { session, auth, authError, slices } = this.props;
     let state = this.state;
     //console.log(authError);
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
+
+
+
 
     var votePercent = (state.Voted / state.Here) * 100;
 
@@ -128,7 +134,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  A: This is where Answer1 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer1
+                    : ""}
                 </a>
                 <a
                   id="answer2"
@@ -136,7 +144,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  B: This is where Answer2 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer2
+                    : ""}
                 </a>
                 <a
                   id="answer3"
@@ -144,7 +154,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  C: This is where Answer3 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer3
+                    : ""}
                 </a>
                 <a
                   id="answer4"
@@ -152,7 +164,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  D: This is where Answer4 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer4
+                    : ""}
                 </a>
               </div>
               <Button
@@ -175,15 +189,15 @@ class Presentation extends Component {
             <Row style={{ height: "50%", marginBottom: "1em" }}>
               <ProjectionTemplate
                 slide="Current Slide"
-                question={state.Question}
-                title={state.Title}
+                question={session.question}
+                title={session.title}
               />
             </Row>
             <Row style={{ height: "50%", marginBottom: "-1em" }}>
               <ProjectionTemplate
                 slide="Next Slide"
-                question={state.Question}
-                title={state.Title}
+                question={session.question}
+                title={session.title}
               />
             </Row>
           </Col>
@@ -329,7 +343,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleQuestion}
           >
-            Next Question
+            New Question
           </Button>
 
           <Button
@@ -343,7 +357,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleDifficulty}
           >
-            Change Difficulty
+            Change Difficulty: {session ? session.difficulty : ''}
           </Button>
 
           <Button
@@ -357,7 +371,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleTopic}
           >
-            New Topic
+            New Topic: {session ? session.topic : ''}
           </Button>
 
           <Button
@@ -380,17 +394,21 @@ class Presentation extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  const { sessions } = state.firestore.data;
+  const { sessions, slices } = state.firestore.data;
   const session = sessions ? sessions[id] : null;
   return {
     session: session,
+    slices: slices,
     auth: state.firebase.auth
   };
 };
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(["sessions", "slices"])
 )(Presentation);
