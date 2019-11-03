@@ -14,7 +14,7 @@ class frickenlazorbeams extends Component {
     this.state = {
       point: [0, 0],
       trail: [],
-      enabled: true,
+      enabled: false,
       firing: true,
       isFull: false,
       slideNumber: 1

@@ -20,10 +20,10 @@ class ProjectionTemplate extends Component {
         }}
       >
         <hr style={{ marginBottom: 0 }} />
-        <p className="projection_title">
+        <p className="presentation_title">
           {this.props.title ? this.props.title : "Loading..."}
         </p>
-        <div id="body" className="projection_body">
+        <div id="body" className="presentation_body">
           {this.props.question ? (
             this.props.question
           ) : (

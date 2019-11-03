@@ -343,7 +343,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleQuestion}
           >
-            Next Question
+            New Question
           </Button>
 
           <Button
@@ -357,7 +357,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleDifficulty}
           >
-            Change Difficulty
+            Change Difficulty: {session ? session.difficulty : ''}
           </Button>
 
           <Button
@@ -371,7 +371,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleTopic}
           >
-            New Topic
+            New Topic: {session ? session.topic : ''}
           </Button>
 
           <Button
