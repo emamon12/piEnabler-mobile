@@ -3,6 +3,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { firestoreConnect  } from 'react-redux-firebase'
+import { compose } from 'redux'
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
@@ -60,13 +62,16 @@ class Presentation extends Component {
   };
 
   render() {
-    const { session, auth, authError } = this.props;
+    const { session, auth, authError, slices } = this.props;
     let state = this.state;
     //console.log(authError);
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
+    console.log(session.currentSliceId)
+    let id = session.currentSliceId;
+    console.log(slices)
 
     var votePercent = (state.Voted / state.Here) * 100;
 
@@ -128,7 +133,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  {(session && session.isCurrentSliceAQuestion) ? session.answer1 : '' }
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer1
+                    : ""}
                 </a>
                 <a
                   id="answer2"
@@ -136,7 +143,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                   {(session && session.isCurrentSliceAQuestion) ? session.answer2 : '' }
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer2
+                    : ""}
                 </a>
                 <a
                   id="answer3"
@@ -144,7 +153,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                   {(session && session.isCurrentSliceAQuestion) ? session.answer3 : '' }
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer3
+                    : ""}
                 </a>
                 <a
                   id="answer4"
@@ -152,7 +163,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                   {(session && session.isCurrentSliceAQuestion) ? session.answer4 : '' }
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer4
+                    : ""}
                 </a>
               </div>
               <Button
@@ -380,17 +393,21 @@ class Presentation extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  const { sessions } = state.firestore.data;
+  const { sessions, slices } = state.firestore.data;
   const session = sessions ? sessions[id] : null;
   return {
     session: session,
+    slices: slices,
     auth: state.firebase.auth
   };
 };
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(["sessions", "slices"])
 )(Presentation);

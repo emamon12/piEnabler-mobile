@@ -8,11 +8,11 @@ const data = [
   ["B", 15, "color: blue"],
   ["C", 50, "color: green"],
   ["D", 25, "color: orange"]
-]; 
+];
 
 const options = {
   chartArea: { width: "80%" },
-  legend: 'none',
+  legend: "none",
   hAxis: {
     title: "Voting Percentage",
     minValue: 0,
@@ -43,6 +43,10 @@ class Histogram extends React.Component {
           chartType="BarChart"
           width="100%"
           height="auto"
+          style={{
+            position: "absolute",
+            top: "25%"
+          }}
           data={data}
           options={options}
         />

@@ -126,7 +126,7 @@ class frickenlazorbeams extends Component {
     if (authError) {
       console.log(authError);
     }
-
+    
     let style = this.state.enabled ? "lazor" : "";
 
     return (
@@ -220,10 +220,11 @@ class frickenlazorbeams extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  const { sessions } = state.firestore.data;
+  const { sessions, slices } = state.firestore.data;
   const session = sessions ? sessions[id] : null;
   return {
     session: session,
+    slices: slices,
     auth: state.firebase.auth
   };
 };
@@ -235,5 +236,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  firestoreConnect(["sessions"])
+  firestoreConnect(["sessions", "slices"])
 )(frickenlazorbeams);
