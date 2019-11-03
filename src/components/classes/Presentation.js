@@ -3,8 +3,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { firestoreConnect  } from 'react-redux-firebase'
-import { compose } from 'redux'
+import { firestoreConnect, getFirestore } from "react-redux-firebase";
+import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
@@ -12,6 +12,7 @@ import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
+import { connectableObservableDescriptor } from "C:/Users/Serenity/AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/ConnectableObservable";
 
 class Presentation extends Component {
   state = {
@@ -69,9 +70,9 @@ class Presentation extends Component {
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
-    console.log(session.currentSliceId)
-    let id = session.currentSliceId;
-    console.log(slices)
+
+
+
 
     var votePercent = (state.Voted / state.Here) * 100;
 
@@ -188,15 +189,15 @@ class Presentation extends Component {
             <Row style={{ height: "50%", marginBottom: "1em" }}>
               <ProjectionTemplate
                 slide="Current Slide"
-                question={state.Question}
-                title={state.Title}
+                question={session.question}
+                title={session.title}
               />
             </Row>
             <Row style={{ height: "50%", marginBottom: "-1em" }}>
               <ProjectionTemplate
                 slide="Next Slide"
-                question={state.Question}
-                title={state.Title}
+                question={session.question}
+                title={session.title}
               />
             </Row>
           </Col>
