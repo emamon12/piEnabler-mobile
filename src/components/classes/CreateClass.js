@@ -37,7 +37,7 @@ class CreateClass extends Component {
       return <Redirect to="/signin" />;
     }
 
-    if (profile.userRole === "student") {
+    if (profile.userRole !== "admin" && profile.userRole !== "instructor") {
       return <Redirect to="/"></Redirect>;
     }
 

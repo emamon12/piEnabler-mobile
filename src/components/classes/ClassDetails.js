@@ -111,6 +111,8 @@ class ClassDetails extends Component {
         const formMode = this.state.formMode
         const message = this.state.classMessage
 
+        const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+
         if (user && classs && classs.currSession !== "") {
             return (
                 <div>
@@ -118,14 +120,14 @@ class ClassDetails extends Component {
                         <div className="card z-depth-0">
                             <div className="card-content">
                                 <span className="card-title">{classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day</span>
-                                {formMode ? <Row>
+                                {formMode ? <Row className="class-message">
                                     <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
                                         s={12}
                                         m={12}
                                         l={12}
                                         xl={12}
                                     />
-                                </Row> : <p>{classs.messageOfTheDay}</p>}
+                                </Row> : <p className="class-message">{classs.messageOfTheDay}</p>}
                             </div>
                             <div className="card-action grey lighten-4 grey-text">
                                 <div>Teacher: {classs.teacherFirstName} {classs.teacherLastName}</div>
@@ -137,22 +139,21 @@ class ClassDetails extends Component {
                                 {(classs.currSession !== "") ?
                                     <Link to={'/session/' + classs.currSession} key={classs.currSession}>
                                         <div className="col mar1">
-                                            <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Join Session</button>
+                                            <button type="button" className={buttonClassName}>Join Session</button>
                                         </div>
                                     </Link>
                                     :
                                     null
                                 }
 
-
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
-                                        <button type="button" onClick={this.handleEndSession} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">End Session</button></div> : null}
+                                        <button type="button" onClick={this.handleEndSession} className={buttonClassName}>End Session</button></div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <NavLink to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + "proj"} >
                                         <div className="col mar1">
-                                            <button type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
+                                            <button type="button" className={buttonClassName}>
                                                 Projection
                                                 </button>
                                         </div>
@@ -163,7 +164,7 @@ class ClassDetails extends Component {
                                     <NavLink to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
                                         <div className="col mar1">
                                             <button type="button"
-                                                className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
+                                                className={buttonClassName}>
                                                 Presentation
                                             </button>
                                         </div>
@@ -173,9 +174,9 @@ class ClassDetails extends Component {
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
                                         {(!formMode) ?
-                                            <button onClick={this.handleButtonClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Change Message</button>
+                                            <button onClick={this.handleButtonClick} type="button" value={message} className={buttonClassName}>Change Message</button>
                                             :
-                                            <button onClick={this.handleSubmitClick} type="button" value={message} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Save</button>}
+                                            <button onClick={this.handleSubmitClick} type="button" value={message} className={buttonClassName}>Save</button>}
                                     </div> :
                                     null}
                             </div>
@@ -190,14 +191,14 @@ class ClassDetails extends Component {
                         <div className="card z-depth-0">
                             <div className="card-content">
                                 <span className="card-title">{classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day</span>
-                                {formMode ? <Row>
-                                    <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
+                                {formMode ? <Row className="class-message">
+                                    <Textarea data-length={180} name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
                                         s={12}
                                         m={12}
                                         l={12}
                                         xl={12}
                                     />
-                                </Row> : <p>{classs.messageOfTheDay}</p>}
+                                </Row> : <p className="class-message">{classs.messageOfTheDay}</p>}
 
                             </div>
                             <div className="card-action grey lighten-4 grey-text">
@@ -211,7 +212,7 @@ class ClassDetails extends Component {
                                     <Modal className="modal1"
                                         options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }}
                                         actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active"
-                                        trigger={<button data-target="modal1" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
+                                        trigger={<button data-target="modal1" className={buttonClassName}>
                                             Join Session
                                     </button>
                                         }>
@@ -220,19 +221,19 @@ class ClassDetails extends Component {
                                 </div>
                                 {((this.state.startASession === false) && (user.userRole === "admin" || user.userRole === "instructor")) ?
                                     <div className="col mar1">
-                                        <button type="button" onClick={this.handleSessionClick} className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Start Session</button>
+                                        <button type="button" onClick={this.handleSessionClick} className={buttonClassName}>Start Session</button>
                                     </div> : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
                                         {(!formMode) ?
                                             <button onClick={this.handleButtonClick} type="button" value={message}
-                                                className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
+                                                className={buttonClassName}>
                                                 Change Message
                                             </button>
                                             :
                                             <button onClick={this.handleSubmitClick} type="button" value={message}
-                                                className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">
+                                                className={buttonClassName}>
                                                 Save</button>}
                                     </div> :
                                     null}
@@ -256,12 +257,10 @@ class ClassDetails extends Component {
                                 null
                             }
 
-
-
                             {((this.state.startASession === true) && (user.userRole === "admin" || user.userRole === "instructor")) ?
                                 <div className="row">
                                     <div className="center">
-                                        <button onClick={this.handleSessionLoad} type="button" className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Load Session</button>
+                                        <button onClick={this.handleSessionLoad} type="button" className={buttonClassName}>Load Session</button>
                                     </div>
                                 </div>
                                 :
