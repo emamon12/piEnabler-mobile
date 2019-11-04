@@ -10,10 +10,6 @@ class ProfileSettings extends Component {
     render() {
         const { props } = this;
         const { user, auth } = props;
-
-        if (!auth.uid) {
-            return <Redirect to="/signin" />;
-        }
         
         if (user) {
             return (

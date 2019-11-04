@@ -142,7 +142,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                     if (sliceIds[0]) {
                         fireStore.collection('slices').doc(sliceIds[0]).get()
                             .then(docRef2 => {
-                                if (docRef2.exists) {
+                                if (docRef2.exists && docRef2.data().Lecture === false) {
                                     fireStore.collection('sessions').add({
                                         answer1: docRef2.data().Answer1,
                                         answer2: docRef2.data().Answer2,
@@ -172,7 +172,38 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                                             err,
                                         }))
                                     })
-                                } else {
+                                } else if(docRef2.exists && docRef2.data().Lecture === true){
+                                    fireStore.collection('sessions').add({
+                                        answer1: "",
+                                        answer2: "",
+                                        answer3: "",
+                                        answer4: "",
+                                        currentSliceId: sliceIds[0],
+                                        inClass: collection,
+                                        isCurrentSliceAQuestion: !docRef2.data().Lecture,
+                                        numPolls: 1,
+                                        question: docRef2.data().Question,
+                                        topic: docRef2.data().Topic,
+                                        difficulty: "",
+                                        sessionPlan: sliceIds,
+                                        sessionStart: new Date(),
+                                        sessionEnd: "",
+                                        sliceHistory: "",
+                                        trueAnswer: "",
+                                        sliceNumber: 1,
+                                    }).then(docRefSession => {
+                                        fireStore.collection('classes').doc(collection).update({
+                                            currSession: docRefSession.id,
+                                        }).then(() => dispatch({
+                                            type: 'SUCCESSFULLY_LOADED',
+                                            classs,
+                                        })).catch((err) => dispatch({
+                                            type: 'UNSUCCESSFULLY_LOADED',
+                                            err,
+                                        }))
+                                    })
+                                } 
+                                else {
                                     dispatch({
                                         type: 'SLICE_REF_NOT_EXIST'
                                     })

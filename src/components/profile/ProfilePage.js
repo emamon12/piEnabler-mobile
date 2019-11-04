@@ -11,14 +11,6 @@ class ProfilePage extends Component {
         const { props } = this;
         const { user, auth } = props;
 
-        if (!auth.uid) {
-            return <Redirect to="/signin" />;
-        }
-
-        if(auth.uid !== user.id){
-            return <Redirect to="/"/>
-        }
-
         if (user) {
             return (
                 <div className="container section">

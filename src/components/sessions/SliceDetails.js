@@ -44,7 +44,7 @@ class SliceDetails extends Component {
                         <br />
                         <span>
                             <h3 className={textStyle}>Question: </h3>
-                            <p className={textStyle}>{slice.Question}</p>
+                            <p className="grey-text text-darken-3 class-message" >{slice.Question}</p>
                             <h3 className={textStyle}>Answers </h3>
                             <p>Answer 1: {slice.Answer1}</p>
                             <p>Answer 2: {slice.Answer2}</p>
