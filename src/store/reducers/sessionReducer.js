@@ -38,6 +38,19 @@ const sessionReducer = (state = initstate, action) => {
                 ...state,
                 sliceError: "Session Plan Could Not Successfully Get"
             }
+        case 'NEXT_SLICE':
+            console.log('incremented slice', action.pie);
+            return{
+            ...state, 
+            messageErrorFeedback: null,
+        }
+        case 'PREV_SLICE':
+                console.log('decremented slice', action.pie);
+                return{
+                ...state, 
+                messageErrorFeedback: null,
+            }
+
         default:
             return state;
     }

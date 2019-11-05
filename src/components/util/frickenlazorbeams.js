@@ -104,7 +104,6 @@ class frickenlazorbeams extends Component {
     if (x < -20) x = window.innerWidth + 20;
 
     if (this.state.firing) this.handleTrail(x, y);
-
   };
 
   goFull = () => {
@@ -120,10 +119,13 @@ class frickenlazorbeams extends Component {
 
   render() {
     const { session, auth, authError } = this.props;
+    const brandImage =
+      "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
+
     if (authError) {
       console.log(authError);
     }
-    
+
     let style = this.state.enabled ? "lazor" : "";
 
     return (
@@ -155,17 +157,17 @@ class frickenlazorbeams extends Component {
                 onClick={this.goFull}
               />
             ) : (
-                <AspectRatioIcon
-                  style={{
-                    fontSize: "4em",
-                    color: "red",
-                    position: "absolute",
-                    top: "1%",
-                    right: "1.5%"
-                  }}
-                  onClick={this.goFull}
-                />
-              )}
+              <AspectRatioIcon
+                style={{
+                  fontSize: "4em",
+                  color: "red",
+                  position: "absolute",
+                  top: "1%",
+                  right: "1.5%"
+                }}
+                onClick={this.goFull}
+              />
+            )}
 
             <div
               style={{
@@ -177,11 +179,7 @@ class frickenlazorbeams extends Component {
                 display: "inline"
               }}
             >
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f"
-                alt=""
-                style={{ height: "1em" }} 
-              />
+              <img src={brandImage} alt="" style={{ height: "1em" }} />
               <h3
                 style={{
                   cursor: "default",
@@ -203,7 +201,9 @@ class frickenlazorbeams extends Component {
                 right: "2%"
               }}
             >
-              <h1>{session && session.sliceNumber ? session.sliceNumber : ''}</h1>
+              <h1>
+                {session && session.sliceNumber ? session.sliceNumber : ""}
+              </h1>
             </div>
 
             {this.state.enabled ? this.renderPoint() : null}
