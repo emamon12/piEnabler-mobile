@@ -29,10 +29,7 @@ class frickenlazorbeams extends Component {
   }
   animate = now => {
     let drawVisual = requestAnimationFrame(this.animate);
-
-
-      this.renderCanvas();
-    
+    this.renderCanvas();
   };
 
   handleMouseMove = event => {

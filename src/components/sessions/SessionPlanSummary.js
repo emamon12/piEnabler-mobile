@@ -7,7 +7,7 @@ const SessionPlanSummary = ({ sessionplans }) => {
                 <span className="card-title">{sessionplans.sessionPlanSummary}
                 </span>
                 <span className="card-content">
-                    ID: {sessionplans.id}
+                    Session Plan ID: {sessionplans.id}
                 </span>
             </div>
         </div>
