@@ -137,7 +137,7 @@ class frickenlazorbeams extends Component {
               onClick={this.nextSlide}
             >
               <h3 className="projection_title">Welcome to CS 140</h3>
-              <div id="body" className="projection_body">
+              <div id="body" className="projection_body class-message">
                 {session && session.question
                   ? session.question
                   : "No Session Active"}
