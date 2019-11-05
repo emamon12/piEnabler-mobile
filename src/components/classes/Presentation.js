@@ -12,6 +12,9 @@ import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
+import { nextSlice } from "../../store/actions/sessionActions"
+import { prevSlice } from "../../store/actions/sessionActions"
+
 
 class Presentation extends Component {
   state = {
@@ -42,10 +45,20 @@ class Presentation extends Component {
   };
 
   handleLecture = () => {
+    const { props, state } = this;
+    const { sessionId } = props;
+
+    props.prevSlice(sessionId)
     console.log("Lecture Clicked");
   };
 
-  handleQuestion = () => {
+  handleQuestion = (e) => {
+    e.preventDefault();
+    const { props, state } = this;
+    const { sessionId } = props;
+
+    props.nextSlice(sessionId)
+    
     console.log("Question Clicked");
   };
 
@@ -69,9 +82,6 @@ class Presentation extends Component {
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
-
-
-
 
     var votePercent = (state.Voted / state.Here) * 100;
 
@@ -205,7 +215,7 @@ class Presentation extends Component {
             style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}
           >
             <Row style={{ height: "50%" }}>
-              <Histogram />
+              <Histogram sid={this.props.sessionId}/>
             </Row>
             <Row style={{ height: "50%", marginTop: "3em" }}>
               <Container style={{ height: "100%" }}>
@@ -392,17 +402,25 @@ class Presentation extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { id } = ownProps.match.params;
+  const { id, cid } = ownProps.match.params;
+  const { classes } = state.firestore.data;
   const { sessions, slices } = state.firestore.data;
+  const pie = classes ? classes[id] : null
   const session = sessions ? sessions[id] : null;
   return {
+    pie: pie,
+    classId: cid,
+    sessionId: id,
     session: session,
     slices: slices,
     auth: state.firebase.auth
   };
 };
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  nextSlice: pie => dispatch(nextSlice(pie)),
+  prevSlice: pie => dispatch(prevSlice(pie)),
+});
 
 export default compose(
   connect(

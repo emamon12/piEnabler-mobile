@@ -15,13 +15,15 @@ class AddClass extends Component {
 
         this.setState(state => ({
             ...state,
-            [target.id]: target.value,
+            [target.id]: target.value.trim(),
         }));
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
+    
         const { props, state } = this;
+        console.log(state);
         props.addClass(state);
         
         props.history.push('/')

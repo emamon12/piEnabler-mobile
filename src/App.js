@@ -42,7 +42,7 @@ class App extends Component {
             <Route push path='/sessionplans/:id' component={PlanSession} />
             <Route exact path='/session/:id' component={Session} />
             <Route exact path='/session/:id/projection' component={Projection} />
-            <Route exact path='/session/:id/presentation' component={Presentation} />
+            <Route exact path='/class/:cid/session/:id/presentation' component={Presentation} />
             <Route exact path='/slices/:id' component={SliceDetails} />
             <Route path='/users/:id' component={ProfilePage}/>
             <Route exact path='/settings' component={ProfileSettings}/>

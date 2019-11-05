@@ -23,7 +23,7 @@ class ProjectionTemplate extends Component {
         <p className="presentation_title">
           {this.props.title ? this.props.title : "Loading..."}
         </p>
-        <div id="body" className="presentation_body">
+        <div id="body" className="presentation_body class-message">
           {this.props.question ? (
             this.props.question
           ) : (

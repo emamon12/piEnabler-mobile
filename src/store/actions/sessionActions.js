@@ -17,6 +17,41 @@ export const createSession = session => (dispatch, getState, { getFirestore }) =
     }));
 };
 
+export const nextSlice = pie => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const sessionId = pie;
+
+    const increment = fireStore.FieldValue.increment(1);
+
+    fireStore.collection('sessions').doc(sessionId).update({
+        sliceNumber: increment
+    }).then({
+        type: "NEXT_SLICE"
+    }
+    ).catch((err) => ({
+        type: 'NEXT_SLICE_ERROR',
+        err
+    }))
+};
+
+export const prevSlice = pie => (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    const sessionId = pie;
+
+    const decrement = fireStore.FieldValue.increment(-1);
+    
+    fireStore.collection('sessions').doc(sessionId).update({
+        sliceNumber: decrement
+    }).then({
+        type: "PREV_SLICE"
+    }
+    ).catch((err) => ({
+        type: 'PREV_SLICE_ERROR',
+        err
+    }))
+};
+
+
 export const addSliceToSession = session => (dispatch, getState, { getFirestore }) => {
     const fireStore = getFirestore();
     var sliceId = session.sliceId;
