@@ -55,5 +55,5 @@ const mapStateToProps = (state) => {
 
 //connect mapstatetoprops
 //firestoreconnect connects the component to the firestore... so you can access the collections
-export default compose(firestoreConnect([{ collection: 'classes', orderBy: ['classIdentifier', 'desc'] }, 'users']), connect(mapStateToProps))(Dashboard)
+export default compose(firestoreConnect([{ collection: 'classes' }, 'users']), connect(mapStateToProps))(Dashboard)
 

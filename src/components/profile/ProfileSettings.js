@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import { Redirect } from 'react-router-dom'
 import { Row, Col, Preloader } from 'react-materialize'
+import { Redirect } from 'react-router-dom'
 
-class ProfilePage extends Component {
+class ProfileSettings extends Component {
 
     render() {
         const { props } = this;
@@ -14,32 +14,15 @@ class ProfilePage extends Component {
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
-
-        if(auth.uid !== user.id){
-            return <Redirect to="/"/>
-        }
-
+        
         if (user) {
             return (
                 <div className="container section">
                     <div className="card z-depth-0 section">
-                        <div className="row">
-                            <img className="circle responsive-img col s4 l2 m4 xl2 offset-xl5 offset-s4 offset-l5 offset-m4" alt="" src="https://i.redd.it/6r7t2i5kgvu21.png">
-                            </img>
-                        </div>
-                        <div className="row">
-                            <div className="card-title center-align">
-                                <p className="flow-text">{user.firstName} {user.lastName}</p>
-                            </div>
-                        </div>
-
                         <div className="card-content row">
-                            <div className="card-title left-align">
-                                <p className="profile-content flow-text">Role: {user.userRole}</p>
-                                <br />
+                            <div className="card-title center-align">
+                                <p>Nothing To See Here Yet Folks!</p>
                             </div>
-
-                            <p>Nothing To See Here Yet Folks!</p>
                         </div>
                     </div>
                 </div>
@@ -69,4 +52,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default compose(connect(mapStateToProps), firestoreConnect(['users']))(ProfilePage);
+export default compose(connect(mapStateToProps), firestoreConnect(['users']))(ProfileSettings);

@@ -166,13 +166,13 @@ code {
   animation-timing-function: ease-in;
 }
 
-@media screen and (min-width: 626px) {
+@media screen and (min-width: 650px) {
   .navbar-dropdown {
     display: none;
   }
 }
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 650px) {
   .navbar-attrib {
     display: none;
     pointer-events: none;
@@ -256,4 +256,12 @@ textarea:focus ~ label {
 
 .profile-content {
   font-size-adjust: inherit;
+}
+
+.class-message{
+  white-space: pre-line;
+}
+
+#slice-list{
+  position: relative;
 }

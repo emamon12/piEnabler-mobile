@@ -17,7 +17,7 @@ class ClassSession extends Component {
 
         var x = document.getElementsByClassName("collection-item black-text")
         var theButton = document.getElementById("answer-submit")
-        theButton.className = "btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light "
+        theButton.className = "btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 
         x[0].className = "collection-item black-text"
         x[1].className = "collection-item black-text"
@@ -58,7 +58,9 @@ class ClassSession extends Component {
 
     render() {
 
-        const { session, slice, auth, responseFeedback } = this.props;
+        const { session, auth, responseFeedback } = this.props;
+        
+        const disabledButtonStyle = "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 
         //this just redirects if the user is not authenticated
         if (!auth.uid) {
@@ -80,13 +82,13 @@ class ClassSession extends Component {
                             </div>
                         </div>
                         <div className="collection card-content" onClick={this.handleListClick}>
-                            <a id="answer1" name="answer1" href="#!" className="collection-item black-text" >{session.answer1}</a>
-                            <a id="answer2" name="answer2" href="#!" className="collection-item black-text" >{session.answer2}</a>
-                            <a id="answer3" name="answer3" href="#!" className="collection-item black-text" >{session.answer3}</a>
-                            <a id="answer4" name="answer4" href="#!" className="collection-item black-text" >{session.answer4}</a>
+                            <a id="answer1" name="answer1" href="#answer1" className="collection-item black-text" >{session.answer1}</a>
+                            <a id="answer2" name="answer2" href="#answer2" className="collection-item black-text" >{session.answer2}</a>
+                            <a id="answer3" name="answer3" href="#answer3" className="collection-item black-text" >{session.answer3}</a>
+                            <a id="answer4" name="answer4" href="#answer4" className="collection-item black-text" >{session.answer4}</a>
                         </div>
                         <div className="input-field center">
-                            <button id="answer-submit" onClick={this.handleButtonClick} name={session} className="disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light">Submit</button>
+                            <button id="answer-submit" onClick={this.handleButtonClick} name={session} className={disabledButtonStyle}>Submit</button>
                         </div>
                         {auth.isLoaded}
                         {responseFeedback ? <div className="red-text center text-darken-1"><p>{responseFeedback}</p></div> : null}
