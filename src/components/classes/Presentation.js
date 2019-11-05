@@ -12,7 +12,6 @@ import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
-import { connectableObservableDescriptor } from "C:/Users/Serenity/AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/ConnectableObservable";
 
 class Presentation extends Component {
   state = {
