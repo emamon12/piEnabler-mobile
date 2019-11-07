@@ -4,13 +4,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createClass } from "../../store/actions/classActions";
+import { Checkbox } from "react-materialize";
+import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
 class CreateClass extends Component {
   state = {
     classsName: "",
     classSection: "",
     classIdentifier: "",
-    classLecture: ""
+    classLecture: [],
+    time: ['8:00', '9:15'],
   };
 
   handleChange = e => {
@@ -25,10 +28,14 @@ class CreateClass extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { props, state } = this;
+    state.classLecture += time[0] + '-' + time[1];
+    delete state.time;
     props.createClass(state);
     //the push acts as a redirect... when the form is submitted... redirect to home
     props.history.push("/");
   };
+
+  handleTime = time => this.setState({ time })
 
   render() {
     //just check if the user is authenticated
@@ -74,12 +81,18 @@ class CreateClass extends Component {
           </div>
           <div className="input-field">
             <label htmlFor="classLecture">Class Lecture</label>
-            <input
+            {/* <input
               type="text"
               name="classLecture"
               id="classLecture"
               onChange={this.handleChange}
-            />
+            /> */}
+            <Checkbox value="M" label="Monday" id="classLecture" onChange={this.handleDate} />
+            <Checkbox value="T" label="Tuesday" id="classLecture" onChange={this.handleDate} />
+            <Checkbox value="W" label="Wednesday" id="classLecture" onChange={this.handleDate} />
+            <Checkbox value="R" label="Thursday" id="classLecture" onChange={this.handleDate} />
+            <Checkbox value="F" label="Friday" id="classLecture" onChange={this.handleDate} />
+            <TimeRangePicker id="classLecture" onChange={this.handleTime} value={this.state.time} />
           </div>
           <div className="input-field">
             <button

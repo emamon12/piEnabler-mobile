@@ -187,7 +187,7 @@ class Presentation extends Component {
                 }}
                 waves="light"
               >
-                display
+                Display Correct Answer
               </Button>
             </Card>
           </Col>
