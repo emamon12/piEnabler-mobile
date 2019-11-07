@@ -3,13 +3,7 @@ import ReactDOM from "react-dom";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 
-// Setup Firebase
-firebase.initializeApp({
-  apiKey: "AIzaSyBT8CS1nu1PqeMDq_VnMu2LsfOZM_7eMQo",
-  storageBucket: "piesiue.appspot.com"
-});
-
-class App extends React.Component {
+class ImageUpload extends React.Component {
   state = {
     filename: "",
     downloadURL: "",
@@ -48,12 +42,19 @@ class App extends React.Component {
       downloadURL: downloadURL,
       uploadProgress: 100,
       isUploading: false
-    }));
+    } 
+    ));
+    this.props.uploadGoog(filename, downloadURL);
+
   };
 
   render() {
+    let style = {border: "solid #242222b5 3px",	padding: "1em",	borderRadius: "1.5em"}
+    if(this.state.filename){
+      style.height = '37vh'
+    }
     return (
-      <div>
+      <div style={{padding: "2em"}}>
         <FileUploader
           accept="image/*"
           name="image-uploader"
@@ -64,16 +65,15 @@ class App extends React.Component {
           onProgress={this.handleProgress}
         />
 
-        <p>Progress: {this.state.uploadProgress}</p>
-        <p>Filename: {this.state.filename}</p>
+        <h3>Progress: {this.state.uploadProgress}</h3>
+        <h3>Filename: {this.state.filename}</h3>
 
-        <div>
-           <img src={this.state.downloadURL} /> 
+        <div style={{textAlign: "center", height: "35vh"}}>
+           <img style={style} src={this.state.downloadURL} /> 
         </div>
       </div>
     );
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+export default ImageUpload;
