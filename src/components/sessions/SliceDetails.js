@@ -15,52 +15,77 @@ class SliceDetails extends Component {
         if (!auth.uid) {
             return <Redirect to="/signin" />;
         }
-
-        if (slice && slice.Lecture === true) {
-            return (
-                <div className="container section">
-                    <form className="white">
-                        <h5 className={textStyle}>Slice ID: {sliceid}</h5>
-                        <h2 className={textStyle}>{slice.Title}</h2>
-                        <br />
-
-                        <span>
-                            <h3 className={textStyle}>Content: </h3>
-                            <p className={textStyle}>{slice.Question}</p>
+        if (slice && slice.Cheese){
+            return(
+                    <div className="container section">
+                        <form className="white">
+                            <h5 className={textStyle}>Slice ID: {sliceid}</h5>
+                            <h2 className={textStyle}>{slice.Title}</h2>
                             <br />
-                            <p>Topic: {slice.Topic}</p>
-                        </span>
+    
+                            <span>
+                                <h3 className={textStyle}>Content: {slice.filename} </h3>
+                                <div style={{textAlign: "center"}}>
+                                    <img style={{height: "45vh", border: "solid #242222b5 3px",	padding: "1em",	borderRadius: "1.5em"}} src={slice.url} /> 
 
-
-                    </form>
-                </div>
-            );
-        } else {
-            return (
-                <div className="container section">
-                    <form className="white">
-                        <h5 className={textStyle}>Slice ID: {sliceid}</h5>
-                        <h2 className={textStyle}>{slice.Title}</h2>
-                        <br />
-                        <span>
-                            <h3 className={textStyle}>Question: </h3>
-                            <p className="grey-text text-darken-3 class-message" >{slice.Question}</p>
-                            <h3 className={textStyle}>Answers </h3>
-                            <p>Answer 1: {slice.Answer1}</p>
-                            <p>Answer 2: {slice.Answer2}</p>
-                            <p>Answer 3: {slice.Answer3}</p>
-                            <p>Answer 4: {slice.Answer4}</p>
-                            <p>Correct Answer: {slice.CorrectAnswer}</p>
-                            <p>
+                                </div>
                                 <br />
-                            </p>
-                            <p>Topic: {slice.Topic}</p>
-                            <p>Difficulty: {slice.Difficulty}</p>
-                        </span>
-                    </form>
-                </div>
-            );
+                                <p>Topic: {slice.Topic}</p>
+                            </span>
+    
+    
+                        </form>
+                    </div>
+            )
+        }else{
+            if (slice && slice.Lecture === true) {
+                return (
+                    <div className="container section">
+                        <form className="white">
+                            <h5 className={textStyle}>Slice ID: {sliceid}</h5>
+                            <h2 className={textStyle}>{slice.Title}</h2>
+                            <br />
+    
+                            <span>
+                                <h3 className={textStyle}>Content: </h3>
+                                <p className={textStyle}>{slice.Question}</p>
+                                <br />
+                                <p>Topic: {slice.Topic}</p>
+                            </span>
+    
+    
+                        </form>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="container section">
+                        <form className="white">
+                            <h5 className={textStyle}>Slice ID: {sliceid}</h5>
+                            <h2 className={textStyle}>{slice.Title}</h2>
+                            <br />
+                            <span>
+                                <h3 className={textStyle}>Question: </h3>
+                                <p className="grey-text text-darken-3 class-message" >{slice.Question}</p>
+                                <h3 className={textStyle}>Answers </h3>
+                                <p>Answer 1: {slice.Answer1}</p>
+                                <p>Answer 2: {slice.Answer2}</p>
+                                <p>Answer 3: {slice.Answer3}</p>
+                                <p>Answer 4: {slice.Answer4}</p>
+                                <p>Correct Answer: {slice.CorrectAnswer}</p>
+                                <p>
+                                    <br />
+                                </p>
+                                <p>Topic: {slice.Topic}</p>
+                                <p>Difficulty: {slice.Difficulty}</p>
+                            </span>
+                        </form>
+                    </div>
+                );
+            }
         }
+
+
 
     }
 }
