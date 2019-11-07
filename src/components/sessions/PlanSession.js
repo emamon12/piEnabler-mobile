@@ -68,42 +68,42 @@ class PlanSession extends Component {
         return (
             <div className="dashboard">
                 <div className="row">
-                <div className="col s12 m6">
-                    <form onSubmit={this.handleSubmit} className="white">
-                        <h4 className="grey-text text-darken-3">Session Planner</h4>
-                        <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
-                        <h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
-                        {sessionplans && sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
-                            return (
-                                <h5 className="slice-list" onClick={this.handleDelete} key={slices}>{slices}</h5>
-                            )
-                        })
-                        }
+                    <div className="col s12 m6" style={{marginLeft: "1%"}}>
+                        <form onSubmit={this.handleSubmit} className="white">
+                            <h4 className="grey-text text-darken-3">Session Planner</h4>
+                            <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
+                            <h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
+                            {sessionplans && sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
+                                return (
+                                    <h5 className="slice-list" onClick={this.handleDelete} key={slices}>{slices}</h5>
+                                )
+                            })
+                            }
 
-                        <div className="input-field">
-                            <label htmlFor="sliceId">Input Slice Id to Add</label>
-                            <input
-                                type="text"
-                                name="sliceId"
-                                id="sliceId"
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className="input-field">
-                            <button
-                                type="submit"
-                                className="btn purple-bg purple darken-3 z-depth-1">
-                                Add
-                            </button>
-                        </div>
-                        {sliceError ? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
-                    </form>
-                </div>
-                <div id="slice-list" className="col s12 m5 offset-m1">
+                            <div className="input-field">
+                                <label htmlFor="sliceId">Input Slice Id to Add</label>
+                                <input
+                                    type="text"
+                                    name="sliceId"
+                                    id="sliceId"
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                            <div className="input-field">
+                                <button
+                                    type="submit"
+                                    className="btn purple-bg purple darken-3 z-depth-1">
+                                    Add
+                                </button>
+                            </div>
+                            {sliceError ? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
+                        </form>
+                    </div>
+                    <div id="slice-list" className="col s12 m5" style={{marginLeft: "4.5%"}}>
                         <SlicesList slices={slices} profile={auth} />
+                    </div>
                 </div>
             </div>
-                        </div>
 
         );
     }

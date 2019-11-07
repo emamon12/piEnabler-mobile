@@ -19,7 +19,7 @@ class Dashboard extends Component {
             return (
                 <div className="dashboard">
                     <div className="row">
-                        <div className="col s12 m6">
+                        <div className="col s12 m6" style={{marginLeft: "1%"}}>
                             <ClassList user={user} classes={classes} />
                         </div>
                         <div className="col s12 m5 offset-m1">
