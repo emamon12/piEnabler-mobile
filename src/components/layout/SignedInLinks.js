@@ -114,21 +114,10 @@ const SignedInLinks = (props) => {
     );
   } else if (profile.userRole === "student") {
     return (
-      <div className="nav-container">
+      <div className="">
         <ul className="right">
-          <Dropdown
-            trigger={<li className="navbar-dropdown">Class Options</li>}
-          >
-            <NavLink className={textStyle} to="/">
-              Home
-            </NavLink>
-            <Divider></Divider>
-            <NavLink className={textStyle} to="/addClass">
-              Add Class
-            </NavLink>
-          </Dropdown>
           <li>
-            <NavLink to="/addClass" className="navbar-attrib">
+            <NavLink to="/addClass" className="">
               Add Class
             </NavLink>
           </li>

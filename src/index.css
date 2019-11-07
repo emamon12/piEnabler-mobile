@@ -265,3 +265,10 @@ textarea:focus ~ label {
 #slice-list{
   position: relative;
 }
+
+.switch label input[type="checkbox"]:checked + .lever {
+	background-color: rgba(106, 27, 154, 0.64);
+}
+.switch label input[type="checkbox"]:checked + .lever::after {
+	background-color: rgb(106, 27, 154);
+}
