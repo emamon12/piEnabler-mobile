@@ -6,6 +6,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import { addSliceToSession, removeSliceFromSession } from '../../store/actions/sessionActions'
+import SlicesList from './SlicesList'
 
 class PlanSession extends Component {
     state = {
@@ -54,7 +55,7 @@ class PlanSession extends Component {
     render() {
         //just check if the user is authenticated
         const { props } = this;
-        const { auth, user, sessionplansid, sessionplans, sliceError } = props;
+        const { auth, user, sessionplansid, sessionplans, sliceError, slices } = props;
 
         if (!auth.uid) {
             return <Redirect to="/signin" />;
@@ -65,37 +66,45 @@ class PlanSession extends Component {
         }
 
         return (
-            <div className="container section">
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h4 className="grey-text text-darken-3">Session Planner</h4>
-                    <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
-                    <h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
-                    {sessionplans && sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
-                        return (
-                            <h5 className="slice-list" onClick={this.handleDelete} key={slices}>{slices}</h5>
-                        )
-                    })
-                    }
+            <div className="dashboard">
+                <div className="row">
+                <div className="col s12 m6">
+                    <form onSubmit={this.handleSubmit} className="white">
+                        <h4 className="grey-text text-darken-3">Session Planner</h4>
+                        <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
+                        <h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
+                        {sessionplans && sessionplans.sliceIds && sessionplans.sliceIds.map(slices => {
+                            return (
+                                <h5 className="slice-list" onClick={this.handleDelete} key={slices}>{slices}</h5>
+                            )
+                        })
+                        }
 
-                    <div className="input-field">
-                        <label htmlFor="sliceId">Input Slice Id to Add</label>
-                        <input
-                            type="text"
-                            name="sliceId"
-                            id="sliceId"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="input-field">
-                        <button
-                            type="submit"
-                            className="btn purple-bg purple darken-3 z-depth-1">
-                            Add
-                        </button>
-                    </div>
-                    {sliceError ? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
-                </form>
+                        <div className="input-field">
+                            <label htmlFor="sliceId">Input Slice Id to Add</label>
+                            <input
+                                type="text"
+                                name="sliceId"
+                                id="sliceId"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="input-field">
+                            <button
+                                type="submit"
+                                className="btn purple-bg purple darken-3 z-depth-1">
+                                Add
+                            </button>
+                        </div>
+                        {sliceError ? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
+                    </form>
+                </div>
+                <div id="slice-list" className="col s12 m5 offset-m1">
+                        <SlicesList slices={slices} profile={auth} />
+                </div>
             </div>
+                        </div>
+
         );
     }
 }
@@ -111,6 +120,7 @@ const mapStateToProps = (state, ownProps) => {
         auth: state.firebase.auth,
         user: user,
         sessionplansid: id,
+        slices: state.firestore.ordered.slices,
         sliceError: state.session.sliceError,
     };
 };

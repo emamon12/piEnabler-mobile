@@ -52,9 +52,8 @@ class SessionPlans extends Component {
         }
 
         return (
-            <div className="dashboard">
-                <div className="row">
-                    <div className="col s12 m6">
+
+                   <div className="container section">
                         <SessionPlanList sessionplans={sessionplans} profile={auth} />
                         {this.state.planningSession ?
                             <form className="white z-depth-1">
@@ -88,11 +87,6 @@ class SessionPlans extends Component {
                                 </button>}
                         </div>
                     </div>
-                    <div id="slice-list" className="col s12 m5 offset-m1">
-                        <SlicesList slices={slices} profile={auth} />
-                    </div>
-                </div>
-            </div>
         )
     }
 }
