@@ -59,10 +59,9 @@ class Histogram extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  //const { id } = ownProps.match.params;
-  const id = 'vUlO8FSlm4dC9PPZ61JK' //fix this later
+  const { sid } = ownProps; 
   const { sessions } = state.firestore.data;
-  const session = sessions ? sessions[id] : null;
+  const session = sessions ? sessions[sid] : null;
   return {
     session: session,
     auth: state.firebase.auth
