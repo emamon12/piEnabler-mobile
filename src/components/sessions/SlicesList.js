@@ -6,7 +6,7 @@ import { Row, Col, Preloader } from 'react-materialize'
 const SlicesList = ({ slices, profile }) => {
     if (slices && profile) {
         return (
-            <div className="session-plans-list ease-in-anim section">
+            <div className="slice-list-children ease-in-anim section">
                 {slices && slices.map(slices => {
                     return (
                         <Link to={'/slices/' + slices.id} key={slices.id}>
