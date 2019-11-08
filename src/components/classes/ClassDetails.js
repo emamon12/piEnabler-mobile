@@ -78,7 +78,7 @@ class ClassDetails extends Component {
 
         const sessionId = classs.currSession;
 
-        const composite = {classId, sessionId};
+        const composite = { classId, sessionId };
 
         props.RemoveSession(composite);
     }
@@ -100,7 +100,7 @@ class ClassDetails extends Component {
     render() {
         const { props } = this;
         const { auth } = props;
-        const { classs, loadingError } = props
+        const { classs, loadingError, classsId } = props
 
         if (!auth.uid) {
             return <Redirect to='/signin/' />
@@ -119,6 +119,11 @@ class ClassDetails extends Component {
                     <div className="container section classs-details">
                         <div className="card z-depth-0">
                             <div className="card-content">
+                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                    <p>Class Key: {classsId}</p>
+                                    :
+                                    null
+                                }
                                 <span className="card-title">{classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day</span>
                                 {formMode ? <Row className="class-message">
                                     <Textarea name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
@@ -190,6 +195,11 @@ class ClassDetails extends Component {
                     <div className="container section classs-details">
                         <div className="card z-depth-0">
                             <div className="card-content">
+                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                    <p>Class Key: {classsId}</p>
+                                    :
+                                    null
+                                }
                                 <span className="card-title">{classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day</span>
                                 {formMode ? <Row className="class-message">
                                     <Textarea data-length={180} name="classMessage" id="classMessage" onChange={this.handleChange} defaultValue={classs.messageOfTheDay}
@@ -299,6 +309,7 @@ const mapStateToProps = (state, ownProps) => {
     const { users } = state.firestore.data;
     const classs = classes ? classes[id] : null
     const user = users ? users[state.firebase.auth.uid] : null
+    
     return {
         classs: classs,
         auth: state.firebase.auth,

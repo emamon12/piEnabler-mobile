@@ -250,5 +250,44 @@ textarea:focus ~ label {
 }
 
 #slice-list{
-  position: relative;
+  height: 700px;
+  margin: 10px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+#plan-session-row{
+  margin: 10px;
+}
+
+#session-form{
+  margin: 10px;
+}
+
+#session-style{
+  padding-top: 0;
+}
+
+.slice-list-children{
+  padding: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6a1b9a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #851363;
 }

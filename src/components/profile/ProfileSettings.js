@@ -10,8 +10,13 @@ class ProfileSettings extends Component {
     render() {
         const { props } = this;
         const { user, auth } = props;
-        
-        if (user) {
+
+        if (user && auth) {
+
+            if (!auth.uid) {
+                return <Redirect to="/signin" />;
+            }
+
             return (
                 <div className="container section">
                     <div className="card z-depth-0 section">
