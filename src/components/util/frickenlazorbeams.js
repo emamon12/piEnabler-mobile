@@ -136,16 +136,24 @@ class frickenlazorbeams extends Component {
               style={{ height: "100%", position: "relative" }}
               onClick={this.nextSlide}
             >
-              <h3 className="projection_title">Welcome to CS 140</h3>
-              <div id="body" className="projection_body class-message">
-                {session && session.question
-                  ? session.question
-                  : 
-                  <div style={{textAlign: "center", marginTop: "15%"}}>
-                    <Preloader flashing size="big" />
-                  </div>
-                  }
+              {session && session.url ? 
+                <img style={{height: "82vh", width: "100%"}} alt="" src={session.url} /> 
+              :
+              <div>
+                <h3 className="projection_title">Welcome to CS 140</h3>
+                  <div id="body" className="projection_body class-message">
+                    {session && session.question
+                      ? session.question
+                      : 
+                      <div style={{textAlign: "center", marginTop: "15%"}}>
+                        <Preloader flashing size="big" />
+                      </div>
+                      }
+                </div>
               </div>
+ 
+              }
+              
             </Card>
             {this.state.isFull ? (
               <CancelPresentationIcon
