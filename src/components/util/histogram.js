@@ -20,8 +20,7 @@ const options = {
 class Histogram extends React.Component {
   render() {
     const { session } = this.props;
-    let state = this.state;
-
+    
     return (
       <Card
         className="white "

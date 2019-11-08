@@ -26,7 +26,7 @@ class SliceDetails extends Component {
                             <span>
                                 <h3 className={textStyle}>Content: {slice.filename} </h3>
                                 <div style={{textAlign: "center"}}>
-                                    <img style={{height: "45vh", border: "solid #242222b5 3px",	padding: "1em",	borderRadius: "1.5em"}} src={slice.url} /> 
+                                    <img style={{height: "45vh", border: "solid #242222b5 3px",	padding: "1em",	borderRadius: "1.5em"}} alt="" src={slice.url} /> 
 
                                 </div>
                                 <br />

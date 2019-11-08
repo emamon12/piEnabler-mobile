@@ -7,7 +7,7 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import SlicesList from './SlicesList'
 import { addSliceToSession, removeSliceFromSession } from '../../store/actions/sessionActions'
-import SlicesList from './SlicesList'
+
 
 class PlanSession extends Component {
     state = {
@@ -123,7 +123,6 @@ const mapStateToProps = (state, ownProps) => {
         sessionplansid: id,
         slices: state.firestore.ordered.slices,
         sliceError: state.session.sliceError,
-        slices: state.firestore.ordered.slices,
     };
 };
 const mapDispatchToProps = dispatch => ({
