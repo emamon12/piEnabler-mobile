@@ -258,12 +258,12 @@ textarea:focus ~ label {
   font-size-adjust: inherit;
 }
 
-.class-message{
+.class-message {
   white-space: pre-line;
 }
 
-#slice-list{
-  height: 700px;
+#slice-list {
+  height: 90vh;
   margin: 10px;
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -271,29 +271,29 @@ textarea:focus ~ label {
 }
 
 .switch label input[type="checkbox"]:checked + .lever {
-	background-color: rgba(106, 27, 154, 0.64);
+  background-color: rgba(106, 27, 154, 0.64);
 }
 .switch label input[type="checkbox"]:checked + .lever::after {
-	background-color: rgb(106, 27, 154);
+  background-color: rgb(106, 27, 154);
 }
-[type="checkbox"]:checked + span:not(.lever)::before{
+[type="checkbox"]:checked + span:not(.lever)::before {
   border-right: 2px solid rgb(106, 27, 154);
-  border-bottom:  2px solid rgb(106, 27, 154);
+  border-bottom: 2px solid rgb(106, 27, 154);
 }
 
-#plan-session-row{
+#plan-session-row {
   margin: 10px;
 }
 
-#session-form{
+#session-form {
   margin: 10px;
 }
 
-#session-style{
+#session-style {
   padding-top: 0;
 }
 
-.slice-list-children{
+.slice-list-children {
   padding: 0;
 }
 
