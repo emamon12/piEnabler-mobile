@@ -87,7 +87,7 @@ class CreateSlice extends Component {
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Create a new Slice</h2>
+          <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Create A New Slice</h2>
           <div style={{position: "relative", paddingBottom: "3em"}}>
             <div style={{position: "absolute", left: "1.5em", top: "1.75em"}}>
               <Switch

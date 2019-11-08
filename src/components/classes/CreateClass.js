@@ -89,7 +89,7 @@ class CreateClass extends Component {
             className="grey-text text-darken-3"
             style={{ textAlign: "center" }}
           >
-            Create new class
+            Create A New class
           </h2>
           <div className="input-field">
             <label htmlFor="classsName">Class Name</label>
