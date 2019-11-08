@@ -8,32 +8,30 @@ import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
-import { Card, Button } from "react-materialize";
+import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
-import { nextSlice } from "../../store/actions/sessionActions"
-import { prevSlice } from "../../store/actions/sessionActions"
+import { nextSlice, prevSlice, setPolling } from "../../store/actions/sessionActions"
+
 
 
 class Presentation extends Component {
   state = {
     view: null,
-    PollingStatus: false,
     Voted: 83,
     Here: 150,
-    Question:
-      "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
-    Title: "Welcome to CS 140"
   };
 
-  handlePolling = e => {
-    const { target } = e;
+  handlePolling = () => {
+    const { props } = this;
+    const { session, sessionId } = props;
+    let status = session.polling;
 
-    this.setState(state => ({
-      ...state,
-      [target.id]: !state.PollingStatus
-    }));
+    let composite = { status, sessionId };
+
+    props.setPolling(composite)
+    console.log("polling set")
   };
 
   handleResetPolling = () => {
@@ -201,15 +199,15 @@ class Presentation extends Component {
             <Row style={{ height: "50%", marginBottom: "1em" }}>
               <ProjectionTemplate
                 slide="Current Slide"
-                question={session.question}
-                title={session.title}
+                question={session ? session.question : Preloader}
+                title={session ? session.title : ''}
               />
             </Row>
             <Row style={{ height: "50%", marginBottom: "-1em" }}>
               <ProjectionTemplate
                 slide="Next Slide"
-                question={session.question}
-                title={session.title}
+                question={session ? session.question: Preloader}
+                title={session ? session.title : ''}
               />
             </Row>
           </Col>
@@ -252,7 +250,7 @@ class Presentation extends Component {
                       paddingLeft: ".5em"
                     }}
                   >
-                    {state.PollingStatus ? (
+                    {session && session.polling ? (
                       <Button
                         waves="light"
                         style={StyleOpen}
@@ -423,6 +421,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   nextSlice: pie => dispatch(nextSlice(pie)),
   prevSlice: pie => dispatch(prevSlice(pie)),
+  setPolling: pie => dispatch(setPolling(pie)),
 });
 
 export default compose(

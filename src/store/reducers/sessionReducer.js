@@ -44,13 +44,33 @@ const sessionReducer = (state = initstate, action) => {
             ...state, 
             messageErrorFeedback: null,
         }
+        case 'NEXT_SLICE_ERROR':
+            return{
+                ...state,
+                sliceError: "Unable To Increment Slice!",
+            }
         case 'PREV_SLICE':
                 console.log('decremented slice', action.pie);
                 return{
                 ...state, 
                 messageErrorFeedback: null,
             }
-
+        case 'PREV_SLICE_ERROR':
+            return{
+                ...state,
+                sliceError: "Unable To Decrement Slice!",
+            }
+        case 'CHANGE_POLLING':
+            console.log('changing polling status', action.pie);
+            return{
+            ...state, 
+            messageErrorFeedback: null,
+        }
+        case 'CHANGE_POLLING_ERROR':
+            return{
+                ...state,
+                sliceError: "Unable to change polling status!",
+            }
         default:
             return state;
     }

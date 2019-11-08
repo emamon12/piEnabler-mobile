@@ -39,7 +39,7 @@ class AddClass extends Component {
         return (
             <div className="container section">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Add A New class</h2>
+                    <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Add A Class</h2>
                     <div className="input-field">
                         <label htmlFor="classKey">Class Key</label>
                         <input type="text" name="classKey" id="classKey" onChange={this.handleChange} />

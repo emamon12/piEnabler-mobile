@@ -17,11 +17,27 @@ export const createSession = session => (dispatch, getState, { getFirestore }) =
     }));
 };
 
-export const nextSlice = pie => (dispatch, getState, { getFirestore }) => {
-    const fireStore = getFirestore();
-    const sessionId = pie;
+export const setPolling = pie => (dispatch, getState, { getFirestore }) => {
+    let fireStore = getFirestore();
+    let sessionId = pie.sessionId;
+    let status = !pie.status;
 
-    const increment = fireStore.FieldValue.increment(1);
+    fireStore.collection('sessions').doc(sessionId).update({
+        polling: status
+    }).then({
+        type: "CHANGE_POLLING"
+    }
+    ).catch((err) => ({
+        type: 'CHANGE_POLLING_ERROR',
+        err
+    }))
+};
+
+export const nextSlice = pie => (dispatch, getState, { getFirestore }) => {
+    let fireStore = getFirestore();
+    let sessionId = pie;
+
+    let increment = fireStore.FieldValue.increment(1);
 
     fireStore.collection('sessions').doc(sessionId).update({
         sliceNumber: increment
@@ -35,10 +51,10 @@ export const nextSlice = pie => (dispatch, getState, { getFirestore }) => {
 };
 
 export const prevSlice = pie => (dispatch, getState, { getFirestore }) => {
-    const fireStore = getFirestore();
-    const sessionId = pie;
+    let fireStore = getFirestore();
+    let sessionId = pie;
 
-    const decrement = fireStore.FieldValue.increment(-1);
+    let decrement = fireStore.FieldValue.increment(-1);
     
     fireStore.collection('sessions').doc(sessionId).update({
         sliceNumber: decrement

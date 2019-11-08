@@ -45,10 +45,10 @@ class Histogram extends React.Component {
           }}
           data={[
             ["Answer", "", { role: "style" }],
-            ["A", session.respondA1, "color: red"],
-            ["B", session.respondA2, "color: blue"],
-            ["C", session.respondA3, "color: green"],
-            ["D", session.respondA4, "color: orange"]
+            ["A", session ? session.respondA1 : 0, "color: red"],
+            ["B", session ? session.respondA2 : 0, "color: blue"],
+            ["C", session ? session.respondA3 : 0, "color: green"],
+            ["D", session ? session.respondA4 : 0, "color: orange"]
           ]}
           options={options}
         />
