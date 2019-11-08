@@ -3,10 +3,10 @@ import SessionPlanSummary from './SessionPlanSummary'
 import { Link } from 'react-router-dom'
 import { Row, Col, Preloader } from 'react-materialize'
 
-const SessionPlanList = ({ sessionplans, profile }) => {
+const SessionPlanList = ({ sessionplans, profile }) =>  {
     if (sessionplans && profile) {
         return (
-            <div className="session-plans-list ease-in-anim section">
+            <div className="session-plans-list ease-in-anim section" >
                 {sessionplans && sessionplans.map(sessionplans => {
                     if (profile.uid === sessionplans.createdBy) {
                         return (
