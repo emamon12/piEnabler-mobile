@@ -3,18 +3,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { firestoreConnect, getFirestore } from "react-redux-firebase";
+import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import { Card, Button, Preloader } from "react-materialize";
 import Clock from "react-live-clock";
+import ProjectionTemplate from "../util/ProjectionTemplate";
+import Histogram from "../util/histogram";
+import { nextSlice } from "../../store/actions/sessionActions"
+import { prevSlice } from "../../store/actions/sessionActions"
+
 
 class Presentation extends Component {
   state = {
     view: null,
     PollingStatus: false,
+    correct: null,
     Voted: 83,
-    Here: 150
+    Here: 150,
+    Question:
+      "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
+    Title: "Welcome to CS 140"
   };
 
   handlePolling = e => {
@@ -35,14 +46,30 @@ class Presentation extends Component {
   };
 
   handleLecture = () => {
+    const { props, state } = this;
+    const { sessionId } = props;
+
+    props.prevSlice(sessionId)
     console.log("Lecture Clicked");
   };
 
-  handleQuestion = () => {
+  handleQuestion = (e) => {
+    e.preventDefault();
+    const { props, state } = this;
+    const { sessionId } = props;
+
+    props.nextSlice(sessionId)
+    
     console.log("Question Clicked");
   };
 
   handleDifficulty = () => {
+    if(session.difficulty == 'easy') {
+      session.difficulty = 'hard';
+    } else {
+      session.difficulty = 'easy';
+    }
+    
     console.log("Difficulty Clicked");
   };
 
@@ -51,13 +78,14 @@ class Presentation extends Component {
   };
 
   handleHistogram = () => {
+    
     console.log("Histogram Clicked");
   };
 
   render() {
-    const { session, auth, authError } = this.props;
+    const { session, auth, authError, slices } = this.props;
     let state = this.state;
-    console.log(authError);
+    //console.log(authError);
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
@@ -123,7 +151,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  A: This is where Answer1 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer1
+                    : ""}
                 </a>
                 <a
                   id="answer2"
@@ -131,7 +161,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  B: This is where Answer2 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer2
+                    : ""}
                 </a>
                 <a
                   id="answer3"
@@ -139,7 +171,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  C: This is where Answer3 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer3
+                    : ""}
                 </a>
                 <a
                   id="answer4"
@@ -147,7 +181,9 @@ class Presentation extends Component {
                   href="#!"
                   className="collection-item black-text"
                 >
-                  D: This is where Answer4 goes
+                  {session && session.isCurrentSliceAQuestion
+                    ? session.answer4
+                    : ""}
                 </a>
               </div>
               <Button
@@ -167,45 +203,19 @@ class Presentation extends Component {
             md="4"
             style={{ paddingRight: "3em", height: "90%", marginTop: "2%" }}
           >
-            <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Current Slide"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "100%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+            <Row style={{ height: "50%", marginBottom: "1em" }}>
+              <ProjectionTemplate
+                slide={session.sliceId}
+                question={session.question}
+                title={session.title}
+              />
             </Row>
-            <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Next Slide"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "100%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+            <Row style={{ height: "50%", marginBottom: "-1em" }}>
+              <ProjectionTemplate
+                slide="Next Slide"
+                question={session.question}
+                title={session.title}
+              />
             </Row>
           </Col>
           <Col
@@ -213,26 +223,9 @@ class Presentation extends Component {
             style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}
           >
             <Row style={{ height: "50%" }}>
-              <Card
-                className="white "
-                textClassName="black-text"
-                title="Histogram"
-                style={{
-                  padding: "0em",
-                  textAlign: "center",
-                  height: "80%"
-                }}
-              >
-                <Card
-                  className="white"
-                  textClassName="black-text fit"
-                  style={{ height: "90%", padding: "0px" }}
-                >
-                  <Preloader flashing size="big" />
-                </Card>
-              </Card>
+              <Histogram sid={this.props.sessionId}/>
             </Row>
-            <Row style={{ height: "50%" }}>
+            <Row style={{ height: "50%", marginTop: "3em" }}>
               <Container style={{ height: "100%" }}>
                 <Row style={{ height: "35%" }}>
                   <Col
@@ -367,7 +360,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleQuestion}
           >
-            Next Question
+            New Question
           </Button>
 
           <Button
@@ -381,7 +374,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleDifficulty}
           >
-            Change Difficulty
+            Change Difficulty: {session ? session.difficulty : ''}
           </Button>
 
           <Button
@@ -395,7 +388,7 @@ class Presentation extends Component {
             className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
             onClick={this.handleTopic}
           >
-            New Topic
+            New Topic: {session ? session.topic : ''}
           </Button>
 
           <Button
@@ -416,13 +409,31 @@ class Presentation extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth
+const mapStateToProps = (state, ownProps) => {
+  const { id, cid } = ownProps.match.params;
+  const { classes } = state.firestore.data;
+  const { sessions, slices } = state.firestore.data;
+  const pie = classes ? classes[id] : null
+  const session = sessions ? sessions[id] : null;
+  return {
+    pie: pie,
+    classId: cid,
+    sessionId: id,
+    session: session,
+    slices: slices,
+    auth: state.firebase.auth
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  nextSlice: pie => dispatch(nextSlice(pie)),
+  prevSlice: pie => dispatch(prevSlice(pie)),
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(["sessions", "slices"])
 )(Presentation);
