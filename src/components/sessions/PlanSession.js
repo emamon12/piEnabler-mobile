@@ -8,6 +8,7 @@ import { Redirect } from 'react-router-dom'
 import SlicesList from './SlicesList'
 import { addSliceToSession, removeSliceFromSession } from '../../store/actions/sessionActions'
 
+
 class PlanSession extends Component {
     state = {
         sliceId: '',
@@ -104,6 +105,7 @@ class PlanSession extends Component {
 
                 </div>
             </div>
+
         );
     }
 }
@@ -119,8 +121,8 @@ const mapStateToProps = (state, ownProps) => {
         auth: state.firebase.auth,
         user: user,
         sessionplansid: id,
-        sliceError: state.session.sliceError,
         slices: state.firestore.ordered.slices,
+        sliceError: state.session.sliceError,
     };
 };
 const mapDispatchToProps = dispatch => ({

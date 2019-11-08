@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 
@@ -69,7 +68,7 @@ class ImageUpload extends React.Component {
         <h3>Filename: {this.state.filename}</h3>
 
         <div style={{textAlign: "center", height: "35vh"}}>
-           <img style={style} src={this.state.downloadURL} /> 
+           <img style={style} alt="" src={this.state.downloadURL} /> 
         </div>
       </div>
     );

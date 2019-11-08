@@ -28,7 +28,7 @@ class frickenlazorbeams extends Component {
     this.animate();
   }
   animate = now => {
-    let drawVisual = requestAnimationFrame(this.animate);
+    requestAnimationFrame(this.animate);
     this.renderCanvas();
   };
 
@@ -92,10 +92,8 @@ class frickenlazorbeams extends Component {
 
   renderCanvas = () => {
     // MOVE SHIP
-    let dir = this.state.dir,
-      y = this.state.point[1],
-      x = this.state.point[0],
-      speed = this.state.speed;
+    let y = this.state.point[1];
+    let x = this.state.point[0];
 
     if (y > window.innerHeight + 20) y = -20;
     if (y < -20) y = window.innerHeight + 20;
@@ -118,7 +116,7 @@ class frickenlazorbeams extends Component {
   };
 
   render() {
-    const { session, auth, authError } = this.props;
+    const { session, authError } = this.props;
     const brandImage =
       "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
 

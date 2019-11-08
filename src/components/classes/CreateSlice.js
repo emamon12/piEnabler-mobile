@@ -87,9 +87,9 @@ class CreateSlice extends Component {
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Create a new Slice</h2>
-          <div style={{whiteSpace: 'nowrap'}}>
-            <div style={{display: "inline-block", marginLeft: "1.5em"}}>
+          <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Create A New Slice</h2>
+          <div style={{position: "relative", paddingBottom: "3em"}}>
+            <div style={{position: "absolute", left: "1.5em", top: "1.75em"}}>
               <Switch
                 offLabel="Question"
                 onLabel="Lecture"
@@ -98,9 +98,9 @@ class CreateSlice extends Component {
               />
             </div>
             {this.state.Cheese ? 
-              <Button waves="light" style={{marginLeft: "69em", display: "inline-block", backgroundColor: "#6a1b9a", width: "6.5em"}} className="btn" onClick={this.handleCheese} > Slice</Button>
+              <Button waves="light" style={{right: "1.5em", position: "absolute", backgroundColor: "#6a1b9a", width: "6.5em"}} className="btn" onClick={this.handleCheese} > Slice</Button>
             : 
-              <Button waves="light" style={{marginLeft: "69em", display: "inline-block", backgroundColor: "#6a1b9a", width: "6.5em"}} className="btn" onClick={this.handleCheese} > Image </Button>
+              <Button waves="light" style={{right: "1.5em", position: "absolute", backgroundColor: "#6a1b9a", width: "6.5em"}} className="btn" onClick={this.handleCheese} > Image </Button>
             }
           </div>
 
