@@ -278,6 +278,7 @@ textarea:focus ~ label {
 [type="checkbox"]:checked + span:not(.lever)::before{
   border-right: 2px solid rgb(106, 27, 154);
   border-bottom:  2px solid rgb(106, 27, 154);
+}
 
 #plan-session-row{
   margin: 10px;
