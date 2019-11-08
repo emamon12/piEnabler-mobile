@@ -71,32 +71,31 @@ class ClassSession extends Component {
 
         //this is whats actually being seen in the ClassList
 
-        if (session) {
-            if (session ) {
-                return (
-                    <div className="container section">
-                        <div className="card">
-                            <div className="card-content">
-                                <div>
-                                    <label>Slice ID: {session.currentSliceId}</label>
-                                </div>
-                                <label className="card-title black-text center">{session.question ? session.question : ''}</label>
+
+        if ( session ) {
+            return (
+                <div className="container section">
+                    <div className="card">
+                        <div className="card-content">
+                            <div>
+                                <label>Slice ID: {session.currentSliceId}</label>
                             </div>
+                            <label className="card-title black-text center">{session.question}</label>
                         </div>
-                        <div className="collection card-content" onClick={this.handleListClick}>
-                            <a id="answer1" name="answer1" href="#answer1" className="collection-item black-text" >{session.answer1 ? 'A: ' + session.answer1 : 'A:'}</a>
-                            <a id="answer2" name="answer2" href="#answer2" className="collection-item black-text" >{session.answer2 ? 'B: ' + session.answer2 : 'B:'}</a>
-                            <a id="answer3" name="answer3" href="#answer3" className="collection-item black-text" >{session.answer3 ? 'C: ' + session.answer3 : 'C:'}</a>
-                            <a id="answer4" name="answer4" href="#answer4" className="collection-item black-text" >{session.answer4 ? 'D: ' + session.answer4 : 'D:'}</a>
-                        </div>
-                        <div className="input-field center">
-                            <button id="answer-submit" onClick={this.handleButtonClick} name={session} disabled={session ? !session.polling : true } className={disabledButtonStyle}>Submit</button>
-                        </div>
-                        {auth.isLoaded}
-                        {responseFeedback ? <div className="red-text center text-darken-1"><p>{responseFeedback}</p></div> : null}
                     </div>
-                )
-            }
+                    <div className="collection card-content" onClick={this.handleListClick}>
+                        <a id="answer1" name="answer1" href="#answer1" className="collection-item black-text" >{'A: ' + session.answer1}</a>
+                        <a id="answer2" name="answer2" href="#answer2" className="collection-item black-text" >{'B: ' + session.answer2}</a>
+                        <a id="answer3" name="answer3" href="#answer3" className="collection-item black-text" >{'C: ' + session.answer3}</a>
+                        <a id="answer4" name="answer4" href="#answer4" className="collection-item black-text" >{'D: ' + session.answer4}</a>
+                    </div>
+                    <div className="input-field center">
+                        <button id="answer-submit" onClick={this.handleButtonClick} name={session} disabled={session ? !session.polling : true } className={disabledButtonStyle}>Submit</button>
+                    </div>
+                    {auth.isLoaded}
+                    {responseFeedback ? <div className="red-text center text-darken-1"><p>{responseFeedback}</p></div> : null}
+                </div>
+            )
         }
         else if (!session && isLoaded(session)) {
             return (
