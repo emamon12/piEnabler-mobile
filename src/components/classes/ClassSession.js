@@ -90,7 +90,7 @@ class ClassSession extends Component {
                         <a id="answer4" name="answer4" href="#answer4" className="collection-item black-text" >{'D: ' + session.answer4}</a>
                     </div>
                     <div className="input-field center">
-                        <button id="answer-submit" onClick={this.handleButtonClick} name={session} disabled={session ? !session.polling : true } className={disabledButtonStyle}>Submit</button>
+                        <button id="answer-submit" onClick={this.handleButtonClick} name={session} disabled={(session ? !session.polling : true) || !session.isCurrentSliceAQuestion } className={disabledButtonStyle}>Submit</button>
                     </div>
                     {auth.isLoaded}
                     {responseFeedback ? <div className="red-text center text-darken-1"><p>{responseFeedback}</p></div> : null}
