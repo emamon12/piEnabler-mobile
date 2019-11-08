@@ -152,7 +152,7 @@ code {
   animation-timing-function: ease-in;
 }
 
-.ease-in-anim{
+.ease-in-anim {
   animation-name: ease-in-anim;
   animation-iteration-count: 1;
   animation-duration: 0.3s;
@@ -221,27 +221,40 @@ textarea:focus ~ label {
 }
 
 .projection_body {
-  font-size: 20px;
+  font-size: 5vh;
+  text-align: left;
+  margin: 1em;
 }
 
 .projection_title {
-	text-align: left;
-  font-size: 30px;
+  text-align: left;
+  font-size: 7vh;
   font-weight: bold;
-  margin-bottom: .25em !important;
+  margin-bottom: 0.25em !important;
 }
 
+.presentation_body {
+  font-size: 20px;
+  text-align: left;
+  margin: 1em;
+}
+.presentation_title {
+  text-align: left;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 0.25em !important;
+}
 
 .slice-list {
   cursor: default;
 }
 
-.slice-list:hover{
+.slice-list:hover {
   color: red;
   text-decoration: line-through;
 }
 
-.profile-content{
+.profile-content {
   font-size-adjust: inherit;
 }
 
@@ -254,6 +267,13 @@ textarea:focus ~ label {
   margin: 10px;
   overflow-y: scroll;
   scroll-behavior: smooth;
+}
+
+.switch label input[type="checkbox"]:checked + .lever {
+	background-color: rgba(106, 27, 154, 0.64);
+}
+.switch label input[type="checkbox"]:checked + .lever::after {
+	background-color: rgb(106, 27, 154);
 }
 
 #plan-session-row{
@@ -272,22 +292,18 @@ textarea:focus ~ label {
   padding: 0;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #6a1b9a;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #851363;
 }

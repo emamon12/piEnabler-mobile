@@ -4,14 +4,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createSlice } from "../../store/actions/sliceActions";
-import { Switch } from "react-materialize";
+import { Switch, Button } from "react-materialize";
 import Textarea from "muicss/lib/react/textarea";
 import Dropdown from "muicss/lib/react/dropdown";
 import DropdownItem from "muicss/lib/react/dropdown-item";
+import ImageUpload from "../util/ImageUpload";
 
 class CreateSlice extends Component {
+  
   state = {
-    Lecture: ""
+    Lecture: false,
+    Cheese: false
   };
 
   handleChange = e => {
@@ -22,6 +25,28 @@ class CreateSlice extends Component {
       [target.id]: target.value
     }));
   };
+
+  handleCheese = e => {
+    e.preventDefault()
+    console.log("cheese clicked");
+
+    this.setState(state => ({
+      ...state,
+      Cheese: !state.Cheese
+    }));
+  }
+  handleImage = (filename, url) => { 
+    this.setState(state => ({
+      ...state,
+      filename: filename,
+      url: url
+    }));
+
+    const { props, state } = this;
+    props.createSlice(state);
+    props.history.push("/createSlice");
+  }
+
 
   handleLectureChange = e => {
     const { target } = e;
@@ -62,24 +87,51 @@ class CreateSlice extends Component {
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Create a new Slice</h5>
+          <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Create a new Slice</h2>
+          <div style={{whiteSpace: 'nowrap'}}>
+            <div style={{display: "inline-block", marginLeft: "1.5em"}}>
+              <Switch
+                offLabel="Question"
+                onLabel="Lecture"
+                onChange={this.handleLectureChange}
+                id="Lecture"
+              />
+            </div>
+            {this.state.Cheese ? 
+              <Button waves="light" style={{marginLeft: "69em", display: "inline-block", backgroundColor: "#6a1b9a", width: "6.5em"}} className="btn" onClick={this.handleCheese} > Slice</Button>
+            : 
+              <Button waves="light" style={{marginLeft: "69em", display: "inline-block", backgroundColor: "#6a1b9a", width: "6.5em"}} className="btn" onClick={this.handleCheese} > Image </Button>
+            }
+          </div>
 
-          <Switch
-            offLabel="Question"
-            onLabel="Lecture"
-            onChange={this.handleLectureChange}
-            id="Lecture"
-          />
+          {this.state.Cheese ? 
+          <div>
+            <h4 style={{color: "red", textAlign: "center"}}>WARNING IMAGES ARE UPLOADED IMMEDIATELY</h4>
+            <div className="input-field">
+                <label htmlFor="Topic">Topic</label>
+                <input
+                  type="text"
+                  name="Topic"
+                  id="Topic"
+                  className="input-style"
+                  autoComplete="off"
+                  onChange={this.handleChange}
+                />
+              </div>
+            <ImageUpload uploadGoog={this.handleImage} />
+          </div>
 
-          {this.state.Lecture ? (
+          : 
+            this.state.Lecture ? (
             <form style={{ marginTop: 0 }} className="white" id="form">
               <div className="input-field">
-                <label htmlFor="Title">Title</label>
+                <label htmlFor="Title">Slice Title</label>
                 <input
                   type="text"
                   name="Title"
                   id="Title"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                 />
               </div>
@@ -88,10 +140,11 @@ class CreateSlice extends Component {
                   type="text"
                   name="Question"
                   id="Question"
-                  className="input-style"
+                  className="input-style class-message"
                   onChange={this.handleChange}
                   floatingLabel={true}
                   label="Lecture Material"
+                  autoComplete="off"
                   required
                 />
               </div>
@@ -103,27 +156,30 @@ class CreateSlice extends Component {
                   id="Topic"
                   className="input-style"
                   onChange={this.handleChange}
+                  autoComplete="off"
                   required
                 />
               </div>
               <div className="input-field" style={{ paddingBottom: "2rem" }}>
-                <button
+                <Button
                   type="submit"
+                  waves="light "
                   className="btn purple-bg purple darken-3 right z-depth-1"
                 >
-                  Create
-                </button>
+                  Create Slice
+                </Button>
               </div>
             </form>
           ) : (
             <form style={{ marginTop: 0 }} className="white" id="form">
               <div className="input-field">
-                <label htmlFor="Title">Slide Title</label>
+                <label htmlFor="Title">Slice Title</label>
                 <input
                   type="text"
                   name="Title"
                   id="Title"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                 />
               </div>
@@ -134,6 +190,7 @@ class CreateSlice extends Component {
                   name="Question"
                   id="Question"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                   required
                 />
@@ -145,6 +202,7 @@ class CreateSlice extends Component {
                   name="Answer1"
                   id="Answer1"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                   required
                 />
@@ -156,6 +214,7 @@ class CreateSlice extends Component {
                   name="Answer2"
                   id="Answer2"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                   required
                 />
@@ -167,6 +226,7 @@ class CreateSlice extends Component {
                   name="Answer3"
                   id="Answer3"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                 />
               </div>
@@ -177,6 +237,7 @@ class CreateSlice extends Component {
                   name="Answer4"
                   id="Answer4"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                 />
               </div>
@@ -188,6 +249,7 @@ class CreateSlice extends Component {
                   name="CorrectAnswer"
                   id="CorrectAnswer"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                   required
                 />
@@ -199,6 +261,7 @@ class CreateSlice extends Component {
                   name="Topic"
                   id="Topic"
                   className="input-style"
+                  autoComplete="off"
                   onChange={this.handleChange}
                   required
                 />
@@ -222,15 +285,18 @@ class CreateSlice extends Component {
               </div>
 
               <div className="input-field" style={{ paddingBottom: "2rem" }}>
-                <button
+                <Button
                   type="submit"
+                  waves="light "
                   className="btn purple-bg purple darken-3 right z-depth-1"
                 >
-                  Create
-                </button>
+                  Create Slice
+                </Button>
               </div>
             </form>
-          )}
+          )
+          }
+          
         </form>
       </div>
     );

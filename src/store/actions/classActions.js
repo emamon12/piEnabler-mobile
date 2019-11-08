@@ -110,7 +110,7 @@ export const RemoveSession = classs => (dispatch, getState, { getFirestore }) =>
     const classCollection = classs.classId;
     const sessionId = classs.sessionId;
 
-    fireStore.collection('session').doc(sessionId).update({
+    fireStore.collection('sessions').doc(sessionId).update({
         sessionEnd: new Date(),
         inClass: '',
         currentSliceId: '',
@@ -148,6 +148,11 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                                         answer2: docRef2.data().Answer2,
                                         answer3: docRef2.data().Answer3,
                                         answer4: docRef2.data().Answer4,
+                                        respondA1: 15,
+                                        respondA2: 15,
+                                        respondA3: 45,
+                                        respondA4: 25,
+                                        title: docRef2.data().Title,
                                         currentSliceId: sliceIds[0],
                                         inClass: collection,
                                         isCurrentSliceAQuestion: !docRef2.data().Lecture,

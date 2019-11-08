@@ -15,6 +15,7 @@
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-firebase-file-uploader": "^2.4.3",
     "react-full-screen": "^0.2.4",
     "react-google-charts": "^3.0.15",
     "react-live-clock": "^3.1.0",

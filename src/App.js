@@ -42,24 +42,23 @@ class App extends Component {
             <Route push path='/sessionplans/:id' component={PlanSession} />
             <Route exact path='/session/:id' component={Session} />
             <Route exact path='/session/:id/projection' component={Projection} />
-            <Route exact path='/session/:id/presentation' component={Presentation} />
+            <Route exact path='/class/:cid/session/:id/presentation' component={Presentation} />
             <Route exact path='/slices/:id' component={SliceDetails} />
-            <Route path='/users/:id' component={ProfilePage}></Route>
-            <Route exact path='/settings' component={ProfileSettings}></Route>
+            <Route path='/users/:id' component={ProfilePage}/>
+            <Route exact path='/settings' component={ProfileSettings}/>
             <Route path="/:any" component={Dashboard} />
           </Switch>
         </div>
       </BrowserRouter>
-
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth,
+  auth: state.firebase.auth
 });
 
 export default compose(
   firebaseConnect(),
-  connect(mapStateToProps),
+  connect(mapStateToProps)
 )(App);

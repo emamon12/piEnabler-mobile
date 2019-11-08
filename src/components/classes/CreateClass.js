@@ -44,7 +44,7 @@ class CreateClass extends Component {
     return (
       <div className="container section">
         <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Create new class</h5>
+          <h2 className="grey-text text-darken-3" style={{textAlign: "center"}}>Create new class</h2>
           <div className="input-field">
             <label htmlFor="classsName">Class Name</label>
             <input

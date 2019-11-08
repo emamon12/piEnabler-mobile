@@ -107,9 +107,11 @@ class ClassDetails extends Component {
         }
 
         const { user } = props
+        const classId = props.classsId
 
         const formMode = this.state.formMode
         const message = this.state.classMessage
+        
 
         const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 
@@ -166,7 +168,7 @@ class ClassDetails extends Component {
                                     : null}
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <NavLink to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
+                                    <NavLink to={'/class/' + classId  + '/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
                                         <div className="col mar1">
                                             <button type="button"
                                                 className={buttonClassName}>

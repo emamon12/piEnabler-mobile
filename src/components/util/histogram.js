@@ -1,18 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 import { Chart } from "react-google-charts";
 import { Card } from "react-materialize";
-
-const data = [
-  ["Answer", "", { role: "style" }],
-  ["A", 10, "color: red"],
-  ["B", 15, "color: blue"],
-  ["C", 50, "color: green"],
-  ["D", 25, "color: orange"]
-]; 
-
 const options = {
   chartArea: { width: "80%" },
-  legend: 'none',
+  legend: "none",
   hAxis: {
     title: "Voting Percentage",
     minValue: 0,
@@ -25,6 +19,9 @@ const options = {
 
 class Histogram extends React.Component {
   render() {
+    const { session } = this.props;
+    let state = this.state;
+
     return (
       <Card
         className="white "
@@ -43,7 +40,17 @@ class Histogram extends React.Component {
           chartType="BarChart"
           width="100%"
           height="auto"
-          data={data}
+          style={{
+            position: "absolute",
+            top: "25%"
+          }}
+          data={[
+            ["Answer", "", { role: "style" }],
+            ["A", session.respondA1, "color: red"],
+            ["B", session.respondA2, "color: blue"],
+            ["C", session.respondA3, "color: green"],
+            ["D", session.respondA4, "color: orange"]
+          ]}
           options={options}
         />
       </Card>
@@ -51,4 +58,24 @@ class Histogram extends React.Component {
   }
 }
 
-export default Histogram;
+const mapStateToProps = (state, ownProps) => {
+  //const { id } = ownProps.match.params;
+  const id = 'vUlO8FSlm4dC9PPZ61JK' //fix this later
+  const { sessions } = state.firestore.data;
+  const session = sessions ? sessions[id] : null;
+  return {
+    session: session,
+    auth: state.firebase.auth
+  };
+};
+
+const mapDispatchToProps = dispatch => ({});
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(["sessions"])
+)(Histogram);
+

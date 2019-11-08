@@ -8,7 +8,9 @@ const SliceSummary = ({ slices }) => {
                 <span className="card-title">{slices.Title}
                 </span>
                 <p>Topic: {slices.Topic}</p>
-                {slices.Lecture === true ?
+                
+                {slices.Cheese ? <p>Image Slice</p>:
+                    slices.Lecture === true ?
                     <p>Lecture Slice</p>
                     :
                     <p>Question Slice</p>}
