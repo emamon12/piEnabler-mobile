@@ -262,6 +262,11 @@ textarea:focus ~ label {
   white-space: pre-line;
 }
 
+.classs-summary {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
 #slice-list {
   height: 90vh;
   margin: 10px;
