@@ -3,12 +3,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { firestoreConnect, getFirestore } from "react-redux-firebase";
+import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
-import { Card, Button, Preloader } from "react-materialize";
+import { Card, Button } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
@@ -45,7 +45,7 @@ class Presentation extends Component {
   };
 
   handleLecture = () => {
-    const { props, state } = this;
+    const { props } = this;
     const { sessionId } = props;
 
     props.prevSlice(sessionId)
@@ -54,7 +54,7 @@ class Presentation extends Component {
 
   handleQuestion = (e) => {
     e.preventDefault();
-    const { props, state } = this;
+    const { props } = this;
     const { sessionId } = props;
 
     props.nextSlice(sessionId)
@@ -75,9 +75,12 @@ class Presentation extends Component {
   };
 
   render() {
-    const { session, auth, authError, slices } = this.props;
+    const { session, auth, authError } = this.props;
     let state = this.state;
-    //console.log(authError);
+    
+    if(authError){
+      console.log(authError);
+    }
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
@@ -187,7 +190,7 @@ class Presentation extends Component {
                 }}
                 waves="light"
               >
-                display
+                Display Correct Answer
               </Button>
             </Card>
           </Col>

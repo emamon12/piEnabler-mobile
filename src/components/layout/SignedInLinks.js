@@ -19,7 +19,7 @@ const SignedInLinks = (props) => {
   const textStyle = "purple darken-3 white-text"
   const buttonStyle = "btn btn-floating grey-bg grey darken-3"
 
-  if (profile.userRole === "instructor" || profile.userRole === "admin") {
+  if (profile.userRole === "admin") {
     return (
       <div className="nav-container">
         <ul className="right">
@@ -112,7 +112,91 @@ const SignedInLinks = (props) => {
         </ul>
       </div>
     );
-  } else if (profile.userRole === "student") {
+  } else if (profile.userRole === "instructor" ){
+    return (
+      <div className="nav-container">
+        <ul className="right">
+          <Dropdown
+            trigger={<li className="navbar-dropdown">Class Options</li>}
+          >
+            <NavLink className={textStyle} to="/createClass">
+              Create Class
+            </NavLink>
+            <Divider />
+            <NavLink className={textStyle} to="/createSlice">
+              Create Slice
+            </NavLink>
+            <Divider />
+            <NavLink className={textStyle} to="/sessionplans">
+              Session Plan
+            </NavLink>
+          </Dropdown>
+          <li>
+            <NavLink to="/createClass" className="navbar-attrib">
+              Create Class
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/createSlice" className="navbar-attrib">
+              Create Slice
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/sessionplans" className="navbar-attrib">
+              Session Plan
+            </NavLink>
+          </li>
+
+          <SideNav
+            className="grey darken-3 white-text"
+            trigger={
+              <li>
+                <button className={buttonStyle}>
+                  {props.profile.initials}
+                </button>
+              </li>
+            }
+            options={{ closeOnClick: true, edge: "right" }}
+          >
+            <SideNavItem
+              userView
+              user={{
+                background: "../img/sidebar_background.jpg",
+                image: "../img/hat_kid.png",
+                name: `${profile.firstName} ${profile.lastName}`
+              }}
+            />
+            <SideNavItem
+              waves={true}
+              className="white-text"
+              icon="account_circle"
+              href={"../users/" + auth.uid}
+            >
+              Profile
+            </SideNavItem>
+
+            <SideNavItem
+              waves={true}
+              className="white-text"
+              href={"../settings"}
+              icon="settings_applications"
+            >
+              Settings
+            </SideNavItem>
+            <SideNavItem
+              waves={true}
+              className="white-text"
+              onClick={handleSignOut}
+              href=""
+              icon="power_settings_new"
+            >
+              Log Out
+            </SideNavItem>
+          </SideNav>
+        </ul>
+      </div>
+    );
+  }else if (profile.userRole === "student") {
     return (
       <div className="">
         <ul className="right">
