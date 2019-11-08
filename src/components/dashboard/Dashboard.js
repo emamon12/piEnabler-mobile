@@ -15,19 +15,36 @@ class Dashboard extends Component {
             return <Redirect to='/signin' />
         }
 
-        if (classes && user) {
+        if (classes && user && user.registeredClasses) {
             return (
                 <div className="dashboard">
                     <div className="row">
-                        <div className="col s12 m6" style={{marginLeft: "1%"}}>
+                        <div className="col s12 m6 offset-m3">
                             <ClassList user={user} classes={classes} />
-                        </div>
-                        <div className="col s12 m5 offset-m1">
                         </div>
                     </div>
                 </div>
             )
-        } else {
+        } else if (classes && user) {
+            return (
+                <div className="dashboard">
+                    <div className="row">
+                        <div className="col s12 m6 offset-m3">
+                            <div className="classs-list section">
+                                <div className="card z-depth-0 classs-summary">
+                                    <div className="card-content grey-text text-darken-3">
+                                        <span className="center-align card-title">You Are Currently Not Registered To Any Classes!
+                                    </span>
+                                    <p className="center-align">Click On The Add Class Button On The Navigation Bar To Start Registering Classes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else {
             return (
                 <div className="section">
                     <Row>

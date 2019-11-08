@@ -102,8 +102,8 @@ const SignedInLinks = (props) => {
             <SideNavItem
               waves={true}
               className="white-text"
+              to="/signin"
               onClick={handleSignOut}
-              href=""
               icon="power_settings_new"
             >
               Log Out
@@ -244,8 +244,8 @@ const SignedInLinks = (props) => {
             <SideNavItem
               waves={true}
               className="white-text"
+              to="/signin"
               onClick={handleSignOut}
-              href=""
               icon="power_settings_new"
             >
               Log Out

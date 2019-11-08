@@ -11,12 +11,21 @@ class ProfilePage extends Component {
         const { props } = this;
         const { user, auth } = props;
 
-        if (user) {
+        const imgStyle = "circle responsive-img col s4 l2 m4 xl2 offset-xl5 offset-s4 offset-l5 offset-m4"
+
+
+        if (user && auth) {
+            if (!auth.uid) {
+                return <Redirect to="/signin" />;
+            }
+
             return (
                 <div className="container section">
                     <div className="card z-depth-0 section">
                         <div className="row">
-                            <img className="circle responsive-img col s4 l2 m4 xl2 offset-xl5 offset-s4 offset-l5 offset-m4" alt="" src="https://i.redd.it/6r7t2i5kgvu21.png">
+                            <img className={imgStyle} alt={
+                                user.initials
+                            } src="https://i.redd.it/6r7t2i5kgvu21.png">
                             </img>
                         </div>
                         <div className="row">
@@ -27,7 +36,7 @@ class ProfilePage extends Component {
 
                         <div className="card-content row">
                             <div className="card-title left-align">
-                                <p className="profile-content flow-text">Role: {user.userRole}</p>
+                                <p className="profile-content flow-text">Current Registerd As: {user.userRole}</p>
                                 <br />
                             </div>
 

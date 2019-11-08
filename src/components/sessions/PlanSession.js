@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
+import SlicesList from './SlicesList'
 import { addSliceToSession, removeSliceFromSession } from '../../store/actions/sessionActions'
 import SlicesList from './SlicesList'
 
@@ -15,7 +16,6 @@ class PlanSession extends Component {
 
     handleChange = (e) => {
         const { target } = e;
-
         this.setState(state => ({
             ...state,
             [target.id]: target.value
@@ -36,7 +36,7 @@ class PlanSession extends Component {
 
         props.addSliceToSession(composite);
 
-        
+
     };
 
     handleDelete = (e) => {
@@ -67,9 +67,9 @@ class PlanSession extends Component {
 
         return (
             <div className="dashboard">
-                <div className="row">
-                    <div className="col s12 m6" style={{marginLeft: "1%"}}>
-                        <form onSubmit={this.handleSubmit} className="white">
+                <div id="plan-session-row" className="row">
+                    <div id="session-style" className="col s12 m5 offset-m1 ease-in-anim">
+                        <form id="session-form" onSubmit={this.handleSubmit} className="white">
                             <h4 className="grey-text text-darken-3">Session Planner</h4>
                             <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
                             <h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
@@ -94,14 +94,15 @@ class PlanSession extends Component {
                                     type="submit"
                                     className="btn purple-bg purple darken-3 z-depth-1">
                                     Add
-                                </button>
+                        </button>
                             </div>
                             {sliceError ? <div className="red-text center text-darken-1"><p>{sliceError}</p></div> : null}
                         </form>
                     </div>
-                    <div id="slice-list" className="col s12 m5" style={{marginLeft: "4.5%"}}>
+                    <div id="slice-list" className="col s12 m4 offset-m1">
                         <SlicesList slices={slices} profile={auth} />
                     </div>
+
                 </div>
             </div>
 
@@ -122,6 +123,7 @@ const mapStateToProps = (state, ownProps) => {
         sessionplansid: id,
         slices: state.firestore.ordered.slices,
         sliceError: state.session.sliceError,
+        slices: state.firestore.ordered.slices,
     };
 };
 const mapDispatchToProps = dispatch => ({
@@ -129,4 +131,4 @@ const mapDispatchToProps = dispatch => ({
     removeSliceFromSession: session => dispatch(removeSliceFromSession(session)),
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'sessionplans']))(PlanSession);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'sessionplans', 'slices']))(PlanSession);

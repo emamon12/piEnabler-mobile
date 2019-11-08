@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import SessionPlanList from '../sessions/SessionPlanList'
-import SlicesList from './SlicesList'
 import { connect } from 'react-redux'
 import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import { compose } from 'redux'
@@ -41,7 +40,7 @@ class SessionPlans extends Component {
     };
 
     render() {
-        const { sessionplans, auth, profile, slices } = this.props;
+        const { sessionplans, auth, profile } = this.props;
 
         if (!auth.uid && isLoaded(auth)) {
             return <Redirect to='/signin' />
@@ -52,8 +51,9 @@ class SessionPlans extends Component {
         }
 
         return (
-
-                   <div className="container section">
+            <div className="dashboard">
+                <div className="row">
+                    <div className="col s12 m6 offset-m3">
                         <SessionPlanList sessionplans={sessionplans} profile={auth} />
                         {this.state.planningSession ?
                             <form className="white z-depth-1">
@@ -87,6 +87,8 @@ class SessionPlans extends Component {
                                 </button>}
                         </div>
                     </div>
+                </div>
+            </div>
         )
     }
 }
@@ -97,7 +99,6 @@ const mapStateToProps = (state) => {
         auth: state.firebase.auth,
         sessionErr: state.session.sliceError,
         profile: state.firebase.profile,
-        slices: state.firestore.ordered.slices,
     }
 }
 
@@ -117,9 +118,6 @@ const fbCompose = compose(connect(mapStateToProps), firestoreConnect((props) => 
                 where: [
                     'createdBy', '==', props.auth.uid
                 ]
-            },
-            {
-                collection: 'slices'
             }
         ]
     }
