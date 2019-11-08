@@ -272,3 +272,7 @@ textarea:focus ~ label {
 .switch label input[type="checkbox"]:checked + .lever::after {
 	background-color: rgb(106, 27, 154);
 }
+[type="checkbox"]:checked + span:not(.lever)::before{
+  border-right: 2px solid rgb(106, 27, 154);
+  border-bottom:  2px solid rgb(106, 27, 154);
+}
