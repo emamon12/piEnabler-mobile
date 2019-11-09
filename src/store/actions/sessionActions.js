@@ -44,6 +44,31 @@ export const setPolling = (pie) => (dispatch, getState, { getFirestore }) => {
 		}));
 };
 
+export const resetPolling = (pie) => (dispatch, getState, { getFirestore }) => {
+	let fireStore = getFirestore();
+	let sessionId = pie.sessionId;
+
+	let increment = fireStore.FieldValue.increment(1);
+
+	fireStore
+		.collection("sessions")
+		.doc(sessionId)
+		.update({
+			respondA1: 0,
+			respondA2: 0,
+			respondA3: 0,
+			respondA4: 0,
+			numPolls: increment
+		})
+		.then({
+			type: "CHANGE_POLLING"
+		})
+		.catch((err) => ({
+			type: "CHANGE_POLLING_ERROR",
+			err
+		}));
+};
+
 export const nextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
 	let sessionId = pie;
@@ -54,7 +79,8 @@ export const nextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 		.collection("sessions")
 		.doc(sessionId)
 		.update({
-			sliceNumber: increment
+			sliceNumber: increment,
+			numPolls: 0
 		})
 		.then({
 			type: "NEXT_SLICE"
@@ -75,7 +101,8 @@ export const prevSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 		.collection("sessions")
 		.doc(sessionId)
 		.update({
-			sliceNumber: decrement
+			sliceNumber: decrement,
+			numPolls: 0
 		})
 		.then({
 			type: "PREV_SLICE"

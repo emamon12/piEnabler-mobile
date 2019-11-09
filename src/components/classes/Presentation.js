@@ -146,7 +146,7 @@ class Presentation extends Component {
                   href='#!'
                   className='collection-item black-text'
                 >
-                  {session ? session.answer1 : ''}
+                  {session ? "A: " + session.answer1 : 'A:'}
                 </a>
                 <a
                   id='answer2'
@@ -154,7 +154,7 @@ class Presentation extends Component {
                   href='#!'
                   className='collection-item black-text'
                 >
-                  {session ? session.answer2 : ''}
+                  {session ? "B: " + session.answer2 : 'B:'}
                 </a>
                 <a
                   id='answer3'
@@ -162,7 +162,7 @@ class Presentation extends Component {
                   href='#!'
                   className='collection-item black-text'
                 >
-                  {session ? session.answer3 : ''}
+                  {session ? "C: " + session.answer3 : 'C:'}
                 </a>
                 <a
                   id='answer4'
@@ -170,7 +170,7 @@ class Presentation extends Component {
                   href='#!'
                   className='collection-item black-text'
                 >
-                  {session ? session.answer4 : ''}
+                  {session ? "D: " + session.answer4 : 'D:'}
                 </a>
               </div>
               <Button

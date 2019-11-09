@@ -72,10 +72,7 @@ class ClassSession extends Component {
 				<div className="container section">
 					<div className="card">
 						<div className="card-content">
-							<div>
-								<label>Slice ID: {session.currentSliceId}</label>
-							</div>
-							<label className="card-title black-text center">{session.question}</label>
+							<h3 style={{textAlign: "center", marginBottom: "20px"}}>Current Slice Number: {session.sliceNumber}</h3>
 						</div>
 					</div>
 					<div className="collection card-content" onClick={this.handleListClick}>
