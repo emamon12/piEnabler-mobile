@@ -11,84 +11,87 @@ $spacer: 44px;
 //
 
 .lazor {
-  width: 100%;
-  height: 100%;
-  cursor: none;
+	width: 100%;
+	height: 100%;
+	cursor: none;
 }
 
 .ship {
-  position: absolute;
-  z-index: 999;
-  &:after {
-    content: "";
-    position: absolute;
-    top: -6px;
-    left: -6px;
-    width: 12px;
-    height: 12px;
-    background: radial-gradient(rgba(rgb(220, 20, 60), .8), rgba(rgb(220, 20, 60), 0.60), rgba(rgb(220, 20, 60), 0.40), rgba(rgb(220, 20, 60), 0.25));
-    //box-shadow: 0px 0px 4px 12px rgba(yellow, 0.5);
-    //transform: rotate(45deg);
-    border-radius: 100%;
-    opacity: 0.75;
-    transition: all 160ms ease-in-out;
-  }
+	position: absolute;
+	z-index: 999;
+	&:after {
+		content: "";
+		position: absolute;
+		top: -6px;
+		left: -6px;
+		width: 12px;
+		height: 12px;
+		background: radial-gradient(
+			rgba(rgb(220, 20, 60), 0.8),
+			rgba(rgb(220, 20, 60), 0.6),
+			rgba(rgb(220, 20, 60), 0.4),
+			rgba(rgb(220, 20, 60), 0.25)
+		);
+		//box-shadow: 0px 0px 4px 12px rgba(yellow, 0.5);
+		//transform: rotate(45deg);
+		border-radius: 100%;
+		opacity: 0.75;
+		transition: all 160ms ease-in-out;
+	}
 
-  &:active {
-    &:after {
-      background: $green;
-      transform: scale(1.2);
-      opacity: 0.25;
-    }
-  }
+	&:active {
+		&:after {
+			background: $green;
+			transform: scale(1.2);
+			opacity: 0.25;
+		}
+	}
 }
 
 .junk {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  background: transparent;
-  border-radius: 2%;
-  top: -$spacer/2;
-  left: -$spacer/2;
-  width: $spacer;
-  height: $spacer;
-  border: 2px solid rgba(rgb(220, 20, 60), .25); //transition: all 20ms linear;
-  &.on {
-    background: rgba(rgb(220, 20, 60), .5);
-  }
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	background: transparent;
+	border-radius: 2%;
+	top: -$spacer/2;
+	left: -$spacer/2;
+	width: $spacer;
+	height: $spacer;
+	border: 2px solid rgba(rgb(220, 20, 60), 0.25); //transition: all 20ms linear;
+	&.on {
+		background: rgba(rgb(220, 20, 60), 0.5);
+	}
 }
 
 .trail {
-  $w: 12px;
-  position: absolute;
-  z-index: 999;
-  //width: $w;
-  //height: $w;
-  &:after {
-    content: "";
-    position: absolute;
-    top: -$w/2;
-    left: -$w/2;
-    width: $w;
-    height: $w;
-    //background: linear-gradient(rgba($green, 0.5), rgba($black, 0.5));
-    background: rgba($green, 0.65);
-    //filter: blur(4px);
-    //border: 2px solid rgba($green, 0.85);
-    //box-shadow: 0px 0px 2px 4px rgba($green, .65);
-    border-radius: 100%;
-    //transition: all 260ms ease-in-out;
-  }
-  @for $i from 1 through 40 {
-    //$sz: 15 - $i;
+	$w: 12px;
+	position: absolute;
+	z-index: 999;
+	//width: $w;
+	//height: $w;
+	&:after {
+		content: "";
+		position: absolute;
+		top: -$w/2;
+		left: -$w/2;
+		width: $w;
+		height: $w;
+		//background: linear-gradient(rgba($green, 0.5), rgba($black, 0.5));
+		background: rgba($green, 0.65);
+		//filter: blur(4px);
+		//border: 2px solid rgba($green, 0.85);
+		//box-shadow: 0px 0px 2px 4px rgba($green, .65);
+		border-radius: 100%;
+		//transition: all 260ms ease-in-out;
+	}
+	@for $i from 1 through 40 {
+		//$sz: 15 - $i;
 
-    &:nth-child(#{$i}):after {
-      transform: scale(#{$i/7});
-      //opacity: #{$i/20};
-      filter: blur(#{(40 - $i) / 10}px);
-    }
-  }
+		&:nth-child(#{$i}):after {
+			transform: scale(#{$i/7});
+			//opacity: #{$i/20};
+			filter: blur(#{(40 - $i) / 10}px);
+		}
+	}
 }
-
-
