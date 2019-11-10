@@ -8,8 +8,8 @@ import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
-import { Card, Button, Icon } from "react-materialize";
-import { nextSlice, prevSlice, rePoll, setPolling, revealAnswer, updateSession } from "../../store/actions/sessionActions";
+import { Button, Icon } from "react-materialize";
+import { nextSlice, prevSlice, rePoll, setPolling, revealAnswer, updateSession } from "../../store/actions/dashboardActions";
 
 class Clicker extends Component {
 	state = {};
@@ -65,7 +65,6 @@ class Clicker extends Component {
 
 	render() {
 		const { session, auth, authError, profile } = this.props;
-		let state = this.state;
 
 		if (authError) {
 			console.log(authError);

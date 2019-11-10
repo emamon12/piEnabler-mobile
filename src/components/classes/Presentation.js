@@ -12,7 +12,16 @@ import { Card, Button, Icon } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
-import { nextSlice, prevSlice, rePoll, setPolling, revealAnswer, changeDifficulty, updateSession } from "../../store/actions/sessionActions";
+import {
+	nextSlice,
+	prevSlice,
+	rePoll,
+	setPolling,
+	revealAnswer,
+	changeDifficulty,
+	updateSession,
+	displayHistogram
+} from "../../store/actions/dashboardActions";
 
 class Presentation extends Component {
 	state = {
@@ -87,7 +96,13 @@ class Presentation extends Component {
 	};
 
 	handleHistogram = () => {
-		console.log("Histogram Clicked");
+		const { props } = this;
+		const { session, sessionId } = props;
+		let status = session.displayHistogram;
+
+		let composite = { status, sessionId };
+
+		props.displayHistogram(composite);
 	};
 
 	render() {
@@ -473,7 +488,8 @@ const mapDispatchToProps = (dispatch) => ({
 	revealAnswer: (pie) => dispatch(revealAnswer(pie)),
 	rePoll: (pie) => dispatch(rePoll(pie)),
 	changeDifficulty: (pie) => dispatch(changeDifficulty(pie)),
-	updateSession: (pie) => dispatch(updateSession(pie))
+	updateSession: (pie) => dispatch(updateSession(pie)),
+	displayHistogram: (pie) => dispatch(displayHistogram(pie))
 });
 
 export default compose(
