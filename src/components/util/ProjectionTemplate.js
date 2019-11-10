@@ -7,10 +7,9 @@ class ProjectionTemplate extends Component {
 		this.state = {};
 	}
 
-	
 	render() {
 		const brandImage =
-		"https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
+			"https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
 		return (
 			<Card
 				className="white "
@@ -47,11 +46,7 @@ class ProjectionTemplate extends Component {
 						display: "inline"
 					}}
 				>
-					<img
-						src={brandImage}
-						alt=""
-						style={{ height: ".5em" }}
-					/>
+					<img src={brandImage} alt="" style={{ height: ".5em" }} />
 					<p
 						style={{
 							cursor: "default",
