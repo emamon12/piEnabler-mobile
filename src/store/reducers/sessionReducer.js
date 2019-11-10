@@ -60,6 +60,60 @@ const sessionReducer = (state = initstate, action) => {
 				...state,
 				sliceError: "Unable To Decrement Slice!"
 			};
+		case "REPOLL":
+			console.log("Repolling", action.pie);
+			return {
+				...state,
+				messageErrorFeedback: null
+			};
+		case "REPOLL_ERROR":
+			return {
+				...state,
+				sliceError: "Unable To Repoll!"
+			};
+		case "REVEAL_ANSWER":
+			console.log("Revealing Answer", action.pie);
+			return {
+				...state,
+				messageErrorFeedback: null
+			};
+		case "REVEAL_ANSWER_ERROR":
+			return {
+				...state,
+				sliceError: "Unable To Reveal!"
+			};
+		case "CHANGE_DIFFICULTY":
+			console.log("changing difficulty", action.pie);
+			return {
+				...state,
+				messageErrorFeedback: null
+			};
+		case "CHANGE_DIFFICULTY_ERROR":
+			return {
+				...state,
+				sliceError: "Unable To change difficutly!"
+			};
+		case "SUCCESSFULLY_UPDATED":
+			console.log("session updated", action.pie);
+			return {
+				...state,
+				messageErrorFeedback: null
+			};
+		case "UNSUCCESSFULLY_UPDATED":
+			return {
+				...state,
+				sliceError: "Unable To update session!"
+			};
+		case "SLICE_EMPTY":
+			return {
+				...state,
+				loadingError: "Slice Is Empty...."
+			};
+		case "SESSION_DNE":
+			return {
+				...state,
+				loadingError: "Session Do Not Exist..."
+			};
 		case "CHANGE_POLLING":
 			console.log("changing polling status", action.pie);
 			return {

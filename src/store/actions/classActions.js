@@ -295,7 +295,9 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                         sessionEnd: '',
                         sliceHistory: '',
                         trueAnswer: docRef2.data().CorrectAnswer,
-                        sliceNumber: 1
+                        sliceNumber: 1,
+                        url: "",
+                        filename: ""
                       })
                       .then(docRefSession => {
                         fireStore
@@ -346,7 +348,9 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                         sessionEnd: '',
                         sliceHistory: '',
                         trueAnswer: '',
-                        sliceNumber: 1
+                        sliceNumber: 1,
+                        url: "",
+                        filename: ""
                       })
                       .then(docRefSession => {
                         fireStore

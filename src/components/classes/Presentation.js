@@ -8,18 +8,17 @@ import { compose } from "redux";
 import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
-import { Card, Button, Preloader } from "react-materialize";
+import { Card, Button, Icon } from "react-materialize";
 import Clock from "react-live-clock";
 import ProjectionTemplate from "../util/ProjectionTemplate";
 import Histogram from "../util/histogram";
-import { nextSlice, prevSlice, setPolling, revealAnswer } from "../../store/actions/sessionActions";
+import { nextSlice, prevSlice, rePoll, setPolling, revealAnswer, changeDifficulty, updateSession } from "../../store/actions/sessionActions";
 
 class Presentation extends Component {
 	state = {
 		view: null,
 		Voted: 83,
-    Here: 150,
-    revealAnswer: false
+		Here: 150
 	};
 
 	handlePolling = () => {
@@ -30,10 +29,9 @@ class Presentation extends Component {
 		let composite = { status, sessionId };
 
 		props.setPolling(composite);
-		console.log("polling set");
-  };
-  
-  revealAnswer = () => {
+	};
+
+	revealAnswer = () => {
 		const { props } = this;
 		const { session, sessionId } = props;
 		let status = session.revealAnswer;
@@ -41,37 +39,36 @@ class Presentation extends Component {
 		let composite = { status, sessionId };
 
 		props.revealAnswer(composite);
-		console.log("revealed");
 	};
 
-	handleResetPolling = () => {
-		console.log("Reset Clicked");
-		this.setState((state) => ({
-			...state,
-			Voted: 0
-		}));
-	};
-
-	handleLecture = () => {
+	handleRepoll = () => {
 		const { props } = this;
 		const { sessionId } = props;
 
-		props.prevSlice(sessionId);
-		console.log("Lecture Clicked");
+		props.rePoll(sessionId);
 	};
 
-	handleQuestion = (e) => {
-		e.preventDefault();
+	handlePrevious = () => {
+		const { props } = this;
+		const { sessionId } = props;
+
+    props.prevSlice(sessionId);
+    props.updateSession(sessionId);
+	};
+
+	handleNext = (e) => {
 		const { props } = this;
 		const { sessionId } = props;
 
 		props.nextSlice(sessionId);
-
-		console.log("Question Clicked");
+		props.updateSession(sessionId);
 	};
 
 	handleDifficulty = () => {
-		console.log("Difficulty Clicked");
+		const { props } = this;
+		const { sessionId } = props;
+
+		props.changeDifficulty(sessionId);
 	};
 
 	handleTopic = () => {
@@ -80,8 +77,8 @@ class Presentation extends Component {
 
 	handleHistogram = () => {
 		console.log("Histogram Clicked");
-  };
-  
+	};
+
 	render() {
 		const { session, auth, authError } = this.props;
 		let state = this.state;
@@ -117,8 +114,8 @@ class Presentation extends Component {
 			background: "#ff6161"
 		};
 
-    const correctClass =  "collection-item black-text CorrectAnswer" ;
-    const regClass = "collection-item black-text";
+		const correctClass = "collection-item black-text CorrectAnswer";
+		const regClass = "collection-item black-text";
 
 		return (
 			<Container
@@ -151,45 +148,63 @@ class Presentation extends Component {
 								onClick={this.handleListClick}
 								style={{ height: "100%", textAlign: "left", marginBottom: "7%" }}
 							>
-								<a id="answer1" name="answer1" href="#!" className={session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
+								<a
+									id="answer1"
+									name="answer1"
+									href="#!"
+									className={session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+								>
 									{session ? "A: " + session.answer1 : "A:"}
 								</a>
-								<a id="answer2" name="answer2" href="#!" className={session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
+								<a
+									id="answer2"
+									name="answer2"
+									href="#!"
+									className={session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+								>
 									{session ? "B: " + session.answer2 : "B:"}
 								</a>
-								<a id="answer3" name="answer3" href="#!" className={session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
+								<a
+									id="answer3"
+									name="answer3"
+									href="#!"
+									className={session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+								>
 									{session ? "C: " + session.answer3 : "C:"}
 								</a>
-								<a id="answer4" name="answer4" href="#!" className={session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
+								<a
+									id="answer4"
+									name="answer4"
+									href="#!"
+									className={session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+								>
 									{session ? "D: " + session.answer4 : "D:"}
 								</a>
 							</div>
-              {session.revealAnswer ? 
-                <Button
-								style={{
-									bottom: "2px",
-									background: "grey"
-								}}
-								waves="light"
-                onClick={this.revealAnswer}
-							>
-								Hide Correct Answer
-							</Button>
-              :
-              <Button
-								style={{
-
-                  bottom: "2px",
-									background: "white",
-                  color: "black"
-								}}
-								waves="dark"
-                onClick={this.revealAnswer}
-							>
-								Show Correct Answer
-							</Button>
-               }
-
+							{session.revealAnswer ? (
+								<Button
+									style={{
+										bottom: "2px",
+										background: "grey"
+									}}
+									waves="light"
+									onClick={this.revealAnswer}
+								>
+									Hide Correct Answer
+								</Button>
+							) : (
+								<Button
+									style={{
+										bottom: "2px",
+										background: "white",
+										color: "black"
+									}}
+									waves="dark"
+									onClick={this.revealAnswer}
+								>
+									Show Correct Answer
+								</Button>
+							)}
 						</Card>
 					</Col>
 					<Col md="4" style={{ paddingRight: "3em", height: "90%", marginTop: "2%" }}>
@@ -204,9 +219,9 @@ class Presentation extends Component {
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
 							<ProjectionTemplate
 								slide="Next Slice"
-								url={session && session.url}
-								question={session && session.question}
-								title={session && session.title}
+								url={""}
+								question={""}
+								title={""}
 							/>
 						</Row>
 					</Col>
@@ -295,9 +310,9 @@ class Presentation extends Component {
 												height: "100%",
 												fontSize: "1vw"
 											}}
-											onClick={this.handleResetPolling}
+											onClick={this.handleRepoll}
 										>
-											Reset Polling
+											Repoll Question
 										</Button>
 									</Col>
 								</Row>
@@ -310,22 +325,50 @@ class Presentation extends Component {
 					<Button
 						waves="light"
 						style={{
-							width: "19%",
+							width: "9%",
 							height: "90%",
 							padding: "2em",
-							marginRight: "1%",
-							marginLeft: "1%"
+							marginLeft: "4%",
+							marginRight: ".1%"
 						}}
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
-						onClick={this.handleLecture}
+						onClick={this.handlePrevious}
 					>
-						Lecture Material
+						<Icon>skip_previous</Icon>
 					</Button>
 
 					<Button
 						waves="light"
 						style={{
-							width: "19%",
+							width: "9%",
+							height: "90%",
+							padding: "2em",
+							marginRight: "1%"
+						}}
+						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+						onClick={this.handleNext}
+					>
+						<Icon>skip_next</Icon>
+					</Button>
+
+					<Button
+						waves="light"
+						style={{
+							width: "9%",
+							height: "90%",
+							padding: "2em",
+							marginRight: ".1%"
+						}}
+						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+						onClick={this.handleLecture}
+					>
+						Lecture Slice
+					</Button>
+
+					<Button
+						waves="light"
+						style={{
+							width: "9%",
 							height: "90%",
 							padding: "2em",
 							marginRight: "1%"
@@ -333,13 +376,12 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handleQuestion}
 					>
-						New Question
+						Question Slice
 					</Button>
-
 					<Button
 						waves="light"
 						style={{
-							width: "19%",
+							width: "18%",
 							height: "90%",
 							padding: "2em",
 							marginRight: "1%"
@@ -347,13 +389,13 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handleDifficulty}
 					>
-						Change Difficulty: {session ? session.difficulty : ""}
+						Difficulty: {session ? session.difficulty : ""}
 					</Button>
 
 					<Button
 						waves="light"
 						style={{
-							width: "19%",
+							width: "18%",
 							height: "90%",
 							padding: "2em",
 							marginRight: "1%"
@@ -361,13 +403,13 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handleTopic}
 					>
-						New Topic: {session ? session.topic : ""}
+						Topic: {session ? session.topic : ""}
 					</Button>
 
 					<Button
 						waves="light"
 						style={{
-							width: "19%",
+							width: "18%",
 							height: "90%",
 							padding: "2em"
 						}}
@@ -401,8 +443,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
 	nextSlice: (pie) => dispatch(nextSlice(pie)),
 	prevSlice: (pie) => dispatch(prevSlice(pie)),
-  setPolling: (pie) => dispatch(setPolling(pie)),
-  revealAnswer: (pie) => dispatch(revealAnswer(pie))
+	setPolling: (pie) => dispatch(setPolling(pie)),
+	revealAnswer: (pie) => dispatch(revealAnswer(pie)),
+	rePoll: (pie) => dispatch(rePoll(pie)),
+	changeDifficulty: (pie) => dispatch(changeDifficulty(pie)),
+	updateSession: (pie) => dispatch(updateSession(pie))
 });
 
 export default compose(

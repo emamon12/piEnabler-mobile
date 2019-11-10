@@ -99,7 +99,6 @@ class CreateSlice extends Component {
 								className="btn"
 								onClick={this.handleCheese}
 							>
-								{" "}
 								Slice
 							</Button>
 						) : (
@@ -109,8 +108,7 @@ class CreateSlice extends Component {
 								className="btn"
 								onClick={this.handleCheese}
 							>
-								{" "}
-								Image{" "}
+								Image
 							</Button>
 						)}
 					</div>
