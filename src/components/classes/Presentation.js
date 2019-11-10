@@ -429,7 +429,7 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handleDifficulty}
 					>
-						Difficulty: {session ? session.difficulty : ""}
+						<b>Difficulty</b> {session ? session.difficulty : ""}
 					</Button>
 
 					<Button
@@ -443,7 +443,7 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handleTopic}
 					>
-						Topic: {session ? session.topic : ""}
+						<b>Topic</b> {session ? session.topic : ""}
 					</Button>
 					{session.displayGraph ? (
 						<Button
@@ -456,7 +456,7 @@ class Presentation extends Component {
 							className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 							onClick={this.handleHistogram}
 						>
-							Hide Graph
+							<b>Hide Graph</b>
 						</Button>
 					) : (
 						<Button
@@ -469,21 +469,9 @@ class Presentation extends Component {
 							className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 							onClick={this.handleHistogram}
 						>
-							Show Graph
+							<b>Show Graph</b>
 						</Button>
 					)}
-					<Button
-						waves="light"
-						style={{
-							width: "18%",
-							height: "90%",
-							padding: "2em"
-						}}
-						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
-						onClick={this.handleHistogram}
-					>
-						Histogram
-					</Button>
 				</Row>
 			</Container>
 		);

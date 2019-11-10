@@ -341,3 +341,7 @@ div.mui-col-md-4:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
 .CorrectAnswer {
 	background: #ce93d8 !important;
 }
+
+.btn:hover {
+	filter: brightness(1.25);
+}

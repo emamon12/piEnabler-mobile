@@ -236,6 +236,7 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		session: session,
 		slices: slices,
+		sessionId: id,
 		auth: state.firebase.auth
 	};
 };
