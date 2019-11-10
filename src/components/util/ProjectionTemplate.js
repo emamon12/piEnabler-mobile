@@ -6,7 +6,11 @@ class ProjectionTemplate extends Component {
 		super(props);
 		this.state = {};
 	}
+
+	
 	render() {
+		const brandImage =
+		"https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
 		return (
 			<Card
 				className="white "
@@ -20,9 +24,11 @@ class ProjectionTemplate extends Component {
 				}}
 			>
 				<hr style={{ marginBottom: 0 }} />
-				<p className="presentation_title">{this.props.title ? this.props.title : "Loading..."}</p>
+				<p className="presentation_title">{this.props.title && this.props.title}</p>
 				<div id="body" className="presentation_body class-message">
-					{this.props.question ? (
+					{this.props.url ? (
+						<img style={{ height: "23vh", width: "100%" }} alt="" src={this.props.url} />
+					) : this.props.question ? (
 						this.props.question
 					) : (
 						<div style={{ textAlign: "center", marginTop: "15%" }}>
@@ -42,7 +48,7 @@ class ProjectionTemplate extends Component {
 					}}
 				>
 					<img
-						src="https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f"
+						src={brandImage}
 						alt=""
 						style={{ height: ".5em" }}
 					/>

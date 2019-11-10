@@ -66,6 +66,8 @@ class ClassSession extends Component {
 		}
 
 		//this is whats actually being seen in the ClassList
+		const correctClass =  "collection-item black-text CorrectAnswer" ;
+		const regClass = "collection-item black-text";
 
 		if (session) {
 			return (
@@ -75,17 +77,17 @@ class ClassSession extends Component {
 							<h3 style={{textAlign: "center", marginBottom: "20px"}}>Current Slice Number: {session.sliceNumber}</h3>
 						</div>
 					</div>
-					<div className="collection card-content" onClick={this.handleListClick}>
-						<a id="answer1" name="answer1" href="#answer1" className="collection-item black-text">
+					<div className="collection card-content" onClick={session.polling ? this.handleListClick : ()=>{}}>
+						<a id="answer1" name="answer1" href="#answer1" className={session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
 							{"A: " + session.answer1}
 						</a>
-						<a id="answer2" name="answer2" href="#answer2" className="collection-item black-text">
+						<a id="answer2" name="answer2" href="#answer2" className={session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
 							{"B: " + session.answer2}
 						</a>
-						<a id="answer3" name="answer3" href="#answer3" className="collection-item black-text">
+						<a id="answer3" name="answer3" href="#answer3" className={session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
 							{"C: " + session.answer3}
 						</a>
-						<a id="answer4" name="answer4" href="#answer4" className="collection-item black-text">
+						<a id="answer4" name="answer4" href="#answer4" className={session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}>
 							{"D: " + session.answer4}
 						</a>
 					</div>

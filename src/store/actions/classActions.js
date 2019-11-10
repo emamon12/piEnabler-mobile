@@ -227,6 +227,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                       respondA2: 0,
                       respondA3: 0,
                       respondA4: 0,
+                      revealAnswer: false,
                       currentSliceId: sliceIds[0],
                       inClass: collection,
                       isCurrentSliceAQuestion: docRef2.data().Lecture
@@ -279,6 +280,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                         respondA2: 15,
                         respondA3: 45,
                         respondA4: 25,
+                        revealAnswer: false,
                         title: docRef2.data().Title,
                         currentSliceId: sliceIds[0],
                         inClass: collection,
@@ -330,6 +332,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                         respondA2: 0,
                         respondA3: 0,
                         respondA4: 0,
+                        revealAnswer: false,
                         currentSliceId: sliceIds[0],
                         inClass: collection,
                         isCurrentSliceAQuestion: !docRef2.data().Lecture,

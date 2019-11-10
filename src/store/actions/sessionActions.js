@@ -44,6 +44,26 @@ export const setPolling = (pie) => (dispatch, getState, { getFirestore }) => {
 		}));
 };
 
+export const revealAnswer = (pie) => (dispatch, getState, { getFirestore }) => {
+	let fireStore = getFirestore();
+	let sessionId = pie.sessionId;
+	let status = !pie.status;
+
+	fireStore
+		.collection("sessions")
+		.doc(sessionId)
+		.update({
+			revealAnswer: status
+		})
+		.then({
+			type: "CHANGE_POLLING"
+		})
+		.catch((err) => ({
+			type: "CHANGE_POLLING_ERROR",
+			err
+		}));
+};
+
 export const resetPolling = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
 	let sessionId = pie.sessionId;

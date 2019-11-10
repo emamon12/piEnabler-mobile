@@ -5,6 +5,7 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scrollbar-color: #6a1b9a #f1f1f1;
 
 	background: linear-gradient(
 			231deg,
@@ -271,6 +272,7 @@ textarea:focus ~ label {
 	overflow-y: scroll;
 	scroll-behavior: smooth;
 	scrollbar-width: thin;
+	/* scrollbar-color: #6a1b9a #f1f1f1; */
 }
 
 .switch label input[type="checkbox"]:checked + .lever {
@@ -313,5 +315,17 @@ textarea:focus ~ label {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #851363;
+	background: #9225d6;
+}
+
+div.mui-col-md-4:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {
+	height: 100%;
+}
+div.mui-col-md-4:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+	height: 85%;
+}
+
+
+.CorrectAnswer {
+	background: #ce93d8 !important;
 }
