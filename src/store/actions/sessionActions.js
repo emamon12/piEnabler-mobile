@@ -46,7 +46,7 @@ export const setPolling = (pie) => (dispatch, getState, { getFirestore }) => {
 
 export const rePoll = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
-	let sessionId = pie.sessionId;
+	let sessionId = pie;
 
 	let increment = fireStore.FieldValue.increment(1);
 
@@ -132,13 +132,26 @@ export const revealAnswer = (pie) => (dispatch, getState, { getFirestore }) => {
 export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
 	let sessionId = pie.sessionId;
-	let status = !pie.status;
+
+	let value = pie.difficulty;
+
+	switch (value) {
+		case "easy":
+			value = "medium";
+			break;
+		case "medium":
+			value = "hard";
+			break;
+		default:
+			value = "easy"
+			break;
+	}
 
 	fireStore
 		.collection("sessions")
 		.doc(sessionId)
 		.update({
-			revealAnswer: status
+			difficulty: value
 		})
 		.then({
 			type: "CHANGE_DIFFICULTY"
@@ -244,7 +257,7 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 		.doc(sessionId)
 		.get()
 		.then((docRef) => {
-			console.log(docRef.data())
+			console.log(docRef.data());
 			let slice = docRef.data().sessionPlan;
 			let index = docRef.data().sliceNumber - 1;
 			if (slice[index]) {
@@ -254,7 +267,7 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 					.get()
 					.then((docRef2) => {
 						if (docRef2.exists) {
-							console.log(docRef2.data())
+							console.log(docRef2.data());
 							fireStore
 								.collection("sessions")
 								.doc(sessionId)

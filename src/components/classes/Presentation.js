@@ -51,24 +51,35 @@ class Presentation extends Component {
 	handlePrevious = () => {
 		const { props } = this;
 		const { sessionId } = props;
+		const { session } = props;
 
-    props.prevSlice(sessionId);
-    props.updateSession(sessionId);
+		if (session.sliceNumber > 1) {
+			props.prevSlice(sessionId);
+			props.updateSession(sessionId);
+		}
 	};
 
 	handleNext = (e) => {
 		const { props } = this;
 		const { sessionId } = props;
+		const { session } = props;
 
-		props.nextSlice(sessionId);
-		props.updateSession(sessionId);
+		if (session.sliceNumber < session.sessionPlan.length) {
+			props.nextSlice(sessionId);
+			props.updateSession(sessionId);
+		}
 	};
 
 	handleDifficulty = () => {
 		const { props } = this;
 		const { sessionId } = props;
+		const { session } = props;
 
-		props.changeDifficulty(sessionId);
+		let difficulty = session.difficulty;
+
+		let composite = { difficulty, sessionId };
+
+		props.changeDifficulty(composite);
 	};
 
 	handleTopic = () => {
@@ -217,12 +228,7 @@ class Presentation extends Component {
 							/>
 						</Row>
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
-							<ProjectionTemplate
-								slide="Next Slice"
-								url={""}
-								question={""}
-								title={""}
-							/>
+							<ProjectionTemplate slide="Next Slice" url={""} question={""} title={""} />
 						</Row>
 					</Col>
 					<Col md="4" style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}>
