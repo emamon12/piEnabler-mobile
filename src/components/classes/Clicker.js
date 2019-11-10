@@ -101,7 +101,7 @@ class Clicker extends Component {
 				fluid
 				style={{
 					width: "95vw",
-					height: "90vh",
+					height: "85vh",
 					background: "#4911623d none repeat scroll 0% 0%",
 					marginTop: "1em"
 				}}

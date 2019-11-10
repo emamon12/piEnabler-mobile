@@ -359,7 +359,7 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handlePrevious}
 					>
-						<Icon>skip_previous</Icon>
+						<Icon className="bigButt">skip_previous</Icon>
 					</Button>
 
 					<Button
@@ -373,7 +373,7 @@ class Presentation extends Component {
 						className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 						onClick={this.handleNext}
 					>
-						<Icon>skip_next</Icon>
+						<Icon className="bigButt">skip_next</Icon>
 					</Button>
 
 					<Button
