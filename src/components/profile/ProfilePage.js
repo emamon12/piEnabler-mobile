@@ -33,7 +33,7 @@ class ProfilePage extends Component {
 
 						<div className="card-content row">
 							<div className="card-title left-align">
-								<p className="profile-content flow-text">Current Registerd As: {user.userRole}</p>
+								<p className="profile-content flow-text">Current Registerd As: {user.userRole.toString().toUpperCase()}</p>
 								<br />
 							</div>
 
