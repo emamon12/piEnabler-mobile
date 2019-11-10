@@ -76,7 +76,8 @@ export const nextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 		.doc(sessionId)
 		.update({
 			sliceNumber: increment,
-			numPolls: 0
+			numPolls: 0,
+			revealAnswer: false
 		})
 		.then({
 			type: "NEXT_SLICE"
@@ -98,7 +99,8 @@ export const prevSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 		.doc(sessionId)
 		.update({
 			sliceNumber: decrement,
-			numPolls: 0
+			numPolls: 0,
+			revealAnswer: false
 		})
 		.then({
 			type: "PREV_SLICE"
@@ -282,7 +284,7 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 									respondA4: 0,
 									revealAnswer: false,
 									currentSliceId: slice[index],
-									isCurrentSliceAQuestion: docRef2.data().Lecture ? docRef2.data().Lecture : "",
+									isCurrentSliceAQuestion: docRef2.data().Lecture ? false : true,
 									numPolls: 1,
 									polling: false,
 									question: docRef2.data().Question ? docRef2.data().Question : "",

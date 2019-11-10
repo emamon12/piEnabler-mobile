@@ -91,7 +91,7 @@ class Presentation extends Component {
 	};
 
 	render() {
-		const { session, auth, authError } = this.props;
+		const { session, auth, authError, profile } = this.props;
 		let state = this.state;
 
 		if (authError) {
@@ -100,6 +100,10 @@ class Presentation extends Component {
 
 		if (!auth.uid) {
 			return <Redirect to="/signin" />;
+		}
+
+		if (profile.userRole !== "admin" && profile.userRole !== "instructor") {
+			return <Redirect to="/"></Redirect>;
 		}
 
 		var votePercent = (state.Voted / state.Here) * 100;
@@ -458,7 +462,8 @@ const mapStateToProps = (state, ownProps) => {
 		sessionId: id,
 		session: session,
 		slices: slices,
-		auth: state.firebase.auth
+		auth: state.firebase.auth,
+		profile: state.firebase.profile
 	};
 };
 

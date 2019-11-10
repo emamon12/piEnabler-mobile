@@ -77,9 +77,12 @@ class CreateSlice extends Component {
 
 	render() {
 		//just check if the user is authenticated
-		const { auth } = this.props;
+		const { auth, profile } = this.props;
 		if (!auth.uid) {
 			return <Redirect to="/signin" />;
+		}
+		if (profile.userRole !== "admin" && profile.userRole !== "instructor") {
+			return <Redirect to="/"></Redirect>;
 		}
 
 		return (
@@ -280,7 +283,9 @@ class CreateSlice extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	auth: state.firebase.auth
+	auth: state.firebase.auth,
+	profile: state.firebase.profile
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

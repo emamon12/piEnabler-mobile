@@ -156,7 +156,7 @@ class ClassDetails extends Component {
                                     <div className="col mar1">
                                         <button type="button" onClick={this.handleEndSession} className={buttonClassName}>End Session</button></div> : null}
 
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                    
                                     <NavLink to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + "proj"} >
                                         <div className="col mar1">
                                             <button type="button" className={buttonClassName}>
@@ -164,7 +164,7 @@ class ClassDetails extends Component {
                                                 </button>
                                         </div>
                                     </NavLink>
-                                    : null}
+                      
 
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <NavLink to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
