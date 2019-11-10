@@ -107,18 +107,33 @@ class Clicker extends Component {
 			>
 				<Row style={{ height: "31%" }}>
 					<Col md="6" xs="6" style={{ height: "90%", marginTop: "2em" }}>
-						<Button
-							waves="dark"
-							style={{
-								width: "100%",
-								height: "100%",
-								color: "black"
-							}}
-							className="btn white-bg white darken-3 z-depth-1"
-							onClick={this.handleHistogram}
-						>
-							Histogram
-						</Button>
+						{session.displayGraph ? (
+							<Button
+								waves="dark"
+								style={{
+									width: "100%",
+									height: "100%",
+									color: "black"
+								}}
+								className="btn white-bg white darken-3 z-depth-1 waves-effect waves-light"
+								onClick={this.handleHistogram}
+							>
+								Hide Graph
+							</Button>
+						) : (
+							<Button
+								waves="dark"
+								style={{
+									width: "100%",
+									height: "100%",
+									color: "black"
+								}}
+								className="btn white-bg white darken-3 z-depth-1 waves-effect waves-light"
+								onClick={this.handleHistogram}
+							>
+								Show Graph
+							</Button>
+						)}
 					</Col>
 					<Col md="6" xs="6" style={{ height: "90%", marginTop: "2em" }}>
 						{session.revealAnswer ? (

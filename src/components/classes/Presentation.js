@@ -20,7 +20,7 @@ import {
 	revealAnswer,
 	changeDifficulty,
 	updateSession,
-	displayHistogram
+	displayGraph
 } from "../../store/actions/dashboardActions";
 
 class Presentation extends Component {
@@ -98,11 +98,11 @@ class Presentation extends Component {
 	handleHistogram = () => {
 		const { props } = this;
 		const { session, sessionId } = props;
-		let status = session.displayHistogram;
+		let status = session.displayGraph;
 
 		let composite = { status, sessionId };
 
-		props.displayHistogram(composite);
+		props.displayGraph(composite);
 	};
 
 	render() {
@@ -445,7 +445,33 @@ class Presentation extends Component {
 					>
 						Topic: {session ? session.topic : ""}
 					</Button>
-
+					{session.displayGraph ? (
+						<Button
+							waves="light"
+							style={{
+								width: "18%",
+								height: "90%",
+								padding: "2em"
+							}}
+							className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+							onClick={this.handleHistogram}
+						>
+							Hide Graph
+						</Button>
+					) : (
+						<Button
+							waves="light"
+							style={{
+								width: "18%",
+								height: "90%",
+								padding: "2em"
+							}}
+							className="btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+							onClick={this.handleHistogram}
+						>
+							Show Graph
+						</Button>
+					)}
 					<Button
 						waves="light"
 						style={{
@@ -489,7 +515,7 @@ const mapDispatchToProps = (dispatch) => ({
 	rePoll: (pie) => dispatch(rePoll(pie)),
 	changeDifficulty: (pie) => dispatch(changeDifficulty(pie)),
 	updateSession: (pie) => dispatch(updateSession(pie)),
-	displayHistogram: (pie) => dispatch(displayHistogram(pie))
+	displayGraph: (pie) => dispatch(displayGraph(pie))
 });
 
 export default compose(

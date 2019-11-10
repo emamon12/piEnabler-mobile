@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import "./frickenlazorbeams.scss";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
 import { Card, Preloader } from "react-materialize";
 import Fullscreen from "react-full-screen";
+import Graph from "./pieGraph";
 
 class frickenlazorbeams extends Component {
 	constructor(props) {
@@ -116,12 +118,16 @@ class frickenlazorbeams extends Component {
 	};
 
 	render() {
-		const { session, authError } = this.props;
+		const { session, authError, auth } = this.props;
 		const brandImage =
 			"https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
 
 		if (authError) {
 			console.log(authError);
+		}
+
+		if (!auth.uid) {
+			return <Redirect to="/" />;
 		}
 
 		let style = this.state.enabled ? "lazor" : "";
@@ -136,11 +142,13 @@ class frickenlazorbeams extends Component {
 							style={{ height: "100%", position: "relative" }}
 							onClick={this.nextSlide}
 						>
-							{session && session.url ? (
+							{session && session.displayGraph ? (
+								<Graph sid={this.props.sessionId} />
+							) : session.url ? (
 								<img style={{ height: "82vh", width: "100%" }} alt="" src={session.url} />
 							) : (
 								<div>
-									<h3 className="projection_title">{session && session.title ? session.title : ''}</h3>
+									<h3 className="projection_title">{session && session.title ? session.title : ""}</h3>
 									<div id="body" className="projection_body class-message">
 										{session && session.question ? (
 											session.question
