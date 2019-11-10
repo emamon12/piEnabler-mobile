@@ -140,7 +140,7 @@ class frickenlazorbeams extends Component {
 								<img style={{ height: "82vh", width: "100%" }} alt="" src={session.url} />
 							) : (
 								<div>
-									<h3 className="projection_title">Welcome to CS 140</h3>
+									<h3 className="projection_title">{session && session.title ? session.title : ''}</h3>
 									<div id="body" className="projection_body class-message">
 										{session && session.question ? (
 											session.question
