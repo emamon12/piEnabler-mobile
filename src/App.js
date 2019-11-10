@@ -21,6 +21,8 @@ import PlanSession from "./components/sessions/PlanSession";
 import ProfilePage from "./components/profile/ProfilePage";
 import ProfileSettings from "./components/profile/ProfileSettings";
 import SliceDetails from "./components/sessions/SliceDetails";
+import Clicker from "./components/classes/Clicker";
+
 
 //this is where all of the links to all of th components are located. Make sure to import the components with the link route
 class App extends Component {
@@ -41,7 +43,8 @@ class App extends Component {
 						<Route push path="/sessionplans/:id" component={PlanSession} />
 						<Route exact path="/session/:id" component={Session} />
 						<Route exact path="/session/:id/projection" component={Projection} />
-						<Route exact path="/session/:id/presentation" component={Presentation} />
+						<Route exact path="/session/:id/dashboard" component={Presentation} />
+						<Route exact path="/session/:id/clicker" component={Clicker} />
 						<Route exact path="/slices/:id" component={SliceDetails} />
 						<Route path="/users/:id" component={ProfilePage} />
 						<Route exact path="/settings" component={ProfileSettings} />

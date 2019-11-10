@@ -112,7 +112,7 @@ class ClassDetails extends Component {
         const message = this.state.classMessage
         
 
-        const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+        const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light unify"
 
         if (user && classs && classs.currSession !== "") {
             return (
@@ -155,8 +155,31 @@ class ClassDetails extends Component {
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
                                         <button type="button" onClick={this.handleEndSession} className={buttonClassName}>End Session</button></div> : null}
+                   
+                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                    <NavLink to={'/session/' + classs.currSession + '/clicker/'} key={classs.currSession + "pres"} >
+                                        <div className="col mar1">
+                                            <button type="button"
+                                                className={buttonClassName}>
+                                                Clicker
+                                            </button>
+                                        </div>
+                                    </NavLink>
+                                    : null}
 
-                    
+                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                    <NavLink to={'/session/' + classs.currSession + '/dashboard/'} key={classs.currSession + "pres"} >
+                                        <div className="col mar1">
+                                            <button type="button"
+                                                className={buttonClassName}>
+                                                Dashboard
+                                            </button>
+                                        </div>
+                                    </NavLink>
+                                    : null}
+
+
+
                                     <NavLink to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + "proj"} >
                                         <div className="col mar1">
                                             <button type="button" className={buttonClassName}>
@@ -164,19 +187,6 @@ class ClassDetails extends Component {
                                                 </button>
                                         </div>
                                     </NavLink>
-                      
-
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <NavLink to={'/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
-                                        <div className="col mar1">
-                                            <button type="button"
-                                                className={buttonClassName}>
-                                                Presentation
-                                            </button>
-                                        </div>
-                                    </NavLink>
-                                    : null}
-
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
                                         {(!formMode) ?

@@ -328,10 +328,9 @@ class Presentation extends Component {
 										}}
 									>
 										<Button
-											waves="dark "
+											waves="light "
 											style={{
-												background: "#d0d0d0",
-												color: "black",
+												background: "grey",
 												width: "100%",
 												height: "100%",
 												fontSize: "1vw"
