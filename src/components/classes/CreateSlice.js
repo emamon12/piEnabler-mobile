@@ -285,7 +285,6 @@ class CreateSlice extends Component {
 const mapStateToProps = (state) => ({
 	auth: state.firebase.auth,
 	profile: state.firebase.profile
-
 });
 
 const mapDispatchToProps = (dispatch) => ({

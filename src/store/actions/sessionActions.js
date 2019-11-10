@@ -24,7 +24,6 @@ export const createSession = (session) => (dispatch, getState, { getFirestore })
 		);
 };
 
-
 export const addSliceToSession = (session) => (dispatch, getState, { getFirestore }) => {
 	const fireStore = getFirestore();
 	var sliceId = session.sliceId;

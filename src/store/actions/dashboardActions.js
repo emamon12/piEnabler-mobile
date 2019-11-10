@@ -158,7 +158,6 @@ export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) 
 		}));
 };
 
-
 //I know this is ugly
 export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
