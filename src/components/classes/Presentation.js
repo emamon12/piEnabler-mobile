@@ -163,7 +163,11 @@ class Presentation extends Component {
 									id="answer1"
 									name="answer1"
 									href="#!"
-									className={session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+									className={
+										session.answer1 === session.trueAnswer && session.revealAnswer && session.question !== ""
+											? correctClass
+											: regClass
+									}
 								>
 									{session ? "A: " + session.answer1 : "A:"}
 								</a>
@@ -171,7 +175,11 @@ class Presentation extends Component {
 									id="answer2"
 									name="answer2"
 									href="#!"
-									className={session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+									className={
+										session.answer2 === session.trueAnswer && session.revealAnswer && session.question !== ""
+											? correctClass
+											: regClass
+									}
 								>
 									{session ? "B: " + session.answer2 : "B:"}
 								</a>
@@ -179,7 +187,11 @@ class Presentation extends Component {
 									id="answer3"
 									name="answer3"
 									href="#!"
-									className={session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+									className={
+										session.answer3 === session.trueAnswer && session.revealAnswer && session.question !== ""
+											? correctClass
+											: regClass
+									}
 								>
 									{session ? "C: " + session.answer3 : "C:"}
 								</a>
@@ -187,7 +199,11 @@ class Presentation extends Component {
 									id="answer4"
 									name="answer4"
 									href="#!"
-									className={session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+									className={
+										session.answer4 === session.trueAnswer && session.revealAnswer && session.question !== ""
+											? correctClass
+											: regClass
+									}
 								>
 									{session ? "D: " + session.answer4 : "D:"}
 								</a>
