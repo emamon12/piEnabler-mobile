@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from "react";
+import firebase from "../../config/fbConfig";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -27,7 +28,12 @@ class Presentation extends Component {
 	state = {
 		view: null,
 		Voted: 83,
-		Here: 150
+		Here: 150,
+		fetch: true,
+		finished: false,
+		nextURL: "",
+		nextTitle: "",
+		nextQuestion: ""
 	};
 
 	handlePolling = () => {
@@ -63,6 +69,7 @@ class Presentation extends Component {
 		const { session } = props;
 
 		if (session.sliceNumber > 1) {
+			this.getNextSlice(-1);
 			props.prevSlice(sessionId);
 			props.updateSession(sessionId);
 		}
@@ -72,6 +79,7 @@ class Presentation extends Component {
 		const { props } = this;
 		const { sessionId } = props;
 		const { session } = props;
+		this.getNextSlice(1);
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
@@ -103,6 +111,45 @@ class Presentation extends Component {
 		let composite = { status, sessionId };
 
 		props.displayGraph(composite);
+	};
+
+	getNextSlice = (value) => {
+		const { session } = this.props;
+
+		let nextID = session.sessionPlan[session.sliceNumber + value];
+
+		console.log(nextID);
+
+		if (nextID) {
+			firebase
+				.firestore()
+				.collection("slices")
+				.doc(nextID)
+				.get()
+				.then((docRef) => {
+					console.log(docRef.data());
+					this.setState((state) => ({
+						...state,
+						nextUrl: docRef.data().url ? docRef.data().url : "",
+						nextTitle: docRef.data().url ? "" : docRef.data().Title,
+						nextQuestion: docRef.data().url ? "" : docRef.data().Question
+					}));
+				});
+		} else {
+			this.setState((state) => ({
+				...state,
+				nextUrl: "",
+				nextTitle: "",
+				nextQuestion: ""
+			}));
+		}
+	};
+
+	componentDidMount = () => {
+		const { session } = this.props;
+		if (session) {
+			this.getNextSlice(0);
+		}
 	};
 
 	render() {
@@ -263,7 +310,12 @@ class Presentation extends Component {
 							/>
 						</Row>
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
-							<ProjectionTemplate slide="Next Slice" url={""} question={""} title={""} />
+							<ProjectionTemplate
+								slide="Next Slice"
+								url={this.state.nextUrl}
+								question={this.state.nextQuestion}
+								title={this.state.nextTitle}
+							/>
 						</Row>
 					</Col>
 					<Col md="4" style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}>
