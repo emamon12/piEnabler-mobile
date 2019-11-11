@@ -19,8 +19,31 @@ const options = {
 
 class Histogram extends React.Component {
   render() {
-    const { session } = this.props;
-    
+    const { session, responses } = this.props;
+
+    var numResponses = 0;
+    var response1 = 0;
+    var response2 = 0;
+    var response3 = 0;
+    var response4 = 0;
+
+    if (responses) {
+      for (var resp in responses) {
+        var rRef = responses[resp]
+
+        if (rRef.response === "answer1") {
+          response1++;
+        } else if (rRef.response === "answer2") {
+          response2++;
+        } else if (rRef.response === "answer3") {
+          response3++;
+        } else if (rRef.response === "answer4") {
+          response4++;
+        }
+        numResponses++;
+      }
+    }
+
     return (
       <Card
         className="white "
@@ -45,10 +68,10 @@ class Histogram extends React.Component {
           }}
           data={[
             ["Answer", "", { role: "style" }],
-            ["A", session.respondA1, "color: red"],
-            ["B", session.respondA2, "color: blue"],
-            ["C", session.respondA3, "color: green"],
-            ["D", session.respondA4, "color: orange"]
+            ["A", response1, "color: red"],
+            ["B", response2, "color: blue"],
+            ["C", response3, "color: green"],
+            ["D", response4, "color: orange"]
           ]}
           options={options}
         />
@@ -58,22 +81,32 @@ class Histogram extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { sid } = ownProps; 
+  const { sid } = ownProps;
   const { sessions } = state.firestore.data;
+  const responses = state.firestore.data[`sessions/${sid}/responses`]
   const session = sessions ? sessions[sid] : null;
+
   return {
     session: session,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    responses: responses,
+    id: sid,
   };
 };
 
-const mapDispatchToProps = dispatch => ({});
+const fbCompose = compose(connect(mapStateToProps), firestoreConnect((props) => {
+  if (!props.id || !props.session) {
+    return []
+  } else {
+    return [
+      {
+        collection: `sessions/${props.id}/responses`,
+        where: [
+          'responseReference', '==', `${props.id}${props.session.currentSliceId}${props.session.numPolls}`
+        ]
+      }
+    ]
+  }
+}))
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firestoreConnect(["sessions"])
-)(Histogram);
-
+export default compose(connect(mapStateToProps, null), fbCompose)(Histogram)

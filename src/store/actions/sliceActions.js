@@ -4,7 +4,7 @@ export const createSlice = slices => (dispatch, getState, { getFirestore }) => {
 
     fireStore.collection('slices').add({
         ...slices,
-        teacherId: [teacherId],
+        createdBy: teacherId,
         createdAt: new Date(),
     }).then(() => dispatch({
         type: 'CREATE_SLICE',

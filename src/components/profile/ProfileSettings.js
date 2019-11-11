@@ -14,7 +14,7 @@ class ProfileSettings extends Component {
         if (user && auth) {
 
             if (!auth.uid) {
-                return <Redirect to="/signin" />;
+                return <Redirect to="/landing" />;
             }
 
             return (
@@ -53,4 +53,14 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default compose(connect(mapStateToProps), firestoreConnect(['users']))(ProfileSettings);
+const fbCompose = compose(connect(mapStateToProps), firestoreConnect((props) => {
+    if (!props.auth) {
+        return []
+    } else {
+        return [
+            `users/${props.auth.uid}`
+        ]
+    }
+}))
+
+export default compose(connect(mapStateToProps), fbCompose)(ProfileSettings);

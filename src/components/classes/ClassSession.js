@@ -59,12 +59,12 @@ class ClassSession extends Component {
     render() {
 
         const { session, auth, responseFeedback } = this.props;
-        
+
         const disabledButtonStyle = "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
 
         //this just redirects if the user is not authenticated
         if (!auth.uid) {
-            return <Redirect to="/signin" />;
+            return <Redirect to="/landing" />;
         }
 
         //this is whats actually being seen in the ClassList
@@ -139,7 +139,8 @@ class ClassSession extends Component {
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;
     const { sessions } = state.firestore.data;
-    const session = sessions ? sessions[id] : null
+    const session = sessions? sessions[id] : null
+    console.log(state.firestore.data)
     return {
         session: session,
         auth: state.firebase.auth,
@@ -152,4 +153,15 @@ const mapDispatchToProps = dispatch => ({
     addResponse: (composite) => dispatch(addResponse(composite)),
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['sessions']))(ClassSession);
+const fbCompose = compose(connect(mapStateToProps), firestoreConnect((props) => {
+    console.log(props.sessionid)
+    if (!props.sessionid) {
+        return []
+    } else {
+        return [
+            `sessions/${props.sessionid}`
+        ]
+    }
+}))
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(ClassSession);

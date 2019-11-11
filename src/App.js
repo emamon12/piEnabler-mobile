@@ -21,7 +21,8 @@ import PlanSession from './components/sessions/PlanSession'
 import ProfilePage from './components/profile/ProfilePage'
 import ProfileSettings from './components/profile/ProfileSettings'
 import SliceDetails from './components/sessions/SliceDetails'
-
+import LandingPage from './components/dashboard/LandingPage'
+import ChangeRoles from './components/profile/ChangeRoles'
 
 //this is where all of the links to all of th components are located. Make sure to import the components with the link route
 class App extends Component {
@@ -32,6 +33,8 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
+            <Route exact path='/changeRole' component={ChangeRoles} />
+            <Route exact path='/landing' component={LandingPage} />
             <Route path='/classes/:id' component={ClassDetails} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />

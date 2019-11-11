@@ -77,11 +77,25 @@ export const addResponse = fbase => (dispatch, getState, { getFirestore }) => {
             studentId: studentId,
             forSlice: session.currentSliceId,
             forSession: sessionid,
-            timesPolled: session.numPolls
+            timesPolled: session.numPolls,
+            responseReference: `${sessionid}${session.currentSliceId}${session.numPolls}`
 
-        }).then(() => dispatch({
-            type: 'ADD_RESPONSE'
-        })).catch((err) => dispatch({
+        }).then(
+            fireStore.collection('/sessions/' + sessionid + '/responses/').doc(`${sessionid}${studentId}${session.currentSliceId}${session.numPolls}`).set({
+                response: resp.userAnswer,
+                studentId: studentId,
+                forSlice: session.currentSliceId,
+                forSession: sessionid,
+                timesPolled: session.numPolls,
+                responseReference: `${sessionid}${session.currentSliceId}${session.numPolls}`
+
+            }).then(() => ({
+                type: 'ADD_RESPONSE'
+            })).catch((err) => dispatch({
+                type: 'ADD_RESPONSE_ERR',
+                err
+            }))
+        ).catch((err) => dispatch({
             type: 'ADD_RESPONSE_ERR',
             err
         }))
@@ -177,7 +191,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                                             err,
                                         }))
                                     })
-                                } else if(docRef2.exists && docRef2.data().Lecture === true){
+                                } else if (docRef2.exists && docRef2.data().Lecture === true) {
                                     fireStore.collection('sessions').add({
                                         answer1: "",
                                         answer2: "",
@@ -207,7 +221,7 @@ export const LoadSession = classs => (dispatch, getState, { getFirestore }) => {
                                             err,
                                         }))
                                     })
-                                } 
+                                }
                                 else {
                                     dispatch({
                                         type: 'SLICE_REF_NOT_EXIST'

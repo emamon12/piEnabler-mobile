@@ -26,10 +26,17 @@ const SignedInLinks = (props) => {
           <Dropdown
             trigger={<li className="navbar-dropdown">Class Options</li>}
           >
+            <NavLink className={textStyle} to="/changeRole">
+              Change Role
+            </NavLink>
+
+            <Divider />
             <NavLink className={textStyle} to="/addClass">
               Add Class
             </NavLink>
             <Divider />
+
+
             <NavLink className={textStyle} to="/createClass">
               Create Class
             </NavLink>
@@ -43,6 +50,12 @@ const SignedInLinks = (props) => {
             </NavLink>
           </Dropdown>
           <li>
+            <NavLink className="navbar-attrib" to="/changeRole">
+              Change Role
+            </NavLink>
+          </li>
+          <li>
+
             <NavLink to="/addClass" className="navbar-attrib">
               Add Class
             </NavLink>
@@ -112,7 +125,7 @@ const SignedInLinks = (props) => {
         </ul>
       </div>
     );
-  } else if (profile.userRole === "instructor" ){
+  } else if (profile.userRole === "instructor") {
     return (
       <div className="nav-container">
         <ul className="right">
@@ -196,7 +209,7 @@ const SignedInLinks = (props) => {
         </ul>
       </div>
     );
-  }else if (profile.userRole === "student") {
+  } else if (profile.userRole === "student") {
     return (
       <div className="">
         <ul className="right">

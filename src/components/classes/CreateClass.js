@@ -75,7 +75,7 @@ class CreateClass extends Component {
     //just check if the user is authenticated
     const { auth, profile } = this.props;
     if (!auth.uid) {
-      return <Redirect to="/signin" />;
+      return <Redirect to="/landing" />;
     }
 
     if (profile.userRole !== "admin" && profile.userRole !== "instructor") {

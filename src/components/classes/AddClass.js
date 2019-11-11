@@ -33,7 +33,7 @@ class AddClass extends Component {
     render() {
         const { auth, addClassError } = this.props;
         if (!auth.uid) {
-            return <Redirect to="/signin" />;
+            return <Redirect to="/landing" />;
         }
 
         return (

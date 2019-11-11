@@ -83,7 +83,7 @@ class Presentation extends Component {
     }
 
     if (!auth.uid) {
-      return <Redirect to="/signin" />;
+      return <Redirect to="/landing" />;
     }
 
     var votePercent = (state.Voted / state.Here) * 100;

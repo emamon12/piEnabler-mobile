@@ -43,7 +43,7 @@ class SessionPlans extends Component {
         const { sessionplans, auth, profile } = this.props;
 
         if (!auth.uid && isLoaded(auth)) {
-            return <Redirect to='/signin' />
+            return <Redirect to='/landing' />
         }
 
         if (profile.userRole !== "admin" && profile.userRole !== "instructor") {

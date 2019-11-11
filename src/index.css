@@ -118,6 +118,19 @@ textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: none;
 }
 
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+  border: 2px solid #63115c;
+}
+ 
+ 
+ 
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+  background-color: #af1ab4;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -267,6 +280,7 @@ textarea:focus ~ label {
   margin: 10px;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 .switch label input[type="checkbox"]:checked + .lever {
@@ -292,10 +306,40 @@ textarea:focus ~ label {
 
 #session-style{
   padding-top: 0;
+} 
+
+#landing-card{
+  background: linear-gradient(0deg, rgba(39, 38, 39, 0.15) 0%,rgba(41, 40, 41, 0.15) 100%),linear-gradient(90deg, rgb(34, 33, 34),rgb(48, 47, 48));
+}
+
+#landing-card-num2{
+  background: linear-gradient(0deg, rgba(25, 24, 26, 0.15) 0%,rgba(19, 18, 19, 0.15) 100%),linear-gradient(90deg, rgb(29, 27, 29),rgb(66, 64, 66));
+  
+}
+
+#landing-card-outer{
+  background: linear-gradient(0deg, rgba(81, 41, 107, 0.15)0%,rgba(56, 27, 56, 0.15) 100%),linear-gradient(90deg, rgb(27, 24, 27),rgb(63, 26, 63));
+  border-radius: 25px;
+}
+
+#card-tabs-styling{
+  background-color: #280c3a;
+}
+
+#tabs-styling{
+  background-color: #280c3a;
+}
+
+.pienabler-info{
+  margin-left: 5px;
 }
 
 .slice-list-children{
   padding: 0;
+}
+
+.radio-element{
+  margin-right: 20px;
 }
 
 ::-webkit-scrollbar {

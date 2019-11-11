@@ -58,7 +58,7 @@ class PlanSession extends Component {
         const { auth, user, sessionplansid, sessionplans, sliceError, slices } = props;
 
         if (!auth.uid) {
-            return <Redirect to="/signin" />;
+            return <Redirect to="/landing" />;
         }
 
         if (user && user.userRole === "student") {
@@ -116,6 +116,8 @@ const mapStateToProps = (state, ownProps) => {
     const { users } = state.firestore.data;
     const sessionplan = sessionplans ? sessionplans[id] : null
     const user = users ? users[state.firebase.auth.uid] : null
+
+    console.log(state.firestore.data)
     return {
         sessionplans: sessionplan,
         auth: state.firebase.auth,
@@ -130,4 +132,14 @@ const mapDispatchToProps = dispatch => ({
     removeSliceFromSession: session => dispatch(removeSliceFromSession(session)),
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'sessionplans', 'slices']))(PlanSession);
+const fbCompose = compose(connect(mapStateToProps), firestoreConnect((props) => {
+    if (!props.auth.uid) {
+        return []
+    } else {
+        return [
+            `users/${props.auth.uid}`, { collection: 'slices', where: ['createdBy', '==', props.auth.uid] }, { collection: 'sessionplans', where: ['createdBy', '==', props.auth.uid] }
+        ]
+    }
+}))
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(PlanSession);
