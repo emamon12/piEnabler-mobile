@@ -158,6 +158,28 @@ export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) 
 		}));
 };
 
+export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
+	// const { session } = pie.session;
+	// let nextID = session.sessionPlan[session.sliceNumber + pie.value];
+	// let nextUrl = "",
+	// 	nextTitle = "",
+	// 	nextQuestion = "";
+	// if (nextID) {
+	// 	getFirestore
+	// 		.collection("slices")
+	// 		.doc(nextID)
+	// 		.get()
+	// 		.then((docRef) => {
+	// 			(nextUrl = docRef.data().url ? docRef.data().url : ""),
+	// 				(nextTitle = docRef.data().url ? "" : docRef.data().Title),
+	// 				(nextQuestion = docRef.data().url ? "" : docRef.data().Question);
+	// 		});
+	// }
+	// dispatch({
+	// 	type: "GET_NEXT_SLICE"
+	// });
+};
+
 //I know this is ugly
 export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
