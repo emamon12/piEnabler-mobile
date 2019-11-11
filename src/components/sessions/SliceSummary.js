@@ -12,7 +12,13 @@ const SliceSummary = ({ slice }) => {
 					<span className="card-title">{slice.Title}</span>
 					<p>Topic: {slice.Topic}</p>
 
-					{slice.Cheese ? <p>Image Slice</p> : slice.Lecture === true ? <p>Lecture Slice</p> : <p>Question Slice</p>}
+					{slice.Cheese ? (
+						<p>Image Slice</p>
+					) : slice.Lecture === true ? (
+						<p>Lecture Slice: {slice.Title && slice.Title}</p>
+					) : (
+						<p>Question Slice: {slice.Question && slice.Question}</p>
+					)}
 				</Link>
 			</div>
 		</div>

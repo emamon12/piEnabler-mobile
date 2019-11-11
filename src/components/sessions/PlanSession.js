@@ -24,7 +24,7 @@ class PlanSession extends Component {
 
 		this.setState((state) => ({
 			...state,
-			[target.id]: target.checked
+			[target.id]: target.value
 		}));
 	};
 
@@ -90,7 +90,9 @@ class PlanSession extends Component {
 						<form id="session-form" onSubmit={this.handleSubmit} className="white">
 							<h4 className="grey-text text-darken-3">Session Planner</h4>
 							<h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
-							<h5 className="grey-text text-darken-3">Planner ID: {sessionplansid}</h5>
+							<h5 className="grey-text text-darken-3">
+								<b>Planner ID:</b> {sessionplansid}
+							</h5>
 							{sessionplans &&
 								sessionplans.sliceIds &&
 								sessionplans.sliceIds.map((slices) => {

@@ -1,6 +1,5 @@
 import React from "react";
 import SliceSummary from "./SliceSummary";
-import { Link } from "react-router-dom";
 import { Row, Col, Preloader } from "react-materialize";
 
 const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter }) => {
@@ -14,6 +13,7 @@ const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilte
 		}
 		if (topicFilter !== "") {
 			filtered = filtered.filter((slice) => {
+				console.log(slice.Topic);
 				return slice.Topic && slice.Topic.toUpperCase().includes(topicFilter.toUpperCase());
 			});
 		}
