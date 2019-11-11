@@ -9,8 +9,16 @@ import Container from "muicss/lib/react/container";
 import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import { Button, Icon } from "react-materialize";
-import { nextSlice, prevSlice, rePoll, setPolling, revealAnswer, updateSession } from "../../store/actions/dashboardActions";
-import getNextSlice from "./Presentation";
+import {
+	nextSlice,
+	prevSlice,
+	rePoll,
+	setPolling,
+	revealAnswer,
+	updateSession,
+	getNextSlice,
+	displayGraph
+} from "../../store/actions/dashboardActions";
 
 class Clicker extends Component {
 	state = {};
@@ -47,10 +55,12 @@ class Clicker extends Component {
 		const { sessionId } = props;
 		const { session } = props;
 
+		let id = session.sessionPlan[session.sliceNumber - 1];
+
 		if (session.sliceNumber > 1) {
-			getNextSlice(-1);
 			props.prevSlice(sessionId);
 			props.updateSession(sessionId);
+			props.getNextSlice(id);
 		}
 	};
 
@@ -58,12 +68,24 @@ class Clicker extends Component {
 		const { props } = this;
 		const { sessionId } = props;
 		const { session } = props;
-		getNextSlice(1);
+
+		let id = session.sessionPlan[session.sliceNumber + 1];
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
 			props.updateSession(sessionId);
 		}
+		props.getNextSlice(id);
+	};
+
+	handleHistogram = () => {
+		const { props } = this;
+		const { session, sessionId } = props;
+		let status = session.displayGraph;
+
+		let composite = { status, sessionId };
+
+		props.displayGraph(composite);
 	};
 
 	render() {
@@ -250,7 +272,9 @@ const mapDispatchToProps = (dispatch) => ({
 	setPolling: (pie) => dispatch(setPolling(pie)),
 	revealAnswer: (pie) => dispatch(revealAnswer(pie)),
 	rePoll: (pie) => dispatch(rePoll(pie)),
-	updateSession: (pie) => dispatch(updateSession(pie))
+	updateSession: (pie) => dispatch(updateSession(pie)),
+	displayGraph: (pie) => dispatch(displayGraph(pie)),
+	getNextSlice: (pie) => dispatch(getNextSlice(pie))
 });
 
 export default compose(

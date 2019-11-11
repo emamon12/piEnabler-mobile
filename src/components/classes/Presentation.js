@@ -21,7 +21,8 @@ import {
 	revealAnswer,
 	changeDifficulty,
 	updateSession,
-	displayGraph
+	displayGraph,
+	getNextSlice
 } from "../../store/actions/dashboardActions";
 
 class Presentation extends Component {
@@ -68,10 +69,12 @@ class Presentation extends Component {
 		const { sessionId } = props;
 		const { session } = props;
 
+		let id = session.sessionPlan[session.sliceNumber - 1];
+
 		if (session.sliceNumber > 1) {
-			this.getNextSlice(-1);
 			props.prevSlice(sessionId);
 			props.updateSession(sessionId);
+			props.getNextSlice(id);
 		}
 	};
 
@@ -79,12 +82,14 @@ class Presentation extends Component {
 		const { props } = this;
 		const { sessionId } = props;
 		const { session } = props;
-		this.getNextSlice(1);
+
+		let id = session.sessionPlan[session.sliceNumber + 1];
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
 			props.updateSession(sessionId);
 		}
+		props.getNextSlice(id);
 	};
 
 	handleDifficulty = () => {
@@ -113,44 +118,17 @@ class Presentation extends Component {
 		props.displayGraph(composite);
 	};
 
-	getNextSlice = (value) => {
-		const { session } = this.props;
-
-		let nextID = session.sessionPlan[session.sliceNumber + value];
-
-		if (nextID) {
-			firebase
-				.firestore()
-				.collection("slices")
-				.doc(nextID)
-				.get()
-				.then((docRef) => {
-					this.setState((state) => ({
-						...state,
-						nextUrl: docRef.data().url ? docRef.data().url : "",
-						nextTitle: docRef.data().url ? "" : docRef.data().Title,
-						nextQuestion: docRef.data().url ? "" : docRef.data().Question
-					}));
-				});
-		} else {
-			this.setState((state) => ({
-				...state,
-				nextUrl: "",
-				nextTitle: "",
-				nextQuestion: ""
-			}));
-		}
-	};
-
 	componentDidMount = () => {
-		const { session } = this.props;
+		const { props } = this;
+		const { session } = props; 	 	
 		if (session) {
-			this.getNextSlice(0);
+			let id = session.sessionPlan[session.sliceNumber];
+			props.getNextSlice(id);
 		}
 	};
 
 	render() {
-		const { session, auth, authError, profile } = this.props;
+		const { session, auth, authError, profile, next } = this.props;
 		let state = this.state;
 
 		if (authError) {
@@ -307,12 +285,7 @@ class Presentation extends Component {
 							/>
 						</Row>
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
-							<ProjectionTemplate
-								slide="Next Slice"
-								url={this.state.nextUrl}
-								question={this.state.nextQuestion}
-								title={this.state.nextTitle}
-							/>
+							<ProjectionTemplate slide="Next Slice" url={next.url} question={next.question} title={next.title} />
 						</Row>
 					</Col>
 					<Col md="4" style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}>
@@ -539,6 +512,11 @@ const mapStateToProps = (state, ownProps) => {
 		sessionId: id,
 		session: session,
 		slices: slices,
+		next: {
+			url: state.dashboard.nextUrl,
+			question: state.dashboard.nextQuestion,
+			title: state.dashboard.nextTitle
+		},
 		auth: state.firebase.auth,
 		profile: state.firebase.profile
 	};
@@ -552,7 +530,8 @@ const mapDispatchToProps = (dispatch) => ({
 	rePoll: (pie) => dispatch(rePoll(pie)),
 	changeDifficulty: (pie) => dispatch(changeDifficulty(pie)),
 	updateSession: (pie) => dispatch(updateSession(pie)),
-	displayGraph: (pie) => dispatch(displayGraph(pie))
+	displayGraph: (pie) => dispatch(displayGraph(pie)),
+	getNextSlice: (pie) => dispatch(getNextSlice(pie))
 });
 
 export default compose(

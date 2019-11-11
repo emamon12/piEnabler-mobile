@@ -159,25 +159,45 @@ export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) 
 };
 
 export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
-	// const { session } = pie.session;
-	// let nextID = session.sessionPlan[session.sliceNumber + pie.value];
-	// let nextUrl = "",
-	// 	nextTitle = "",
-	// 	nextQuestion = "";
-	// if (nextID) {
-	// 	getFirestore
-	// 		.collection("slices")
-	// 		.doc(nextID)
-	// 		.get()
-	// 		.then((docRef) => {
-	// 			(nextUrl = docRef.data().url ? docRef.data().url : ""),
-	// 				(nextTitle = docRef.data().url ? "" : docRef.data().Title),
-	// 				(nextQuestion = docRef.data().url ? "" : docRef.data().Question);
-	// 		});
-	// }
-	// dispatch({
-	// 	type: "GET_NEXT_SLICE"
-	// });
+	let id = pie;
+
+	let nextUrl = "",
+		nextTitle = "",
+		nextQuestion = "";
+
+	console.log(id);
+
+	if (id) {
+		getFirestore()
+			.collection("slices")
+			.doc(id)
+			.get()
+			.then((docRef) => {
+				nextUrl = docRef.data().url ? docRef.data().url : "";
+				nextTitle = docRef.data().url ? "" : docRef.data().Title;
+				nextQuestion = docRef.data().url ? "" : docRef.data().Question;
+
+				let slice = {
+					url: nextUrl,
+					title: nextTitle,
+					question: nextQuestion
+				};
+				dispatch({
+					type: "GET_NEXT_SLICE",
+					pie: slice
+				});
+			});
+	} else {
+		let slice = {
+			url: nextUrl,
+			title: nextTitle,
+			question: nextQuestion
+		};
+		dispatch({
+			type: "GET_NEXT_SLICE",
+			pie: slice
+		});
+	}
 };
 
 //I know this is ugly

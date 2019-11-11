@@ -1,4 +1,11 @@
-const initstate = {};
+const initstate = {
+	nextUrl: "",
+	nextQuestion: "",
+	nextTitle: "",
+	messageErrorFeedback: null,
+	sliceError: null,
+	loadingError: null
+};
 
 const dashboardReducer = (state = initstate, action) => {
 	switch (action.type) {
@@ -69,7 +76,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To change difficutly!"
 			};
 		case "SUCCESSFULLY_UPDATED":
-			console.log("session updated", action.pie);
+			console.log("session updated", action.sessionId);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -99,6 +106,15 @@ const dashboardReducer = (state = initstate, action) => {
 			return {
 				...state,
 				sliceError: "Unable to change polling status!"
+			};
+		case "GET_NEXT_SLICE":
+			console.log(action.pie);
+
+			return {
+				...state,
+				nextUrl: action.pie.url,
+				nextTitle: action.pie.title,
+				nextQuestion: action.pie.question
 			};
 		default:
 			return state;
