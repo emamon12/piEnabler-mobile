@@ -66,12 +66,11 @@ class Presentation extends Component {
 
 	handlePrevious = () => {
 		const { props } = this;
-		const { sessionId } = props;
-		const { session } = props;
+		const { sessionId, session, slices } = props;
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
-		let composite = { id, sessionId };
+		let composite = { id, sessionId, slices };
 
 		if (session.sliceNumber > 1) {
 			props.prevSlice(sessionId);
@@ -82,12 +81,11 @@ class Presentation extends Component {
 
 	handleNext = (e) => {
 		const { props } = this;
-		const { sessionId } = props;
-		const { session } = props;
+		const { sessionId, session, slices } = props;
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
-		let composite = { id, sessionId };
+		let composite = { id, sessionId, slices };
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
@@ -124,10 +122,10 @@ class Presentation extends Component {
 
 	componentDidMount = () => {
 		const { props } = this;
-		const { session, sessionId } = props;
+		const { session, sessionId, slices } = props;
 		if (session) {
 			let id = session.sessionPlan[session.sliceNumber];
-			let composite = { id, sessionId };
+			let composite = { id, sessionId, slices };
 
 			props.getNextSlice(composite);
 		}

@@ -159,46 +159,34 @@ export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) 
 };
 
 export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
-	let { id, sessionId } = pie;
+	let { id, sessionId, slices } = pie;
 
 	let nextUrl = "",
 		nextTitle = "",
 		nextQuestion = "";
 
-	console.log(id);
-	console.log(sessionId);
-
-	if (!sessionId) {
+	if (!sessionId || !slices) {
 		return;
 	}
 
 	if (id) {
+		let myslice = slices[id];
+
+		let slice = {
+			url: myslice.url ? myslice.url : "",
+			title: myslice.url ? "" : myslice.Title,
+			question: myslice.url ? "" : myslice.Question
+		};
 		getFirestore()
-			.collection("slices")
-			.doc(id)
-			.get()
-			.then((docRef) => {
-				nextUrl = docRef.data().url ? docRef.data().url : "";
-				nextTitle = docRef.data().url ? "" : docRef.data().Title;
-				nextQuestion = docRef.data().url ? "" : docRef.data().Question;
-
-				let slice = {
-					url: nextUrl,
-					title: nextTitle,
-					question: nextQuestion
-				};
-				getFirestore()
-					.collection("sessions")
-					.doc(sessionId)
-					.update({
-						nextSlice: slice
-					});
-
-				dispatch({
-					type: "GET_NEXT_SLICE",
-					pie: slice
-				});
+			.collection("sessions")
+			.doc(sessionId)
+			.update({
+				nextSlice: slice
 			});
+		dispatch({
+			type: "GET_NEXT_SLICE",
+			pie: slice
+		});
 	} else {
 		let slice = {
 			url: nextUrl,

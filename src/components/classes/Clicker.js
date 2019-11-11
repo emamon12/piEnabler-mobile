@@ -52,8 +52,7 @@ class Clicker extends Component {
 
 	handlePrevious = () => {
 		const { props } = this;
-		const { sessionId } = props;
-		const { session } = props;
+		const { sessionId, session, slices } = props;
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
@@ -68,8 +67,7 @@ class Clicker extends Component {
 
 	handleNext = (e) => {
 		const { props } = this;
-		const { sessionId } = props;
-		const { session } = props;
+		const { sessionId, session, slices } = props;
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
