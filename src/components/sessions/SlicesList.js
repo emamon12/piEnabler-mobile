@@ -26,11 +26,7 @@ const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilte
 		return (
 			<div className="slice-list-children ease-in-anim section">
 				{filtered.map((slice) => {
-					return (
-						<Link to={"/slices/" + slice.id} key={slice.id}>
-							<SliceSummary slices={slice}></SliceSummary>
-						</Link>
-					);
+					return <SliceSummary slice={slice}></SliceSummary>;
 				})}
 			</div>
 		);
