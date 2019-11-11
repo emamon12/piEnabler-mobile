@@ -10,6 +10,7 @@ import Row from "muicss/lib/react/row";
 import Col from "muicss/lib/react/col";
 import { Button, Icon } from "react-materialize";
 import { nextSlice, prevSlice, rePoll, setPolling, revealAnswer, updateSession } from "../../store/actions/dashboardActions";
+import getNextSlice from "./Presentation";
 
 class Clicker extends Component {
 	state = {};
@@ -47,6 +48,7 @@ class Clicker extends Component {
 		const { session } = props;
 
 		if (session.sliceNumber > 1) {
+			getNextSlice(-1);
 			props.prevSlice(sessionId);
 			props.updateSession(sessionId);
 		}
@@ -56,6 +58,7 @@ class Clicker extends Component {
 		const { props } = this;
 		const { sessionId } = props;
 		const { session } = props;
+		getNextSlice(1);
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
