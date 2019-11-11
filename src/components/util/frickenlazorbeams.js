@@ -93,7 +93,6 @@ class frickenlazorbeams extends Component {
 	);
 
 	renderCanvas = () => {
-		// MOVE SHIP
 		let y = this.state.point[1];
 		let x = this.state.point[0];
 
