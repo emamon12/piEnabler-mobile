@@ -159,13 +159,18 @@ export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) 
 };
 
 export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
-	let id = pie;
+	let { id, sessionId } = pie;
 
 	let nextUrl = "",
 		nextTitle = "",
 		nextQuestion = "";
 
 	console.log(id);
+	console.log(sessionId);
+
+	if (!sessionId) {
+		return;
+	}
 
 	if (id) {
 		getFirestore()
@@ -182,6 +187,13 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 					title: nextTitle,
 					question: nextQuestion
 				};
+				getFirestore()
+					.collection("sessions")
+					.doc(sessionId)
+					.update({
+						nextSlice: slice
+					});
+
 				dispatch({
 					type: "GET_NEXT_SLICE",
 					pie: slice
@@ -193,6 +205,12 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 			title: nextTitle,
 			question: nextQuestion
 		};
+		getFirestore()
+			.collection("sessions")
+			.doc(sessionId)
+			.update({
+				nextSlice: slice
+			});
 		dispatch({
 			type: "GET_NEXT_SLICE",
 			pie: slice

@@ -71,10 +71,12 @@ class Presentation extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
+		let composite = { id, sessionId };
+
 		if (session.sliceNumber > 1) {
 			props.prevSlice(sessionId);
 			props.updateSession(sessionId);
-			props.getNextSlice(id);
+			props.getNextSlice(composite);
 		}
 	};
 
@@ -85,11 +87,13 @@ class Presentation extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
+		let composite = { id, sessionId };
+
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
 			props.updateSession(sessionId);
 		}
-		props.getNextSlice(id);
+		props.getNextSlice(composite);
 	};
 
 	handleDifficulty = () => {
@@ -120,7 +124,7 @@ class Presentation extends Component {
 
 	componentDidMount = () => {
 		const { props } = this;
-		const { session } = props; 	 	
+		const { session } = props;
 		if (session) {
 			let id = session.sessionPlan[session.sliceNumber];
 			props.getNextSlice(id);
@@ -285,7 +289,12 @@ class Presentation extends Component {
 							/>
 						</Row>
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
-							<ProjectionTemplate slide="Next Slice" url={next.url} question={next.question} title={next.title} />
+							<ProjectionTemplate
+								slide="Next Slice"
+								url={session && session.nextSlice.url}
+								question={session && session.nextSlice.question}
+								title={session && session.nextSlice.title}
+							/>
 						</Row>
 					</Col>
 					<Col md="4" style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}>

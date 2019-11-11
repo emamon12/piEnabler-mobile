@@ -57,10 +57,12 @@ class Clicker extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
+		let composite = { id, sessionId };
+
 		if (session.sliceNumber > 1) {
 			props.prevSlice(sessionId);
 			props.updateSession(sessionId);
-			props.getNextSlice(id);
+			props.getNextSlice(composite);
 		}
 	};
 
@@ -71,11 +73,13 @@ class Clicker extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
+		let composite = { id, sessionId };
+
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
 			props.updateSession(sessionId);
 		}
-		props.getNextSlice(id);
+		props.getNextSlice(composite);
 	};
 
 	handleHistogram = () => {
