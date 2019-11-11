@@ -118,8 +118,6 @@ class Presentation extends Component {
 
 		let nextID = session.sessionPlan[session.sliceNumber + value];
 
-		console.log(nextID);
-
 		if (nextID) {
 			firebase
 				.firestore()
@@ -127,7 +125,6 @@ class Presentation extends Component {
 				.doc(nextID)
 				.get()
 				.then((docRef) => {
-					console.log(docRef.data());
 					this.setState((state) => ({
 						...state,
 						nextUrl: docRef.data().url ? docRef.data().url : "",
