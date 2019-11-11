@@ -10,6 +10,7 @@ const SliceSummary = ({ slice }) => {
 				</p>
 				<Link to={"/slices/" + slice.id} key={slice.id} style={{ color: "#424242" }}>
 					<span className="card-title">{slice.Title}</span>
+					<span className="card-title">{slice.filename}</span>
 					<p>Topic: {slice.Topic}</p>
 
 					{slice.Cheese ? (

@@ -124,10 +124,12 @@ class Presentation extends Component {
 
 	componentDidMount = () => {
 		const { props } = this;
-		const { session } = props;
+		const { session, sessionId } = props;
 		if (session) {
 			let id = session.sessionPlan[session.sliceNumber];
-			props.getNextSlice(id);
+			let composite = { id, sessionId };
+
+			props.getNextSlice(composite);
 		}
 	};
 
@@ -291,9 +293,9 @@ class Presentation extends Component {
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
 							<ProjectionTemplate
 								slide="Next Slice"
-								url={session && session.nextSlice.url}
-								question={session && session.nextSlice.question}
-								title={session && session.nextSlice.title}
+								url={session && session.nextSlice && session.nextSlice.url}
+								question={session && session.nextSlice && session.nextSlice.question}
+								title={session && session.nextSlice && session.nextSlice.title}
 							/>
 						</Row>
 					</Col>
