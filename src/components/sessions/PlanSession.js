@@ -6,18 +6,39 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import SlicesList from "./SlicesList";
+import { Switch } from "react-materialize";
+import Dropdown from "muicss/lib/react/dropdown";
+import DropdownItem from "muicss/lib/react/dropdown-item";
 import { addSliceToSession, removeSliceFromSession } from "../../store/actions/sessionActions";
 
 class PlanSession extends Component {
 	state = {
-		sliceId: ""
+		sliceId: "",
+		ImageFilter: false,
+		TopicFilter: "",
+		DifficultyFilter: ""
 	};
 
 	handleChange = (e) => {
 		const { target } = e;
+
 		this.setState((state) => ({
 			...state,
-			[target.id]: target.value
+			[target.id]: target.checked
+		}));
+	};
+
+	handleImage = () => {
+		this.setState((state) => ({
+			...state,
+			ImageFilter: !this.state.ImageFilter
+		}));
+	};
+	handleDifficulty = (e, data) => {
+		console.log(e);
+		this.setState((state) => ({
+			...state,
+			DifficultyFilter: e
 		}));
 	};
 
@@ -95,9 +116,42 @@ class PlanSession extends Component {
 								</div>
 							) : null}
 						</form>
+
+						<div className="white" style={{ marginTop: "3em !important", margin: "10px" }}>
+							<div style={{ paddingTop: "10px" }}>
+								<div className="input-field" style={{ margin: "10px" }}>
+									<label htmlFor="TopicFilter">Input Topic Filter</label>
+									<input type="text" name="TopicFilter" id="TopicFilter" onChange={this.handleChange} />
+								</div>
+							</div>
+							<div style={{ display: "ruby", margin: "10px" }}>
+								<Switch offLabel="Filter for Images" onChange={this.handleImage} id="ImageFilter" />
+								<div className="input-field" style={{ marginLeft: "2em" }}>
+									<label style={{ marginRight: "2em", margin: "10px" }}> Filter Difficulty</label>
+									<Dropdown
+										color="grey"
+										label={this.state.DifficultyFilter}
+										id="DifficultyFilter"
+										onSelect={this.handleDifficulty}
+										style={{ margin: "10px", marginLeft: "9em" }}
+									>
+										<DropdownItem value="">None</DropdownItem>
+										<DropdownItem value="easy">Easy</DropdownItem>
+										<DropdownItem value="medium">Medium</DropdownItem>
+										<DropdownItem value="hard">Hard</DropdownItem>
+									</Dropdown>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div id="slice-list" className="col s12 m4 offset-m1">
-						<SlicesList slices={slices} profile={auth} />
+						<SlicesList
+							slices={slices}
+							profile={auth}
+							imageFilter={this.state.ImageFilter}
+							topicFilter={this.state.TopicFilter}
+							difficultyFilter={this.state.DifficultyFilter}
+						/>
 					</div>
 				</div>
 			</div>

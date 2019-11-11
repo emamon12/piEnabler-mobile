@@ -3,18 +3,35 @@ import SliceSummary from "./SliceSummary";
 import { Link } from "react-router-dom";
 import { Row, Col, Preloader } from "react-materialize";
 
-const SlicesList = ({ slices, profile }) => {
+const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter }) => {
 	if (slices && profile) {
+		let filtered = slices;
+
+		if (imageFilter) {
+			filtered = filtered.filter((slice) => {
+				return slice.Cheese === true;
+			});
+		}
+		if (topicFilter !== "") {
+			filtered = filtered.filter((slice) => {
+				return slice.Topic && slice.Topic.toUpperCase().includes(topicFilter.toUpperCase());
+			});
+		}
+		if (difficultyFilter !== "") {
+			filtered = filtered.filter((slice) => {
+				return slice.Difficulty && slice.Difficulty === difficultyFilter;
+			});
+		}
+
 		return (
 			<div className="slice-list-children ease-in-anim section">
-				{slices &&
-					slices.map((slices) => {
-						return (
-							<Link to={"/slices/" + slices.id} key={slices.id}>
-								<SliceSummary slices={slices}></SliceSummary>
-							</Link>
-						);
-					})}
+				{filtered.map((slice) => {
+					return (
+						<Link to={"/slices/" + slice.id} key={slice.id}>
+							<SliceSummary slices={slice}></SliceSummary>
+						</Link>
+					);
+				})}
 			</div>
 		);
 	} else {
