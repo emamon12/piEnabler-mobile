@@ -156,7 +156,7 @@ class ClassDetails extends Component {
                                     <div className="col mar1">
                                         <button type="button" onClick={this.handleEndSession} className={buttonClassName}>End Session</button></div> : null}
                    
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                {((user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "") ?
                                     <NavLink to={'/session/' + classs.currSession + '/clicker/'} key={classs.currSession + "pres"} >
                                         <div className="col mar1">
                                             <button type="button"
@@ -167,7 +167,7 @@ class ClassDetails extends Component {
                                     </NavLink>
                                     : null}
 
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                {((user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "") ?
                                     <NavLink to={'/session/' + classs.currSession + '/dashboard/'} key={classs.currSession + "pres"} >
                                         <div className="col mar1">
                                             <button type="button"
@@ -179,15 +179,16 @@ class ClassDetails extends Component {
                                     : null}
 
 
-
-                                    <NavLink to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + "proj"} >
+                                    {(classs.currSession !== "") ?
+                                    <NavLink to={'/session/' + classs.currSession + '/projection/' } key={classs.currSession + "proj"} >
                                         <div className="col mar1">
                                             <button type="button" className={buttonClassName}>
                                                 Projection
                                                 </button>
                                         </div>
                                     </NavLink>
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                    : null}
+                                {((user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "") ?
                                     <div className="col mar1">
                                         {(!formMode) ?
                                             <button onClick={this.handleButtonClick} type="button" value={message} className={buttonClassName}>Change Message</button>
