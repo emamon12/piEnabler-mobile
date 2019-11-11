@@ -6,7 +6,7 @@ export const createSlice = (slices) => (dispatch, getState, { getFirestore }) =>
 		.collection("slices")
 		.add({
 			...slices,
-			teacherId: [teacherId],
+			createdBy: teacherId,
 			createdAt: new Date()
 		})
 		.then(() =>
@@ -21,32 +21,4 @@ export const createSlice = (slices) => (dispatch, getState, { getFirestore }) =>
 				err
 			})
 		);
-};
-
-export const addSlice = (slices) => (dispatch, getState, { getFirestore }) => {
-	const fireStore = getFirestore();
-	const teacherId = getState().firebase.auth.uid;
-
-	var sliceID = slices.classKey;
-
-	if (sliceID !== "") {
-		fireStore
-			.collection("slices")
-			.doc(sliceID)
-			.update({
-				teacherId: fireStore.FieldValue.arrayUnion(teacherId)
-			})
-			.then(() =>
-				dispatch({
-					type: "ADD_SLICE",
-					slices
-				})
-			)
-			.catch((err) =>
-				dispatch({
-					type: "ADD_SLICE_ERROR",
-					err
-				})
-			);
-	}
 };

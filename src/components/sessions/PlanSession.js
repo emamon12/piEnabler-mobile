@@ -14,6 +14,7 @@ import { addSliceToSession, removeSliceFromSession } from "../../store/actions/s
 class PlanSession extends Component {
 	state = {
 		sliceId: "",
+		UserFilter: "",
 		ImageFilter: false,
 		TopicFilter: "",
 		DifficultyFilter: ""
@@ -34,8 +35,15 @@ class PlanSession extends Component {
 			ImageFilter: !this.state.ImageFilter
 		}));
 	};
+
+	handleUser = () => {
+		this.setState((state) => ({
+			...state,
+			UserFilter: state.UserFilter === "" ? this.props.uid : ""
+		}));
+	};
+
 	handleDifficulty = (e, data) => {
-		console.log(e);
 		this.setState((state) => ({
 			...state,
 			DifficultyFilter: e
@@ -128,7 +136,10 @@ class PlanSession extends Component {
 							</div>
 							<div style={{ display: "ruby", margin: "10px" }}>
 								<Switch offLabel="Filter for Images" onChange={this.handleImage} id="ImageFilter" />
-								<div className="input-field" style={{ marginLeft: "2em" }}>
+								<p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
+								<Switch offLabel="All Slices" onLabel="My Slices" onChange={this.handleUser} id="UserFilter" />
+								<p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
+								<div className="input-field">
 									<label style={{ marginRight: "2em", margin: "10px" }}> Filter Difficulty</label>
 									<Dropdown
 										color="grey"
@@ -153,6 +164,7 @@ class PlanSession extends Component {
 							imageFilter={this.state.ImageFilter}
 							topicFilter={this.state.TopicFilter}
 							difficultyFilter={this.state.DifficultyFilter}
+							userFilter={this.state.UserFilter}
 						/>
 					</div>
 				</div>
@@ -173,7 +185,8 @@ const mapStateToProps = (state, ownProps) => {
 		user: user,
 		sessionplansid: id,
 		slices: state.firestore.ordered.slices,
-		sliceError: state.session.sliceError
+		sliceError: state.session.sliceError,
+		uid: state.firebase.auth.uid
 	};
 };
 const mapDispatchToProps = (dispatch) => ({

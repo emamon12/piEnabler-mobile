@@ -2,7 +2,7 @@ import React from "react";
 import SliceSummary from "./SliceSummary";
 import { Row, Col, Preloader } from "react-materialize";
 
-const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter }) => {
+const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter, userFilter }) => {
 	if (slices && profile) {
 		let filtered = slices;
 
@@ -11,6 +11,13 @@ const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilte
 				return slice.Cheese === true;
 			});
 		}
+
+		if (userFilter) {
+			filtered = filtered.filter((slice) => {
+				return slice.createdBy === userFilter;
+			});
+		}
+
 		if (topicFilter !== "") {
 			filtered = filtered.filter((slice) => {
 				console.log(slice.Topic);
