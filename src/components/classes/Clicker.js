@@ -56,7 +56,7 @@ class Clicker extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
-		let composite = { id, sessionId };
+		let composite = { id, sessionId, slices };
 
 		if (session.sliceNumber > 1) {
 			props.prevSlice(sessionId);
@@ -71,7 +71,7 @@ class Clicker extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
-		let composite = { id, sessionId };
+		let composite = { id, sessionId, slices };
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
