@@ -14,7 +14,7 @@ class ProfilePage extends Component {
 
 		if (user && auth) {
 			if (!auth.uid) {
-				return <Redirect to="/signin" />;
+				return <Redirect to="/landing" />;
 			}
 
 			return (
@@ -33,7 +33,7 @@ class ProfilePage extends Component {
 
 						<div className="card-content row">
 							<div className="card-title left-align">
-								<p className="profile-content flow-text">Current Registerd As: {user.userRole.toString().toUpperCase()}</p>
+								<p className="profile-content flow-text">Current Registerd As: {user.userRole.toUpperCase()}</p>
 								<br />
 							</div>
 
@@ -65,7 +65,18 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		if (!props.auth) {
+			return [];
+		} else {
+			return [`users/${props.auth.uid}`];
+		}
+	})
+);
+
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect(["users"])
+	fbCompose
 )(ProfilePage);

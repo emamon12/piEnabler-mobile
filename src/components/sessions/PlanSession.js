@@ -84,7 +84,7 @@ class PlanSession extends Component {
 		const { auth, user, sessionplansid, sessionplans, sliceError, slices } = props;
 
 		if (!auth.uid) {
-			return <Redirect to="/signin" />;
+			return <Redirect to="/landing" />;
 		}
 
 		if (user && user.userRole === "student") {
@@ -134,13 +134,24 @@ class PlanSession extends Component {
 									<input type="text" name="TopicFilter" id="TopicFilter" onChange={this.handleChange} />
 								</div>
 							</div>
-							<div style={{ display: "ruby", margin: "10px" }}>
-								<Switch offLabel="Filter for Images" onChange={this.handleImage} id="ImageFilter" />
+							<div style={{ display: "flex", margin: "10px" }}>
+								<div style={{ marginTop: "3vh" }}>
+									<Switch offLabel="Filter for Images" onChange={this.handleImage} id="ImageFilter" />
+								</div>
 								<p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
-								<Switch offLabel="All Slices" onLabel="My Slices" onChange={this.handleUser} id="UserFilter" />
+								<div style={{ marginTop: "3vh" }}>
+									<Switch
+										offLabel="All Slices"
+										onLabel="My Slices"
+										style={{ marginTop: "3vh" }}
+										onChange={this.handleUser}
+										id="UserFilter"
+									/>
+								</div>
+
 								<p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
-								<div className="input-field">
-									<label style={{ marginRight: "2em", margin: "10px" }}> Filter Difficulty</label>
+								<div className="difficulty-bullshit">
+									<label style={{ marginRight: "2em", position: "absolute", top: "2em" }}> Filter Difficulty</label>
 									<Dropdown
 										color="grey"
 										label={this.state.DifficultyFilter}
@@ -194,10 +205,21 @@ const mapDispatchToProps = (dispatch) => ({
 	removeSliceFromSession: (session) => dispatch(removeSliceFromSession(session))
 });
 
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		if (!props.auth.uid) {
+			return [];
+		} else {
+			return [`users/${props.auth.uid}`, { collection: "slices" }, { collection: "sessionplans", where: ["createdBy", "==", props.auth.uid] }];
+		}
+	})
+);
+
 export default compose(
 	connect(
 		mapStateToProps,
 		mapDispatchToProps
 	),
-	firestoreConnect(["users", "sessionplans", "slices"])
+	fbCompose
 )(PlanSession);

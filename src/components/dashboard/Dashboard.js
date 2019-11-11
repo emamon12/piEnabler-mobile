@@ -11,7 +11,7 @@ class Dashboard extends Component {
 		const { classes, auth, user } = this.props;
 
 		if (!auth.uid && isLoaded(auth)) {
-			return <Redirect to="/signin" />;
+			return <Redirect to="/landing" />;
 		}
 
 		if (classes && user && user.registeredClasses) {
@@ -68,9 +68,21 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		console.log(props);
+		if (!props) {
+			return [];
+		} else {
+			return ["classes", `users/${props.auth.uid}`];
+		}
+	})
+);
+
 //connect mapstatetoprops
 //firestoreconnect connects the component to the firestore... so you can access the collections
 export default compose(
-	firestoreConnect([{ collection: "classes" }, "users"]),
+	fbCompose,
 	connect(mapStateToProps)
 )(Dashboard);

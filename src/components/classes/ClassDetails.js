@@ -103,7 +103,7 @@ class ClassDetails extends Component {
         const { classs, loadingError, classsId } = props
 
         if (!auth.uid) {
-            return <Redirect to='/signin/' />
+            return <Redirect to='/landing' />
         }
 
         const { user } = props
@@ -337,4 +337,14 @@ const mapDispatchToProps = dispatch => ({
     LoadSession: classs => dispatch(LoadSession(classs)),
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(['users', 'classes', 'sessions']))(ClassDetails)
+const fbCompose = compose(connect(mapStateToProps), firestoreConnect((props) => {
+    if (!props.classs) {
+        return []
+    } else {
+        return [
+            `users/${props.auth.uid}`,'classes', `sessions/${props.classs.currSession}`
+        ]
+    }
+}))
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(ClassDetails)

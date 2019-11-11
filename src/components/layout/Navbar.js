@@ -18,14 +18,18 @@ const Navbar = (props) => {
 			<div>
 				<ul className="left">
 					<li>
-						<NavLink to="/" className="">
-							<img src={brandImage} alt="Home" style={{ height: "2em" }} />
+						<NavLink to="/">
+							<div>
+								<img src={brandImage} alt="Home" style={{ height: "2em" }} />
+							</div>
 						</NavLink>
 					</li>
 					<li>
-						<h3 className="app-title" style={{ cursor: "default" }}>
-							piEnabler
-						</h3>
+						<NavLink to="/">
+							<div className="app-title" style={{ cursor: "default" }}>
+								piEnabler
+							</div>
+						</NavLink>
 					</li>
 				</ul>
 			</div>

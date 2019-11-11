@@ -140,7 +140,7 @@ class Presentation extends Component {
 		}
 
 		if (!auth.uid) {
-			return <Redirect to="/signin" />;
+			return <Redirect to="/landing" />;
 		}
 
 		if (profile.userRole !== "admin" && profile.userRole !== "instructor") {

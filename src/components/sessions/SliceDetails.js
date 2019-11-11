@@ -13,7 +13,7 @@ class SliceDetails extends Component {
 		const textStyle = "grey-text text-darken-3";
 
 		if (!auth.uid) {
-			return <Redirect to="/signin" />;
+			return <Redirect to="/landing" />;
 		}
 		if (slice && slice.Cheese) {
 			return (
@@ -97,7 +97,23 @@ const mapStateToProps = (state, ownProps) => {
 	};
 };
 
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		if (!props.auth.uid) {
+			return [];
+		} else {
+			return [
+				{
+					collection: "slices",
+					where: ["createdBy", "==", props.auth.uid]
+				}
+			];
+		}
+	})
+);
+
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect(["slices"])
+	fbCompose
 )(SliceDetails);

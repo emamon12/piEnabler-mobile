@@ -62,7 +62,7 @@ class ClassSession extends Component {
 
 		//this just redirects if the user is not authenticated
 		if (!auth.uid) {
-			return <Redirect to="/signin" />;
+			return <Redirect to="/landing" />;
 		}
 
 		//this is whats actually being seen in the ClassList
@@ -172,10 +172,22 @@ const mapDispatchToProps = (dispatch) => ({
 	addResponse: (composite) => dispatch(addResponse(composite))
 });
 
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		console.log(props.sessionid);
+		if (!props.sessionid) {
+			return [];
+		} else {
+			return [`sessions/${props.sessionid}`];
+		}
+	})
+);
+
 export default compose(
 	connect(
 		mapStateToProps,
 		mapDispatchToProps
 	),
-	firestoreConnect(["sessions"])
+	fbCompose
 )(ClassSession);
