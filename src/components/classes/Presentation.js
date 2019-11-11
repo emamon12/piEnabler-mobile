@@ -293,9 +293,9 @@ class Presentation extends Component {
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
 							<ProjectionTemplate
 								slide="Next Slice"
-								url={session && session.nextSlice && session.nextSlice.url}
-								question={session && session.nextSlice && session.nextSlice.question}
-								title={session && session.nextSlice && session.nextSlice.title}
+								url={session.nextSlice && session.nextSlice.url}
+								question={session.nextSlice && session.nextSlice.question}
+								title={session.nextSlice && session.nextSlice.title}
 							/>
 						</Row>
 					</Col>
