@@ -45,6 +45,11 @@ class Histogram extends React.Component {
 			}
 		}
 
+		var r1p = (response1 / numResponses) * 100;
+		var r2p = (response2 / numResponses) * 100;
+		var r3p = (response3 / numResponses) * 100;
+		var r4p = (response4 / numResponses) * 100;
+
 		return (
 			<Card
 				className="white "
@@ -69,10 +74,10 @@ class Histogram extends React.Component {
 					}}
 					data={[
 						["Answer", "", { role: "style" }],
-						["A", response1, "color: red"],
-						["B", response2, "color: blue"],
-						["C", response3, "color: green"],
-						["D", response4, "color: orange"]
+						["A", r1p, "color: red"],
+						["B", r2p, "color: blue"],
+						["C", r3p, "color: green"],
+						["D", r4p, "color: orange"]
 					]}
 					options={options}
 				/>
