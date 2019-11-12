@@ -135,16 +135,13 @@ class frickenlazorbeams extends Component {
 			<div className={style}>
 				<div style={{ margin: "1em", padding: "0" }}>
 					<Fullscreen enabled={this.state.isFull}>
-						<Card
-							className="white full-screenable-node"
-							textClassName="black-text"
-							style={{ height: "100%", position: "relative" }}
-							onClick={this.nextSlide}
-						>
+						<div className="white" style={{ position: "relative", height: "100%" }}>
 							{session && session.displayGraph ? (
 								<Graph sid={this.props.sessionId} />
-							) : session.slice.url ? (
+							) : session.slice.url && !this.state.isFull ? (
 								<img style={{ height: "82vh", width: "100%" }} alt="" src={session.slice.url} />
+							) : session.slice.url && this.state.isFull ? (
+								<img style={{ height: "100vh", width: "100%" }} alt="" src={session.slice.url} />
 							) : (
 								<div>
 									<h3 className="projection_title">{session && session.slice.title ? session.slice.title : ""}</h3>
@@ -159,7 +156,8 @@ class frickenlazorbeams extends Component {
 									</div>
 								</div>
 							)}
-						</Card>
+						</div>
+
 						{this.state.isFull ? (
 							<CancelPresentationIcon
 								style={{
