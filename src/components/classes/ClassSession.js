@@ -82,7 +82,9 @@ class ClassSession extends Component {
 							id="answer1"
 							name="answer1"
 							href="#answer1"
-							className={session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+							className={
+								session.answer1 !== "" && session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
+							}
 						>
 							{"A: " + session.answer1}
 						</a>
@@ -90,7 +92,9 @@ class ClassSession extends Component {
 							id="answer2"
 							name="answer2"
 							href="#answer2"
-							className={session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+							className={
+								session.answer2 !== "" && session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
+							}
 						>
 							{"B: " + session.answer2}
 						</a>
@@ -98,7 +102,9 @@ class ClassSession extends Component {
 							id="answer3"
 							name="answer3"
 							href="#answer3"
-							className={session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+							className={
+								session.answer3 !== "" && session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
+							}
 						>
 							{"C: " + session.answer3}
 						</a>
@@ -106,7 +112,9 @@ class ClassSession extends Component {
 							id="answer4"
 							name="answer4"
 							href="#answer4"
-							className={session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
+							className={
+								session.answer4 !== "" && session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
+							}
 						>
 							{"D: " + session.answer4}
 						</a>

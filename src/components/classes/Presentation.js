@@ -232,7 +232,10 @@ class Presentation extends Component {
 									name="answer1"
 									href="#!"
 									className={
-										session.answer1 === session.trueAnswer && session.revealAnswer && session.question !== ""
+										session.answer1 !== "" &&
+										session.answer1 === session.trueAnswer &&
+										session.revealAnswer &&
+										session.question !== ""
 											? correctClass
 											: regClass
 									}
@@ -244,7 +247,10 @@ class Presentation extends Component {
 									name="answer2"
 									href="#!"
 									className={
-										session.answer2 === session.trueAnswer && session.revealAnswer && session.question !== ""
+										session.answer2 !== "" &&
+										session.answer2 === session.trueAnswer &&
+										session.revealAnswer &&
+										session.question !== ""
 											? correctClass
 											: regClass
 									}
@@ -256,7 +262,10 @@ class Presentation extends Component {
 									name="answer3"
 									href="#!"
 									className={
-										session.answer3 === session.trueAnswer && session.revealAnswer && session.question !== ""
+										session.answer3 !== "" &&
+										session.answer3 === session.trueAnswer &&
+										session.revealAnswer &&
+										session.question !== ""
 											? correctClass
 											: regClass
 									}
@@ -268,7 +277,10 @@ class Presentation extends Component {
 									name="answer4"
 									href="#!"
 									className={
-										session.answer4 === session.trueAnswer && session.revealAnswer && session.question !== ""
+										session.answer4 !== "" &&
+										session.answer4 === session.trueAnswer &&
+										session.revealAnswer &&
+										session.question !== ""
 											? correctClass
 											: regClass
 									}

@@ -182,22 +182,26 @@ class frickenlazorbeams extends Component {
 							<CancelPresentationIcon
 								style={{
 									fontSize: "4em",
-									color: "grey",
+									color: "#6a1b9a",
 									position: "absolute",
 									top: "2%",
 									right: "1%",
+									filter: "opacity(15%)"
 								}}
+								className="hoverButt"
 								onClick={this.goFull}
 							/>
 						) : (
 							<AspectRatioIcon
 								style={{
 									fontSize: "4em",
-									color: "grey",
+									color: "#6a1b9a",
 									position: "absolute",
 									top: "1%",
-									right: "1.5%"
+									right: "1.5%",
+									filter: "opacity(15%)"
 								}}
+								className="hoverButt"
 								onClick={this.goFull}
 							/>
 						)}

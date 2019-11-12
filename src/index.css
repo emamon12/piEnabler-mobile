@@ -292,6 +292,10 @@ textarea:focus ~ label {
 	margin-bottom: 1.5rem;
 }
 
+.hoverButt:hover {
+	filter: opacity(100%) !important;
+}
+
 #slice-list {
 	height: 90vh;
 	margin: 10px;
