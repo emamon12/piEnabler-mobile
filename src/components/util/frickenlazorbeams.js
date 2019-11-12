@@ -143,7 +143,7 @@ class frickenlazorbeams extends Component {
 						>
 							{session && session.displayGraph ? (
 								<Graph sid={this.props.sessionId} />
-							) : session.url ? (
+							) : session.slice.url ? (
 								<img style={{ height: "82vh", width: "100%" }} alt="" src={session.slice.url} />
 							) : (
 								<div>
