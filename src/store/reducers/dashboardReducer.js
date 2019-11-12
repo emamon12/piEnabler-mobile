@@ -10,7 +10,7 @@ const initstate = {
 const dashboardReducer = (state = initstate, action) => {
 	switch (action.type) {
 		case "NEXT_SLICE":
-			console.log("incremented slice", action.pie);
+			console.log("incremented slice", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -21,7 +21,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To Increment Slice!"
 			};
 		case "PREV_SLICE":
-			console.log("decremented slice", action.pie);
+			console.log("decremented slice", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -32,7 +32,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To Decrement Slice!"
 			};
 		case "REPOLL":
-			console.log("Repolling", action.pie);
+			console.log("Repolling", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -43,7 +43,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To Repoll!"
 			};
 		case "REVEAL_ANSWER":
-			console.log("Revealing Answer", action.pie);
+			console.log("Revealing Answer", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -54,7 +54,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To Reveal!"
 			};
 		case "DISPLAY_HISTOGRAM":
-			console.log("Displaying Histogram", action.pie);
+			console.log("Displaying Histogram", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -65,7 +65,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To Display Histogram!"
 			};
 		case "CHANGE_DIFFICULTY":
-			console.log("changing difficulty", action.pie);
+			console.log("changing difficulty", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -76,7 +76,7 @@ const dashboardReducer = (state = initstate, action) => {
 				sliceError: "Unable To change difficutly!"
 			};
 		case "SUCCESSFULLY_UPDATED":
-			console.log("session updated", action.sessionId);
+			console.log("session updated", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null
@@ -86,18 +86,8 @@ const dashboardReducer = (state = initstate, action) => {
 				...state,
 				sliceError: "Unable To update session!"
 			};
-		case "SLICE_EMPTY":
-			return {
-				...state,
-				loadingError: "Slice Is Empty...."
-			};
-		case "SESSION_DNE":
-			return {
-				...state,
-				loadingError: "Session Do Not Exist..."
-			};
 		case "CHANGE_POLLING":
-			console.log("changing polling status", action.pie);
+			console.log("changing polling status", action.id);
 			return {
 				...state,
 				messageErrorFeedback: null

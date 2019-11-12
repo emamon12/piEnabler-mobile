@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from "react";
-import firebase from "../../config/fbConfig";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -134,7 +133,7 @@ class Presentation extends Component {
 	};
 
 	render() {
-		const { session, auth, authError, profile, next } = this.props;
+		const { session, auth, authError, profile } = this.props;
 		let state = this.state;
 
 		if (authError) {

@@ -10,7 +10,8 @@ export const setPolling = (pie) => (dispatch, getState, { getFirestore }) => {
 			polling: status
 		})
 		.then({
-			type: "CHANGE_POLLING"
+			type: "CHANGE_POLLING",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "CHANGE_POLLING_ERROR",
@@ -31,7 +32,8 @@ export const rePoll = (pie) => (dispatch, getState, { getFirestore }) => {
 			numPolls: increment
 		})
 		.then({
-			type: "REPOLL"
+			type: "REPOLL",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "REPOLL_ERROR",
@@ -54,7 +56,8 @@ export const nextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 			revealAnswer: false
 		})
 		.then({
-			type: "NEXT_SLICE"
+			type: "NEXT_SLICE",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "NEXT_SLICE_ERROR",
@@ -77,7 +80,8 @@ export const prevSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 			revealAnswer: false
 		})
 		.then({
-			type: "PREV_SLICE"
+			type: "PREV_SLICE",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "PREV_SLICE_ERROR",
@@ -97,7 +101,8 @@ export const revealAnswer = (pie) => (dispatch, getState, { getFirestore }) => {
 			revealAnswer: status
 		})
 		.then({
-			type: "REVEAL_ANSWER"
+			type: "REVEAL_ANSWER",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "REVEAL_ANSWER_ERROR",
@@ -117,7 +122,8 @@ export const displayGraph = (pie) => (dispatch, getState, { getFirestore }) => {
 			displayGraph: status
 		})
 		.then({
-			type: "DISPLAY_HISTOGRAM"
+			type: "DISPLAY_HISTOGRAM",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "DISPLAY_HISTOGRAM_ERROR",
@@ -150,7 +156,8 @@ export const changeDifficulty = (pie) => (dispatch, getState, { getFirestore }) 
 			difficulty: value
 		})
 		.then({
-			type: "CHANGE_DIFFICULTY"
+			type: "CHANGE_DIFFICULTY",
+			id: sessionId
 		})
 		.catch((err) => ({
 			type: "CHANGE_DIFFICULTY_ERROR",
@@ -206,7 +213,6 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 	}
 };
 
-//I know this is ugly
 export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
 	let { sessionId, slices } = pie;
@@ -221,19 +227,14 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 		.doc(sessionId)
 		.get()
 		.then((docRef) => {
-			console.log(docRef.data());
-
 			let session = docRef.data();
 			let sliceId = session.sessionPlan[session.sliceNumber - 1];
-			console.log(sliceId);
 			let myslice = slices[sliceId];
 			let slice = {
 				url: myslice.url ? myslice.url : "",
 				title: myslice.url || !myslice.Title ? "" : myslice.Title,
 				question: myslice.url || !myslice.Question ? "" : myslice.Question
 			};
-
-			console.log(slice);
 
 			fireStore
 				.collection("sessions")
@@ -257,7 +258,7 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 				.then(() =>
 					dispatch({
 						type: "SUCCESSFULLY_UPDATED",
-						sessionId
+						id: sessionId
 					})
 				)
 				.catch((err) =>

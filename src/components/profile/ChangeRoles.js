@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { RadioGroup } from "react-materialize";
 import { changeRole } from "../../store/actions/adminActions";
 
 class ChangeRoles extends Component {
@@ -17,8 +16,6 @@ class ChangeRoles extends Component {
 			...state,
 			[target.id]: target.value.trim()
 		}));
-
-		const { props } = this;
 	};
 
 	handleRadioChange = (e) => {
