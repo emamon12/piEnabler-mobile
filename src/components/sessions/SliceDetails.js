@@ -105,8 +105,7 @@ const fbCompose = compose(
 		} else {
 			return [
 				{
-					collection: "slices",
-					where: ["createdBy", "==", props.auth.uid]
+					collection: "slices"
 				}
 			];
 		}
