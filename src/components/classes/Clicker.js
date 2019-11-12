@@ -138,13 +138,12 @@ class Clicker extends Component {
 					<Col md="6" xs="6" style={{ height: "90%", marginTop: "2em" }}>
 						{session.displayGraph ? (
 							<Button
-								waves="dark"
+								waves="light"
 								style={{
 									width: "100%",
 									height: "100%",
-									color: "black"
+									background: "grey"
 								}}
-								className="btn white-bg white darken-3 z-depth-1 waves-effect waves-light"
 								onClick={this.handleHistogram}
 							>
 								Hide Graph
@@ -155,9 +154,10 @@ class Clicker extends Component {
 								style={{
 									width: "100%",
 									height: "100%",
-									color: "black"
+									color: "black",
+									background: "white"
 								}}
-								className="btn white-bg white darken-3 z-depth-1 waves-effect waves-light"
+								className="btn white-bg white darken-3 z-depth-1 waves-effect waves-dark"
 								onClick={this.handleHistogram}
 							>
 								Show Graph
