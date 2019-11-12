@@ -182,10 +182,10 @@ class frickenlazorbeams extends Component {
 							<CancelPresentationIcon
 								style={{
 									fontSize: "4em",
-									color: "red",
+									color: "grey",
 									position: "absolute",
 									top: "2%",
-									right: "1%"
+									right: "1%",
 								}}
 								onClick={this.goFull}
 							/>
@@ -193,7 +193,7 @@ class frickenlazorbeams extends Component {
 							<AspectRatioIcon
 								style={{
 									fontSize: "4em",
-									color: "red",
+									color: "grey",
 									position: "absolute",
 									top: "1%",
 									right: "1.5%"

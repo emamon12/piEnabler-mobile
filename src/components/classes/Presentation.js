@@ -347,7 +347,7 @@ class Presentation extends Component {
 											<p style={{ textAlign: "center" }}>
 												{state.Voted}/{classSize}
 											</p>
-											<p style={{ textAlign: "center" }}>Voted {votePercent.toFixed(2)} %</p>
+											<p style={{ textAlign: "center" }}>Voted {votePercent && votePercent.toFixed(2)} %</p>
 										</Card>
 									</Col>
 									<Col
