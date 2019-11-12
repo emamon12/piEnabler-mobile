@@ -29,7 +29,6 @@ class Presentation extends Component {
 	state = {
 		view: null,
 		Voted: 0,
-		Here: 140,
 		fetch: true,
 		finished: false,
 		nextURL: "",
@@ -133,7 +132,6 @@ class Presentation extends Component {
 	};
 
 	Voted = (num) => {
-		console.log(num);
 		this.setState((state) => ({
 			...state,
 			Voted: num
@@ -152,7 +150,7 @@ class Presentation extends Component {
 	};
 
 	render() {
-		const { session, auth, authError, profile } = this.props;
+		const { session, auth, authError, profile, pie } = this.props;
 		let state = this.state;
 
 		if (authError) {
@@ -166,8 +164,12 @@ class Presentation extends Component {
 		if (profile.userRole !== "admin" && profile.userRole !== "instructor") {
 			return <Redirect to="/"></Redirect>;
 		}
-
-		var votePercent = (state.Voted / state.Here) * 100;
+		var votePercent = 0;
+		var classSize = 0;
+		if (pie) {
+			classSize = pie.studentId.length;
+			votePercent = (state.Voted / classSize) * 100;
+		}
 
 		const StyleOpen = {
 			fontSize: "1vw",
@@ -342,7 +344,7 @@ class Presentation extends Component {
 											style={{ fontSize: "1.5vw", height: "100%", margin: "0" }}
 										>
 											<p style={{ textAlign: "center" }}>
-												{state.Voted}/{state.Here}
+												{state.Voted}/{classSize}
 											</p>
 											<p style={{ textAlign: "center" }}>Voted {votePercent.toFixed(2)} %</p>
 										</Card>
@@ -537,8 +539,9 @@ const mapStateToProps = (state, ownProps) => {
 	const { id } = ownProps.match.params;
 	const { classes } = state.firestore.data;
 	const { sessions, slices } = state.firestore.data;
-	const pie = classes ? classes[id] : null;
 	const session = sessions ? sessions[id] : null;
+	const pie = classes ? classes[session.inClass] : null;
+
 	return {
 		pie: pie,
 		sessionId: id,
