@@ -144,13 +144,13 @@ class frickenlazorbeams extends Component {
 							{session && session.displayGraph ? (
 								<Graph sid={this.props.sessionId} />
 							) : session.url ? (
-								<img style={{ height: "82vh", width: "100%" }} alt="" src={session.url} />
+								<img style={{ height: "82vh", width: "100%" }} alt="" src={session.slice.url} />
 							) : (
 								<div>
-									<h3 className="projection_title">{session && session.title ? session.title : ""}</h3>
+									<h3 className="projection_title">{session && session.slice.title ? session.slice.title : ""}</h3>
 									<div id="body" className="projection_body class-message">
-										{session && session.question ? (
-											session.question
+										{session && session.slice.question ? (
+											session.slice.question
 										) : (
 											<div style={{ textAlign: "center", marginTop: "15%" }}>
 												<Preloader flashing size="big" />

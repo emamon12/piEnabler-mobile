@@ -229,17 +229,19 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 											isCurrentSliceAQuestion: docRef2.data().Lecture ? !docRef2.date().Lecture : "",
 											numPolls: 1,
 											polling: false,
-											question: "",
-											topic: docRef2.data().Topic,
+											topic: docRef2.data().Topic ? docRef2.data().Topic : "",
+											slice: {
+												url: docRef2.data().url,
+												title: "",
+												question: ""
+											},
 											difficulty: "",
 											sessionPlan: sliceIds,
 											sessionStart: new Date(),
 											sessionEnd: "",
 											sliceHistory: "",
 											trueAnswer: "",
-											sliceNumber: 1,
-											url: docRef2.data().url,
-											filename: docRef2.data().filename
+											sliceNumber: 1
 										})
 										.then((docRefSession) => {
 											fireStore
@@ -272,23 +274,24 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 												answer4: docRef2.data().Answer4,
 												revealAnswer: false,
 												displayGraph: false,
-												title: docRef2.data().Title,
 												currentSliceId: sliceIds[0],
 												inClass: collection,
 												isCurrentSliceAQuestion: !docRef2.data().Lecture,
 												numPolls: 1,
 												polling: false,
-												question: docRef2.data().Question,
 												topic: docRef2.data().Topic,
+												slice: {
+													url: "",
+													title: docRef2.data().Title ? docRef2.data().Title : "",
+													question: docRef2.data().Question ? docRef2.data().Question : ""
+												},
 												difficulty: docRef2.data().Difficulty,
 												sessionPlan: sliceIds,
 												sessionStart: new Date(),
 												sessionEnd: "",
 												sliceHistory: "",
 												trueAnswer: docRef2.data().CorrectAnswer,
-												sliceNumber: 1,
-												url: "",
-												filename: ""
+												sliceNumber: 1
 											})
 											.then((docRefSession) => {
 												fireStore
@@ -325,17 +328,19 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 												isCurrentSliceAQuestion: !docRef2.data().Lecture,
 												numPolls: 1,
 												polling: false,
-												question: docRef2.data().Question,
 												topic: docRef2.data().Topic,
+												slice: {
+													url: "",
+													title: docRef2.data().Title ? docRef2.data().Title : "",
+													question: docRef2.data().Question ? docRef2.data().Question : ""
+												},
 												difficulty: "",
 												sessionPlan: sliceIds,
 												sessionStart: new Date(),
 												sessionEnd: "",
 												sliceHistory: "",
 												trueAnswer: "",
-												sliceNumber: 1,
-												url: "",
-												filename: ""
+												sliceNumber: 1
 											})
 											.then((docRefSession) => {
 												fireStore

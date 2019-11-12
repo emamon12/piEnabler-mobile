@@ -56,12 +56,13 @@ class Clicker extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
-		let composite = { id, sessionId, slices };
+		let nextComposite = { id, sessionId, slices };
+		let updateComposite = { sessionId, slices };
 
 		if (session.sliceNumber > 1) {
 			props.prevSlice(sessionId);
-			props.updateSession(sessionId);
-			props.getNextSlice(composite);
+			props.updateSession(updateComposite);
+			props.getNextSlice(nextComposite);
 		}
 	};
 
@@ -71,13 +72,14 @@ class Clicker extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
-		let composite = { id, sessionId, slices };
+		let nextComposite = { id, sessionId, slices };
+		let updateComposite = { sessionId, slices };
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
-			props.updateSession(sessionId);
+			props.updateSession(updateComposite);
 		}
-		props.getNextSlice(composite);
+		props.getNextSlice(nextComposite);
 	};
 
 	handleHistogram = () => {
@@ -252,15 +254,15 @@ class Clicker extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const { id, cid } = ownProps.match.params;
+	const { id } = ownProps.match.params;
 	const { classes } = state.firestore.data;
 	const { sessions, slices } = state.firestore.data;
 	const pie = classes ? classes[id] : null;
 	const session = sessions ? sessions[id] : null;
 	return {
 		pie: pie,
-		classId: cid,
 		sessionId: id,
+		sessions: sessions,
 		session: session,
 		slices: slices,
 		auth: state.firebase.auth,

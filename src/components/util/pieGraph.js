@@ -17,10 +17,10 @@ class pieGraph extends React.Component {
 					style={{ height: "80vh", width: "90vw" }}
 					data={[
 						["Answer", "Responses"],
-						["A: " + session.answer1, !session ? session.respondA1 : 19],
-						["B: " + session.answer2, !session ? session.respondA2 : 36],
-						["C: " + session.answer3, !session ? session.respondA3 : 3],
-						["D: " + session.answer4, !session ? session.respondA4 : 35]
+						["A: " + session.answer1, 19],
+						["B: " + session.answer2, 36],
+						["C: " + session.answer3, 3],
+						["D: " + session.answer4, 35]
 					]}
 					options={{
 						is3D: true,

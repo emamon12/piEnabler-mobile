@@ -174,8 +174,8 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 
 		let slice = {
 			url: myslice.url ? myslice.url : "",
-			title: myslice.url ? "" : myslice.Title,
-			question: myslice.url ? "" : myslice.Question
+			title: myslice.url || !myslice.Title ? "" : myslice.Title,
+			question: myslice.url || !myslice.Question ? "" : myslice.Question
 		};
 		getFirestore()
 			.collection("sessions")
@@ -209,69 +209,63 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 //I know this is ugly
 export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
-	let sessionId = pie;
+	let { sessionId, slices } = pie;
 
 	console.log(sessionId);
 
+	if (!sessionId || !slices) {
+		return;
+	}
 	fireStore
 		.collection("sessions")
 		.doc(sessionId)
 		.get()
 		.then((docRef) => {
 			console.log(docRef.data());
-			let slice = docRef.data().sessionPlan;
-			let index = docRef.data().sliceNumber - 1;
-			if (slice[index]) {
-				fireStore
-					.collection("slices")
-					.doc(slice[index])
-					.get()
-					.then((docRef2) => {
-						if (docRef2.exists) {
-							console.log(docRef2.data());
-							fireStore
-								.collection("sessions")
-								.doc(sessionId)
-								.update({
-									answer1: docRef2.data().Answer1 ? docRef2.data().Answer1 : "",
-									answer2: docRef2.data().Answer2 ? docRef2.data().Answer2 : "",
-									answer3: docRef2.data().Answer3 ? docRef2.data().Answer3 : "",
-									answer4: docRef2.data().Answer4 ? docRef2.data().Answer4 : "",
-									respondA1: 0,
-									respondA2: 0,
-									respondA3: 0,
-									respondA4: 0,
-									revealAnswer: false,
-									currentSliceId: slice[index],
-									isCurrentSliceAQuestion: docRef2.data().Lecture ? false : true,
-									numPolls: 1,
-									polling: false,
-									question: docRef2.data().Question ? docRef2.data().Question : "",
-									topic: docRef2.data().Topic ? docRef2.data().Topic : "",
-									difficulty: docRef2.data().Difficulty ? docRef2.data().Difficulty : "",
-									sliceHistory: "",
-									trueAnswer: docRef2.data().CorrectAnswer ? docRef2.data().CorrectAnswer : "",
-									url: docRef2.data().url ? docRef2.data().url : "",
-									filename: docRef2.data().filename ? docRef2.data().filename : ""
-								})
-								.then(() =>
-									dispatch({
-										type: "SUCCESSFULLY_UPDATED",
-										sessionId
-									})
-								)
-								.catch((err) =>
-									dispatch({
-										type: "UNSUCCESSFULLY_UPDATED",
-										err
-									})
-								);
-						}
-					});
-			} else {
-				dispatch({
-					type: "SLICE_EMPTY"
-				});
-			}
+
+			let session = docRef.data();
+			let sliceId = session.sessionPlan[session.sliceNumber - 1];
+			console.log(sliceId)
+			let myslice = slices[sliceId];
+			let slice = {
+				url: myslice.url ? myslice.url : "",
+				title: myslice.url || !myslice.Title ? "" : myslice.Title,
+				question: myslice.url || !myslice.Question ? "" : myslice.Question
+			};
+
+			console.log(slice);
+
+			fireStore
+				.collection("sessions")
+				.doc(sessionId)
+				.update({
+					answer1: slice.Answer1 ? slice.Answer1 : "",
+					answer2: slice.Answer2 ? slice.Answer2 : "",
+					answer3: slice.Answer3 ? slice.Answer3 : "",
+					answer4: slice.Answer4 ? slice.Answer4 : "",
+					revealAnswer: false,
+					currentSliceId: sliceId,
+					isCurrentSliceAQuestion: slice.Lecture ? false : true,
+					numPolls: 1,
+					polling: false,
+					topic: slice.Topic ? slice.Topic : "",
+					difficulty: slice.Difficulty ? slice.Difficulty : "",
+					sliceHistory: "",
+					trueAnswer: slice.CorrectAnswer ? slice.CorrectAnswer : "",
+					slice: slice
+				})
+				.then(() =>
+					dispatch({
+						type: "SUCCESSFULLY_UPDATED",
+						sessionId
+					})
+				)
+				.catch((err) =>
+					dispatch({
+						type: "UNSUCCESSFULLY_UPDATED",
+						err
+					})
+				);
 		});
+		
 };

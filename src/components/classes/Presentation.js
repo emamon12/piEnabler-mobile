@@ -70,12 +70,13 @@ class Presentation extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber - 1];
 
-		let composite = { id, sessionId, slices };
+		let nextComposite = { id, sessionId, slices };
+		let updateComposite = { sessionId, slices };
 
 		if (session.sliceNumber > 1) {
 			props.prevSlice(sessionId);
-			props.updateSession(sessionId);
-			props.getNextSlice(composite);
+			props.updateSession(updateComposite);
+			props.getNextSlice(nextComposite);
 		}
 	};
 
@@ -85,13 +86,14 @@ class Presentation extends Component {
 
 		let id = session.sessionPlan[session.sliceNumber + 1];
 
-		let composite = { id, sessionId, slices };
+		let nextComposite = { id, sessionId, slices };
+		let updateComposite = { sessionId, slices };
 
 		if (session.sliceNumber < session.sessionPlan.length) {
 			props.nextSlice(sessionId);
-			props.updateSession(sessionId);
+			props.updateSession(updateComposite);
 		}
-		props.getNextSlice(composite);
+		props.getNextSlice(nextComposite);
 	};
 
 	handleDifficulty = () => {
@@ -283,9 +285,9 @@ class Presentation extends Component {
 						<Row style={{ height: "50%", marginBottom: "1em" }}>
 							<ProjectionTemplate
 								slide="Current Slice"
-								url={session && session.url}
-								question={session && session.question}
-								title={session ? session.title : ""}
+								url={session.slice && session.slice.url}
+								question={session.slice && session.slice.question}
+								title={session.slice && session.slice.title}
 							/>
 						</Row>
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
@@ -510,22 +512,17 @@ class Presentation extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const { id, cid } = ownProps.match.params;
+	const { id } = ownProps.match.params;
 	const { classes } = state.firestore.data;
 	const { sessions, slices } = state.firestore.data;
 	const pie = classes ? classes[id] : null;
 	const session = sessions ? sessions[id] : null;
 	return {
 		pie: pie,
-		classId: cid,
 		sessionId: id,
 		session: session,
+		sessions: sessions,
 		slices: slices,
-		next: {
-			url: state.dashboard.nextUrl,
-			question: state.dashboard.nextQuestion,
-			title: state.dashboard.nextTitle
-		},
 		auth: state.firebase.auth,
 		profile: state.firebase.profile
 	};

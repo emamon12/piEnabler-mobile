@@ -143,11 +143,11 @@ class ClassDetails extends Component {
                         <div className="row">
                             <div className="flexbox">
                                 {(classs.currSession !== "") ?
-                                    <Link to={'/session/' + classs.currSession} key={classs.currSession}>
+                                    <NavLink to={'/session/' + classs.currSession} key={classs.currSession}>
                                         <div className="col mar1">
                                             <button type="button" className={buttonClassName}>Join Session</button>
                                         </div>
-                                    </Link>
+                                    </NavLink>
                                     :
                                     null
                                 }
@@ -230,7 +230,7 @@ class ClassDetails extends Component {
                         </div>
                         <div className="row">
                             <div className="flexbox">
-                                <div className="col">
+                                <div className="col mar1">
                                     <Modal className="modal1"
                                         options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }}
                                         actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active"
