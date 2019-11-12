@@ -225,7 +225,7 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 
 			let session = docRef.data();
 			let sliceId = session.sessionPlan[session.sliceNumber - 1];
-			console.log(sliceId)
+			console.log(sliceId);
 			let myslice = slices[sliceId];
 			let slice = {
 				url: myslice.url ? myslice.url : "",
@@ -239,19 +239,19 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 				.collection("sessions")
 				.doc(sessionId)
 				.update({
-					answer1: slice.Answer1 ? slice.Answer1 : "",
-					answer2: slice.Answer2 ? slice.Answer2 : "",
-					answer3: slice.Answer3 ? slice.Answer3 : "",
-					answer4: slice.Answer4 ? slice.Answer4 : "",
+					answer1: myslice.Answer1 ? myslice.Answer1 : "",
+					answer2: myslice.Answer2 ? myslice.Answer2 : "",
+					answer3: myslice.Answer3 ? myslice.Answer3 : "",
+					answer4: myslice.Answer4 ? myslice.Answer4 : "",
 					revealAnswer: false,
 					currentSliceId: sliceId,
-					isCurrentSliceAQuestion: slice.Lecture ? false : true,
+					isCurrentSliceAQuestion: myslice.Lecture ? false : true,
 					numPolls: 1,
 					polling: false,
-					topic: slice.Topic ? slice.Topic : "",
-					difficulty: slice.Difficulty ? slice.Difficulty : "",
+					topic: myslice.Topic ? myslice.Topic : "",
+					difficulty: myslice.Difficulty ? myslice.Difficulty : "",
 					sliceHistory: "",
-					trueAnswer: slice.CorrectAnswer ? slice.CorrectAnswer : "",
+					trueAnswer: myslice.CorrectAnswer ? myslice.CorrectAnswer : "",
 					slice: slice
 				})
 				.then(() =>
@@ -267,5 +267,4 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 					})
 				);
 		});
-		
 };
