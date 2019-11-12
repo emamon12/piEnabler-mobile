@@ -167,8 +167,9 @@ class Presentation extends Component {
 		var votePercent = 0;
 		var classSize = 0;
 		if (pie) {
-			classSize = pie.studentId.length;
+			classSize = pie.studentId ? pie.studentId.length : 0;
 			votePercent = (state.Voted / classSize) * 100;
+			votePercent = isNaN(votePercent) && 0;
 		}
 
 		const StyleOpen = {
