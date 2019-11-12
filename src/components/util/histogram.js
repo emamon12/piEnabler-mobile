@@ -19,7 +19,7 @@ const options = {
 
 class Histogram extends React.Component {
 	render() {
-		const { session, responses } = this.props;
+		const { responses } = this.props;
 
 		var numResponses = 0;
 		var response1 = 0;
@@ -41,6 +41,7 @@ class Histogram extends React.Component {
 					response4++;
 				}
 				numResponses++;
+				this.props.numResponded(numResponses);
 			}
 		}
 
@@ -83,7 +84,7 @@ class Histogram extends React.Component {
 const mapStateToProps = (state, ownProps) => {
 	const { sid } = ownProps;
 	const { sessions } = state.firestore.data;
-	const responses = state.firestore.data[`sessions/${sid}/responses`];
+	const responses = state.firestore.data["responses"];
 	const session = sessions ? sessions[sid] : null;
 
 	return {
@@ -103,7 +104,8 @@ const fbCompose = compose(
 			return [
 				{
 					collection: `sessions/${props.id}/responses`,
-					where: ["responseReference", "==", `${props.id}${props.session.currentSliceId}${props.session.numPolls}`]
+					where: ["responseReference", "==", `${props.id}${props.session.currentSliceId}${props.session.numPolls}`],
+					storeAs: "responses"
 				}
 			];
 		}

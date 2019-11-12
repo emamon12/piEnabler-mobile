@@ -110,6 +110,27 @@ export const revealAnswer = (pie) => (dispatch, getState, { getFirestore }) => {
 		}));
 };
 
+export const changeMode = (pie) => (dispatch, getState, { getFirestore }) => {
+	let fireStore = getFirestore();
+	let sessionId = pie.sessionId;
+	let status = !pie.status;
+
+	fireStore
+		.collection("sessions")
+		.doc(sessionId)
+		.update({
+			dark: status
+		})
+		.then({
+			type: "MODE_CHANGED",
+			id: sessionId
+		})
+		.catch((err) => ({
+			type: "MODE_CHANGED_ERROR",
+			err
+		}));
+};
+
 export const displayGraph = (pie) => (dispatch, getState, { getFirestore }) => {
 	let fireStore = getFirestore();
 	let sessionId = pie.sessionId;

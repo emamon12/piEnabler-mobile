@@ -254,6 +254,8 @@ textarea:focus ~ label {
 	font-size: 7vh;
 	font-weight: bold;
 	margin-bottom: 0.25em !important;
+	padding-top: 0.5em;
+	padding-left: 0.2em;
 }
 
 .presentation_body {

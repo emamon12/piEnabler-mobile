@@ -7,9 +7,30 @@ import { Preloader } from "react-materialize";
 
 class pieGraph extends React.Component {
 	render() {
-		const { session } = this.props;
+		const { session, responses } = this.props;
 
-		if (!session) {
+		var response1 = 0;
+		var response2 = 0;
+		var response3 = 0;
+		var response4 = 0;
+
+		if (responses) {
+			for (var resp in responses) {
+				var rRef = responses[resp];
+
+				if (rRef.response === "answer1") {
+					response1++;
+				} else if (rRef.response === "answer2") {
+					response2++;
+				} else if (rRef.response === "answer3") {
+					response3++;
+				} else if (rRef.response === "answer4") {
+					response4++;
+				}
+			}
+		}
+
+		if (session && responses) {
 			return (
 				<Chart
 					chartType="PieChart"
@@ -17,10 +38,10 @@ class pieGraph extends React.Component {
 					style={{ height: "80vh", width: "90vw" }}
 					data={[
 						["Answer", "Responses"],
-						["A: " + session.answer1, 19],
-						["B: " + session.answer2, 36],
-						["C: " + session.answer3, 3],
-						["D: " + session.answer4, 35]
+						["A: " + session.answer1, response1],
+						["B: " + session.answer2, response2],
+						["C: " + session.answer3, response3],
+						["D: " + session.answer4, response4]
 					]}
 					options={{
 						is3D: true,
@@ -47,19 +68,37 @@ class pieGraph extends React.Component {
 const mapStateToProps = (state, ownProps) => {
 	const { sid } = ownProps;
 	const { sessions } = state.firestore.data;
+	const responses = state.firestore.data["responses"];
 	const session = sessions ? sessions[sid] : null;
 	return {
 		session: session,
-		auth: state.firebase.auth
+		auth: state.firebase.auth,
+		responses: responses,
+		id: sid
 	};
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		if (!props.id || !props.session) {
+			return [];
+		} else {
+			return [
+				{
+					collection: `sessions/${props.id}/responses`,
+					where: ["responseReference", "==", `${props.id}${props.session.currentSliceId}${props.session.numPolls}`],
+					storeAs: "responses"
+				}
+			];
+		}
+	})
+);
 
 export default compose(
 	connect(
 		mapStateToProps,
-		mapDispatchToProps
+		null
 	),
-	firestoreConnect(["sessions"])
+	fbCompose
 )(pieGraph);

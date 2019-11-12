@@ -21,14 +21,15 @@ import {
 	changeDifficulty,
 	updateSession,
 	displayGraph,
-	getNextSlice
+	getNextSlice,
+	changeMode
 } from "../../store/actions/dashboardActions";
 
 class Presentation extends Component {
 	state = {
 		view: null,
-		Voted: 83,
-		Here: 150,
+		Voted: 0,
+		Here: 140,
 		fetch: true,
 		finished: false,
 		nextURL: "",
@@ -54,6 +55,16 @@ class Presentation extends Component {
 		let composite = { status, sessionId };
 
 		props.revealAnswer(composite);
+	};
+
+	changeMode = () => {
+		const { props } = this;
+		const { session, sessionId } = props;
+		let status = session.dark;
+
+		let composite = { status, sessionId };
+
+		props.changeMode(composite);
 	};
 
 	handleRepoll = () => {
@@ -119,6 +130,14 @@ class Presentation extends Component {
 		let composite = { status, sessionId };
 
 		props.displayGraph(composite);
+	};
+
+	Voted = (num) => {
+		console.log(num);
+		this.setState((state) => ({
+			...state,
+			Voted: num
+		}));
 	};
 
 	componentDidMount = () => {
@@ -287,6 +306,8 @@ class Presentation extends Component {
 								url={session.slice && session.slice.url}
 								question={session.slice && session.slice.question}
 								title={session.slice && session.slice.title}
+								changeMode={this.changeMode}
+								dark={session.dark}
 							/>
 						</Row>
 						<Row style={{ height: "50%", marginBottom: "-1em" }}>
@@ -295,12 +316,14 @@ class Presentation extends Component {
 								url={session.nextSlice && session.nextSlice.url}
 								question={session.nextSlice && session.nextSlice.question}
 								title={session.nextSlice && session.nextSlice.title}
+								changeMode={this.changeMode}
+								dark={session.dark}
 							/>
 						</Row>
 					</Col>
 					<Col md="4" style={{ paddingRight: "3em", height: "95%", marginTop: "2%" }}>
 						<Row style={{ height: "50%" }}>
-							<Histogram sid={this.props.sessionId} />
+							<Histogram sid={this.props.sessionId} numResponded={this.Voted} />
 						</Row>
 						<Row style={{ height: "50%", marginTop: "3em" }}>
 							<Container style={{ height: "100%" }}>
@@ -536,7 +559,8 @@ const mapDispatchToProps = (dispatch) => ({
 	changeDifficulty: (pie) => dispatch(changeDifficulty(pie)),
 	updateSession: (pie) => dispatch(updateSession(pie)),
 	displayGraph: (pie) => dispatch(displayGraph(pie)),
-	getNextSlice: (pie) => dispatch(getNextSlice(pie))
+	getNextSlice: (pie) => dispatch(getNextSlice(pie)),
+	changeMode: (pie) => dispatch(changeMode(pie))
 });
 
 export default compose(
