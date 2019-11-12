@@ -199,6 +199,7 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 	const fireStore = getFirestore();
 	const collection = classs.classId;
 	const sessionToLoad = classs.sessionToLoad;
+	console.log(sessionToLoad);
 
 	if (sessionToLoad) {
 		fireStore
@@ -208,6 +209,7 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 			.then((docRef) => {
 				if (docRef.exists) {
 					var sliceIds = docRef.data().sliceIds;
+					console.log(sliceIds);
 					if (sliceIds[0]) {
 						fireStore
 							.collection("slices")
@@ -226,7 +228,7 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 											displayGraph: false,
 											currentSliceId: sliceIds[0],
 											inClass: collection,
-											isCurrentSliceAQuestion: docRef2.data().Lecture ? !docRef2.date().Lecture : "",
+											isCurrentSliceAQuestion: docRef2.data().Lecture ? !docRef2.data().Lecture : "",
 											numPolls: 1,
 											polling: false,
 											topic: docRef2.data().Topic ? docRef2.data().Topic : "",
