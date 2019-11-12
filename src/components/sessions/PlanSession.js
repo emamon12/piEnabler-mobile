@@ -39,7 +39,7 @@ class PlanSession extends Component {
 	handleUser = () => {
 		this.setState((state) => ({
 			...state,
-			UserFilter: state.UserFilter === "" ? this.props.uid : ""
+			UserFilter: state.UserFilter === "" ? "" : this.props.uid
 		}));
 	};
 
@@ -148,8 +148,8 @@ class PlanSession extends Component {
 								<p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
 								<div style={{ marginTop: "3vh" }}>
 									<Switch
-										offLabel="All Slices"
-										onLabel="My Slices"
+										offLabel="My Slices"
+										onLabel="All Slices"
 										style={{ marginTop: "3vh" }}
 										onChange={this.handleUser}
 										id="UserFilter"
@@ -165,7 +165,6 @@ class PlanSession extends Component {
 											top: "2em"
 										}}
 									>
-										{" "}
 										Filter Difficulty
 									</label>
 									<Dropdown
