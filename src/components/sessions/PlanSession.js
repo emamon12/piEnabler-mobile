@@ -68,6 +68,16 @@ class PlanSession extends Component {
     props.addSliceToSession(composite);
   };
 
+  handleSliceButtonClick = e => {
+    const { props } = this;
+    const { target } = e;
+
+    const sessionplanid = props.sessionplansid;
+    const sliceId = target.value;
+    const composite = { sessionplanid, sliceId };
+    props.addSliceToSession(composite);
+  };
+
   handleDelete = e => {
     e.preventDefault();
     const { props } = this;
@@ -189,6 +199,7 @@ class PlanSession extends Component {
                 <div style={{ marginTop: "3vh" }}>
                   <Switch
                     offLabel="Filter for Images"
+                    onLabel=""
                     onChange={this.handleImage}
                     id="ImageFilter"
                   />
@@ -239,6 +250,7 @@ class PlanSession extends Component {
               topicFilter={this.state.TopicFilter}
               difficultyFilter={this.state.DifficultyFilter}
               userFilter={this.state.UserFilter}
+              handleButtonClick={this.handleSliceButtonClick}
             />
           </div>
         </div>
