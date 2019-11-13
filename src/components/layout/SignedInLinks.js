@@ -114,7 +114,7 @@ const SignedInLinks = props => {
               waves={true}
               className="white-text"
               href={"../manage/slices/" + auth.uid}
-              icon="settings_applications"
+              icon="delete_sweep"
             >
               Manage Slices
             </SideNavItem>
@@ -201,6 +201,14 @@ const SignedInLinks = props => {
               icon="settings_applications"
             >
               Settings
+            </SideNavItem>
+            <SideNavItem
+              waves={true}
+              className="white-text"
+              href={"../manage/slices/" + auth.uid}
+              icon="delete_sweep"
+            >
+              Manage Slices
             </SideNavItem>
             <SideNavItem
               waves={true}

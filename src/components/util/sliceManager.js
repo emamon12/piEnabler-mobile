@@ -69,10 +69,10 @@ class sliceManager extends Component {
       sliceFilter = slices;
     }
 
-    if (user && user.userRole === "instructor") {
+    if (user && user.userRole === "instructor" && slices) {
       sliceFilter = slices.filter(slice => {
         return slice.createdBy === auth.uid;
-      })
+      });
     }
 
     const textStyle = "grey-text text-darken-3";
@@ -83,7 +83,6 @@ class sliceManager extends Component {
         return slice.id === this.state.sliceId;
       })[0];
     }
-    console.log(selectedSlice);
 
     return (
       <div className="dashboard">
