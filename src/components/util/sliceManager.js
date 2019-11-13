@@ -59,9 +59,7 @@ class sliceManager extends Component {
     //just check if the user is authenticated
     const { props } = this;
     const { auth, user, slices } = props;
-    if (!auth.uid) {
-      return <Redirect to="/landing" />;
-    }
+
     if (user && user.userRole === "student") {
       return <Redirect to="/" />;
     }
