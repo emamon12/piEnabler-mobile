@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Modal, Button, Row, Col, Preloader, Textarea } from 'react-materialize'
 import { ChangeMessage } from '../../store/actions/classActions'
 import { RemoveSession } from '../../store/actions/classActions'
@@ -107,13 +107,12 @@ class ClassDetails extends Component {
         }
 
         const { user } = props
-        const classId = props.classsId
 
         const formMode = this.state.formMode
         const message = this.state.classMessage
         
 
-        const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light"
+        const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light unify"
 
         if (user && classs && classs.currSession !== "") {
             return (
@@ -144,11 +143,11 @@ class ClassDetails extends Component {
                         <div className="row">
                             <div className="flexbox">
                                 {(classs.currSession !== "") ?
-                                    <Link to={'/session/' + classs.currSession} key={classs.currSession}>
+                                    <NavLink to={'/session/' + classs.currSession} key={classs.currSession}>
                                         <div className="col mar1">
                                             <button type="button" className={buttonClassName}>Join Session</button>
                                         </div>
-                                    </Link>
+                                    </NavLink>
                                     :
                                     null
                                 }
@@ -156,9 +155,32 @@ class ClassDetails extends Component {
                                 {(user.userRole === "admin" || user.userRole === "instructor") ?
                                     <div className="col mar1">
                                         <button type="button" onClick={this.handleEndSession} className={buttonClassName}>End Session</button></div> : null}
+                   
+                                {((user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "") ?
+                                    <NavLink to={'/session/' + classs.currSession + '/clicker/'} key={classs.currSession + "pres"} >
+                                        <div className="col mar1">
+                                            <button type="button"
+                                                className={buttonClassName}>
+                                                Clicker
+                                            </button>
+                                        </div>
+                                    </NavLink>
+                                    : null}
 
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <NavLink to={'/session/' + classs.currSession + '/projection/'} key={classs.currSession + "proj"} >
+                                {((user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "") ?
+                                    <NavLink to={'/session/' + classs.currSession + '/dashboard/'} key={classs.currSession + "pres"} >
+                                        <div className="col mar1">
+                                            <button type="button"
+                                                className={buttonClassName}>
+                                                Dashboard
+                                            </button>
+                                        </div>
+                                    </NavLink>
+                                    : null}
+
+
+                                    {(classs.currSession !== "") ?
+                                    <NavLink to={'/session/' + classs.currSession + '/projection/' } key={classs.currSession + "proj"} >
                                         <div className="col mar1">
                                             <button type="button" className={buttonClassName}>
                                                 Projection
@@ -166,19 +188,7 @@ class ClassDetails extends Component {
                                         </div>
                                     </NavLink>
                                     : null}
-
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
-                                    <NavLink to={'/class/' + classId  + '/session/' + classs.currSession + '/presentation/'} key={classs.currSession + "pres"} >
-                                        <div className="col mar1">
-                                            <button type="button"
-                                                className={buttonClassName}>
-                                                Presentation
-                                            </button>
-                                        </div>
-                                    </NavLink>
-                                    : null}
-
-                                {(user.userRole === "admin" || user.userRole === "instructor") ?
+                                {((user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "") ?
                                     <div className="col mar1">
                                         {(!formMode) ?
                                             <button onClick={this.handleButtonClick} type="button" value={message} className={buttonClassName}>Change Message</button>
@@ -220,7 +230,7 @@ class ClassDetails extends Component {
                         </div>
                         <div className="row">
                             <div className="flexbox">
-                                <div className="col">
+                                <div className="col mar1">
                                     <Modal className="modal1"
                                         options={{ preventScrolling: false, inDuration: 500, outDuraton: 500 }}
                                         actions={<Button waves="purple" modal="close" flat>Okay</Button>} header="No Session Active"

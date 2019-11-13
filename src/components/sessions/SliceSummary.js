@@ -1,23 +1,29 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const SliceSummary = ({ slices }) => {
-    return (
-        <div className="card z-depth-0 classs-summary">
-            <div className="card-content grey-text text-darken-3">
-                <p>Slice Id: {slices.id}</p>
-                <span className="card-title">{slices.Title}
-                </span>
-                <p>Topic: {slices.Topic}</p>
-                
-                {slices.Cheese ? <p>Image Slice</p>:
-                    slices.Lecture === true ?
-                    <p>Lecture Slice</p>
-                    :
-                    <p>Question Slice</p>}
-            </div>
-        </div>
-    )
+const SliceSummary = ({ slice }) => {
+	return (
+		<div className="card z-depth-0 classs-summary">
+			<div className="card-content black-text ">
+				<p>
+					<b>Slice ID:</b> {slice.id}
+				</p>
+				<Link to={"/slices/" + slice.id} key={slice.id} style={{ color: "#424242" }}>
+					<span className="card-title">{slice.Title}</span>
+					<span className="card-title">{slice.filename}</span>
+					<p>Topic: {slice.Topic}</p>
 
-}
+					{slice.Cheese ? (
+						<p>Image Slice</p>
+					) : slice.Lecture === true ? (
+						<p>Lecture Slice: {slice.Title && slice.Title}</p>
+					) : (
+						<p>Question Slice: {slice.Question && slice.Question}</p>
+					)}
+				</Link>
+			</div>
+		</div>
+	);
+};
 
-export default SliceSummary
+export default SliceSummary;
