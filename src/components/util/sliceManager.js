@@ -59,7 +59,9 @@ class sliceManager extends Component {
     //just check if the user is authenticated
     const { props } = this;
     const { auth, user, slices } = props;
-
+    if (!auth.uid) {
+      return <Redirect to="/landing" />;
+    }
     if (user && user.userRole === "student") {
       return <Redirect to="/" />;
     }
@@ -234,7 +236,6 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.firebase.auth,
     user: user,
     slices: state.firestore.ordered.slices,
-    sliceError: state.session.sliceError,
     id: id
   };
 };
