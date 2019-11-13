@@ -64,11 +64,22 @@ class sliceManager extends Component {
       return <Redirect to="/" />;
     }
 
+    let sliceFilter;
+    if (slices) {
+      sliceFilter = slices;
+    }
+
+    if (user && user.userRole === "instructor") {
+      sliceFilter = slices.filter(slice => {
+        return slice.createdBy === auth.uid;
+      })
+    }
+
     const textStyle = "grey-text text-darken-3";
 
-    var selectedSlice;
+    let selectedSlice;
     if (this.state.sliceId) {
-      selectedSlice = slices.filter(slice => {
+      selectedSlice = sliceFilter.filter(slice => {
         return slice.id === this.state.sliceId;
       })[0];
     }
@@ -80,7 +91,7 @@ class sliceManager extends Component {
           <div id="slice-list" className="col s12 m5 offset-m1 ease-in-anim">
             {slices && auth ? (
               <div className="slice-list-children ease-in-anim section">
-                {slices.map(slice => {
+                {sliceFilter.map(slice => {
                   return (
                     <div
                       style={{ minHeight: "10em" }}
