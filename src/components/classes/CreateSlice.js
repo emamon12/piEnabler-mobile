@@ -10,10 +10,6 @@ import Dropdown from "muicss/lib/react/dropdown";
 import DropdownItem from "muicss/lib/react/dropdown-item";
 import ImageUpload from "../util/ImageUpload";
 
-const initState = {
-  Lecture: false,
-  Cheese: false
-};
 class CreateSlice extends Component {
   state = {
     Lecture: false,
@@ -47,7 +43,6 @@ class CreateSlice extends Component {
 
     const { props, state } = this;
     props.createSlice(state);
-    this.setState(initState);
     props.history.push("/createSlice");
   };
 
@@ -77,7 +72,6 @@ class CreateSlice extends Component {
     console.log("submit clicked");
     //the push acts as a redirect... when the form is submitted... redirect to home
     document.getElementById("form").reset();
-    this.setState(initState);
     props.history.push("/createSlice");
   };
 
