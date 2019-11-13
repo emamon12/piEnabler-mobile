@@ -28,7 +28,7 @@ class PlanSession extends Component {
 
     this.setState(state => ({
       ...state,
-      [target.id]: target.value
+      [target.id]: target.value.trim()
     }));
   };
 
