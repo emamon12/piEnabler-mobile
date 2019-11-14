@@ -70,7 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
 	addClass: (classs) => dispatch(addClass(classs))
 });
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(AddClass);
+export default connect(mapStateToProps, mapDispatchToProps)(AddClass);

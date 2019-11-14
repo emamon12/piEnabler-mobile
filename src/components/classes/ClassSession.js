@@ -192,10 +192,4 @@ const fbCompose = compose(
 	})
 );
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	fbCompose
-)(ClassSession);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(ClassSession);

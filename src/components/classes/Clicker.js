@@ -281,10 +281,4 @@ const mapDispatchToProps = (dispatch) => ({
 	getNextSlice: (pie) => dispatch(getNextSlice(pie))
 });
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect(["sessions", "slices"])
-)(Clicker);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(Clicker);

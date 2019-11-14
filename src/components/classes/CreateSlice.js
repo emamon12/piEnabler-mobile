@@ -67,10 +67,10 @@ class CreateSlice extends Component {
       url: url
     }));
 
-    const { props, state } = this;
-    props.createSlice(state);
-    props.history.push("/createSlice");
-  };
+		const { props, state } = this;
+		props.createSlice(state);
+		props.history.push("/createSlice");
+	};
 
   handleLectureChange = (e) => {
     const { target } = e;

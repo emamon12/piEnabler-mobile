@@ -149,7 +149,4 @@ const mapDispatchToProps = (dispatch) => ({
 	createClass: (classs) => dispatch(createClass(classs))
 });
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(CreateClass);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateClass);
