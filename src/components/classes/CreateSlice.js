@@ -102,8 +102,6 @@ class CreateSlice extends Component {
     props.history.push("/createSlice");
   };
 
-
-
   render() {
     //just check if the user is authenticated
     const { auth, profile } = this.props;
