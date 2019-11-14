@@ -2,7 +2,7 @@ import React from "react";
 import SliceSummary from "./SliceSummary";
 import { Row, Col, Preloader } from "react-materialize";
 
-const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter, userFilter }) => {
+const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter, userFilter, handleButtonClick }) => {
 	if (slices && profile) {
 		let filtered = slices;
 
@@ -33,7 +33,7 @@ const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilte
 		return (
 			<div className="slice-list-children ease-in-anim section">
 				{filtered.map((slice) => {
-					return <SliceSummary slice={slice}></SliceSummary>;
+					return <SliceSummary slice={slice} handleButtonClick={handleButtonClick} key={slice.id}></SliceSummary>;
 				})}
 			</div>
 		);

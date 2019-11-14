@@ -579,10 +579,4 @@ const mapDispatchToProps = (dispatch) => ({
 	changeMode: (pie) => dispatch(changeMode(pie))
 });
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect(["sessions", "slices"])
-)(Presentation);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(Presentation);

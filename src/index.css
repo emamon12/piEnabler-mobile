@@ -176,13 +176,13 @@ code {
 	animation-timing-function: ease-in;
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 710px) {
 	.navbar-dropdown {
 		display: none;
 	}
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 710px) {
 	.navbar-attrib {
 		display: none;
 		pointer-events: none;
@@ -401,4 +401,8 @@ div.mui-col-md-4:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
 
 .btn:hover {
 	filter: brightness(1.25);
+}
+
+.slice-add-button {
+	float: right;
 }

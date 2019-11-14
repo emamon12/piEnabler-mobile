@@ -95,10 +95,4 @@ const fbCompose = compose(
 	})
 );
 
-export default compose(
-	connect(
-		mapStateToProps,
-		null
-	),
-	fbCompose
-)(pieGraph);
+export default compose(connect(mapStateToProps, null), fbCompose)(pieGraph);

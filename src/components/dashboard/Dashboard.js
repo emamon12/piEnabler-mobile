@@ -82,7 +82,4 @@ const fbCompose = compose(
 
 //connect mapstatetoprops
 //firestoreconnect connects the component to the firestore... so you can access the collections
-export default compose(
-	fbCompose,
-	connect(mapStateToProps)
-)(Dashboard);
+export default compose(fbCompose, connect(mapStateToProps))(Dashboard);

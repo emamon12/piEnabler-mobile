@@ -36,7 +36,4 @@ const mapStateToProps = (state) => ({
 	profile: state.firebase.profile
 });
 
-export default compose(
-	firebaseConnect(),
-	connect(mapStateToProps)
-)(Navbar);
+export default compose(firebaseConnect(), connect(mapStateToProps))(Navbar);

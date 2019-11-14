@@ -117,10 +117,4 @@ const fbCompose = compose(
 	})
 );
 
-export default compose(
-	connect(
-		mapStateToProps,
-		null
-	),
-	fbCompose
-)(Histogram);
+export default compose(connect(mapStateToProps, null), fbCompose)(Histogram);

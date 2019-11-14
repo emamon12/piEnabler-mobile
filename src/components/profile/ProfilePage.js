@@ -76,7 +76,4 @@ const fbCompose = compose(
 	})
 );
 
-export default compose(
-	connect(mapStateToProps),
-	fbCompose
-)(ProfilePage);
+export default compose(connect(mapStateToProps), fbCompose)(ProfilePage);

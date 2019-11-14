@@ -246,10 +246,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect(["sessions", "slices"])
-)(frickenlazorbeams);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(frickenlazorbeams);
