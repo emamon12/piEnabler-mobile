@@ -202,8 +202,8 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
 
 		let slice = {
 			url: myslice.url ? myslice.url : "",
-			title: myslice.url || !myslice.Title ? "" : myslice.Title,
-			question: myslice.url || !myslice.Question ? "" : myslice.Question
+			title: myslice.Title ? myslice.Title : "",
+			question: myslice.Question ? myslice.Question : ""
 		};
 		getFirestore()
 			.collection("sessions")
@@ -253,27 +253,27 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
 			let myslice = slices[sliceId];
 			let slice = {
 				url: myslice.url ? myslice.url : "",
-				title: myslice.url || !myslice.Title ? "" : myslice.Title,
-				question: myslice.url || !myslice.Question ? "" : myslice.Question
+				title: myslice.Title ? myslice.Title : "",
+				question: myslice.Question ? myslice.Question : ""
 			};
 
 			fireStore
 				.collection("sessions")
 				.doc(sessionId)
 				.update({
-					answer1: myslice.Answer1,
-					answer2: myslice.Answer2,
-					answer3: myslice.Answer3,
-					answer4: myslice.Answer4,
+					answer1: myslice.Answer1 ? myslice.Answer1 : "",
+					answer2: myslice.Answer2 ? myslice.Answer2 : "",
+					answer3: myslice.Answer3 ? myslice.Answer3 : "",
+					answer4: myslice.Answer4 ? myslice.Answer4 : "",
 					revealAnswer: false,
 					currentSliceId: sliceId,
 					isCurrentSliceAQuestion: myslice.Lecture ? false : true,
 					numPolls: 1,
 					polling: false,
-					topic: myslice.Topic,
-					difficulty: myslice.Difficulty,
-					sliceHistory: fireStore.FieldValue.arrayUnion(session.sessionPlan[session.sliceNumber - 2]),
-					trueAnswer: myslice.CorrectAnswer,
+					topic: myslice.Topic ? myslice.Topic : "",
+					difficulty: myslice.Difficulty ? myslice.Difficulty : "",
+					sliceHistory: session.sliceNumber - 2 >= 0 && fireStore.FieldValue.arrayUnion(session.sessionPlan[session.sliceNumber - 2]),
+					trueAnswer: myslice.CorrectAnswer ? myslice.CorrectAnswer : "",
 					slice: slice
 				})
 				.then(() =>

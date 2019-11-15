@@ -70,6 +70,7 @@ class CreateSlice extends Component {
 
 		const { props, state } = this;
 		props.createSlice(state);
+		this.resetState();
 		props.history.push("/createSlice");
 	};
 

@@ -218,10 +218,10 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 									fireStore
 										.collection("sessions")
 										.add({
-											answer1: docRef2.data().Answer1,
-											answer2: docRef2.data().Answer2,
-											answer3: docRef2.data().Answer3,
-											answer4: docRef2.data().Answer4,
+											answer1: docRef2.data().Answer1 ? docRef2.data().Answer1 : "",
+											answer2: docRef2.data().Answer2 ? docRef2.data().Answer2 : "",
+											answer3: docRef2.data().Answer3 ? docRef2.data().Answer3 : "",
+											answer4: docRef2.data().Answer4 ? docRef2.data().Answer4 : "",
 											revealAnswer: false,
 											displayGraph: false,
 											currentSliceId: sliceIds[0],
@@ -229,18 +229,18 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 											isCurrentSliceAQuestion: !docRef2.data().Lecture ? true : false,
 											numPolls: 1,
 											polling: false,
-											topic: docRef2.data().Topic,
+											topic: docRef2.data().Topic ? docRef2.data().Topic : "",
 											slice: {
-												url: docRef2.data().url,
-												title: docRef2.data().Title,
-												question: docRef2.data().Question
+												url: docRef2.data().url ? docRef2.data().url : "",
+												title: docRef2.data().Title ? docRef2.data().Title : "",
+												question: docRef2.data().Question ? docRef2.data().Question : ""
 											},
-											difficulty: docRef2.data().Difficulty,
+											difficulty: docRef2.data().Difficulty ? docRef2.data().Difficulty : "",
 											sessionPlan: sliceIds,
 											sessionStart: new Date(),
 											sessionEnd: "",
 											sliceHistory: [],
-											trueAnswer: docRef2.data().CorrectAnswer,
+											trueAnswer: docRef2.data().CorrectAnswer ? docRef2.data().CorrectAnswer : "",
 											sliceNumber: 1,
 											dark: false
 										})
