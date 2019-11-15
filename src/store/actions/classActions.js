@@ -239,7 +239,7 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 											sessionPlan: sliceIds,
 											sessionStart: new Date(),
 											sessionEnd: "",
-											sliceHistory: "",
+											sliceHistory: [],
 											trueAnswer: docRef2.data().CorrectAnswer,
 											sliceNumber: 1,
 											dark: false
