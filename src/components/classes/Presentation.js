@@ -150,12 +150,8 @@ class Presentation extends Component {
 	};
 
 	render() {
-		const { session, auth, authError, profile, pie } = this.props;
+		const { session, auth, profile, pie } = this.props;
 		let state = this.state;
-
-		if (authError) {
-			console.log(authError);
-		}
 
 		if (!auth.uid) {
 			return <Redirect to="/landing" />;

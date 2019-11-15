@@ -1,4 +1,4 @@
-const initstate = {};
+const initstate = { sliceError: null };
 
 const sessionReducer = (state = initstate, action) => {
 	switch (action.type) {

@@ -199,7 +199,6 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 	const fireStore = getFirestore();
 	const collection = classs.classId;
 	const sessionToLoad = classs.sessionToLoad;
-	console.log(sessionToLoad);
 
 	if (sessionToLoad) {
 		fireStore
@@ -209,40 +208,39 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 			.then((docRef) => {
 				if (docRef.exists) {
 					var sliceIds = docRef.data().sliceIds;
-					console.log(sliceIds);
 					if (sliceIds[0]) {
 						fireStore
 							.collection("slices")
 							.doc(sliceIds[0])
 							.get()
 							.then((docRef2) => {
-								if (docRef2.exists && docRef2.data().Cheese && docRef2.data().Cheese === true) {
+								if (docRef2.exists) {
 									fireStore
 										.collection("sessions")
 										.add({
-											answer1: "",
-											answer2: "",
-											answer3: "",
-											answer4: "",
+											answer1: docRef2.data().Answer1,
+											answer2: docRef2.data().Answer2,
+											answer3: docRef2.data().Answer3,
+											answer4: docRef2.data().Answer4,
 											revealAnswer: false,
 											displayGraph: false,
 											currentSliceId: sliceIds[0],
 											inClass: collection,
-											isCurrentSliceAQuestion: docRef2.data().Lecture ? !docRef2.data().Lecture : "",
+											isCurrentSliceAQuestion: !docRef2.data().Lecture ? true : false,
 											numPolls: 1,
 											polling: false,
-											topic: docRef2.data().Topic ? docRef2.data().Topic : "",
+											topic: docRef2.data().Topic,
 											slice: {
 												url: docRef2.data().url,
-												title: "",
-												question: ""
+												title: docRef2.data().Title,
+												question: docRef2.data().Question
 											},
-											difficulty: "",
+											difficulty: docRef2.data().Difficulty,
 											sessionPlan: sliceIds,
 											sessionStart: new Date(),
 											sessionEnd: "",
 											sliceHistory: "",
-											trueAnswer: "",
+											trueAnswer: docRef2.data().CorrectAnswer,
 											sliceNumber: 1,
 											dark: false
 										})
@@ -267,111 +265,9 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
 												);
 										});
 								} else {
-									if (docRef2.exists && docRef2.data().Lecture === false) {
-										fireStore
-											.collection("sessions")
-											.add({
-												answer1: docRef2.data().Answer1,
-												answer2: docRef2.data().Answer2,
-												answer3: docRef2.data().Answer3,
-												answer4: docRef2.data().Answer4,
-												revealAnswer: false,
-												displayGraph: false,
-												currentSliceId: sliceIds[0],
-												inClass: collection,
-												isCurrentSliceAQuestion: !docRef2.data().Lecture,
-												numPolls: 1,
-												polling: false,
-												topic: docRef2.data().Topic,
-												slice: {
-													url: "",
-													title: docRef2.data().Title ? docRef2.data().Title : "",
-													question: docRef2.data().Question ? docRef2.data().Question : ""
-												},
-												difficulty: docRef2.data().Difficulty,
-												sessionPlan: sliceIds,
-												sessionStart: new Date(),
-												sessionEnd: "",
-												sliceHistory: "",
-												trueAnswer: docRef2.data().CorrectAnswer,
-												sliceNumber: 1,
-												dark: false
-											})
-											.then((docRefSession) => {
-												fireStore
-													.collection("classes")
-													.doc(collection)
-													.update({
-														currSession: docRefSession.id
-													})
-													.then(() =>
-														dispatch({
-															type: "SUCCESSFULLY_LOADED",
-															classs
-														})
-													)
-													.catch((err) =>
-														dispatch({
-															type: "UNSUCCESSFULLY_LOADED",
-															err
-														})
-													);
-											});
-									} else if (docRef2.exists && docRef2.data().Lecture === true) {
-										fireStore
-											.collection("sessions")
-											.add({
-												answer1: "",
-												answer2: "",
-												answer3: "",
-												answer4: "",
-												revealAnswer: false,
-												displayGraph: false,
-												currentSliceId: sliceIds[0],
-												inClass: collection,
-												isCurrentSliceAQuestion: !docRef2.data().Lecture,
-												numPolls: 1,
-												polling: false,
-												topic: docRef2.data().Topic,
-												slice: {
-													url: "",
-													title: docRef2.data().Title ? docRef2.data().Title : "",
-													question: docRef2.data().Question ? docRef2.data().Question : ""
-												},
-												difficulty: "",
-												sessionPlan: sliceIds,
-												sessionStart: new Date(),
-												sessionEnd: "",
-												sliceHistory: "",
-												trueAnswer: "",
-												sliceNumber: 1,
-												dark: false
-											})
-											.then((docRefSession) => {
-												fireStore
-													.collection("classes")
-													.doc(collection)
-													.update({
-														currSession: docRefSession.id
-													})
-													.then(() =>
-														dispatch({
-															type: "SUCCESSFULLY_LOADED",
-															classs
-														})
-													)
-													.catch((err) =>
-														dispatch({
-															type: "UNSUCCESSFULLY_LOADED",
-															err
-														})
-													);
-											});
-									} else {
-										dispatch({
-											type: "SLICE_REF_NOT_EXIST"
-										});
-									}
+									dispatch({
+										type: "SLICE_REF_NOT_EXIST"
+									});
 								}
 							});
 					} else {

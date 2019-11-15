@@ -93,11 +93,7 @@ class Clicker extends Component {
 	};
 
 	render() {
-		const { session, auth, authError, profile } = this.props;
-
-		if (authError) {
-			console.log(authError);
-		}
+		const { session, auth, profile } = this.props;
 
 		if (!auth.uid) {
 			return <Redirect to="/signin" />;
