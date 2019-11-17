@@ -119,6 +119,7 @@ class CreateSlice extends Component {
 					{this.state.Cheese ? (
 						<div>
 							<h4 style={{ color: "red", textAlign: "center" }}>WARNING IMAGES ARE UPLOADED IMMEDIATELY</h4>
+							<h4 style={{ color: "red", textAlign: "center" }}>PLEASE FILL OUT THE FORM BEFORE UPLOADING THE IMAGE</h4>
 							<div className="input-field">
 								<label htmlFor="Topic">Topic</label>
 								<input type="text" name="Topic" id="Topic" className="input-style" autoComplete="off" onChange={this.handleChange} />
@@ -126,7 +127,7 @@ class CreateSlice extends Component {
 							<ImageUpload uploadGoog={this.handleImage} />
 						</div>
 					) : this.state.Lecture ? (
-						<div style={{ marginTop: 0 }} className="white" id="form">
+						<div style={{ marginTop: 0, marginLeft: 15, marginRight: 15, marginBottom: 15 }} className="white" id="form">
 							<div className="input-field">
 								<label htmlFor="Title">Slice Title</label>
 								<input type="text" name="Title" id="Title" className="input-style" autoComplete="off" onChange={this.handleChange} />
@@ -156,14 +157,14 @@ class CreateSlice extends Component {
 									required
 								/>
 							</div>
-							<div className="input-field" style={{ paddingBottom: "2rem" }}>
+							<div className="input-field" style={{ paddingBottom: "3rem" }}>
 								<Button type="submit" waves="light" className="btn purple-bg purple darken-3 right z-depth-1">
 									Create Slice
 								</Button>
 							</div>
 						</div>
 					) : (
-						<div style={{ marginTop: 0 }} className="white" id="form">
+						<div style={{ marginTop: 0, marginLeft: 15, marginRight: 15, marginBottom: 15  }} className="white" id="form">
 							<div className="input-field">
 								<label htmlFor="Title">Slice Title</label>
 								<input type="text" name="Title" id="Title" className="input-style" autoComplete="off" onChange={this.handleChange} />
@@ -269,7 +270,7 @@ class CreateSlice extends Component {
 								</Dropdown>
 							</div>
 
-							<div className="input-field" style={{ paddingBottom: "2rem" }}>
+							<div className="input-field" style={{ paddingBottom: "3rem" }}>
 								<Button type="submit" waves="light" className="btn purple-bg purple darken-3 right z-depth-1">
 									Create Slice
 								</Button>
