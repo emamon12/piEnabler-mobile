@@ -106,6 +106,7 @@ const SignedInLinks = props => {
             >
               Settings
             </SideNavItem>
+
             <SideNavItem
               waves={true}
               className="white-text"
@@ -114,6 +115,14 @@ const SignedInLinks = props => {
               icon="power_settings_new"
             >
               Log Out
+            </SideNavItem>
+            <SideNavItem
+              waves={true}
+              className="white-text"
+              href={"../manage/slices/" + auth.uid}
+              icon="delete_sweep"
+            >
+              Manage Slices
             </SideNavItem>
           </SideNav>
         </ul>
@@ -187,6 +196,14 @@ const SignedInLinks = props => {
               icon="settings_applications"
             >
               Settings
+            </SideNavItem>
+            <SideNavItem
+              waves={true}
+              className="white-text"
+              href={"../manage/slices/" + auth.uid}
+              icon="delete_sweep"
+            >
+              Manage Slices
             </SideNavItem>
             <SideNavItem
               waves={true}

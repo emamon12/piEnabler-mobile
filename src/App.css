@@ -62,6 +62,11 @@ li.white-text:nth-child(4) > a:nth-child(1) > i:nth-child(1) {
 	color: #cecece !important;
 }
 
+li.white-text:nth-child(5) > a:nth-child(1),
+li.white-text:nth-child(5) > a:nth-child(1) > i:nth-child(1) {
+	color: #cecece !important;
+}
+
 li.white-text:nth-child(2) > a:nth-child(1) > i:nth-child(1) .react-calendar {
 	margin: 0 auto;
 	margin-top: 20vh;

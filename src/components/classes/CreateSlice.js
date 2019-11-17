@@ -13,7 +13,7 @@ import ImageUpload from "../util/ImageUpload";
 class CreateSlice extends Component {
 	state = {
 		Lecture: false,
-		Cheese: false
+		Cheese: false,
 	};
 
 	handleChange = (e) => {
@@ -126,7 +126,7 @@ class CreateSlice extends Component {
 							<ImageUpload uploadGoog={this.handleImage} />
 						</div>
 					) : this.state.Lecture ? (
-						<form style={{ marginTop: 0 }} className="white" id="form">
+						<div style={{ marginTop: 0 }} className="white" id="form">
 							<div className="input-field">
 								<label htmlFor="Title">Slice Title</label>
 								<input type="text" name="Title" id="Title" className="input-style" autoComplete="off" onChange={this.handleChange} />
@@ -157,13 +157,13 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field" style={{ paddingBottom: "2rem" }}>
-								<Button type="submit" waves="light " className="btn purple-bg purple darken-3 right z-depth-1">
+								<Button type="submit" waves="light" className="btn purple-bg purple darken-3 right z-depth-1">
 									Create Slice
 								</Button>
 							</div>
-						</form>
+						</div>
 					) : (
-						<form style={{ marginTop: 0 }} className="white" id="form">
+						<div style={{ marginTop: 0 }} className="white" id="form">
 							<div className="input-field">
 								<label htmlFor="Title">Slice Title</label>
 								<input type="text" name="Title" id="Title" className="input-style" autoComplete="off" onChange={this.handleChange} />
@@ -270,11 +270,11 @@ class CreateSlice extends Component {
 							</div>
 
 							<div className="input-field" style={{ paddingBottom: "2rem" }}>
-								<Button type="submit" waves="light " className="btn purple-bg purple darken-3 right z-depth-1">
+								<Button type="submit" waves="light" className="btn purple-bg purple darken-3 right z-depth-1">
 									Create Slice
 								</Button>
 							</div>
-						</form>
+						</div>
 					)}
 				</form>
 			</div>
