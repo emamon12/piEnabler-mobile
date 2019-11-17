@@ -13,7 +13,33 @@ import ImageUpload from "../util/ImageUpload";
 class CreateSlice extends Component {
 	state = {
 		Lecture: false,
-		Cheese: false
+		Cheese: false,
+		filename: "",
+		url: "",
+		Title: "",
+		Topic: "",
+		Answer1: "",
+		Answer2: "",
+		Answer3: "",
+		Answer4: "",
+		CorrectAnswer: "",
+		Difficulty: ""
+	};
+
+	resetState = (e) => {
+		this.setState((state) => ({
+			...state,
+			filename: "",
+			url: "",
+			Title: "",
+			Topic: "",
+			Answer1: "",
+			Answer2: "",
+			Answer3: "",
+			Answer4: "",
+			CorrectAnswer: "",
+			Difficulty: ""
+		}));
 	};
 
 	handleChange = (e) => {
@@ -34,6 +60,7 @@ class CreateSlice extends Component {
 			Cheese: !state.Cheese
 		}));
 	};
+
 	handleImage = (filename, url) => {
 		this.setState((state) => ({
 			...state,
@@ -43,6 +70,7 @@ class CreateSlice extends Component {
 
 		const { props, state } = this;
 		props.createSlice(state);
+		this.resetState();
 		props.history.push("/createSlice");
 	};
 
@@ -72,6 +100,7 @@ class CreateSlice extends Component {
 		console.log("submit clicked");
 		//the push acts as a redirect... when the form is submitted... redirect to home
 		document.getElementById("form").reset();
+		this.resetState();
 		props.history.push("/createSlice");
 	};
 
@@ -82,23 +111,44 @@ class CreateSlice extends Component {
 			return <Redirect to="/signin" />;
 		}
 		if (profile.userRole !== "admin" && profile.userRole !== "instructor") {
-			return <Redirect to="/"></Redirect>;
+			return <Redirect to="/"> </Redirect>;
 		}
 
 		return (
 			<div className="container">
 				<form onSubmit={this.handleSubmit} className="white">
-					<h2 className="grey-text text-darken-3" style={{ textAlign: "center" }}>
+					<h2
+						className="grey-text text-darken-3"
+						style={{
+							textAlign: "center"
+						}}
+					>
 						Create A New Slice
 					</h2>
-					<div style={{ position: "relative", paddingBottom: "3em" }}>
-						<div style={{ position: "absolute", left: "1.5em", top: "1.75em" }}>
+					<div
+						style={{
+							position: "relative",
+							paddingBottom: "3em"
+						}}
+					>
+						<div
+							style={{
+								position: "absolute",
+								left: "1.5em",
+								top: "1.75em"
+							}}
+						>
 							<Switch offLabel="Question" onLabel="Lecture" onChange={this.handleLectureChange} id="Lecture" />
 						</div>
 						{this.state.Cheese ? (
 							<Button
 								waves="light"
-								style={{ right: "1.5em", position: "absolute", backgroundColor: "#6a1b9a", width: "6.5em" }}
+								style={{
+									right: "1.5em",
+									position: "absolute",
+									backgroundColor: "#6a1b9a",
+									width: "6.5em"
+								}}
 								className="btn"
 								onClick={this.handleCheese}
 							>
@@ -107,7 +157,12 @@ class CreateSlice extends Component {
 						) : (
 							<Button
 								waves="light"
-								style={{ right: "1.5em", position: "absolute", backgroundColor: "#6a1b9a", width: "6.5em" }}
+								style={{
+									right: "1.5em",
+									position: "absolute",
+									backgroundColor: "#6a1b9a",
+									width: "6.5em"
+								}}
 								className="btn"
 								onClick={this.handleCheese}
 							>
@@ -115,20 +170,32 @@ class CreateSlice extends Component {
 							</Button>
 						)}
 					</div>
-
 					{this.state.Cheese ? (
 						<div>
-							<h4 style={{ color: "red", textAlign: "center" }}>WARNING IMAGES ARE UPLOADED IMMEDIATELY</h4>
+							<h4
+								style={{
+									color: "red",
+									textAlign: "center"
+								}}
+							>
+								WARNING IMAGES ARE UPLOADED IMMEDIATELY
+							</h4>
 							<div className="input-field">
-								<label htmlFor="Topic">Topic</label>
+								<label htmlFor="Topic"> Topic </label>
 								<input type="text" name="Topic" id="Topic" className="input-style" autoComplete="off" onChange={this.handleChange} />
 							</div>
 							<ImageUpload uploadGoog={this.handleImage} />
 						</div>
 					) : this.state.Lecture ? (
-						<form style={{ marginTop: 0 }} className="white" id="form">
+						<form
+							style={{
+								marginTop: 0
+							}}
+							className="white"
+							id="form"
+						>
 							<div className="input-field">
-								<label htmlFor="Title">Slice Title</label>
+								<label htmlFor="Title"> Slice Title </label>
 								<input type="text" name="Title" id="Title" className="input-style" autoComplete="off" onChange={this.handleChange} />
 							</div>
 							<div className="input-field">
@@ -145,7 +212,7 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label htmlFor="Topic">Topic</label>
+								<label htmlFor="Topic"> Topic </label>
 								<input
 									type="text"
 									name="Topic"
@@ -156,20 +223,31 @@ class CreateSlice extends Component {
 									required
 								/>
 							</div>
-							<div className="input-field" style={{ paddingBottom: "2rem" }}>
+							<div
+								className="input-field"
+								style={{
+									paddingBottom: "2rem"
+								}}
+							>
 								<Button type="submit" waves="light " className="btn purple-bg purple darken-3 right z-depth-1">
 									Create Slice
 								</Button>
 							</div>
 						</form>
 					) : (
-						<form style={{ marginTop: 0 }} className="white" id="form">
+						<form
+							style={{
+								marginTop: 0
+							}}
+							className="white"
+							id="form"
+						>
 							<div className="input-field">
-								<label htmlFor="Title">Slice Title</label>
+								<label htmlFor="Title"> Slice Title </label>
 								<input type="text" name="Title" id="Title" className="input-style" autoComplete="off" onChange={this.handleChange} />
 							</div>
 							<div className="input-field">
-								<label htmlFor="Question">Question</label>
+								<label htmlFor="Question"> Question </label>
 								<input
 									type="text"
 									name="Question"
@@ -181,7 +259,7 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label htmlFor="Answer1">Answer 1</label>
+								<label htmlFor="Answer1"> Answer 1 </label>
 								<input
 									type="text"
 									name="Answer1"
@@ -193,7 +271,7 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label htmlFor="Answer2">Answer 2</label>
+								<label htmlFor="Answer2"> Answer 2 </label>
 								<input
 									type="text"
 									name="Answer2"
@@ -205,7 +283,7 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label htmlFor="Answer3">Answer 3</label>
+								<label htmlFor="Answer3"> Answer 3 </label>
 								<input
 									type="text"
 									name="Answer3"
@@ -216,7 +294,7 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label htmlFor="Answer4">Answer 4</label>
+								<label htmlFor="Answer4"> Answer 4 </label>
 								<input
 									type="text"
 									name="Answer4"
@@ -226,9 +304,8 @@ class CreateSlice extends Component {
 									onChange={this.handleChange}
 								/>
 							</div>
-
 							<div className="input-field">
-								<label htmlFor="CorrectAnswer">Correct Answer</label>
+								<label htmlFor="CorrectAnswer"> Correct Answer </label>
 								<input
 									type="text"
 									name="CorrectAnswer"
@@ -240,7 +317,7 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label htmlFor="Topic">Topic</label>
+								<label htmlFor="Topic"> Topic </label>
 								<input
 									type="text"
 									name="Topic"
@@ -252,24 +329,33 @@ class CreateSlice extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<label style={{ marginRight: "2em" }}>Difficulty</label>
-
+								<label
+									style={{
+										marginRight: "2em"
+									}}
+								>
+									Difficulty
+								</label>
 								<Dropdown
 									color="grey"
 									label={this.state.Difficulty ? this.state.Difficulty : ""}
 									id="Difficulty"
 									onSelect={this.handleDifChange}
-									style={{ marginLeft: "7em" }}
+									style={{
+										marginLeft: "7em"
+									}}
 									required
 								>
-									<DropdownItem value="">None</DropdownItem>
-									<DropdownItem value="easy">Easy</DropdownItem>
-									<DropdownItem value="medium">Medium</DropdownItem>
-									<DropdownItem value="hard">Hard</DropdownItem>
+									<DropdownItem value=""> None </DropdownItem> <DropdownItem value="easy"> Easy </DropdownItem>
+									<DropdownItem value="medium"> Medium </DropdownItem> <DropdownItem value="hard"> Hard </DropdownItem>
 								</Dropdown>
 							</div>
-
-							<div className="input-field" style={{ paddingBottom: "2rem" }}>
+							<div
+								className="input-field"
+								style={{
+									paddingBottom: "2rem"
+								}}
+							>
 								<Button type="submit" waves="light " className="btn purple-bg purple darken-3 right z-depth-1">
 									Create Slice
 								</Button>
@@ -291,7 +377,4 @@ const mapDispatchToProps = (dispatch) => ({
 	createSlice: (slices) => dispatch(createSlice(slices))
 });
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(CreateSlice);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateSlice);

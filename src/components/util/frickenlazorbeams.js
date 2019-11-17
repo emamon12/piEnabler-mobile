@@ -117,11 +117,7 @@ class frickenlazorbeams extends Component {
 	};
 
 	render() {
-		const { session, authError, auth } = this.props;
-
-		if (authError) {
-			console.log(authError);
-		}
+		const { session, auth } = this.props;
 
 		if (!auth.uid) {
 			return <Redirect to="/" />;
@@ -246,10 +242,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect(["sessions", "slices"])
-)(frickenlazorbeams);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(frickenlazorbeams);

@@ -93,11 +93,7 @@ class Clicker extends Component {
 	};
 
 	render() {
-		const { session, auth, authError, profile } = this.props;
-
-		if (authError) {
-			console.log(authError);
-		}
+		const { session, auth, profile } = this.props;
 
 		if (!auth.uid) {
 			return <Redirect to="/signin" />;
@@ -281,10 +277,4 @@ const mapDispatchToProps = (dispatch) => ({
 	getNextSlice: (pie) => dispatch(getNextSlice(pie))
 });
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	firestoreConnect(["sessions", "slices"])
-)(Clicker);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(Clicker);

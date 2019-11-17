@@ -74,7 +74,9 @@ class ClassSession extends Component {
 				<div className="container section">
 					<div className="card">
 						<div className="card-content">
-							<h3 style={{ textAlign: "center", marginBottom: "20px" }}>Current Slice Number: {session.sliceNumber}</h3>
+							<h3 style={{ textAlign: "center", marginBottom: "20px" }}>
+								{session.isCurrentSliceAQuestion ? session.slice.question : "No Question Available"}
+							</h3>
 						</div>
 					</div>
 					<div className="collection card-content" onClick={session.polling ? this.handleListClick : () => {}}>
@@ -86,7 +88,7 @@ class ClassSession extends Component {
 								session.answer1 !== "" && session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
 							}
 						>
-							{"A: " + session.answer1}
+							{session && session.isCurrentSliceAQuestion ? "A: " + session.answer1 : "A:"}
 						</a>
 						<a
 							id="answer2"
@@ -96,7 +98,7 @@ class ClassSession extends Component {
 								session.answer2 !== "" && session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
 							}
 						>
-							{"B: " + session.answer2}
+							{session && session.isCurrentSliceAQuestion ? "B: " + session.answer2 : "B:"}
 						</a>
 						<a
 							id="answer3"
@@ -106,7 +108,7 @@ class ClassSession extends Component {
 								session.answer3 !== "" && session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
 							}
 						>
-							{"C: " + session.answer3}
+							{session && session.isCurrentSliceAQuestion ? "C: " + session.answer3 : "C:"}
 						</a>
 						<a
 							id="answer4"
@@ -116,7 +118,7 @@ class ClassSession extends Component {
 								session.answer4 !== "" && session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass
 							}
 						>
-							{"D: " + session.answer4}
+							{session && session.isCurrentSliceAQuestion ? "D: " + session.answer4 : "D:"}
 						</a>
 					</div>
 					<div className="input-field center">
@@ -192,10 +194,4 @@ const fbCompose = compose(
 	})
 );
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	fbCompose
-)(ClassSession);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(ClassSession);

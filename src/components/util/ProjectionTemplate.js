@@ -53,7 +53,7 @@ class ProjectionTemplate extends Component {
 					) : this.props.question ? (
 						this.props.question
 					) : (
-						<div style={{ textAlign: "center", marginTop: "15%" }}>
+						<div style={{ position: "absolute", top: "45%", left: "45%" }}>
 							<Preloader flashing size="big" />
 						</div>
 					)}
