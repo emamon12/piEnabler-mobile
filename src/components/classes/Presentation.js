@@ -25,7 +25,8 @@ class Presentation extends Component {
     Here: 150,
     Question:
       "This is just at test of how many words you can fit onto one slide it is apparently not going to fill up too much because this is going to be the best powerpoint clone that the world has ever seen",
-    Title: "Welcome to CS 140"
+    Title: "Welcome to CS 140",
+    SliceNum: 0
   };
 
   handlePolling = e => {
@@ -61,6 +62,17 @@ class Presentation extends Component {
     props.nextSlice(sessionId)
     
     console.log("Question Clicked");
+  };
+
+  getNextID= () => {
+    sliceID = sessionPlan[SliceNum + 1];
+    if(session.isCurrentSliceAQuestion == "true") {
+      PollingStatus: true;
+    } else {
+      PollingStatus: false;
+    }
+    
+    SliceNum++;
   };
 
   handleDifficulty = () => {
