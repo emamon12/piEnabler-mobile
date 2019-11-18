@@ -108,7 +108,4 @@ const mapDispatchToProps = (dispatch) => ({
 	changeRole: (userToChange, userRole) => dispatch(changeRole(userToChange, userRole))
 });
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(ChangeRoles);
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeRoles);
