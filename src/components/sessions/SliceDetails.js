@@ -96,6 +96,7 @@ class SliceDetails extends Component {
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { slices } = state.firestore.data;
+  console.log(id);
   const slice = slices ? slices[id] : null;
   return {
     slice: slice,
@@ -111,9 +112,8 @@ const fbCompose = compose(
       return [];
     } else {
       return [
-        {
-          collection: "slices"
-        }
+        
+			`slices/${props.sliceid}`
       ];
     }
   })

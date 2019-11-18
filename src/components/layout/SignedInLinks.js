@@ -6,7 +6,7 @@ import { firebaseConnect } from "react-redux-firebase";
 import { signOut } from "../../store/actions/authActions";
 import { Dropdown, SideNavItem, SideNav } from "react-materialize";
 
-const SignedInLinks = props => {
+const SignedInLinks = (props) => {
   // As in SignIn.jsx we need to use a function that gets as an argument firebase object
 
   const { profile, auth } = props;
@@ -23,9 +23,7 @@ const SignedInLinks = props => {
     return (
       <div className="nav-container">
         <ul className="right">
-          <Dropdown
-            trigger={<li className="navbar-dropdown">Class Options</li>}
-          >
+          <Dropdown trigger={<li className="navbar-dropdown">Class Options</li>}>
             <NavLink className={textStyle} to="/changeRole">
               Change Role
             </NavLink>
@@ -74,9 +72,7 @@ const SignedInLinks = props => {
             className="grey darken-3 white-text"
             trigger={
               <li>
-                <button className={buttonStyle}>
-                  {props.profile.initials}
-                </button>
+                <button className={buttonStyle}>{props.profile.initials}</button>
               </li>
             }
             options={{ closeOnClick: true, edge: "right" }}
@@ -89,38 +85,17 @@ const SignedInLinks = props => {
                 name: `${profile.firstName} ${profile.lastName}`
               }}
             />
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              icon="account_circle"
-              href={"../users/" + auth.uid}
-            >
+            <SideNavItem waves={true} className="white-text" icon="account_circle" href={"../users/" + auth.uid}>
               Profile
             </SideNavItem>
 
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              href={"../settings"}
-              icon="settings_applications"
-            >
+            <SideNavItem waves={true} className="white-text" href={"../settings"} icon="settings_applications">
               Settings
             </SideNavItem>
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              href={"../manage/slices/" + auth.uid}
-              icon="delete_sweep"
-            >
+            <SideNavItem waves={true} className="white-text" href={"../manage/slices/" + auth.uid} icon="delete_sweep">
               Manage Slices
             </SideNavItem>
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              to="/signin"
-              onClick={handleSignOut}
-              icon="power_settings_new"
-            >
+            <SideNavItem waves={true} className="white-text" to="/signin" onClick={handleSignOut} icon="power_settings_new">
               Log Out
             </SideNavItem>
           </SideNav>
@@ -131,9 +106,7 @@ const SignedInLinks = props => {
     return (
       <div className="nav-container">
         <ul className="right">
-          <Dropdown
-            trigger={<li className="navbar-dropdown">Class Options</li>}
-          >
+          <Dropdown trigger={<li className="navbar-dropdown">Class Options</li>}>
             <NavLink className={textStyle} to="/createClass">
               Create Class
             </NavLink>
@@ -164,9 +137,7 @@ const SignedInLinks = props => {
             className="grey darken-3 white-text"
             trigger={
               <li>
-                <button className={buttonStyle}>
-                  {props.profile.initials}
-                </button>
+                <button className={buttonStyle}>{props.profile.initials}</button>
               </li>
             }
             options={{ closeOnClick: true, edge: "right" }}
@@ -179,38 +150,17 @@ const SignedInLinks = props => {
                 name: `${profile.firstName} ${profile.lastName}`
               }}
             />
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              icon="account_circle"
-              href={"../users/" + auth.uid}
-            >
+            <SideNavItem waves={true} className="white-text" icon="account_circle" href={"../users/" + auth.uid}>
               Profile
             </SideNavItem>
 
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              href={"../settings"}
-              icon="settings_applications"
-            >
+            <SideNavItem waves={true} className="white-text" href={"../settings"} icon="settings_applications">
               Settings
             </SideNavItem>
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              href={"../manage/slices/" + auth.uid}
-              icon="delete_sweep"
-            >
+            <SideNavItem waves={true} className="white-text" href={"../manage/slices/" + auth.uid} icon="delete_sweep">
               Manage Slices
             </SideNavItem>
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              onClick={handleSignOut}
-              href=""
-              icon="power_settings_new"
-            >
+            <SideNavItem waves={true} className="white-text" onClick={handleSignOut} href="" icon="power_settings_new">
               Log Out
             </SideNavItem>
           </SideNav>
@@ -231,9 +181,7 @@ const SignedInLinks = props => {
             className="grey darken-3 white-text"
             trigger={
               <li>
-                <button className={buttonStyle}>
-                  {props.profile.initials}
-                </button>
+                <button className={buttonStyle}>{props.profile.initials}</button>
               </li>
             }
             options={{ closeOnClick: true, edge: "right" }}
@@ -246,29 +194,13 @@ const SignedInLinks = props => {
                 name: `${profile.firstName} ${profile.lastName}`
               }}
             />
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              icon="account_circle"
-              href={"../users/" + auth.uid}
-            >
+            <SideNavItem waves={true} className="white-text" icon="account_circle" href={"../users/" + auth.uid}>
               Profile
             </SideNavItem>
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              href={"../settings"}
-              icon="settings_applications"
-            >
+            <SideNavItem waves={true} className="white-text" href={"../settings"} icon="settings_applications">
               Settings
             </SideNavItem>
-            <SideNavItem
-              waves={true}
-              className="white-text"
-              to="/signin"
-              onClick={handleSignOut}
-              icon="power_settings_new"
-            >
+            <SideNavItem waves={true} className="white-text" to="/signin" onClick={handleSignOut} icon="power_settings_new">
               Log Out
             </SideNavItem>
           </SideNav>
@@ -280,11 +212,8 @@ const SignedInLinks = props => {
   }
 };
 
-const mapDispatchToProps = dispatch => ({
-  signOut: firebase => dispatch(signOut(firebase))
+const mapDispatchToProps = (dispatch) => ({
+  signOut: (firebase) => dispatch(signOut(firebase))
 });
 
-export default compose(
-  firebaseConnect(),
-  connect(null, mapDispatchToProps)
-)(SignedInLinks);
+export default compose(firebaseConnect(), connect(null, mapDispatchToProps))(SignedInLinks);

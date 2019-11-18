@@ -220,7 +220,6 @@ const mapDispatchToProps = dispatch => ({
 const fbCompose = compose(
   connect(mapStateToProps),
   firestoreConnect(props => {
-    console.log(props.sessionid);
     if (!props.sessionid) {
       return [];
     } else {

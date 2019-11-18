@@ -186,7 +186,7 @@ class ClassDetails extends Component {
                 classs.currSession !== "" ? (
                   <NavLink
                     to={"/session/" + classs.currSession + "/clicker/"}
-                    key={classs.currSession + "pres"}
+                    key={classs.currSession + "clicker"}
                   >
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
@@ -201,7 +201,7 @@ class ClassDetails extends Component {
                 classs.currSession !== "" ? (
                   <NavLink
                     to={"/session/" + classs.currSession + "/dashboard/"}
-                    key={classs.currSession + "pres"}
+                    key={classs.currSession + "presentation"}
                   >
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
@@ -214,7 +214,7 @@ class ClassDetails extends Component {
                 {classs.currSession !== "" ? (
                   <NavLink
                     to={"/session/" + classs.currSession + "/projection/"}
-                    key={classs.currSession + "proj"}
+                    key={classs.currSession + "projection"}
                   >
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
@@ -452,7 +452,7 @@ const fbCompose = compose(
     } else {
       return [
         `users/${props.auth.uid}`,
-        "classes",
+        `classes/${props.classsId}`,
         `sessions/${props.classs.currSession}`
       ];
     }

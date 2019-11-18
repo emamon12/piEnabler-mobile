@@ -574,4 +574,18 @@ const mapDispatchToProps = (dispatch) => ({
 	changeMode: (pie) => dispatch(changeMode(pie))
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(Presentation);
+const fbCompose = compose(
+	connect(mapStateToProps),
+	firestoreConnect(props => {
+	  if (!props.session) {
+		return [];
+	  } else {
+		return [
+		  "slices",
+		  `sessions/${props.sessionId}`
+		];
+	  }
+	})
+  );
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(Presentation);

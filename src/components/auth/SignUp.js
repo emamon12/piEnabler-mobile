@@ -33,7 +33,7 @@ export class SignUp extends Component {
   };
 
   render() {
-    const { auth, authError } = this.props;
+    const { auth, signUpError } = this.props;
 
     if (auth.uid) {
       return <Redirect to="/" />;
@@ -68,9 +68,9 @@ export class SignUp extends Component {
             <button className="btn purple-bg purple darken-3 z-depth-1">
               Sign Up
             </button>
-            {authError ? (
+            {signUpError ? (
               <div className="red-text center text-darken-1">
-                <p>{authError}</p>
+                <p>{signUpError}</p>
               </div>
             ) : null}
           </div>
@@ -80,9 +80,9 @@ export class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.firebase.auth,
-  authError: state.auth.authError
+  signUpError: state.auth.signUpError,
 });
 
 const mapDispatchToProps = dispatch => ({
