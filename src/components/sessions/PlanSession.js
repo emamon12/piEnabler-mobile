@@ -50,21 +50,6 @@ class PlanSession extends Component {
     }));
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { props, state } = this;
-
-    const sliceId = state.sliceId;
-
-    const sessionplanid = props.sessionplansid;
-
-    const composite = { sessionplanid, sliceId };
-
-    document.getElementById("sliceId").value = "";
-
-    props.addSliceToSession(composite);
-  };
-
   handleSliceButtonClick = (e) => {
     const { props } = this;
     const { target } = e;
@@ -79,8 +64,7 @@ class PlanSession extends Component {
     e.preventDefault();
     const { props } = this;
     const { target } = e;
-    const value = target.innerHTML;
-
+    const value = target.id;
     const sessionplanid = props.sessionplansid;
 
     const composite = { sessionplanid, value };
@@ -124,23 +108,13 @@ class PlanSession extends Component {
               </h5>
               {sessionplans &&
                 sessionplans.sliceIds &&
-                sessionplans.sliceIds.map((slices) => {
+                sessionplans.sliceIds.map((slices, index) => {
                   return (
-                    <h5 className="slice-list" onClick={this.handleDelete} key={slices}>
-                      {slices}
+                    <h5 className="slice-list" id={slices} onClick={this.handleDelete} key={slices}>
+                      ({index+1}) {slices}
                     </h5>
                   );
                 })}
-
-              <div className="input-field">
-                <label htmlFor="sliceId">Input Slice Id to Add</label>
-                <input type="text" name="sliceId" id="sliceId" onChange={this.handleChange} />
-              </div>
-              <div className="input-field">
-                <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">
-                  Add
-                </button>
-              </div>
               {sliceError ? (
                 <div className="red-text center text-darken-1">
                   <p>{sliceError}</p>
