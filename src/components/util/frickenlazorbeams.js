@@ -117,11 +117,7 @@ class frickenlazorbeams extends Component {
 	};
 
 	render() {
-		const { session, authError, auth } = this.props;
-
-		if (authError) {
-			console.log(authError);
-		}
+		const { session, auth } = this.props;
 
 		if (!auth.uid) {
 			return <Redirect to="/" />;

@@ -150,12 +150,8 @@ class Presentation extends Component {
 	};
 
 	render() {
-		const { session, auth, authError, profile, pie } = this.props;
+		const { session, auth, profile, pie } = this.props;
 		let state = this.state;
-
-		if (authError) {
-			console.log(authError);
-		}
 
 		if (!auth.uid) {
 			return <Redirect to="/landing" />;
@@ -222,11 +218,10 @@ class Presentation extends Component {
 							title="Student View"
 							style={{ height: "100%", position: "relative", textAlign: "center" }}
 						>
-							<div
-								className="collection card-content"
-								onClick={this.handleListClick}
-								style={{ height: "100%", textAlign: "left", marginBottom: "7%" }}
-							>
+							<div className="collection card-content" style={{ height: "100%", textAlign: "left", marginBottom: "7%" }}>
+								<h3 style={{ textAlign: "center", marginBottom: "20px" }}>
+									{session.isCurrentSliceAQuestion ? session.slice.question : "No Current Question"}
+								</h3>
 								<a
 									id="answer1"
 									name="answer1"
@@ -240,7 +235,7 @@ class Presentation extends Component {
 											: regClass
 									}
 								>
-									{session ? "A: " + session.answer1 : "A:"}
+									{session && session.isCurrentSliceAQuestion ? "A: " + session.answer1 : "A:"}
 								</a>
 								<a
 									id="answer2"
@@ -255,7 +250,7 @@ class Presentation extends Component {
 											: regClass
 									}
 								>
-									{session ? "B: " + session.answer2 : "B:"}
+									{session && session.isCurrentSliceAQuestion ? "B: " + session.answer2 : "B:"}
 								</a>
 								<a
 									id="answer3"
@@ -270,7 +265,7 @@ class Presentation extends Component {
 											: regClass
 									}
 								>
-									{session ? "C: " + session.answer3 : "C:"}
+									{session && session.isCurrentSliceAQuestion ? "C: " + session.answer3 : "C:"}
 								</a>
 								<a
 									id="answer4"
@@ -285,7 +280,7 @@ class Presentation extends Component {
 											: regClass
 									}
 								>
-									{session ? "D: " + session.answer4 : "D:"}
+									{session && session.isCurrentSliceAQuestion ? "D: " + session.answer4 : "D:"}
 								</a>
 							</div>
 							{session.revealAnswer ? (
