@@ -70,9 +70,7 @@ class SliceDetails extends Component {
               <br />
               <span>
                 <h3 className={textStyle}>Question: </h3>
-                <p className="grey-text text-darken-3 class-message">
-                  {slice.Question}
-                </p>
+                <p className="grey-text text-darken-3 class-message">{slice.Question}</p>
                 <h3 className={textStyle}>Answers </h3>
                 <p>Answer 1: {slice.Answer1}</p>
                 <p>Answer 2: {slice.Answer2}</p>
@@ -96,6 +94,7 @@ class SliceDetails extends Component {
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { slices } = state.firestore.data;
+  console.log(id);
   const slice = slices ? slices[id] : null;
   return {
     slice: slice,
@@ -106,15 +105,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
+  firestoreConnect((props) => {
     if (!props.auth.uid) {
       return [];
     } else {
-      return [
-        {
-          collection: "slices"
-        }
-      ];
+      return [`slices/${props.sliceid}`];
     }
   })
 );

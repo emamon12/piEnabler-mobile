@@ -8,8 +8,7 @@ class ProjectionTemplate extends Component {
   }
 
   render() {
-    let logo =
-      "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
+    let logo = "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
     let slideStyle = {
       position: "absolute",
       top: "0px",
@@ -32,8 +31,7 @@ class ProjectionTemplate extends Component {
     };
 
     if (this.props.dark) {
-      logo =
-        "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/logo.png?alt=media&token=d9b38104-916b-492f-b128-dd00209cded9";
+      logo = "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/logo.png?alt=media&token=d9b38104-916b-492f-b128-dd00209cded9";
       nameStyle = {
         cursor: "default",
         float: "right",
@@ -59,9 +57,7 @@ class ProjectionTemplate extends Component {
           {this.props.slide}
         </p>
         <hr style={{ marginBottom: 0 }} />
-        <p className="presentation_title">
-          {this.props.title && this.props.title}
-        </p>
+        <p className="presentation_title">{this.props.title && this.props.title}</p>
         <div id="body" className="presentation_body class-message">
           {this.props.url ? (
             <img

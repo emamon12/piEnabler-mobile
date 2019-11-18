@@ -32,13 +32,8 @@ class Dashboard extends Component {
               <div className="classs-list section">
                 <div className="card z-depth-0 classs-summary">
                   <div className="card-content grey-text text-darken-3">
-                    <span className="center-align card-title">
-                      You Are Currently Not Registered To Any Classes!
-                    </span>
-                    <p className="center-align">
-                      Click On The Add Class Button On The Navigation Bar To
-                      Start Registering Classes
-                    </p>
+                    <span className="center-align card-title">You Are Currently Not Registered To Any Classes!</span>
+                    <p className="center-align">Click On The Add Class Button On The Navigation Bar To Start Registering Classes</p>
                   </div>
                 </div>
               </div>
@@ -60,7 +55,7 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { users } = state.firestore.data;
   const user = users ? users[state.firebase.auth.uid] : null;
 
@@ -73,8 +68,7 @@ const mapStateToProps = state => {
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
-    console.log(props);
+  firestoreConnect((props) => {
     if (!props) {
       return [];
     } else {

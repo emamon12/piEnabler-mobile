@@ -9,10 +9,7 @@ import SlicesList from "./SlicesList";
 import { Switch } from "react-materialize";
 import Dropdown from "muicss/lib/react/dropdown";
 import DropdownItem from "muicss/lib/react/dropdown-item";
-import {
-  addSliceToSession,
-  removeSliceFromSession
-} from "../../store/actions/sessionActions";
+import { addSliceToSession, removeSliceFromSession } from "../../store/actions/sessionActions";
 
 class PlanSession extends Component {
   state = {
@@ -23,52 +20,37 @@ class PlanSession extends Component {
     DifficultyFilter: ""
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value.trim()
     }));
   };
 
   handleImage = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       ImageFilter: !this.state.ImageFilter
     }));
   };
 
   handleUser = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       UserFilter: state.UserFilter === "" ? this.props.uid : ""
     }));
   };
 
   handleDifficulty = (e, data) => {
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       DifficultyFilter: e
     }));
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { props, state } = this;
-
-    const sliceId = state.sliceId;
-
-    const sessionplanid = props.sessionplansid;
-
-    const composite = { sessionplanid, sliceId };
-
-    document.getElementById("sliceId").value = "";
-
-    props.addSliceToSession(composite);
-  };
-
-  handleSliceButtonClick = e => {
+  handleSliceButtonClick = (e) => {
     const { props } = this;
     const { target } = e;
 
@@ -78,12 +60,11 @@ class PlanSession extends Component {
     props.addSliceToSession(composite);
   };
 
-  handleDelete = e => {
+  handleDelete = (e) => {
     e.preventDefault();
     const { props } = this;
     const { target } = e;
-    const value = target.innerHTML;
-
+    const value = target.id;
     const sessionplanid = props.sessionplansid;
 
     const composite = { sessionplanid, value };
@@ -95,7 +76,7 @@ class PlanSession extends Component {
     const { props } = this;
 
     if (props.uid) {
-      this.setState(state => ({
+      this.setState((state) => ({
         ...state,
         UserFilter: props.uid
       }));
@@ -105,14 +86,7 @@ class PlanSession extends Component {
   render() {
     //just check if the user is authenticated
     const { props } = this;
-    const {
-      auth,
-      user,
-      sessionplansid,
-      sessionplans,
-      sliceError,
-      slices
-    } = props;
+    const { auth, user, sessionplansid, sessionplans, sliceError, slices } = props;
 
     if (!auth.uid) {
       return <Redirect to="/landing" />;
@@ -126,49 +100,21 @@ class PlanSession extends Component {
       <div className="dashboard">
         <div id="plan-session-row" className="row">
           <div id="session-style" className="col s12 m5 offset-m1 ease-in-anim">
-            <form
-              id="session-form"
-              onSubmit={this.handleSubmit}
-              className="white"
-            >
+            <form id="session-form" onSubmit={this.handleSubmit} className="white">
               <h4 className="grey-text text-darken-3">Session Planner</h4>
-              <h2 className="grey-text text-darken-3">
-                {sessionplans.sessionPlanSummary}
-              </h2>
+              <h2 className="grey-text text-darken-3">{sessionplans.sessionPlanSummary}</h2>
               <h5 className="grey-text text-darken-3">
                 <b>Planner ID:</b> {sessionplansid}
               </h5>
               {sessionplans &&
                 sessionplans.sliceIds &&
-                sessionplans.sliceIds.map(slices => {
+                sessionplans.sliceIds.map((slices, index) => {
                   return (
-                    <h5
-                      className="slice-list"
-                      onClick={this.handleDelete}
-                      key={slices}
-                    >
-                      {slices}
+                    <h5 className="slice-list" id={slices} onClick={this.handleDelete} key={slices}>
+                      ({index+1}) {slices}
                     </h5>
                   );
                 })}
-
-              <div className="input-field">
-                <label htmlFor="sliceId">Input Slice Id to Add</label>
-                <input
-                  type="text"
-                  name="sliceId"
-                  id="sliceId"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="input-field">
-                <button
-                  type="submit"
-                  className="btn purple-bg purple darken-3 z-depth-1"
-                >
-                  Add
-                </button>
-              </div>
               {sliceError ? (
                 <div className="red-text center text-darken-1">
                   <p>{sliceError}</p>
@@ -187,32 +133,16 @@ class PlanSession extends Component {
               <div style={{ paddingTop: "10px" }}>
                 <div className="input-field" style={{ margin: "10px" }}>
                   <label htmlFor="TopicFilter">Input Topic Filter</label>
-                  <input
-                    type="text"
-                    name="TopicFilter"
-                    id="TopicFilter"
-                    onChange={this.handleChange}
-                  />
+                  <input type="text" name="TopicFilter" id="TopicFilter" onChange={this.handleChange} />
                 </div>
               </div>
               <div style={{ display: "flex", margin: "10px" }}>
                 <div style={{ marginTop: "3vh" }}>
-                  <Switch
-                    offLabel="Filter for Images"
-                    onLabel=""
-                    onChange={this.handleImage}
-                    id="ImageFilter"
-                  />
+                  <Switch offLabel="Filter for Images" onLabel="" onChange={this.handleImage} id="ImageFilter" />
                 </div>
                 <p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
                 <div style={{ marginTop: "3vh" }}>
-                  <Switch
-                    offLabel="My Slices"
-                    onLabel="All Slices"
-                    style={{ marginTop: "3vh" }}
-                    onChange={this.handleUser}
-                    id="UserFilter"
-                  />
+                  <Switch offLabel="My Slices" onLabel="All Slices" style={{ marginTop: "3vh" }} onChange={this.handleUser} id="UserFilter" />
                 </div>
 
                 <p style={{ margin: "2em", color: "#9e9e9e" }}> | </p>
@@ -275,14 +205,14 @@ const mapStateToProps = (state, ownProps) => {
     uid: state.firebase.auth.uid
   };
 };
-const mapDispatchToProps = dispatch => ({
-  addSliceToSession: session => dispatch(addSliceToSession(session)),
-  removeSliceFromSession: session => dispatch(removeSliceFromSession(session))
+const mapDispatchToProps = (dispatch) => ({
+  addSliceToSession: (session) => dispatch(addSliceToSession(session)),
+  removeSliceFromSession: (session) => dispatch(removeSliceFromSession(session))
 });
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
+  firestoreConnect((props) => {
     if (!props.auth.uid) {
       return [];
     } else {
@@ -298,7 +228,4 @@ const fbCompose = compose(
   })
 );
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  fbCompose
-)(PlanSession);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(PlanSession);

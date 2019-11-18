@@ -102,18 +102,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
+  firestoreConnect((props) => {
     if (!props.id || !props.session) {
       return [];
     } else {
       return [
         {
           collection: `sessions/${props.id}/responses`,
-          where: [
-            "responseReference",
-            "==",
-            `${props.id}${props.session.currentSliceId}${props.session.numPolls}`
-          ],
+          where: ["responseReference", "==", `${props.id}${props.session.currentSliceId}${props.session.numPolls}`],
           storeAs: "responses"
         }
       ];

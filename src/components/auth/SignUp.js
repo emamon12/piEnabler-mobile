@@ -14,16 +14,16 @@ export class SignUp extends Component {
     userRole: "student"
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value
     }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { props, state } = this;
     const { firebase } = props;
@@ -33,7 +33,7 @@ export class SignUp extends Component {
   };
 
   render() {
-    const { auth, authError } = this.props;
+    const { auth, signUpError } = this.props;
 
     if (auth.uid) {
       return <Redirect to="/" />;
@@ -42,10 +42,7 @@ export class SignUp extends Component {
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h2
-            className="grey-text text-darken-3"
-            style={{ textAlign: "center" }}
-          >
+          <h2 className="grey-text text-darken-3" style={{ textAlign: "center" }}>
             Sign Up
           </h2>
           <div className="input-field">
@@ -65,12 +62,10 @@ export class SignUp extends Component {
             <input type="text" id="lastName" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <button className="btn purple-bg purple darken-3 z-depth-1">
-              Sign Up
-            </button>
-            {authError ? (
+            <button className="btn purple-bg purple darken-3 z-depth-1">Sign Up</button>
+            {signUpError ? (
               <div className="red-text center text-darken-1">
-                <p>{authError}</p>
+                <p>{signUpError}</p>
               </div>
             ) : null}
           </div>
@@ -80,16 +75,13 @@ export class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.firebase.auth,
-  authError: state.auth.authError
+  signUpError: state.auth.signUpError
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signUp: (newUser, firebase) => dispatch(signUp(newUser, firebase))
 });
 
-export default compose(
-  firebaseConnect(),
-  connect(mapStateToProps, mapDispatchToProps)
-)(SignUp);
+export default compose(firebaseConnect(), connect(mapStateToProps, mapDispatchToProps))(SignUp);

@@ -12,16 +12,16 @@ class SignIn extends Component {
     password: ""
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value
     }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     // As we use react-redux-firebas-v3 we need to pass firebase object to
@@ -59,35 +59,19 @@ class SignIn extends Component {
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h2
-            className="grey-text text-darken-3"
-            style={{ textAlign: "center" }}
-          >
+          <h2 className="grey-text text-darken-3" style={{ textAlign: "center" }}>
             Login
           </h2>
           <div className="input-field">
             <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              onChange={this.handleChange}
-            />
+            <input type="email" name="email" id="email" onChange={this.handleChange} />
           </div>
           <div className="input-field">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={this.handleChange}
-            />
+            <input type="password" name="password" id="password" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <button
-              type="submit"
-              className="btn purple-bg purple darken-3 z-depth-1"
-            >
+            <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">
               Login
             </button>
             {authError ? (
@@ -102,20 +86,17 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   authError: state.auth.authError,
   auth: state.firebase.auth
 });
 
-const mapDispatchToProps = dispatch => ({
-  signIn: authData => dispatch(signIn(authData))
+const mapDispatchToProps = (dispatch) => ({
+  signIn: (authData) => dispatch(signIn(authData))
 });
 
 // We need firebaseConnect function to provide to this component
 // firebase object with auth method.
 // You can find more information on the link below
 // http://docs.react-redux-firebase.com/history/v3.0.0/docs/auth.html
-export default compose(
-  firebaseConnect(),
-  connect(mapStateToProps, mapDispatchToProps)
-)(SignIn);
+export default compose(firebaseConnect(), connect(mapStateToProps, mapDispatchToProps))(SignIn);

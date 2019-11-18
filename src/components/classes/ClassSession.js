@@ -10,14 +10,13 @@ class ClassSession extends Component {
     userAnswer: ""
   };
 
-  handleListClick = e => {
+  handleListClick = (e) => {
     e.preventDefault();
 
     var x = document.getElementsByClassName("collection-item black-text");
     var theButton = document.getElementById("answer-submit");
     if (this.props.session.polling) {
-      theButton.className =
-        "btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light";
+      theButton.className = "btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light";
     }
 
     x[0].className = "collection-item black-text";
@@ -29,12 +28,12 @@ class ClassSession extends Component {
 
     const response = e.target.name;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       userAnswer: response
     }));
   };
 
-  handleButtonClick = e => {
+  handleButtonClick = (e) => {
     var y = document.getElementsByClassName("collection-item black-text");
 
     y[0].className = "collection-item black-text disabled";
@@ -53,15 +52,13 @@ class ClassSession extends Component {
     props.addResponse(composite);
 
     var buttonDoc = document.getElementById("answer-submit");
-    buttonDoc.className =
-      "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light";
+    buttonDoc.className = "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light";
   };
 
   render() {
     const { session, auth, responseFeedback } = this.props;
 
-    const disabledButtonStyle =
-      "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light";
+    const disabledButtonStyle = "disabled btn-large purple-bg purple darken-3 z-depth-1 waves-effect waves-light";
 
     //this just redirects if the user is not authenticated
     if (!auth.uid) {
@@ -78,79 +75,42 @@ class ClassSession extends Component {
           <div className="card">
             <div className="card-content">
               <h3 style={{ textAlign: "center", marginBottom: "20px" }}>
-                {session.isCurrentSliceAQuestion
-                  ? session.slice.question
-                  : "No Question Available"}
+                {session.isCurrentSliceAQuestion ? session.slice.question : "No Question Available"}
               </h3>
             </div>
           </div>
-          <div
-            className="collection card-content"
-            onClick={session.polling ? this.handleListClick : () => {}}
-          >
+          <div className="collection card-content" onClick={session.polling ? this.handleListClick : () => {}}>
             <a
               id="answer1"
               name="answer1"
               href="#answer1"
-              className={
-                session.answer1 !== "" &&
-                session.answer1 === session.trueAnswer &&
-                session.revealAnswer
-                  ? correctClass
-                  : regClass
-              }
+              className={session.answer1 !== "" && session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
-              {session && session.isCurrentSliceAQuestion
-                ? "A: " + session.answer1
-                : "A:"}
+              {session && session.isCurrentSliceAQuestion ? "A: " + session.answer1 : "A:"}
             </a>
             <a
               id="answer2"
               name="answer2"
               href="#answer2"
-              className={
-                session.answer2 !== "" &&
-                session.answer2 === session.trueAnswer &&
-                session.revealAnswer
-                  ? correctClass
-                  : regClass
-              }
+              className={session.answer2 !== "" && session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
-              {session && session.isCurrentSliceAQuestion
-                ? "B: " + session.answer2
-                : "B:"}
+              {session && session.isCurrentSliceAQuestion ? "B: " + session.answer2 : "B:"}
             </a>
             <a
               id="answer3"
               name="answer3"
               href="#answer3"
-              className={
-                session.answer3 !== "" &&
-                session.answer3 === session.trueAnswer &&
-                session.revealAnswer
-                  ? correctClass
-                  : regClass
-              }
+              className={session.answer3 !== "" && session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
-              {session && session.isCurrentSliceAQuestion
-                ? "C: " + session.answer3
-                : "C:"}
+              {session && session.isCurrentSliceAQuestion ? "C: " + session.answer3 : "C:"}
             </a>
             <a
               id="answer4"
               name="answer4"
               href="#answer4"
-              className={
-                session.answer4 !== "" &&
-                session.answer4 === session.trueAnswer &&
-                session.revealAnswer
-                  ? correctClass
-                  : regClass
-              }
+              className={session.answer4 !== "" && session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
-              {session && session.isCurrentSliceAQuestion
-                ? "D: " + session.answer4
-                : "D:"}
+              {session && session.isCurrentSliceAQuestion ? "D: " + session.answer4 : "D:"}
             </a>
           </div>
           <div className="input-field center">
@@ -158,10 +118,7 @@ class ClassSession extends Component {
               id="answer-submit"
               onClick={this.handleButtonClick}
               name={session}
-              disabled={
-                (session ? !session.polling : true) ||
-                !session.isCurrentSliceAQuestion
-              }
+              disabled={(session ? !session.polling : true) || !session.isCurrentSliceAQuestion}
               className={disabledButtonStyle}
             >
               Submit
@@ -213,14 +170,13 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  addResponse: composite => dispatch(addResponse(composite))
+const mapDispatchToProps = (dispatch) => ({
+  addResponse: (composite) => dispatch(addResponse(composite))
 });
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
-    console.log(props.sessionid);
+  firestoreConnect((props) => {
     if (!props.sessionid) {
       return [];
     } else {
@@ -229,7 +185,4 @@ const fbCompose = compose(
   })
 );
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  fbCompose
-)(ClassSession);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(ClassSession);

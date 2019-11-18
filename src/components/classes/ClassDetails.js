@@ -4,14 +4,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import {
-  Modal,
-  Button,
-  Row,
-  Col,
-  Preloader,
-  Textarea
-} from "react-materialize";
+import { Modal, Button, Row, Col, Preloader, Textarea } from "react-materialize";
 import { ChangeMessage } from "../../store/actions/classActions";
 import { RemoveSession } from "../../store/actions/classActions";
 import { LoadSession } from "../../store/actions/classActions";
@@ -24,45 +17,45 @@ class ClassDetails extends Component {
     sessionToLoad: ""
   };
 
-  componentDidMount = e => {
-    this.setState(state => ({
+  componentDidMount = (e) => {
+    this.setState((state) => ({
       ...state,
       classMessage: this.props.classs.messageOfTheDay
     }));
   };
 
-  handleButtonClick = e => {
+  handleButtonClick = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       classMessage: target.value,
       formMode: true
     }));
   };
 
-  handleSessionClick = e => {
-    this.setState(state => ({
+  handleSessionClick = (e) => {
+    this.setState((state) => ({
       startASession: true
     }));
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value.trim()
     }));
   };
 
-  handleSubmitClick = e => {
+  handleSubmitClick = (e) => {
     const { target } = e;
 
     const { props } = this;
 
     const { value } = target;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       formMode: false
     }));
@@ -74,7 +67,7 @@ class ClassDetails extends Component {
     props.ChangeMessage(composite);
   };
 
-  handleEndSession = e => {
+  handleEndSession = (e) => {
     const { props } = this;
     const classId = props.classsId;
     const { classs } = props;
@@ -86,7 +79,7 @@ class ClassDetails extends Component {
     props.RemoveSession(composite);
   };
 
-  handleSessionLoad = e => {
+  handleSessionLoad = (e) => {
     e.preventDefault();
     const { props, state } = this;
     const classId = props.classsId;
@@ -95,7 +88,7 @@ class ClassDetails extends Component {
 
     props.LoadSession(composite);
 
-    this.setState(state => ({
+    this.setState((state) => ({
       startASession: false
     }));
   };
@@ -114,8 +107,7 @@ class ClassDetails extends Component {
     const formMode = this.state.formMode;
     const message = this.state.classMessage;
 
-    const buttonClassName =
-      "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light unify";
+    const buttonClassName = "btn purple-bg purple darken-3 z-depth-1 waves-effect waves-light unify";
 
     if (user && classs && classs.currSession !== "") {
       return (
@@ -123,12 +115,9 @@ class ClassDetails extends Component {
           <div className="container section classs-details">
             <div className="card z-depth-0">
               <div className="card-content">
-                {user.userRole === "admin" || user.userRole === "instructor" ? (
-                  <p>Class Key: {classsId}</p>
-                ) : null}
+                {user.userRole === "admin" || user.userRole === "instructor" ? <p>Class Key: {classsId}</p> : null}
                 <span className="card-title">
-                  {classs.classIdentifier} - {classs.classSection} -{" "}
-                  {classs.classsName} - Message Of The Day
+                  {classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day
                 </span>
                 {formMode ? (
                   <Row className="class-message">
@@ -157,10 +146,7 @@ class ClassDetails extends Component {
             <div className="row">
               <div className="flexbox">
                 {classs.currSession !== "" ? (
-                  <NavLink
-                    to={"/session/" + classs.currSession}
-                    key={classs.currSession}
-                  >
+                  <NavLink to={"/session/" + classs.currSession} key={classs.currSession}>
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
                         Join Session
@@ -171,23 +157,14 @@ class ClassDetails extends Component {
 
                 {user.userRole === "admin" || user.userRole === "instructor" ? (
                   <div className="col mar1">
-                    <button
-                      type="button"
-                      onClick={this.handleEndSession}
-                      className={buttonClassName}
-                    >
+                    <button type="button" onClick={this.handleEndSession} className={buttonClassName}>
                       End Session
                     </button>
                   </div>
                 ) : null}
 
-                {(user.userRole === "admin" ||
-                  user.userRole === "instructor") &&
-                classs.currSession !== "" ? (
-                  <NavLink
-                    to={"/session/" + classs.currSession + "/clicker/"}
-                    key={classs.currSession + "pres"}
-                  >
+                {(user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "" ? (
+                  <NavLink to={"/session/" + classs.currSession + "/clicker/"} key={classs.currSession + "clicker"}>
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
                         Clicker
@@ -196,13 +173,8 @@ class ClassDetails extends Component {
                   </NavLink>
                 ) : null}
 
-                {(user.userRole === "admin" ||
-                  user.userRole === "instructor") &&
-                classs.currSession !== "" ? (
-                  <NavLink
-                    to={"/session/" + classs.currSession + "/dashboard/"}
-                    key={classs.currSession + "pres"}
-                  >
+                {(user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "" ? (
+                  <NavLink to={"/session/" + classs.currSession + "/dashboard/"} key={classs.currSession + "presentation"}>
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
                         Dashboard
@@ -212,10 +184,7 @@ class ClassDetails extends Component {
                 ) : null}
 
                 {classs.currSession !== "" ? (
-                  <NavLink
-                    to={"/session/" + classs.currSession + "/projection/"}
-                    key={classs.currSession + "proj"}
-                  >
+                  <NavLink to={"/session/" + classs.currSession + "/projection/"} key={classs.currSession + "projection"}>
                     <div className="col mar1">
                       <button type="button" className={buttonClassName}>
                         Projection
@@ -223,26 +192,14 @@ class ClassDetails extends Component {
                     </div>
                   </NavLink>
                 ) : null}
-                {(user.userRole === "admin" ||
-                  user.userRole === "instructor") &&
-                classs.currSession !== "" ? (
+                {(user.userRole === "admin" || user.userRole === "instructor") && classs.currSession !== "" ? (
                   <div className="col mar1">
                     {!formMode ? (
-                      <button
-                        onClick={this.handleButtonClick}
-                        type="button"
-                        value={message}
-                        className={buttonClassName}
-                      >
+                      <button onClick={this.handleButtonClick} type="button" value={message} className={buttonClassName}>
                         Change Message
                       </button>
                     ) : (
-                      <button
-                        onClick={this.handleSubmitClick}
-                        type="button"
-                        value={message}
-                        className={buttonClassName}
-                      >
+                      <button onClick={this.handleSubmitClick} type="button" value={message} className={buttonClassName}>
                         Save
                       </button>
                     )}
@@ -259,12 +216,9 @@ class ClassDetails extends Component {
           <div className="container section classs-details">
             <div className="card z-depth-0">
               <div className="card-content">
-                {user.userRole === "admin" || user.userRole === "instructor" ? (
-                  <p>Class Key: {classsId}</p>
-                ) : null}
+                {user.userRole === "admin" || user.userRole === "instructor" ? <p>Class Key: {classsId}</p> : null}
                 <span className="card-title">
-                  {classs.classIdentifier} - {classs.classSection} -{" "}
-                  {classs.classsName} - Message Of The Day
+                  {classs.classIdentifier} - {classs.classSection} - {classs.classsName} - Message Of The Day
                 </span>
                 {formMode ? (
                   <Row className="class-message">
@@ -316,15 +270,9 @@ class ClassDetails extends Component {
                     The class session is currently not active.
                   </Modal>
                 </div>
-                {this.state.startASession === false &&
-                (user.userRole === "admin" ||
-                  user.userRole === "instructor") ? (
+                {this.state.startASession === false && (user.userRole === "admin" || user.userRole === "instructor") ? (
                   <div className="col mar1">
-                    <button
-                      type="button"
-                      onClick={this.handleSessionClick}
-                      className={buttonClassName}
-                    >
+                    <button type="button" onClick={this.handleSessionClick} className={buttonClassName}>
                       Start Session
                     </button>
                   </div>
@@ -333,21 +281,11 @@ class ClassDetails extends Component {
                 {user.userRole === "admin" || user.userRole === "instructor" ? (
                   <div className="col mar1">
                     {!formMode ? (
-                      <button
-                        onClick={this.handleButtonClick}
-                        type="button"
-                        value={message}
-                        className={buttonClassName}
-                      >
+                      <button onClick={this.handleButtonClick} type="button" value={message} className={buttonClassName}>
                         Change Message
                       </button>
                     ) : (
-                      <button
-                        onClick={this.handleSubmitClick}
-                        type="button"
-                        value={message}
-                        className={buttonClassName}
-                      >
+                      <button onClick={this.handleSubmitClick} type="button" value={message} className={buttonClassName}>
                         Save
                       </button>
                     )}
@@ -355,37 +293,21 @@ class ClassDetails extends Component {
                 ) : null}
               </div>
 
-              {this.state.startASession === true &&
-              (user.userRole === "admin" || user.userRole === "instructor") ? (
+              {this.state.startASession === true && (user.userRole === "admin" || user.userRole === "instructor") ? (
                 <div className="row">
-                  <form
-                    onSubmit={this.handleSessionLoad}
-                    className="white z-depth-1"
-                  >
+                  <form onSubmit={this.handleSessionLoad} className="white z-depth-1">
                     <div className="input-field">
-                      <label htmlFor="sessionToLoad">
-                        Input Session Plan To Load
-                      </label>
-                      <input
-                        type="text"
-                        name="sessionToLoad"
-                        id="sessionToLoad"
-                        onChange={this.handleChange}
-                      />
+                      <label htmlFor="sessionToLoad">Input Session Plan To Load</label>
+                      <input type="text" name="sessionToLoad" id="sessionToLoad" onChange={this.handleChange} />
                     </div>
                   </form>
                 </div>
               ) : null}
 
-              {this.state.startASession === true &&
-              (user.userRole === "admin" || user.userRole === "instructor") ? (
+              {this.state.startASession === true && (user.userRole === "admin" || user.userRole === "instructor") ? (
                 <div className="row">
                   <div className="center">
-                    <button
-                      onClick={this.handleSessionLoad}
-                      type="button"
-                      className={buttonClassName}
-                    >
+                    <button onClick={this.handleSessionLoad} type="button" className={buttonClassName}>
                       Load Session
                     </button>
                   </div>
@@ -438,28 +360,21 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  ChangeMessage: classs => dispatch(ChangeMessage(classs)),
-  RemoveSession: classs => dispatch(RemoveSession(classs)),
-  LoadSession: classs => dispatch(LoadSession(classs))
+const mapDispatchToProps = (dispatch) => ({
+  ChangeMessage: (classs) => dispatch(ChangeMessage(classs)),
+  RemoveSession: (classs) => dispatch(RemoveSession(classs)),
+  LoadSession: (classs) => dispatch(LoadSession(classs))
 });
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
+  firestoreConnect((props) => {
     if (!props.classs) {
       return [];
     } else {
-      return [
-        `users/${props.auth.uid}`,
-        "classes",
-        `sessions/${props.classs.currSession}`
-      ];
+      return [`users/${props.auth.uid}`, `classes/${props.classsId}`, `sessions/${props.classs.currSession}`];
     }
   })
 );
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  fbCompose
-)(ClassDetails);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(ClassDetails);

@@ -10,20 +10,19 @@ class AddClass extends Component {
     classKey: ""
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value.trim()
     }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const { props, state } = this;
-    console.log(state);
     props.addClass(state);
 
     props.history.push("/");
@@ -38,26 +37,15 @@ class AddClass extends Component {
     return (
       <div className="container section">
         <form onSubmit={this.handleSubmit} className="white">
-          <h2
-            className="grey-text text-darken-3"
-            style={{ textAlign: "center" }}
-          >
+          <h2 className="grey-text text-darken-3" style={{ textAlign: "center" }}>
             Add A Class
           </h2>
           <div className="input-field">
             <label htmlFor="classKey">Class Key</label>
-            <input
-              type="text"
-              name="classKey"
-              id="classKey"
-              onChange={this.handleChange}
-            />
+            <input type="text" name="classKey" id="classKey" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <button
-              type="submit"
-              className="btn purple-bg purple darken-3 z-depth-1"
-            >
+            <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">
               Add
             </button>
           </div>
@@ -72,13 +60,13 @@ class AddClass extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.firebase.auth,
   addClassError: state.classs.addClassError
 });
 
-const mapDispatchToProps = dispatch => ({
-  addClass: classs => dispatch(addClass(classs))
+const mapDispatchToProps = (dispatch) => ({
+  addClass: (classs) => dispatch(addClass(classs))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddClass);

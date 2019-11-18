@@ -9,7 +9,7 @@ const ClassList = ({ user, classes }) => {
       <div className="classs-list section">
         {user &&
           classes &&
-          classes.map(classs => {
+          classes.map((classs) => {
             var registeredClasses = user.registeredClasses;
             var regClass;
 
