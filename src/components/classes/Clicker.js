@@ -66,7 +66,7 @@ class Clicker extends Component {
     }
   };
 
-  handleNext = e => {
+  handleNext = (e) => {
     const { props } = this;
     const { sessionId, session, slices } = props;
 
@@ -234,21 +234,11 @@ class Clicker extends Component {
           </Col>
           <Col md="6" xs="6" style={{ height: "90%", marginTop: "2em" }}>
             {session && session.polling ? (
-              <Button
-                waves="light"
-                style={StyleOpen}
-                onClick={this.handlePolling}
-                id="PollingStatus"
-              >
+              <Button waves="light" style={StyleOpen} onClick={this.handlePolling} id="PollingStatus">
                 Polling Status : OPEN
               </Button>
             ) : (
-              <Button
-                waves="dark"
-                style={StyleClosed}
-                onClick={this.handlePolling}
-                id="PollingStatus"
-              >
+              <Button waves="dark" style={StyleClosed} onClick={this.handlePolling} id="PollingStatus">
                 Polling Status : CLOSED
               </Button>
             )}
@@ -276,18 +266,26 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  nextSlice: pie => dispatch(nextSlice(pie)),
-  prevSlice: pie => dispatch(prevSlice(pie)),
-  setPolling: pie => dispatch(setPolling(pie)),
-  revealAnswer: pie => dispatch(revealAnswer(pie)),
-  rePoll: pie => dispatch(rePoll(pie)),
-  updateSession: pie => dispatch(updateSession(pie)),
-  displayGraph: pie => dispatch(displayGraph(pie)),
-  getNextSlice: pie => dispatch(getNextSlice(pie))
+const mapDispatchToProps = (dispatch) => ({
+  nextSlice: (pie) => dispatch(nextSlice(pie)),
+  prevSlice: (pie) => dispatch(prevSlice(pie)),
+  setPolling: (pie) => dispatch(setPolling(pie)),
+  revealAnswer: (pie) => dispatch(revealAnswer(pie)),
+  rePoll: (pie) => dispatch(rePoll(pie)),
+  updateSession: (pie) => dispatch(updateSession(pie)),
+  displayGraph: (pie) => dispatch(displayGraph(pie)),
+  getNextSlice: (pie) => dispatch(getNextSlice(pie))
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect(["sessions", "slices"])
-)(Clicker);
+const fbCompose = compose(
+  connect(mapStateToProps),
+  firestoreConnect((props) => {
+    if (!props.session) {
+      return [];
+    } else {
+      return ["slices", `sessions/${props.sessionId}`];
+    }
+  })
+);
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(Clicker);

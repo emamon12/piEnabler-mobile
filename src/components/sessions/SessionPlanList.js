@@ -8,16 +8,11 @@ const SessionPlanList = ({ sessionplans, profile }) => {
     return (
       <div className="session-plans-list ease-in-anim section">
         {sessionplans &&
-          sessionplans.map(sessionplans => {
+          sessionplans.map((sessionplans) => {
             if (profile.uid === sessionplans.createdBy) {
               return (
-                <Link
-                  to={"/sessionplans/" + sessionplans.id}
-                  key={sessionplans.id}
-                >
-                  <SessionPlanSummary
-                    sessionplans={sessionplans}
-                  ></SessionPlanSummary>
+                <Link to={"/sessionplans/" + sessionplans.id} key={sessionplans.id}>
+                  <SessionPlanSummary sessionplans={sessionplans}></SessionPlanSummary>
                 </Link>
               );
             } else {

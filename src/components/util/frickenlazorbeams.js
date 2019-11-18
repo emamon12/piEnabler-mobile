@@ -29,33 +29,33 @@ class frickenlazorbeams extends Component {
     window.addEventListener("keyup", this.handleKeyUp);
     this.animate();
   }
-  animate = now => {
+  animate = (now) => {
     requestAnimationFrame(this.animate);
     this.renderCanvas();
   };
 
-  handleMouseMove = event => {
+  handleMouseMove = (event) => {
     let x = event.clientX || (event.touches ? event.touches[0].clientX : 0),
       y = event.clientY || (event.touches ? event.touches[0].clientY : 0);
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       point: [x, y]
     }));
   };
 
-  handleKeyUp = event => {
+  handleKeyUp = (event) => {
     let _arr = ["Space"];
 
     if (_arr.includes(event.code)) {
-      this.setState(state => ({
+      this.setState((state) => ({
         ...state,
         enabled: !this.state.enabled
       }));
     }
   };
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     console.log(event.code);
   };
 
@@ -125,8 +125,7 @@ class frickenlazorbeams extends Component {
 
     let style = this.state.enabled ? "lazor" : "";
 
-    let logo =
-      "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
+    let logo = "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/darklogo.png?alt=media&token=a1e490df-2474-4ac8-947a-65de362efc4f";
     let numStyle = {
       fontSize: "1em",
       color: "black",
@@ -144,8 +143,7 @@ class frickenlazorbeams extends Component {
     };
 
     if (session.dark) {
-      logo =
-        "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/logo.png?alt=media&token=d9b38104-916b-492f-b128-dd00209cded9";
+      logo = "https://firebasestorage.googleapis.com/v0/b/piesiue.appspot.com/o/logo.png?alt=media&token=d9b38104-916b-492f-b128-dd00209cded9";
       numStyle = {
         fontSize: "1em",
         color: "white",
@@ -168,10 +166,7 @@ class frickenlazorbeams extends Component {
       <div className={style}>
         <div style={{ margin: "1em", padding: "0" }}>
           <Fullscreen enabled={this.state.isFull}>
-            <div
-              className="white"
-              style={{ position: "relative", height: "100%" }}
-            >
+            <div className="white" style={{ position: "relative", height: "100%" }}>
               {session && session.displayGraph ? (
                 <Graph sid={this.props.sessionId} />
               ) : session.slice.url && !this.state.isFull ? (
@@ -188,16 +183,10 @@ class frickenlazorbeams extends Component {
                   src={session.slice.url}
                 />
               ) : session.slice.url && this.state.isFull ? (
-                <img
-                  style={{ height: "100vh", width: "100%" }}
-                  alt=""
-                  src={session.slice.url}
-                />
+                <img style={{ height: "100vh", width: "100%" }} alt="" src={session.slice.url} />
               ) : (
                 <div>
-                  <h3 className="projection_title">
-                    {session && session.slice.title ? session.slice.title : ""}
-                  </h3>
+                  <h3 className="projection_title">{session && session.slice.title ? session.slice.title : ""}</h3>
                   <div id="body" className="projection_body class-message">
                     {session && session.slice.question ? (
                       session.slice.question
@@ -253,9 +242,7 @@ class frickenlazorbeams extends Component {
               <h3 style={nameStyle}>piEnabler</h3>
             </div>
             <div style={numStyle}>
-              <h1>
-                {session && session.sliceNumber ? session.sliceNumber : ""}
-              </h1>
+              <h1>{session && session.sliceNumber ? session.sliceNumber : ""}</h1>
             </div>
 
             {this.state.enabled ? this.renderPoint() : null}
@@ -279,9 +266,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = (dispatch) => ({});
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect(["sessions", "slices"])
-)(frickenlazorbeams);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firestoreConnect(["sessions", "slices"]))(frickenlazorbeams);

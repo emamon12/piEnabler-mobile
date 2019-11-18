@@ -2,55 +2,38 @@ import React from "react";
 import SliceSummary from "./SliceSummary";
 import { Row, Col, Preloader } from "react-materialize";
 
-const SlicesList = ({
-  slices,
-  profile,
-  imageFilter,
-  topicFilter,
-  difficultyFilter,
-  userFilter,
-  handleButtonClick
-}) => {
+const SlicesList = ({ slices, profile, imageFilter, topicFilter, difficultyFilter, userFilter, handleButtonClick }) => {
   if (slices && profile) {
     let filtered = slices;
 
     if (imageFilter) {
-      filtered = filtered.filter(slice => {
+      filtered = filtered.filter((slice) => {
         return slice.Cheese === true;
       });
     }
 
     if (userFilter) {
-      filtered = filtered.filter(slice => {
+      filtered = filtered.filter((slice) => {
         return slice.createdBy === userFilter;
       });
     }
 
     if (topicFilter !== "") {
-      filtered = filtered.filter(slice => {
+      filtered = filtered.filter((slice) => {
         console.log(slice.Topic);
-        return (
-          slice.Topic &&
-          slice.Topic.toUpperCase().includes(topicFilter.toUpperCase())
-        );
+        return slice.Topic && slice.Topic.toUpperCase().includes(topicFilter.toUpperCase());
       });
     }
     if (difficultyFilter !== "") {
-      filtered = filtered.filter(slice => {
+      filtered = filtered.filter((slice) => {
         return slice.Difficulty && slice.Difficulty === difficultyFilter;
       });
     }
 
     return (
       <div className="slice-list-children ease-in-anim section">
-        {filtered.map(slice => {
-          return (
-            <SliceSummary
-              slice={slice}
-              handleButtonClick={handleButtonClick}
-              key={slice.id}
-            ></SliceSummary>
-          );
+        {filtered.map((slice) => {
+          return <SliceSummary slice={slice} handleButtonClick={handleButtonClick} key={slice.id}></SliceSummary>;
         })}
       </div>
     );

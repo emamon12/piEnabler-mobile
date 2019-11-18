@@ -16,7 +16,7 @@ class sliceManager extends Component {
   handleDelete = (e, id) => {
     let { slices } = this.props;
 
-    let deleteSlice = slices.filter(slice => {
+    let deleteSlice = slices.filter((slice) => {
       return slice.id === id;
     })[0];
 
@@ -49,7 +49,7 @@ class sliceManager extends Component {
 
   displaySlice = (e, data) => {
     console.log(data);
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       sliceId: data
     }));
@@ -70,7 +70,7 @@ class sliceManager extends Component {
     }
 
     if (user && user.userRole === "instructor" && slices) {
-      sliceFilter = slices.filter(slice => {
+      sliceFilter = slices.filter((slice) => {
         return slice.createdBy === auth.uid;
       });
     }
@@ -79,7 +79,7 @@ class sliceManager extends Component {
 
     let selectedSlice;
     if (this.state.sliceId) {
-      selectedSlice = sliceFilter.filter(slice => {
+      selectedSlice = sliceFilter.filter((slice) => {
         return slice.id === this.state.sliceId;
       })[0];
     }
@@ -90,17 +90,14 @@ class sliceManager extends Component {
           <div id="slice-list" className="col s12 m5 offset-m1 ease-in-anim">
             {slices && auth ? (
               <div className="slice-list-children ease-in-anim section">
-                {sliceFilter.map(slice => {
+                {sliceFilter.map((slice) => {
                   return (
-                    <div
-                      style={{ minHeight: "10em" }}
-                      className="card z-depth-0 classs-summary"
-                    >
+                    <div style={{ minHeight: "10em" }} className="card z-depth-0 classs-summary">
                       <div className="card-content black-text ">
                         <p>
                           <b>Slice ID:</b> {slice.id}
                           <Button
-                            onClick={e => this.displaySlice(e, slice.id)}
+                            onClick={(e) => this.displaySlice(e, slice.id)}
                             waves="light"
                             style={{
                               right: "1.5em",
@@ -113,7 +110,7 @@ class sliceManager extends Component {
                             Display Slice
                           </Button>
                           <Button
-                            onClick={e => this.handleDelete(e, slice.id)}
+                            onClick={(e) => this.handleDelete(e, slice.id)}
                             waves="light"
                             style={{
                               right: "1.5em",
@@ -134,9 +131,7 @@ class sliceManager extends Component {
                         ) : slice.Lecture === true ? (
                           <p>Lecture Slice: {slice.Title && slice.Title}</p>
                         ) : (
-                          <p>
-                            Question Slice: {slice.Question && slice.Question}
-                          </p>
+                          <p>Question Slice: {slice.Question && slice.Question}</p>
                         )}
                       </div>
                     </div>
@@ -154,10 +149,7 @@ class sliceManager extends Component {
             )}
           </div>
           <div id="" className="col s12 m5 offset-m1">
-            <div
-              className="white"
-              style={{ height: "60vh", marginTop: "5em", position: "relative" }}
-            >
+            <div className="white" style={{ height: "60vh", marginTop: "5em", position: "relative" }}>
               {selectedSlice && selectedSlice.Cheese ? (
                 <div className="white">
                   <h5 className={textStyle}>Slice ID: {this.state.sliceId}</h5>
@@ -165,9 +157,7 @@ class sliceManager extends Component {
                   <br />
 
                   <span>
-                    <h3 className={textStyle}>
-                      Filename: {selectedSlice.filename}{" "}
-                    </h3>
+                    <h3 className={textStyle}>Filename: {selectedSlice.filename} </h3>
                     <div style={{ textAlign: "center" }}>
                       <img
                         style={{
@@ -204,9 +194,7 @@ class sliceManager extends Component {
                   <br />
                   <span>
                     <h3 className={textStyle}>Question: </h3>
-                    <p className="grey-text text-darken-3 class-message">
-                      {selectedSlice.Question}
-                    </p>
+                    <p className="grey-text text-darken-3 class-message">{selectedSlice.Question}</p>
                     <h3 className={textStyle}>Answers </h3>
                     <p>Answer 1: {selectedSlice.Answer1}</p>
                     <p>Answer 2: {selectedSlice.Answer2}</p>
@@ -221,10 +209,7 @@ class sliceManager extends Component {
                   </span>
                 </div>
               ) : (
-                <div
-                  style={{ top: "45%", left: "50%", position: "absolute" }}
-                  className="centerloader"
-                >
+                <div style={{ top: "45%", left: "50%", position: "absolute" }} className="centerloader">
                   <Preloader flashing size="big" />
                 </div>
               )}
@@ -247,23 +232,17 @@ const mapStateToProps = (state, ownProps) => {
     id: id
   };
 };
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = (dispatch) => ({});
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
+  firestoreConnect((props) => {
     if (!props.auth.uid) {
       return [];
     } else {
-      return [
-        `users/${props.auth.uid}`,
-        { collection: "slices", orderBy: ["createdAt", "desc"] }
-      ];
+      return [`users/${props.auth.uid}`, { collection: "slices", orderBy: ["createdAt", "desc"] }];
     }
   })
 );
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  fbCompose
-)(sliceManager);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(sliceManager);

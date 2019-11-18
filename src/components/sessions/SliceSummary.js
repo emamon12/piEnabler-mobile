@@ -9,20 +9,11 @@ const SliceSummary = ({ slice, handleButtonClick }) => {
           <b>Slice ID:</b> {slice.id}{" "}
         </span>
         <span className="slice-add-button">
-          <button
-            type="button"
-            className="btn purple-bg purple darken-3 z-depth-1"
-            value={slice.id}
-            onClick={handleButtonClick}
-          >
+          <button type="button" className="btn purple-bg purple darken-3 z-depth-1" value={slice.id} onClick={handleButtonClick}>
             Add
           </button>
         </span>
-        <Link
-          to={"/slices/" + slice.id}
-          key={slice.id}
-          style={{ color: "#424242" }}
-        >
+        <Link to={"/slices/" + slice.id} key={slice.id} style={{ color: "#424242" }}>
           <span className="card-title">{slice.Title}</span>
           <span className="card-title">{slice.filename}</span>
           <p>Topic: {slice.Topic}</p>

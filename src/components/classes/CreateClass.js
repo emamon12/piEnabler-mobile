@@ -18,16 +18,16 @@ class CreateClass extends Component {
     time: ["8:00", "9:15"]
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value
     }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { props, state } = this;
     let tmp = state;
@@ -66,8 +66,8 @@ class CreateClass extends Component {
     }
     return tmp;
   };
-  handleTime = time => this.setState({ time });
-  handleDate = name => event => {
+  handleTime = (time) => this.setState({ time });
+  handleDate = (name) => (event) => {
     this.setState({ ...this.state, [name]: event.target.checked });
   };
 
@@ -85,44 +85,20 @@ class CreateClass extends Component {
     return (
       <div className="container section">
         <form onSubmit={this.handleSubmit} className="white">
-          <h2
-            className="grey-text text-darken-3"
-            style={{ textAlign: "center" }}
-          >
+          <h2 className="grey-text text-darken-3" style={{ textAlign: "center" }}>
             Create A New class
           </h2>
           <div className="input-field">
             <label htmlFor="classsName">Class Name</label>
-            <input
-              type="text"
-              name="classsName"
-              id="classsName"
-              autoComplete="off"
-              required
-              onChange={this.handleChange}
-            />
+            <input type="text" name="classsName" id="classsName" autoComplete="off" required onChange={this.handleChange} />
           </div>
           <div className="input-field">
             <label htmlFor="classsIdentifier">Class Identifier</label>
-            <input
-              type="text"
-              name="classIdentifier"
-              id="classIdentifier"
-              autoComplete="off"
-              required
-              onChange={this.handleChange}
-            />
+            <input type="text" name="classIdentifier" id="classIdentifier" autoComplete="off" required onChange={this.handleChange} />
           </div>
           <div className="input-field">
             <label htmlFor="classSection">Class Section</label>
-            <input
-              type="text"
-              name="classSection"
-              id="classSection"
-              autoComplete="off"
-              required
-              onChange={this.handleChange}
-            />
+            <input type="text" name="classSection" id="classSection" autoComplete="off" required onChange={this.handleChange} />
           </div>
           <div className="input-field">
             <div>
@@ -131,58 +107,30 @@ class CreateClass extends Component {
                 <Col md="2">
                   <ul>
                     <li>
-                      <Checkbox
-                        value="M"
-                        label="Monday"
-                        onChange={this.handleDate("M")}
-                      />
+                      <Checkbox value="M" label="Monday" onChange={this.handleDate("M")} />
                     </li>
                     <li>
-                      <Checkbox
-                        value="T"
-                        label="Tuesday"
-                        onChange={this.handleDate("T")}
-                      />
+                      <Checkbox value="T" label="Tuesday" onChange={this.handleDate("T")} />
                     </li>
                     <li>
-                      <Checkbox
-                        value="W"
-                        label="Wednesday"
-                        onChange={this.handleDate("W")}
-                      />
+                      <Checkbox value="W" label="Wednesday" onChange={this.handleDate("W")} />
                     </li>
                     <li>
-                      <Checkbox
-                        value="R"
-                        label="Thursday"
-                        onChange={this.handleDate("R")}
-                      />
+                      <Checkbox value="R" label="Thursday" onChange={this.handleDate("R")} />
                     </li>
                     <li>
-                      <Checkbox
-                        value="F"
-                        label="Friday"
-                        onChange={this.handleDate("F")}
-                      />
+                      <Checkbox value="F" label="Friday" onChange={this.handleDate("F")} />
                     </li>
                   </ul>
                 </Col>
                 <Col md="6">
-                  <TimeRangePicker
-                    id="classLecture"
-                    onChange={this.handleTime}
-                    format="HH:mm"
-                    value={this.state.time}
-                  />
+                  <TimeRangePicker id="classLecture" onChange={this.handleTime} format="HH:mm" value={this.state.time} />
                 </Col>
               </Container>
             </div>
           </div>
           <div className="input-field">
-            <button
-              type="submit"
-              className="btn purple-bg purple darken-3 z-depth-1"
-            >
+            <button type="submit" className="btn purple-bg purple darken-3 z-depth-1">
               Add
             </button>
           </div>
@@ -192,13 +140,13 @@ class CreateClass extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile
 });
 
-const mapDispatchToProps = dispatch => ({
-  createClass: classs => dispatch(createClass(classs))
+const mapDispatchToProps = (dispatch) => ({
+  createClass: (classs) => dispatch(createClass(classs))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateClass);

@@ -12,26 +12,26 @@ class SessionPlans extends Component {
     sessionPlanSummary: ""
   };
 
-  handleButtonClick = e => {
-    this.setState(state => ({
+  handleButtonClick = (e) => {
+    this.setState((state) => ({
       ...state,
       planningSession: true
     }));
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { target } = e;
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       [target.id]: target.value.trim()
     }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { props, state } = this;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       planningSession: false
     }));
@@ -58,34 +58,19 @@ class SessionPlans extends Component {
             {this.state.planningSession ? (
               <form className="white z-depth-1">
                 <div className="input-field center ease-in-anim card-content">
-                  <label htmlFor="sessionPlanSummary">
-                    Provide A Quick Summary
-                  </label>
-                  <input
-                    type="text"
-                    name="sessionPlanSummary"
-                    id="sessionPlanSummary"
-                    onChange={this.handleChange}
-                  />
+                  <label htmlFor="sessionPlanSummary">Provide A Quick Summary</label>
+                  <input type="text" name="sessionPlanSummary" id="sessionPlanSummary" onChange={this.handleChange} />
                 </div>
               </form>
             ) : null}
 
             <div className="input-field center">
               {this.state.planningSession ? (
-                <button
-                  type="submit"
-                  className="btn purple-bg purple ease-in-anim darken-3 z-depth-1"
-                  onClick={this.handleSubmit}
-                >
+                <button type="submit" className="btn purple-bg purple ease-in-anim darken-3 z-depth-1" onClick={this.handleSubmit}>
                   Submit New Session
                 </button>
               ) : (
-                <button
-                  type="submit"
-                  className="btn purple-bg purple ease-in-anim darken-3 z-depth-1"
-                  onClick={this.handleButtonClick}
-                >
+                <button type="submit" className="btn purple-bg purple ease-in-anim darken-3 z-depth-1" onClick={this.handleButtonClick}>
                   Plan New Session
                 </button>
               )}
@@ -97,7 +82,7 @@ class SessionPlans extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     sessionplans: state.firestore.ordered.sessionplans,
     auth: state.firebase.auth,
@@ -106,15 +91,15 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  createSession: sessionplans => dispatch(createSession(sessionplans))
+const mapDispatchToProps = (dispatch) => ({
+  createSession: (sessionplans) => dispatch(createSession(sessionplans))
 });
 //connect mapstatetoprops
 //firestoreconnect connects the component to the firestore... so you can access the collections
 
 const fbCompose = compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
+  firestoreConnect((props) => {
     if (!props.auth.uid) {
       return [];
     } else {
@@ -128,7 +113,4 @@ const fbCompose = compose(
   })
 );
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  fbCompose
-)(SessionPlans);
+export default compose(connect(mapStateToProps, mapDispatchToProps), fbCompose)(SessionPlans);

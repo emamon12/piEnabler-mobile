@@ -16,12 +16,12 @@ class ImageUpload extends React.Component {
       uploadProgress: 0
     });
 
-  handleProgress = progress =>
+  handleProgress = (progress) =>
     this.setState({
       uploadProgress: progress
     });
 
-  handleUploadError = error => {
+  handleUploadError = (error) => {
     this.setState({
       isUploading: false
       // Todo: handle error
@@ -29,14 +29,14 @@ class ImageUpload extends React.Component {
     console.error(error);
   };
 
-  handleUploadSuccess = async filename => {
+  handleUploadSuccess = async (filename) => {
     const downloadURL = await firebase
       .storage()
       .ref("images")
       .child(filename)
       .getDownloadURL();
 
-    this.setState(oldState => ({
+    this.setState((oldState) => ({
       filename: filename,
       downloadURL: downloadURL,
       uploadProgress: 100,
