@@ -215,6 +215,22 @@ export const getNextSlice = (pie) => (dispatch, getState, { getFirestore }) => {
                 type: "GET_NEXT_SLICE",
                 pie: slice
             });
+        } else {
+            let slice = {
+                url: "",
+                title: "",
+                question: ""
+            };
+            getFirestore()
+                .collection("sessions")
+                .doc(sessionId)
+                .update({
+                    nextSlice: slice
+                });
+            dispatch({
+                type: "GET_NEXT_SLICE",
+                pie: slice
+            });
         }
     } else {
         let slice = {
