@@ -15,6 +15,7 @@ import rootReducer from "./store/reducers/rootReducer";
 
 // We enhance compose in order to use Redux DevTools extension
 // https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+//this has soon to be depreciated functions (such as componentWIllUpdate && )
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Create config for rrfProps object. We need this to pass it in the ReactReduxFirebaseProvider component
@@ -38,7 +39,6 @@ const rrfProps = {
     dispatch: store.dispatch,
     createFirestoreInstance // Create firestore instead of create it in fbConfig.js
 };
-
 //
 ReactDOM.render(
     <Provider store={store}>
@@ -48,7 +48,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
-
-//this is for debugging purposes... delete when done
-console.log("store", store);
-console.log("state", store.getState());

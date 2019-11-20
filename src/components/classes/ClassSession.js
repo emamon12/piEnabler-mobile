@@ -29,6 +29,7 @@ class ClassSession extends Component {
     const response = e.target.name;
 
     this.setState((state) => ({
+      ...state,
       userAnswer: response
     }));
   };
@@ -100,7 +101,7 @@ class ClassSession extends Component {
             <a
               id="answer1"
               name="answer1"
-              href="#answer1"
+              href="#!"
               className={session.answer1 !== "" && session.answer1 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
               {session && session.isCurrentSliceAQuestion ? "A: " + session.answer1 : "A:"}
@@ -108,7 +109,7 @@ class ClassSession extends Component {
             <a
               id="answer2"
               name="answer2"
-              href="#answer2"
+              href="#!"
               className={session.answer2 !== "" && session.answer2 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
               {session && session.isCurrentSliceAQuestion ? "B: " + session.answer2 : "B:"}
@@ -116,7 +117,7 @@ class ClassSession extends Component {
             <a
               id="answer3"
               name="answer3"
-              href="#answer3"
+              href="#!"
               className={session.answer3 !== "" && session.answer3 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
               {session && session.isCurrentSliceAQuestion ? "C: " + session.answer3 : "C:"}
@@ -124,7 +125,7 @@ class ClassSession extends Component {
             <a
               id="answer4"
               name="answer4"
-              href="#answer4"
+              href="#!"
               className={session.answer4 !== "" && session.answer4 === session.trueAnswer && session.revealAnswer ? correctClass : regClass}
             >
               {session && session.isCurrentSliceAQuestion ? "D: " + session.answer4 : "D:"}

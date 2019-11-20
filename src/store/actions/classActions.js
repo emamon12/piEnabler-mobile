@@ -54,17 +54,54 @@ export const addClass = (classs) => (dispatch, getState, { getFirestore }) => {
       .get()
       .then((docRef) => {
         if (docRef.exists) {
+          const teacherLastName = docRef.data().teacherLastName;
+          const teacherFirstName = docRef.data().teacherFirstName;
+          const classsName = docRef.data().classsName;
+          const classIdentifier = docRef.data().classIdentifier;
+
           fireStore
             .collection("users")
             .doc(studentId)
             .update({
               registeredClasses: fireStore.FieldValue.arrayUnion(classId)
             })
-            .then(() =>
-              dispatch({
-                type: "ADD_CLASS",
-                classs
-              })
+            .then(
+              fireStore
+                .collection(`users/${studentId}/classesRegistered`)
+                .doc(`${classId}`)
+                .set({
+                  classId: classId,
+                  teacherLastName: teacherLastName,
+                  teacherFirstName: teacherFirstName,
+                  classsName: classsName,
+                  classIdentifier: classIdentifier
+                })
+                .then(
+                  fireStore
+                    .collection("classes")
+                    .doc(classId)
+                    .update({
+                      studentId: fireStore.FieldValue.arrayUnion(studentId)
+                    })
+                    .then(() =>
+                      dispatch({
+                        type: "ADD_CLASS",
+                        classs
+                      })
+                    )
+                    .catch((err) =>
+                      dispatch({
+                        type: "ADD_CLASS_ERROR",
+                        err
+                      })
+                    )
+                )
+                .catch((err) => {
+                  dispatch({
+                    type: "ADD_CLASS_ERROR",
+                    err
+                  });
+                })
             )
             .catch((err) =>
               dispatch({

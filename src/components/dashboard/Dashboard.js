@@ -71,10 +71,16 @@ const mapStateToProps = (state) => {
 const fbCompose = compose(
     connect(mapStateToProps),
     firestoreConnect((props) => {
-        if (!props) {
+        if (!props || !props.auth.uid) {
             return [];
         } else {
-            return ["classes", `users/${props.auth.uid}`];
+            return [
+                {
+                    collection: `users/${props.auth.uid}/classesRegistered`,
+                    storeAs: "classes"
+                },
+                `users/${props.auth.uid}`
+            ];
         }
     })
 );
