@@ -9,7 +9,7 @@ const Stopwatch = () => (
         render={({ formatted, hours, minutes, seconds }) => {
             return (
                 <div>
-                    <p>Polling Status: OPEN</p>
+                    <p>Polling: OPEN</p>
                     <p> {formatted}</p>
                 </div>
             );

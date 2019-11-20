@@ -356,7 +356,7 @@ class Presentation extends Component {
                       </Button>
                     ) : (
                       <Button waves="dark" style={StyleClosed} onClick={this.handlePolling} id="PollingStatus">
-                        Polling Status : CLOSED
+                        Polling: CLOSED
                       </Button>
                     )}
                   </Col>
