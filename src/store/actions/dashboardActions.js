@@ -283,7 +283,7 @@ export const updateSession = (pie) => (dispatch, getState, { getFirestore }) => 
                         answer2: myslice.Answer2 ? myslice.Answer2 : "",
                         answer3: myslice.Answer3 ? myslice.Answer3 : "",
                         answer4: myslice.Answer4 ? myslice.Answer4 : "",
-                        QuesionURL: myslice.QuestionURL ? myslice.QuesionURL : "",
+                        QuestionURL: myslice.QuestionURL ? myslice.QuestionURL : null,
                         revealAnswer: false,
                         currentSliceId: sliceId,
                         isCurrentSliceAQuestion: myslice.Lecture ? false : true,

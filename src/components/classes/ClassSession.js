@@ -72,22 +72,31 @@ class ClassSession extends Component {
     if (session) {
       return (
         <div className="container section">
-          <a
-            id="QuestionURL"
-            name="QuestionURL"
-            href={session.QuestionURL}
-            target="_blank"
-            style={{color: "black", textDecoration: "none"}}
-          >
-          <div className="card">
-            <div className="card-content">
-              <h3 style={{ textAlign: "center", marginBottom: "20px" }}>
-                {session.isCurrentSliceAQuestion ? session.slice.question : "No Question Available"}
-              </h3>
+          {session.QuestionURL === "" ?
+            <div className="card">
+              <div className="card-content">
+                <h3 style={{ textAlign: "center", marginBottom: "20px" }}>
+                  {session.isCurrentSliceAQuestion ? session.slice.question : "No Question Available"}
+                </h3>
+              </div>
             </div>
-          </div>
-          </a>
-          <div className="collection card-content" onClick={session.polling ? this.handleListClick : () => {}}>
+            :
+            <a
+              id="QuestionURL"
+              name="QuestionURL"
+              href={session.QuestionURL}
+              target="_blank"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              <div className="card">
+                <div className="card-content">
+                  <h3 style={{ textAlign: "center", marginBottom: "20px" }}>
+                    {session.isCurrentSliceAQuestion ? session.slice.question : "No Question Available"}
+                  </h3>
+                </div>
+              </div>
+            </a>}
+          <div className="collection card-content" onClick={session.polling ? this.handleListClick : () => { }}>
             <a
               id="answer1"
               name="answer1"
