@@ -24,6 +24,7 @@ import {
   getNextSlice,
   changeMode
 } from "../../store/actions/dashboardActions";
+import Stopwatch from "../util/stopwatch";
 
 class Presentation extends Component {
   state = {
@@ -351,7 +352,7 @@ class Presentation extends Component {
                   >
                     {session && session.polling ? (
                       <Button waves="light" style={StyleOpen} onClick={this.handlePolling} id="PollingStatus">
-                        Polling Status : OPEN
+                         <Stopwatch />
                       </Button>
                     ) : (
                       <Button waves="dark" style={StyleClosed} onClick={this.handlePolling} id="PollingStatus">
