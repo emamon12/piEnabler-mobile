@@ -222,6 +222,7 @@ export const LoadSession = (classs) => (dispatch, getState, { getFirestore }) =>
                       answer2: docRef2.data().Answer2 ? docRef2.data().Answer2 : "",
                       answer3: docRef2.data().Answer3 ? docRef2.data().Answer3 : "",
                       answer4: docRef2.data().Answer4 ? docRef2.data().Answer4 : "",
+                      QuestionURL: docRef2.data().QuestionURL ? docRef2.data().QuestionURL : "",
                       revealAnswer: false,
                       displayGraph: false,
                       currentSliceId: sliceIds[0],

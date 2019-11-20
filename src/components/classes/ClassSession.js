@@ -72,6 +72,13 @@ class ClassSession extends Component {
     if (session) {
       return (
         <div className="container section">
+          <a
+            id="QuestionURL"
+            name="QuestionURL"
+            href={session.QuestionURL}
+            target="_blank"
+            style={{color: "black", textDecoration: "none"}}
+          >
           <div className="card">
             <div className="card-content">
               <h3 style={{ textAlign: "center", marginBottom: "20px" }}>
@@ -79,6 +86,7 @@ class ClassSession extends Component {
               </h3>
             </div>
           </div>
+          </a>
           <div className="collection card-content" onClick={session.polling ? this.handleListClick : () => {}}>
             <a
               id="answer1"

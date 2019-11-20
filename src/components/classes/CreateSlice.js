@@ -23,7 +23,8 @@ class CreateSlice extends Component {
         Answer3: "",
         Answer4: "",
         CorrectAnswer: "",
-        Difficulty: ""
+        Difficulty: "",
+        QuestionURL: ""
     };
 
   resetState = (e) => {
@@ -38,7 +39,8 @@ class CreateSlice extends Component {
       Answer3: "",
       Answer4: "",
       CorrectAnswer: "",
-      Difficulty: ""
+      Difficulty: "",
+      QuestionURL: ""
     }));
   };
 
@@ -227,8 +229,8 @@ class CreateSlice extends Component {
                 <input type="text" name="Question" id="Question" className="input-style" autoComplete="off" onChange={this.handleChange} required />
               </div>
               <div className="input-field">
-                  <label htmlFor="CodeURL">Code URL</label>
-                  <input type="text" name="CodeURL" id="CodeURL" className="input-style" onChange={this.handleChange} />
+                  <label htmlFor="QuestionURL">Question URL</label>
+                  <input type="text" name="QuestionURL" id="QuestionURL" className="input-style" onChange={this.handleChange} />
               </div>
               <div className="input-field">
                 <label htmlFor="Answer1"> Answer 1 </label>
