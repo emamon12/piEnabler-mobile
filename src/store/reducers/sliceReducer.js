@@ -3,17 +3,25 @@ const initState = {};
 const sliceReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_SLICE":
-      console.log("added slice", action.slices);
-      return state;
+        return {
+          ...state,
+          addSliceError: null
+        };
     case "ADD_SLICE_ERROR":
-      console.log("add slice error", action.err);
-      return state;
+      return {
+        ...state,
+        addSliceError: "Unable To Add Slice!"
+      };
     case "CREATE_SLICE":
-      console.log("created slice", action.slices);
-      return state;
+      return {
+        ...state,
+        createSliceError: null
+      };
     case "CREATE_SLICE_ERROR":
-      console.log("create slice error", action.err);
-      return state;
+      return {
+        ...state,
+        createSliceError: "Unable To Create Slice!"
+      };
     default:
       return state;
   }
