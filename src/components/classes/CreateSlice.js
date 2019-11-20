@@ -24,50 +24,53 @@ class CreateSlice extends Component {
         Answer4: "",
         CorrectAnswer: "",
         Difficulty: "",
-        QuestionURL: ""
+        QuestionURL: "",
+        Question: ""
+
     };
 
-  resetState = (e) => {
-    this.setState((state) => ({
-      ...state,
-      filename: "",
-      url: "",
-      Title: "",
-      Topic: "",
-      Answer1: "",
-      Answer2: "",
-      Answer3: "",
-      Answer4: "",
-      CorrectAnswer: "",
-      Difficulty: "",
-      QuestionURL: ""
-    }));
+    resetState = (e) => {
+      this.setState((state) => ({
+        ...state,
+        filename: "",
+        url: "",
+        Title: "",
+        Topic: "",
+        Answer1: "",
+        Answer2: "",
+        Answer3: "",
+        Answer4: "",
+        CorrectAnswer: "",
+        Difficulty: "",
+        QuestionURL: "",
+        Question: ""
+      }));
   };
 
-  handleChange = (e) => {
-    const { target } = e;
+    handleChange = (e) => {
+        const { target } = e;
 
-    this.setState((state) => ({
-      ...state,
-      [target.id]: target.value
-    }));
-  };
+        this.setState((state) => ({
+            ...state,
+            [target.id]: target.value
+        }));
+    };
 
-  handleCheese = (e) => {
-    e.preventDefault();
+    handleCheese = (e) => {
+        e.preventDefault();
 
-    this.setState((state) => ({
-      ...state,
-      Cheese: !state.Cheese
-    }));
-  };
+        this.setState((state) => ({
+            ...state,
+            Cheese: !state.Cheese
+        }));
+    };
 
-  handleImage = (filename, url) => {
-    this.setState((state) => ({
-      ...state,
-      filename: filename,
-      url: url
-    }));
+    handleImage = (filename, url) => {
+        this.setState((state) => ({
+            ...state,
+            filename: filename,
+            url: url
+        }));
 
         const { props, state } = this;
         props.createSlice(state);
@@ -75,31 +78,31 @@ class CreateSlice extends Component {
         props.history.push("/createSlice");
     };
 
-  handleLectureChange = (e) => {
-    const { target } = e;
+    handleLectureChange = (e) => {
+        const { target } = e;
 
-    this.setState((state) => ({
-      ...state,
-      [target.id]: target.checked
-    }));
-  };
+        this.setState((state) => ({
+            ...state,
+            [target.id]: target.checked
+        }));
+    };
 
-  handleDifChange = (e, data) => {
-    this.setState((state) => ({
-      ...state,
-      Difficulty: e
-    }));
-  };
+    handleDifChange = (e, data) => {
+        this.setState((state) => ({
+            ...state,
+            Difficulty: e
+        }));
+    };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { props, state } = this;
-    props.createSlice(state);
-    //the push acts as a redirect... when the form is submitted... redirect to home
-    document.getElementById("form").reset();
-    this.resetState();
-    props.history.push("/createSlice");
-  };
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { props, state } = this;
+        props.createSlice(state);
+        //the push acts as a redirect... when the form is submitted... redirect to home
+        document.getElementById("form").reset();
+        this.resetState();
+        props.history.push("/createSlice");
+    };
 
     render() {
         //just check if the user is authenticated
@@ -287,26 +290,26 @@ class CreateSlice extends Component {
                 </Dropdown>
               </div>
 
-              <div className="input-field" style={{ paddingBottom: "3rem" }}>
-                <Button type="submit" waves="light" className="btn purple-bg purple darken-3 right z-depth-1">
-                  Create Slice
-                </Button>
-              </div>
-            </form>
-          )}
-        </form>
-      </div>
-    );
-  }
+                            <div className="input-field" style={{ paddingBottom: "3rem" }}>
+                                <Button type="submit" waves="light" className="btn purple-bg purple darken-3 right z-depth-1">
+                                    Create Slice
+                                </Button>
+                            </div>
+                        </form>
+                    )}
+                </form>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.firebase.auth,
-  profile: state.firebase.profile
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createSlice: (slices) => dispatch(createSlice(slices))
+    createSlice: (slices) => dispatch(createSlice(slices))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateSlice);
