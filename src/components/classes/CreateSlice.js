@@ -227,6 +227,10 @@ class CreateSlice extends Component {
                 <input type="text" name="Question" id="Question" className="input-style" autoComplete="off" onChange={this.handleChange} required />
               </div>
               <div className="input-field">
+                  <label htmlFor="CodeURL">Code URL</label>
+                  <input type="text" name="CodeURL" id="CodeURL" className="input-style" onChange={this.handleChange} />
+              </div>
+              <div className="input-field">
                 <label htmlFor="Answer1"> Answer 1 </label>
                 <input type="text" name="Answer1" id="Answer1" className="input-style" autoComplete="off" onChange={this.handleChange} required />
               </div>
